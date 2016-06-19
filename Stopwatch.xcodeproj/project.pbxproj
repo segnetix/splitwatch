@@ -1,0 +1,752 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1D3623260D0F684500981E51 /* StopwatchAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* StopwatchAppDelegate.m */; };
+		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
+		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
+		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
+		288765080DF74369002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765070DF74369002DB57D /* CoreGraphics.framework */; };
+		28AD73880D9D96C1002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD73870D9D96C1002E5188 /* MainWindow.xib */; };
+		9828E09E10B9C729001CB672 /* HistoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9828E09D10B9C729001CB672 /* HistoryCell.m */; };
+		9828E0A210B9C756001CB672 /* HistoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9828E0A110B9C756001CB672 /* HistoryCell.xib */; };
+		B0004CF710A0FFCD00FC9CAD /* SplitDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0004CF610A0FFCD00FC9CAD /* SplitDetailViewController.m */; };
+		B0004D9510A10A1100FC9CAD /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = B0004D9410A10A1100FC9CAD /* Event.m */; };
+		B019A4521A8026CC0032405A /* MultiStopwatchSetupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B019A4511A8026CC0032405A /* MultiStopwatchSetupViewController.xib */; };
+		B0228C231A7AB278007B4F46 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0228C221A7AB278007B4F46 /* QuartzCore.framework */; };
+		B025ECD61139F887000EE205 /* Help_History.html in Resources */ = {isa = PBXBuildFile; fileRef = B025ECD21139F887000EE205 /* Help_History.html */; };
+		B025ECD71139F887000EE205 /* Help_Multiwatch.html in Resources */ = {isa = PBXBuildFile; fileRef = B025ECD31139F887000EE205 /* Help_Multiwatch.html */; };
+		B025ECD81139F887000EE205 /* Help_Settings.html in Resources */ = {isa = PBXBuildFile; fileRef = B025ECD41139F887000EE205 /* Help_Settings.html */; };
+		B025ECD91139F887000EE205 /* Help_Splitwatch.html in Resources */ = {isa = PBXBuildFile; fileRef = B025ECD51139F887000EE205 /* Help_Splitwatch.html */; };
+		B02A948310A0FCC300DB5E7E /* StopwatchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B02A948210A0FCC300DB5E7E /* StopwatchViewController.m */; };
+		B02A948A10A0FD6D00DB5E7E /* MultiStopwatchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B02A948910A0FD6D00DB5E7E /* MultiStopwatchViewController.m */; };
+		B02A948F10A0FDC400DB5E7E /* HistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B02A948E10A0FDC400DB5E7E /* HistoryViewController.m */; };
+		B02A949410A0FE5100DB5E7E /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B02A949310A0FE5100DB5E7E /* SettingsViewController.m */; };
+		B05D4FB21AA67C9B006AEFA4 /* settings02.png in Resources */ = {isa = PBXBuildFile; fileRef = B05D4FB11AA67C9B006AEFA4 /* settings02.png */; };
+		B05D4FB41AA67FE4006AEFA4 /* history03.png in Resources */ = {isa = PBXBuildFile; fileRef = B05D4FB31AA67FE4006AEFA4 /* history03.png */; };
+		B05D4FF01AA77C42006AEFA4 /* launch_320_480.png in Resources */ = {isa = PBXBuildFile; fileRef = B05D4FEE1AA77C42006AEFA4 /* launch_320_480.png */; };
+		B05D4FF11AA77C42006AEFA4 /* launch_640_960.png in Resources */ = {isa = PBXBuildFile; fileRef = B05D4FEF1AA77C42006AEFA4 /* launch_640_960.png */; };
+		B05D4FF31AA77D86006AEFA4 /* launch_640_1136.png in Resources */ = {isa = PBXBuildFile; fileRef = B05D4FF21AA77D86006AEFA4 /* launch_640_1136.png */; };
+		B05D4FF51AA77EFC006AEFA4 /* launch_750_1334.png in Resources */ = {isa = PBXBuildFile; fileRef = B05D4FF41AA77EFC006AEFA4 /* launch_750_1334.png */; };
+		B05D4FF71AA77FA3006AEFA4 /* launch_1242_2208.png in Resources */ = {isa = PBXBuildFile; fileRef = B05D4FF61AA77FA3006AEFA4 /* launch_1242_2208.png */; };
+		B05D4FFD1AA7D9AF006AEFA4 /* HelpImage_SplitwatchTop.png in Resources */ = {isa = PBXBuildFile; fileRef = B05D4FFC1AA7D9AF006AEFA4 /* HelpImage_SplitwatchTop.png */; };
+		B05D4FFF1AA7DBAB006AEFA4 /* HelpImage_SplitwatchBottom.png in Resources */ = {isa = PBXBuildFile; fileRef = B05D4FFE1AA7DBAB006AEFA4 /* HelpImage_SplitwatchBottom.png */; };
+		B05D50011AA7E2D3006AEFA4 /* HelpImage_MultiwatchTop.png in Resources */ = {isa = PBXBuildFile; fileRef = B05D50001AA7E2D3006AEFA4 /* HelpImage_MultiwatchTop.png */; };
+		B05D50031AA7E765006AEFA4 /* HelpImage_MultiwatchCell.png in Resources */ = {isa = PBXBuildFile; fileRef = B05D50021AA7E765006AEFA4 /* HelpImage_MultiwatchCell.png */; };
+		B05D50051AA7E99F006AEFA4 /* HelpImage_SetupButton.png in Resources */ = {isa = PBXBuildFile; fileRef = B05D50041AA7E99F006AEFA4 /* HelpImage_SetupButton.png */; };
+		B05D50071AA7EDD9006AEFA4 /* HelpImage_MultiwatchSetup.png in Resources */ = {isa = PBXBuildFile; fileRef = B05D50061AA7EDD9006AEFA4 /* HelpImage_MultiwatchSetup.png */; };
+		B05D50091AA7F0E3006AEFA4 /* HelpImage_HistoryOverview.png in Resources */ = {isa = PBXBuildFile; fileRef = B05D50081AA7F0E3006AEFA4 /* HelpImage_HistoryOverview.png */; };
+		B05D500D1AA7F2A9006AEFA4 /* HelpImage_HistoryFilterTabBar.png in Resources */ = {isa = PBXBuildFile; fileRef = B05D500C1AA7F2A9006AEFA4 /* HelpImage_HistoryFilterTabBar.png */; };
+		B05D500F1AA7F5DC006AEFA4 /* HelpImage_SplitDetailView.png in Resources */ = {isa = PBXBuildFile; fileRef = B05D500E1AA7F5DC006AEFA4 /* HelpImage_SplitDetailView.png */; };
+		B05D50111AA7F7C9006AEFA4 /* HelpImage_EmailComposer.png in Resources */ = {isa = PBXBuildFile; fileRef = B05D50101AA7F7C9006AEFA4 /* HelpImage_EmailComposer.png */; };
+		B05D50131AA80A8A006AEFA4 /* HelpImage_SplitEditView.png in Resources */ = {isa = PBXBuildFile; fileRef = B05D50121AA80A8A006AEFA4 /* HelpImage_SplitEditView.png */; };
+		B05D50151AA80DA4006AEFA4 /* HelpImage_SplitEditView2.png in Resources */ = {isa = PBXBuildFile; fileRef = B05D50141AA80DA4006AEFA4 /* HelpImage_SplitEditView2.png */; };
+		B05D50171AA80F48006AEFA4 /* HelpImage_SettingsOverview_2.png in Resources */ = {isa = PBXBuildFile; fileRef = B05D50161AA80F48006AEFA4 /* HelpImage_SettingsOverview_2.png */; };
+		B05D50191AA8123A006AEFA4 /* HelpImage_SettingsEmailSetup.png in Resources */ = {isa = PBXBuildFile; fileRef = B05D50181AA8123A006AEFA4 /* HelpImage_SettingsEmailSetup.png */; };
+		B05D502D1AA8AF59006AEFA4 /* Icon_3_29.png in Resources */ = {isa = PBXBuildFile; fileRef = B05D501A1AA8AF59006AEFA4 /* Icon_3_29.png */; };
+		B05D502E1AA8AF59006AEFA4 /* Icon_3_40.png in Resources */ = {isa = PBXBuildFile; fileRef = B05D501B1AA8AF59006AEFA4 /* Icon_3_40.png */; };
+		B05D502F1AA8AF59006AEFA4 /* Icon_3_50.png in Resources */ = {isa = PBXBuildFile; fileRef = B05D501C1AA8AF59006AEFA4 /* Icon_3_50.png */; };
+		B05D50301AA8AF59006AEFA4 /* Icon_3_57.png in Resources */ = {isa = PBXBuildFile; fileRef = B05D501D1AA8AF59006AEFA4 /* Icon_3_57.png */; };
+		B05D50311AA8AF59006AEFA4 /* Icon_3_58.png in Resources */ = {isa = PBXBuildFile; fileRef = B05D501E1AA8AF59006AEFA4 /* Icon_3_58.png */; };
+		B05D50321AA8AF59006AEFA4 /* Icon_3_60.png in Resources */ = {isa = PBXBuildFile; fileRef = B05D501F1AA8AF59006AEFA4 /* Icon_3_60.png */; };
+		B05D50331AA8AF59006AEFA4 /* Icon_3_72.png in Resources */ = {isa = PBXBuildFile; fileRef = B05D50201AA8AF59006AEFA4 /* Icon_3_72.png */; };
+		B05D50341AA8AF59006AEFA4 /* Icon_3_76.png in Resources */ = {isa = PBXBuildFile; fileRef = B05D50211AA8AF59006AEFA4 /* Icon_3_76.png */; };
+		B05D50351AA8AF59006AEFA4 /* Icon_3_80.png in Resources */ = {isa = PBXBuildFile; fileRef = B05D50221AA8AF59006AEFA4 /* Icon_3_80.png */; };
+		B05D50361AA8AF59006AEFA4 /* Icon_3_87.png in Resources */ = {isa = PBXBuildFile; fileRef = B05D50231AA8AF59006AEFA4 /* Icon_3_87.png */; };
+		B05D50371AA8AF59006AEFA4 /* Icon_3_100.png in Resources */ = {isa = PBXBuildFile; fileRef = B05D50241AA8AF59006AEFA4 /* Icon_3_100.png */; };
+		B05D50381AA8AF59006AEFA4 /* Icon_3_114.png in Resources */ = {isa = PBXBuildFile; fileRef = B05D50251AA8AF59006AEFA4 /* Icon_3_114.png */; };
+		B05D50391AA8AF59006AEFA4 /* Icon_3_120.png in Resources */ = {isa = PBXBuildFile; fileRef = B05D50261AA8AF59006AEFA4 /* Icon_3_120.png */; };
+		B05D503A1AA8AF59006AEFA4 /* Icon_3_144.png in Resources */ = {isa = PBXBuildFile; fileRef = B05D50271AA8AF59006AEFA4 /* Icon_3_144.png */; };
+		B05D503B1AA8AF59006AEFA4 /* Icon_3_152.png in Resources */ = {isa = PBXBuildFile; fileRef = B05D50281AA8AF59006AEFA4 /* Icon_3_152.png */; };
+		B05D503C1AA8AF59006AEFA4 /* Icon_3_180.png in Resources */ = {isa = PBXBuildFile; fileRef = B05D50291AA8AF59006AEFA4 /* Icon_3_180.png */; };
+		B05D503D1AA8AF59006AEFA4 /* Icon_3_256.png in Resources */ = {isa = PBXBuildFile; fileRef = B05D502A1AA8AF59006AEFA4 /* Icon_3_256.png */; };
+		B05D503E1AA8AF59006AEFA4 /* Icon_3_512.png in Resources */ = {isa = PBXBuildFile; fileRef = B05D502B1AA8AF59006AEFA4 /* Icon_3_512.png */; };
+		B05D503F1AA8AF59006AEFA4 /* Icon_3_1024.png in Resources */ = {isa = PBXBuildFile; fileRef = B05D502C1AA8AF59006AEFA4 /* Icon_3_1024.png */; };
+		B05D50411AAB639D006AEFA4 /* wrench13@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B05D50401AAB639D006AEFA4 /* wrench13@2x.png */; };
+		B05D50431AAB6714006AEFA4 /* history03@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B05D50421AAB6714006AEFA4 /* history03@2x.png */; };
+		B05D50451AAB67C3006AEFA4 /* settings02@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B05D50441AAB67C3006AEFA4 /* settings02@2x.png */; };
+		B066ABBE10B38608001D00D9 /* Tink.wav in Resources */ = {isa = PBXBuildFile; fileRef = B066ABBD10B38608001D00D9 /* Tink.wav */; };
+		B076011210A7C60800E60196 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B076011110A7C60800E60196 /* MessageUI.framework */; };
+		B07602D310A8EA7700E60196 /* SplitDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B07602D210A8EA7700E60196 /* SplitDetailCell.m */; };
+		B07602D810A8F5E200E60196 /* SplitDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B07602D710A8F5E200E60196 /* SplitDetailCell.xib */; };
+		B076FB3910A5C17E00E60196 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B076FB3810A5C17E00E60196 /* AudioToolbox.framework */; };
+		B076FB8F10A5CCFD00E60196 /* EventDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B076FB8E10A5CCFD00E60196 /* EventDetailViewController.m */; };
+		B076FC3910A5DAE600E60196 /* EventDetail.xib in Resources */ = {isa = PBXBuildFile; fileRef = B076FC3810A5DAE600E60196 /* EventDetail.xib */; };
+		B077DEB31AA376E700C57164 /* SplitPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B077DEB11AA376E700C57164 /* SplitPickerViewController.m */; };
+		B077DEB41AA376E700C57164 /* SplitPickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B077DEB21AA376E700C57164 /* SplitPickerViewController.xib */; };
+		B077DEC21AA64F7C00C57164 /* wrench13.png in Resources */ = {isa = PBXBuildFile; fileRef = B077DEC11AA64F7C00C57164 /* wrench13.png */; };
+		B0804F4010B61ABA00F840EE /* MultiStopwatchSetupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0804F3E10B61ABA00F840EE /* MultiStopwatchSetupViewController.m */; };
+		B082A709112D5E91007D6758 /* EmailAddressTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B082A707112D5E91007D6758 /* EmailAddressTableViewController.m */; };
+		B0830B2F112B83EB00395AED /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0830B2E112B83EB00395AED /* AddressBookUI.framework */; };
+		B0830B3E112B840B00395AED /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0830B3D112B840B00395AED /* AddressBook.framework */; };
+		B084F87011336D8C008C4B00 /* HelpDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B084F86F11336D8C008C4B00 /* HelpDetailViewController.m */; };
+		B084FABE1136B13F008C4B00 /* multiwatch.png in Resources */ = {isa = PBXBuildFile; fileRef = B084FABC1136B13F008C4B00 /* multiwatch.png */; };
+		B084FABF1136B13F008C4B00 /* splitwatch.png in Resources */ = {isa = PBXBuildFile; fileRef = B084FABD1136B13F008C4B00 /* splitwatch.png */; };
+		B084FD4911383A41008C4B00 /* AboutView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B084FD4711383A41008C4B00 /* AboutView.xib */; };
+		B08EE48210B0ADBC00CAE9FB /* MultiStopwatchTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B08EE48110B0ADBC00CAE9FB /* MultiStopwatchTableViewController.m */; };
+		B08EE71510B1134E00CAE9FB /* MultiStopwatchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B08EE71410B1134E00CAE9FB /* MultiStopwatchCell.m */; };
+		B08EE71E10B1140600CAE9FB /* MultiStopwatchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B08EE71D10B1140600CAE9FB /* MultiStopwatchCell.xib */; };
+		B093FC2F10B4001300535F70 /* Stopwatch.m in Sources */ = {isa = PBXBuildFile; fileRef = B093FC2E10B4001300535F70 /* Stopwatch.m */; };
+		B097C90A11225FE900C478BC /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B097C90911225FE900C478BC /* libsqlite3.0.dylib */; };
+		B099086B1A76D63100ACF6D7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B099086A1A76D63100ACF6D7 /* Images.xcassets */; };
+		B0A2CDEB1AAC9AE5005A7F1D /* multiwatch@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B0A2CDEA1AAC9AE5005A7F1D /* multiwatch@2x.png */; };
+		B0A2CDED1AAC9B1E005A7F1D /* splitwatch@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B0A2CDEC1AAC9B1E005A7F1D /* splitwatch@2x.png */; };
+		B0A2CDEF1AACA657005A7F1D /* AccDisclosure@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B0A2CDEE1AACA657005A7F1D /* AccDisclosure@2x.png */; };
+		B0B5CF95118C76D10051B5C0 /* EventData.db in Resources */ = {isa = PBXBuildFile; fileRef = B0B5CF94118C76D10051B5C0 /* EventData.db */; };
+		B0BFC9D712DBF9DC00EDCA76 /* SplitEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0BFC9D512DBF9DC00EDCA76 /* SplitEditViewController.m */; };
+		B0BFC9D812DBF9DC00EDCA76 /* SplitEditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0BFC9D612DBF9DC00EDCA76 /* SplitEditViewController.xib */; };
+		B0C4E71B111644A2005BFD02 /* EmailAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0C4E719111644A2005BFD02 /* EmailAddressViewController.m */; };
+		B0C4E7AF11164F4D005BFD02 /* Settings.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0C4E7AE11164F4D005BFD02 /* Settings.xib */; };
+		B0CE7E731131DB3600B5A30E /* AccDisclosure.png in Resources */ = {isa = PBXBuildFile; fileRef = B0CE7E721131DB3600B5A30E /* AccDisclosure.png */; };
+		B0CE7EEB1131E5BE00B5A30E /* separator.png in Resources */ = {isa = PBXBuildFile; fileRef = B0CE7EEA1131E5BE00B5A30E /* separator.png */; };
+		B0D23BE21D15CA0C00FADC30 /* logo_black_hires6.png in Resources */ = {isa = PBXBuildFile; fileRef = B0D23BE11D15CA0C00FADC30 /* logo_black_hires6.png */; };
+		B0DE6BAE10A1CC4000FC81E5 /* Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = B0DE6BAD10A1CC4000FC81E5 /* Utilities.m */; };
+		B0F8EB5311272A2100740C3D /* HistoryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0F8EB5111272A2100740C3D /* HistoryTableViewController.m */; };
+		B0F8EB5411272A2100740C3D /* HistoryTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0F8EB5211272A2100740C3D /* HistoryTableViewController.xib */; };
+		B0FACF1C10AF3B7A004FEBC1 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0FACF1B10AF3B7A004FEBC1 /* AboutViewController.m */; };
+		B0FACF2110AF3B8B004FEBC1 /* HelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0FACF2010AF3B8B004FEBC1 /* HelpViewController.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		1D3623240D0F684500981E51 /* StopwatchAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StopwatchAppDelegate.h; sourceTree = "<group>"; };
+		1D3623250D0F684500981E51 /* StopwatchAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StopwatchAppDelegate.m; sourceTree = "<group>"; };
+		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		288765070DF74369002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		28A0AB4B0D9B1048005BE974 /* Stopwatch_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Stopwatch_Prefix.pch; sourceTree = "<group>"; };
+		28AD73870D9D96C1002E5188 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
+		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = ../main.m; sourceTree = "<group>"; };
+		8D1107310486CEB800E47090 /* Stopwatch-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Stopwatch-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
+		9828E09C10B9C729001CB672 /* HistoryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryCell.h; sourceTree = "<group>"; };
+		9828E09D10B9C729001CB672 /* HistoryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryCell.m; sourceTree = "<group>"; };
+		9828E0A110B9C756001CB672 /* HistoryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = HistoryCell.xib; path = Classes/HistoryCell.xib; sourceTree = "<group>"; };
+		B0004CF510A0FFCD00FC9CAD /* SplitDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SplitDetailViewController.h; sourceTree = "<group>"; };
+		B0004CF610A0FFCD00FC9CAD /* SplitDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SplitDetailViewController.m; sourceTree = "<group>"; };
+		B0004D9310A10A1100FC9CAD /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Event.h; sourceTree = "<group>"; };
+		B0004D9410A10A1100FC9CAD /* Event.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Event.m; sourceTree = "<group>"; };
+		B019A4511A8026CC0032405A /* MultiStopwatchSetupViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MultiStopwatchSetupViewController.xib; sourceTree = "<group>"; };
+		B0228C221A7AB278007B4F46 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		B025ECD21139F887000EE205 /* Help_History.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Help_History.html; sourceTree = "<group>"; };
+		B025ECD31139F887000EE205 /* Help_Multiwatch.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Help_Multiwatch.html; sourceTree = "<group>"; };
+		B025ECD41139F887000EE205 /* Help_Settings.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Help_Settings.html; sourceTree = "<group>"; };
+		B025ECD51139F887000EE205 /* Help_Splitwatch.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Help_Splitwatch.html; sourceTree = "<group>"; };
+		B02A948110A0FCC300DB5E7E /* StopwatchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StopwatchViewController.h; sourceTree = "<group>"; };
+		B02A948210A0FCC300DB5E7E /* StopwatchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StopwatchViewController.m; sourceTree = "<group>"; };
+		B02A948810A0FD6D00DB5E7E /* MultiStopwatchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiStopwatchViewController.h; sourceTree = "<group>"; };
+		B02A948910A0FD6D00DB5E7E /* MultiStopwatchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultiStopwatchViewController.m; sourceTree = "<group>"; };
+		B02A948D10A0FDC400DB5E7E /* HistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryViewController.h; sourceTree = "<group>"; };
+		B02A948E10A0FDC400DB5E7E /* HistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryViewController.m; sourceTree = "<group>"; };
+		B02A949210A0FE5100DB5E7E /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		B02A949310A0FE5100DB5E7E /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		B05D4FB11AA67C9B006AEFA4 /* settings02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings02.png; sourceTree = "<group>"; };
+		B05D4FB31AA67FE4006AEFA4 /* history03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = history03.png; sourceTree = "<group>"; };
+		B05D4FEE1AA77C42006AEFA4 /* launch_320_480.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launch_320_480.png; sourceTree = "<group>"; };
+		B05D4FEF1AA77C42006AEFA4 /* launch_640_960.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launch_640_960.png; sourceTree = "<group>"; };
+		B05D4FF21AA77D86006AEFA4 /* launch_640_1136.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launch_640_1136.png; sourceTree = "<group>"; };
+		B05D4FF41AA77EFC006AEFA4 /* launch_750_1334.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launch_750_1334.png; sourceTree = "<group>"; };
+		B05D4FF61AA77FA3006AEFA4 /* launch_1242_2208.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launch_1242_2208.png; sourceTree = "<group>"; };
+		B05D4FFC1AA7D9AF006AEFA4 /* HelpImage_SplitwatchTop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HelpImage_SplitwatchTop.png; sourceTree = "<group>"; };
+		B05D4FFE1AA7DBAB006AEFA4 /* HelpImage_SplitwatchBottom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HelpImage_SplitwatchBottom.png; sourceTree = "<group>"; };
+		B05D50001AA7E2D3006AEFA4 /* HelpImage_MultiwatchTop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HelpImage_MultiwatchTop.png; sourceTree = "<group>"; };
+		B05D50021AA7E765006AEFA4 /* HelpImage_MultiwatchCell.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HelpImage_MultiwatchCell.png; sourceTree = "<group>"; };
+		B05D50041AA7E99F006AEFA4 /* HelpImage_SetupButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HelpImage_SetupButton.png; sourceTree = "<group>"; };
+		B05D50061AA7EDD9006AEFA4 /* HelpImage_MultiwatchSetup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HelpImage_MultiwatchSetup.png; sourceTree = "<group>"; };
+		B05D50081AA7F0E3006AEFA4 /* HelpImage_HistoryOverview.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HelpImage_HistoryOverview.png; sourceTree = "<group>"; };
+		B05D500C1AA7F2A9006AEFA4 /* HelpImage_HistoryFilterTabBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HelpImage_HistoryFilterTabBar.png; sourceTree = "<group>"; };
+		B05D500E1AA7F5DC006AEFA4 /* HelpImage_SplitDetailView.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HelpImage_SplitDetailView.png; sourceTree = "<group>"; };
+		B05D50101AA7F7C9006AEFA4 /* HelpImage_EmailComposer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HelpImage_EmailComposer.png; sourceTree = "<group>"; };
+		B05D50121AA80A8A006AEFA4 /* HelpImage_SplitEditView.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HelpImage_SplitEditView.png; sourceTree = "<group>"; };
+		B05D50141AA80DA4006AEFA4 /* HelpImage_SplitEditView2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HelpImage_SplitEditView2.png; sourceTree = "<group>"; };
+		B05D50161AA80F48006AEFA4 /* HelpImage_SettingsOverview_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HelpImage_SettingsOverview_2.png; sourceTree = "<group>"; };
+		B05D50181AA8123A006AEFA4 /* HelpImage_SettingsEmailSetup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HelpImage_SettingsEmailSetup.png; sourceTree = "<group>"; };
+		B05D501A1AA8AF59006AEFA4 /* Icon_3_29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_3_29.png; sourceTree = "<group>"; };
+		B05D501B1AA8AF59006AEFA4 /* Icon_3_40.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_3_40.png; sourceTree = "<group>"; };
+		B05D501C1AA8AF59006AEFA4 /* Icon_3_50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_3_50.png; sourceTree = "<group>"; };
+		B05D501D1AA8AF59006AEFA4 /* Icon_3_57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_3_57.png; sourceTree = "<group>"; };
+		B05D501E1AA8AF59006AEFA4 /* Icon_3_58.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_3_58.png; sourceTree = "<group>"; };
+		B05D501F1AA8AF59006AEFA4 /* Icon_3_60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_3_60.png; sourceTree = "<group>"; };
+		B05D50201AA8AF59006AEFA4 /* Icon_3_72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_3_72.png; sourceTree = "<group>"; };
+		B05D50211AA8AF59006AEFA4 /* Icon_3_76.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_3_76.png; sourceTree = "<group>"; };
+		B05D50221AA8AF59006AEFA4 /* Icon_3_80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_3_80.png; sourceTree = "<group>"; };
+		B05D50231AA8AF59006AEFA4 /* Icon_3_87.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_3_87.png; sourceTree = "<group>"; };
+		B05D50241AA8AF59006AEFA4 /* Icon_3_100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_3_100.png; sourceTree = "<group>"; };
+		B05D50251AA8AF59006AEFA4 /* Icon_3_114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_3_114.png; sourceTree = "<group>"; };
+		B05D50261AA8AF59006AEFA4 /* Icon_3_120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_3_120.png; sourceTree = "<group>"; };
+		B05D50271AA8AF59006AEFA4 /* Icon_3_144.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_3_144.png; sourceTree = "<group>"; };
+		B05D50281AA8AF59006AEFA4 /* Icon_3_152.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_3_152.png; sourceTree = "<group>"; };
+		B05D50291AA8AF59006AEFA4 /* Icon_3_180.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_3_180.png; sourceTree = "<group>"; };
+		B05D502A1AA8AF59006AEFA4 /* Icon_3_256.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_3_256.png; sourceTree = "<group>"; };
+		B05D502B1AA8AF59006AEFA4 /* Icon_3_512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_3_512.png; sourceTree = "<group>"; };
+		B05D502C1AA8AF59006AEFA4 /* Icon_3_1024.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_3_1024.png; sourceTree = "<group>"; };
+		B05D50401AAB639D006AEFA4 /* wrench13@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wrench13@2x.png"; sourceTree = "<group>"; };
+		B05D50421AAB6714006AEFA4 /* history03@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "history03@2x.png"; sourceTree = "<group>"; };
+		B05D50441AAB67C3006AEFA4 /* settings02@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settings02@2x.png"; sourceTree = "<group>"; };
+		B066ABBD10B38608001D00D9 /* Tink.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Tink.wav; sourceTree = "<group>"; };
+		B076011110A7C60800E60196 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		B07602D110A8EA7700E60196 /* SplitDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SplitDetailCell.h; sourceTree = "<group>"; };
+		B07602D210A8EA7700E60196 /* SplitDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SplitDetailCell.m; sourceTree = "<group>"; };
+		B07602D710A8F5E200E60196 /* SplitDetailCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SplitDetailCell.xib; sourceTree = "<group>"; };
+		B076FB3810A5C17E00E60196 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = /System/Library/Frameworks/AudioToolbox.framework; sourceTree = "<absolute>"; };
+		B076FB8D10A5CCFD00E60196 /* EventDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventDetailViewController.h; sourceTree = "<group>"; };
+		B076FB8E10A5CCFD00E60196 /* EventDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventDetailViewController.m; sourceTree = "<group>"; };
+		B076FC3810A5DAE600E60196 /* EventDetail.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = EventDetail.xib; path = Classes/EventDetail.xib; sourceTree = "<group>"; };
+		B077DEB01AA376E700C57164 /* SplitPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SplitPickerViewController.h; sourceTree = "<group>"; };
+		B077DEB11AA376E700C57164 /* SplitPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SplitPickerViewController.m; sourceTree = "<group>"; };
+		B077DEB21AA376E700C57164 /* SplitPickerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SplitPickerViewController.xib; path = Classes/SplitPickerViewController.xib; sourceTree = "<group>"; };
+		B077DEC11AA64F7C00C57164 /* wrench13.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wrench13.png; sourceTree = "<group>"; };
+		B0804F3D10B61ABA00F840EE /* MultiStopwatchSetupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiStopwatchSetupViewController.h; sourceTree = "<group>"; };
+		B0804F3E10B61ABA00F840EE /* MultiStopwatchSetupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultiStopwatchSetupViewController.m; sourceTree = "<group>"; };
+		B082A706112D5E91007D6758 /* EmailAddressTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmailAddressTableViewController.h; sourceTree = "<group>"; };
+		B082A707112D5E91007D6758 /* EmailAddressTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmailAddressTableViewController.m; sourceTree = "<group>"; };
+		B0830B2E112B83EB00395AED /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
+		B0830B3D112B840B00395AED /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		B084F86E11336D8C008C4B00 /* HelpDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpDetailViewController.h; sourceTree = "<group>"; };
+		B084F86F11336D8C008C4B00 /* HelpDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpDetailViewController.m; sourceTree = "<group>"; };
+		B084FABC1136B13F008C4B00 /* multiwatch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = multiwatch.png; sourceTree = "<group>"; };
+		B084FABD1136B13F008C4B00 /* splitwatch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = splitwatch.png; sourceTree = "<group>"; };
+		B084FD4711383A41008C4B00 /* AboutView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AboutView.xib; sourceTree = "<group>"; };
+		B084FE2811386D9B008C4B00 /* Splitwatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Splitwatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B08EE48010B0ADBC00CAE9FB /* MultiStopwatchTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiStopwatchTableViewController.h; sourceTree = "<group>"; };
+		B08EE48110B0ADBC00CAE9FB /* MultiStopwatchTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultiStopwatchTableViewController.m; sourceTree = "<group>"; };
+		B08EE71310B1134E00CAE9FB /* MultiStopwatchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MultiStopwatchCell.h; path = ../MultiStopwatchCell.h; sourceTree = "<group>"; };
+		B08EE71410B1134E00CAE9FB /* MultiStopwatchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MultiStopwatchCell.m; path = ../MultiStopwatchCell.m; sourceTree = "<group>"; };
+		B08EE71D10B1140600CAE9FB /* MultiStopwatchCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MultiStopwatchCell.xib; sourceTree = "<group>"; };
+		B093FC2D10B4001300535F70 /* Stopwatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Stopwatch.h; sourceTree = "<group>"; };
+		B093FC2E10B4001300535F70 /* Stopwatch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Stopwatch.m; sourceTree = "<group>"; };
+		B097C90911225FE900C478BC /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
+		B099086A1A76D63100ACF6D7 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Stopwatch/Images.xcassets; sourceTree = "<group>"; };
+		B0A2CDEA1AAC9AE5005A7F1D /* multiwatch@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "multiwatch@2x.png"; sourceTree = "<group>"; };
+		B0A2CDEC1AAC9B1E005A7F1D /* splitwatch@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "splitwatch@2x.png"; sourceTree = "<group>"; };
+		B0A2CDEE1AACA657005A7F1D /* AccDisclosure@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AccDisclosure@2x.png"; sourceTree = "<group>"; };
+		B0B5CF94118C76D10051B5C0 /* EventData.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = EventData.db; sourceTree = "<group>"; };
+		B0BFC9D412DBF9DC00EDCA76 /* SplitEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SplitEditViewController.h; sourceTree = "<group>"; };
+		B0BFC9D512DBF9DC00EDCA76 /* SplitEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SplitEditViewController.m; sourceTree = "<group>"; };
+		B0BFC9D612DBF9DC00EDCA76 /* SplitEditViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SplitEditViewController.xib; path = Classes/SplitEditViewController.xib; sourceTree = "<group>"; };
+		B0C4E718111644A2005BFD02 /* EmailAddressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmailAddressViewController.h; sourceTree = "<group>"; };
+		B0C4E719111644A2005BFD02 /* EmailAddressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmailAddressViewController.m; sourceTree = "<group>"; };
+		B0C4E7AE11164F4D005BFD02 /* Settings.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Settings.xib; sourceTree = "<group>"; };
+		B0CE7E721131DB3600B5A30E /* AccDisclosure.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AccDisclosure.png; sourceTree = "<group>"; };
+		B0CE7EEA1131E5BE00B5A30E /* separator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = separator.png; sourceTree = "<group>"; };
+		B0D23BE11D15CA0C00FADC30 /* logo_black_hires6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_black_hires6.png; sourceTree = "<group>"; };
+		B0DE6BAC10A1CC4000FC81E5 /* Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utilities.h; sourceTree = "<group>"; };
+		B0DE6BAD10A1CC4000FC81E5 /* Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utilities.m; sourceTree = "<group>"; };
+		B0F8EB5011272A2100740C3D /* HistoryTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryTableViewController.h; sourceTree = "<group>"; };
+		B0F8EB5111272A2100740C3D /* HistoryTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryTableViewController.m; sourceTree = "<group>"; };
+		B0F8EB5211272A2100740C3D /* HistoryTableViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = HistoryTableViewController.xib; path = Classes/HistoryTableViewController.xib; sourceTree = "<group>"; };
+		B0FACF1A10AF3B7A004FEBC1 /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
+		B0FACF1B10AF3B7A004FEBC1 /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
+		B0FACF1F10AF3B8B004FEBC1 /* HelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpViewController.h; sourceTree = "<group>"; };
+		B0FACF2010AF3B8B004FEBC1 /* HelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpViewController.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1D60588F0D05DD3D006BFB54 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B0228C231A7AB278007B4F46 /* QuartzCore.framework in Frameworks */,
+				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
+				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
+				288765080DF74369002DB57D /* CoreGraphics.framework in Frameworks */,
+				B076FB3910A5C17E00E60196 /* AudioToolbox.framework in Frameworks */,
+				B076011210A7C60800E60196 /* MessageUI.framework in Frameworks */,
+				B097C90A11225FE900C478BC /* libsqlite3.0.dylib in Frameworks */,
+				B0830B2F112B83EB00395AED /* AddressBookUI.framework in Frameworks */,
+				B0830B3E112B840B00395AED /* AddressBook.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		080E96DDFE201D6D7F000001 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				29B97316FDCFA39411CA2CEA /* main.m */,
+				B0004D9310A10A1100FC9CAD /* Event.h */,
+				B0004D9410A10A1100FC9CAD /* Event.m */,
+				B093FC2D10B4001300535F70 /* Stopwatch.h */,
+				B093FC2E10B4001300535F70 /* Stopwatch.m */,
+				B0DE6BAC10A1CC4000FC81E5 /* Utilities.h */,
+				B0DE6BAD10A1CC4000FC81E5 /* Utilities.m */,
+				B02A948110A0FCC300DB5E7E /* StopwatchViewController.h */,
+				B02A948210A0FCC300DB5E7E /* StopwatchViewController.m */,
+				B0004CF510A0FFCD00FC9CAD /* SplitDetailViewController.h */,
+				B0004CF610A0FFCD00FC9CAD /* SplitDetailViewController.m */,
+				B02A948810A0FD6D00DB5E7E /* MultiStopwatchViewController.h */,
+				B02A948910A0FD6D00DB5E7E /* MultiStopwatchViewController.m */,
+				B08EE48010B0ADBC00CAE9FB /* MultiStopwatchTableViewController.h */,
+				B08EE48110B0ADBC00CAE9FB /* MultiStopwatchTableViewController.m */,
+				B0804F3D10B61ABA00F840EE /* MultiStopwatchSetupViewController.h */,
+				B0804F3E10B61ABA00F840EE /* MultiStopwatchSetupViewController.m */,
+				B08EE71310B1134E00CAE9FB /* MultiStopwatchCell.h */,
+				B08EE71410B1134E00CAE9FB /* MultiStopwatchCell.m */,
+				B02A948D10A0FDC400DB5E7E /* HistoryViewController.h */,
+				B02A948E10A0FDC400DB5E7E /* HistoryViewController.m */,
+				B0F8EB5011272A2100740C3D /* HistoryTableViewController.h */,
+				B0F8EB5111272A2100740C3D /* HistoryTableViewController.m */,
+				9828E09C10B9C729001CB672 /* HistoryCell.h */,
+				9828E09D10B9C729001CB672 /* HistoryCell.m */,
+				B076FB8D10A5CCFD00E60196 /* EventDetailViewController.h */,
+				B076FB8E10A5CCFD00E60196 /* EventDetailViewController.m */,
+				B02A949210A0FE5100DB5E7E /* SettingsViewController.h */,
+				B02A949310A0FE5100DB5E7E /* SettingsViewController.m */,
+				B0FACF1A10AF3B7A004FEBC1 /* AboutViewController.h */,
+				B0FACF1B10AF3B7A004FEBC1 /* AboutViewController.m */,
+				B0FACF1F10AF3B8B004FEBC1 /* HelpViewController.h */,
+				B0FACF2010AF3B8B004FEBC1 /* HelpViewController.m */,
+				B084F86E11336D8C008C4B00 /* HelpDetailViewController.h */,
+				B084F86F11336D8C008C4B00 /* HelpDetailViewController.m */,
+				1D3623240D0F684500981E51 /* StopwatchAppDelegate.h */,
+				1D3623250D0F684500981E51 /* StopwatchAppDelegate.m */,
+				B07602D110A8EA7700E60196 /* SplitDetailCell.h */,
+				B07602D210A8EA7700E60196 /* SplitDetailCell.m */,
+				B0C4E718111644A2005BFD02 /* EmailAddressViewController.h */,
+				B0C4E719111644A2005BFD02 /* EmailAddressViewController.m */,
+				B082A706112D5E91007D6758 /* EmailAddressTableViewController.h */,
+				B082A707112D5E91007D6758 /* EmailAddressTableViewController.m */,
+				B0BFC9D412DBF9DC00EDCA76 /* SplitEditViewController.h */,
+				B0BFC9D512DBF9DC00EDCA76 /* SplitEditViewController.m */,
+				B077DEB01AA376E700C57164 /* SplitPickerViewController.h */,
+				B077DEB11AA376E700C57164 /* SplitPickerViewController.m */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		29B97314FDCFA39411CA2CEA /* Stopwatch */ = {
+			isa = PBXGroup;
+			children = (
+				080E96DDFE201D6D7F000001 /* Classes */,
+				29B97315FDCFA39411CA2CEA /* Other Sources */,
+				29B97317FDCFA39411CA2CEA /* Resources */,
+				29B97323FDCFA39411CA2CEA /* Frameworks */,
+				B084FE2911386D9B008C4B00 /* Products */,
+			);
+			name = Stopwatch;
+			sourceTree = "<group>";
+		};
+		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
+			isa = PBXGroup;
+			children = (
+				28A0AB4B0D9B1048005BE974 /* Stopwatch_Prefix.pch */,
+				B05D501A1AA8AF59006AEFA4 /* Icon_3_29.png */,
+			);
+			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+		29B97317FDCFA39411CA2CEA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				B0D23BE11D15CA0C00FADC30 /* logo_black_hires6.png */,
+				8D1107310486CEB800E47090 /* Stopwatch-Info.plist */,
+				B099086A1A76D63100ACF6D7 /* Images.xcassets */,
+				B05D501B1AA8AF59006AEFA4 /* Icon_3_40.png */,
+				B05D501C1AA8AF59006AEFA4 /* Icon_3_50.png */,
+				B05D501D1AA8AF59006AEFA4 /* Icon_3_57.png */,
+				B05D501E1AA8AF59006AEFA4 /* Icon_3_58.png */,
+				B05D501F1AA8AF59006AEFA4 /* Icon_3_60.png */,
+				B05D50201AA8AF59006AEFA4 /* Icon_3_72.png */,
+				B05D50211AA8AF59006AEFA4 /* Icon_3_76.png */,
+				B05D50221AA8AF59006AEFA4 /* Icon_3_80.png */,
+				B05D50231AA8AF59006AEFA4 /* Icon_3_87.png */,
+				B05D50241AA8AF59006AEFA4 /* Icon_3_100.png */,
+				B05D50251AA8AF59006AEFA4 /* Icon_3_114.png */,
+				B05D50261AA8AF59006AEFA4 /* Icon_3_120.png */,
+				B05D50271AA8AF59006AEFA4 /* Icon_3_144.png */,
+				B05D50281AA8AF59006AEFA4 /* Icon_3_152.png */,
+				B05D50291AA8AF59006AEFA4 /* Icon_3_180.png */,
+				B05D502A1AA8AF59006AEFA4 /* Icon_3_256.png */,
+				B05D502B1AA8AF59006AEFA4 /* Icon_3_512.png */,
+				B05D502C1AA8AF59006AEFA4 /* Icon_3_1024.png */,
+				B05D50181AA8123A006AEFA4 /* HelpImage_SettingsEmailSetup.png */,
+				B05D50161AA80F48006AEFA4 /* HelpImage_SettingsOverview_2.png */,
+				B05D50141AA80DA4006AEFA4 /* HelpImage_SplitEditView2.png */,
+				B05D50121AA80A8A006AEFA4 /* HelpImage_SplitEditView.png */,
+				B05D50101AA7F7C9006AEFA4 /* HelpImage_EmailComposer.png */,
+				B05D500E1AA7F5DC006AEFA4 /* HelpImage_SplitDetailView.png */,
+				B05D500C1AA7F2A9006AEFA4 /* HelpImage_HistoryFilterTabBar.png */,
+				B05D50081AA7F0E3006AEFA4 /* HelpImage_HistoryOverview.png */,
+				B05D50061AA7EDD9006AEFA4 /* HelpImage_MultiwatchSetup.png */,
+				B05D50041AA7E99F006AEFA4 /* HelpImage_SetupButton.png */,
+				B05D50021AA7E765006AEFA4 /* HelpImage_MultiwatchCell.png */,
+				B05D50001AA7E2D3006AEFA4 /* HelpImage_MultiwatchTop.png */,
+				B05D4FFE1AA7DBAB006AEFA4 /* HelpImage_SplitwatchBottom.png */,
+				B05D4FFC1AA7D9AF006AEFA4 /* HelpImage_SplitwatchTop.png */,
+				B05D4FF61AA77FA3006AEFA4 /* launch_1242_2208.png */,
+				B05D4FF41AA77EFC006AEFA4 /* launch_750_1334.png */,
+				B05D4FF21AA77D86006AEFA4 /* launch_640_1136.png */,
+				B05D4FEE1AA77C42006AEFA4 /* launch_320_480.png */,
+				B05D4FEF1AA77C42006AEFA4 /* launch_640_960.png */,
+				B084FABD1136B13F008C4B00 /* splitwatch.png */,
+				B0A2CDEC1AAC9B1E005A7F1D /* splitwatch@2x.png */,
+				B084FABC1136B13F008C4B00 /* multiwatch.png */,
+				B0A2CDEA1AAC9AE5005A7F1D /* multiwatch@2x.png */,
+				B05D4FB31AA67FE4006AEFA4 /* history03.png */,
+				B05D50421AAB6714006AEFA4 /* history03@2x.png */,
+				B05D4FB11AA67C9B006AEFA4 /* settings02.png */,
+				B05D50441AAB67C3006AEFA4 /* settings02@2x.png */,
+				B077DEC11AA64F7C00C57164 /* wrench13.png */,
+				B05D50401AAB639D006AEFA4 /* wrench13@2x.png */,
+				B0B5CF94118C76D10051B5C0 /* EventData.db */,
+				B0CE7E721131DB3600B5A30E /* AccDisclosure.png */,
+				B0A2CDEE1AACA657005A7F1D /* AccDisclosure@2x.png */,
+				B0CE7EEA1131E5BE00B5A30E /* separator.png */,
+				B066ABBD10B38608001D00D9 /* Tink.wav */,
+				B025ECD21139F887000EE205 /* Help_History.html */,
+				B025ECD31139F887000EE205 /* Help_Multiwatch.html */,
+				B025ECD41139F887000EE205 /* Help_Settings.html */,
+				B025ECD51139F887000EE205 /* Help_Splitwatch.html */,
+				B084FD4711383A41008C4B00 /* AboutView.xib */,
+				B076FC3810A5DAE600E60196 /* EventDetail.xib */,
+				9828E0A110B9C756001CB672 /* HistoryCell.xib */,
+				B0F8EB5211272A2100740C3D /* HistoryTableViewController.xib */,
+				28AD73870D9D96C1002E5188 /* MainWindow.xib */,
+				B08EE71D10B1140600CAE9FB /* MultiStopwatchCell.xib */,
+				B019A4511A8026CC0032405A /* MultiStopwatchSetupViewController.xib */,
+				B07602D710A8F5E200E60196 /* SplitDetailCell.xib */,
+				B0BFC9D612DBF9DC00EDCA76 /* SplitEditViewController.xib */,
+				B077DEB21AA376E700C57164 /* SplitPickerViewController.xib */,
+				B0C4E7AE11164F4D005BFD02 /* Settings.xib */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B0228C221A7AB278007B4F46 /* QuartzCore.framework */,
+				B076011110A7C60800E60196 /* MessageUI.framework */,
+				B076FB3810A5C17E00E60196 /* AudioToolbox.framework */,
+				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
+				1D30AB110D05D00D00671497 /* Foundation.framework */,
+				288765070DF74369002DB57D /* CoreGraphics.framework */,
+				B097C90911225FE900C478BC /* libsqlite3.0.dylib */,
+				B0830B2E112B83EB00395AED /* AddressBookUI.framework */,
+				B0830B3D112B840B00395AED /* AddressBook.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B084FE2911386D9B008C4B00 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B084FE2811386D9B008C4B00 /* Splitwatch.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1D6058900D05DD3D006BFB54 /* Stopwatch */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "Stopwatch" */;
+			buildPhases = (
+				1D60588D0D05DD3D006BFB54 /* Resources */,
+				1D60588E0D05DD3D006BFB54 /* Sources */,
+				1D60588F0D05DD3D006BFB54 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Stopwatch;
+			productName = Stopwatch;
+			productReference = B084FE2811386D9B008C4B00 /* Splitwatch.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		29B97313FDCFA39411CA2CEA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0720;
+				ORGANIZATIONNAME = SEGNETIX;
+				TargetAttributes = {
+					1D6058900D05DD3D006BFB54 = {
+						DevelopmentTeam = R6ERNS2DRK;
+					};
+				};
+			};
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Stopwatch" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+			);
+			mainGroup = 29B97314FDCFA39411CA2CEA /* Stopwatch */;
+			productRefGroup = B084FE2911386D9B008C4B00 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1D6058900D05DD3D006BFB54 /* Stopwatch */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1D60588D0D05DD3D006BFB54 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B0A2CDEB1AAC9AE5005A7F1D /* multiwatch@2x.png in Resources */,
+				28AD73880D9D96C1002E5188 /* MainWindow.xib in Resources */,
+				B099086B1A76D63100ACF6D7 /* Images.xcassets in Resources */,
+				B05D4FF51AA77EFC006AEFA4 /* launch_750_1334.png in Resources */,
+				B05D4FFF1AA7DBAB006AEFA4 /* HelpImage_SplitwatchBottom.png in Resources */,
+				B076FC3910A5DAE600E60196 /* EventDetail.xib in Resources */,
+				B05D4FB21AA67C9B006AEFA4 /* settings02.png in Resources */,
+				B077DEC21AA64F7C00C57164 /* wrench13.png in Resources */,
+				B05D502E1AA8AF59006AEFA4 /* Icon_3_40.png in Resources */,
+				B0A2CDEF1AACA657005A7F1D /* AccDisclosure@2x.png in Resources */,
+				B07602D810A8F5E200E60196 /* SplitDetailCell.xib in Resources */,
+				B08EE71E10B1140600CAE9FB /* MultiStopwatchCell.xib in Resources */,
+				B05D4FB41AA67FE4006AEFA4 /* history03.png in Resources */,
+				B05D50191AA8123A006AEFA4 /* HelpImage_SettingsEmailSetup.png in Resources */,
+				B05D503D1AA8AF59006AEFA4 /* Icon_3_256.png in Resources */,
+				B066ABBE10B38608001D00D9 /* Tink.wav in Resources */,
+				B05D50301AA8AF59006AEFA4 /* Icon_3_57.png in Resources */,
+				B05D50381AA8AF59006AEFA4 /* Icon_3_114.png in Resources */,
+				B05D4FF71AA77FA3006AEFA4 /* launch_1242_2208.png in Resources */,
+				9828E0A210B9C756001CB672 /* HistoryCell.xib in Resources */,
+				B05D503A1AA8AF59006AEFA4 /* Icon_3_144.png in Resources */,
+				B05D50051AA7E99F006AEFA4 /* HelpImage_SetupButton.png in Resources */,
+				B05D50151AA80DA4006AEFA4 /* HelpImage_SplitEditView2.png in Resources */,
+				B0C4E7AF11164F4D005BFD02 /* Settings.xib in Resources */,
+				B05D50111AA7F7C9006AEFA4 /* HelpImage_EmailComposer.png in Resources */,
+				B0F8EB5411272A2100740C3D /* HistoryTableViewController.xib in Resources */,
+				B0CE7E731131DB3600B5A30E /* AccDisclosure.png in Resources */,
+				B077DEB41AA376E700C57164 /* SplitPickerViewController.xib in Resources */,
+				B0CE7EEB1131E5BE00B5A30E /* separator.png in Resources */,
+				B05D50091AA7F0E3006AEFA4 /* HelpImage_HistoryOverview.png in Resources */,
+				B084FABE1136B13F008C4B00 /* multiwatch.png in Resources */,
+				B05D500F1AA7F5DC006AEFA4 /* HelpImage_SplitDetailView.png in Resources */,
+				B05D502D1AA8AF59006AEFA4 /* Icon_3_29.png in Resources */,
+				B084FABF1136B13F008C4B00 /* splitwatch.png in Resources */,
+				B05D503C1AA8AF59006AEFA4 /* Icon_3_180.png in Resources */,
+				B0D23BE21D15CA0C00FADC30 /* logo_black_hires6.png in Resources */,
+				B05D500D1AA7F2A9006AEFA4 /* HelpImage_HistoryFilterTabBar.png in Resources */,
+				B05D50351AA8AF59006AEFA4 /* Icon_3_80.png in Resources */,
+				B084FD4911383A41008C4B00 /* AboutView.xib in Resources */,
+				B05D4FF11AA77C42006AEFA4 /* launch_640_960.png in Resources */,
+				B05D50071AA7EDD9006AEFA4 /* HelpImage_MultiwatchSetup.png in Resources */,
+				B05D50371AA8AF59006AEFA4 /* Icon_3_100.png in Resources */,
+				B05D50031AA7E765006AEFA4 /* HelpImage_MultiwatchCell.png in Resources */,
+				B025ECD61139F887000EE205 /* Help_History.html in Resources */,
+				B025ECD71139F887000EE205 /* Help_Multiwatch.html in Resources */,
+				B05D50361AA8AF59006AEFA4 /* Icon_3_87.png in Resources */,
+				B05D50451AAB67C3006AEFA4 /* settings02@2x.png in Resources */,
+				B05D50341AA8AF59006AEFA4 /* Icon_3_76.png in Resources */,
+				B05D50411AAB639D006AEFA4 /* wrench13@2x.png in Resources */,
+				B05D50311AA8AF59006AEFA4 /* Icon_3_58.png in Resources */,
+				B025ECD81139F887000EE205 /* Help_Settings.html in Resources */,
+				B05D50431AAB6714006AEFA4 /* history03@2x.png in Resources */,
+				B05D50391AA8AF59006AEFA4 /* Icon_3_120.png in Resources */,
+				B025ECD91139F887000EE205 /* Help_Splitwatch.html in Resources */,
+				B05D503E1AA8AF59006AEFA4 /* Icon_3_512.png in Resources */,
+				B05D50331AA8AF59006AEFA4 /* Icon_3_72.png in Resources */,
+				B05D50011AA7E2D3006AEFA4 /* HelpImage_MultiwatchTop.png in Resources */,
+				B05D50131AA80A8A006AEFA4 /* HelpImage_SplitEditView.png in Resources */,
+				B05D503B1AA8AF59006AEFA4 /* Icon_3_152.png in Resources */,
+				B019A4521A8026CC0032405A /* MultiStopwatchSetupViewController.xib in Resources */,
+				B05D4FF31AA77D86006AEFA4 /* launch_640_1136.png in Resources */,
+				B05D503F1AA8AF59006AEFA4 /* Icon_3_1024.png in Resources */,
+				B0A2CDED1AAC9B1E005A7F1D /* splitwatch@2x.png in Resources */,
+				B0B5CF95118C76D10051B5C0 /* EventData.db in Resources */,
+				B05D4FF01AA77C42006AEFA4 /* launch_320_480.png in Resources */,
+				B0BFC9D812DBF9DC00EDCA76 /* SplitEditViewController.xib in Resources */,
+				B05D50321AA8AF59006AEFA4 /* Icon_3_60.png in Resources */,
+				B05D50171AA80F48006AEFA4 /* HelpImage_SettingsOverview_2.png in Resources */,
+				B05D502F1AA8AF59006AEFA4 /* Icon_3_50.png in Resources */,
+				B05D4FFD1AA7D9AF006AEFA4 /* HelpImage_SplitwatchTop.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1D60588E0D05DD3D006BFB54 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
+				1D3623260D0F684500981E51 /* StopwatchAppDelegate.m in Sources */,
+				B02A948310A0FCC300DB5E7E /* StopwatchViewController.m in Sources */,
+				B02A948A10A0FD6D00DB5E7E /* MultiStopwatchViewController.m in Sources */,
+				B02A948F10A0FDC400DB5E7E /* HistoryViewController.m in Sources */,
+				B02A949410A0FE5100DB5E7E /* SettingsViewController.m in Sources */,
+				B0004CF710A0FFCD00FC9CAD /* SplitDetailViewController.m in Sources */,
+				B0004D9510A10A1100FC9CAD /* Event.m in Sources */,
+				B0DE6BAE10A1CC4000FC81E5 /* Utilities.m in Sources */,
+				B076FB8F10A5CCFD00E60196 /* EventDetailViewController.m in Sources */,
+				B07602D310A8EA7700E60196 /* SplitDetailCell.m in Sources */,
+				B0FACF1C10AF3B7A004FEBC1 /* AboutViewController.m in Sources */,
+				B0FACF2110AF3B8B004FEBC1 /* HelpViewController.m in Sources */,
+				B08EE48210B0ADBC00CAE9FB /* MultiStopwatchTableViewController.m in Sources */,
+				B08EE71510B1134E00CAE9FB /* MultiStopwatchCell.m in Sources */,
+				B077DEB31AA376E700C57164 /* SplitPickerViewController.m in Sources */,
+				B093FC2F10B4001300535F70 /* Stopwatch.m in Sources */,
+				B0804F4010B61ABA00F840EE /* MultiStopwatchSetupViewController.m in Sources */,
+				9828E09E10B9C729001CB672 /* HistoryCell.m in Sources */,
+				B0C4E71B111644A2005BFD02 /* EmailAddressViewController.m in Sources */,
+				B0F8EB5311272A2100740C3D /* HistoryTableViewController.m in Sources */,
+				B082A709112D5E91007D6758 /* EmailAddressTableViewController.m in Sources */,
+				B084F87011336D8C008C4B00 /* HelpDetailViewController.m in Sources */,
+				B0BFC9D712DBF9DC00EDCA76 /* SplitEditViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		1D6058940D05DD3E006BFB54 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = "";
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Stopwatch_Prefix.pch;
+				INFOPLIST_FILE = "Stopwatch-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.segnetix.stopwatch;
+				PRODUCT_NAME = Splitwatch;
+				PROVISIONING_PROFILE = "";
+				RUN_CLANG_STATIC_ANALYZER = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Debug;
+		};
+		1D6058950D05DD3E006BFB54 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				CURRENT_PROJECT_VERSION = "";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Stopwatch_Prefix.pch;
+				INFOPLIST_FILE = "Stopwatch-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.segnetix.stopwatch;
+				PRODUCT_NAME = Splitwatch;
+				PROVISIONING_PROFILE = "81174d60-e4d4-4e08-9cf9-c2ca2145efd0";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "81174d60-e4d4-4e08-9cf9-c2ca2145efd0";
+				RUN_CLANG_STATIC_ANALYZER = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		B0341E241145FB3B00E04D8A /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Distribution;
+		};
+		B0341E251145FB3B00E04D8A /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				CURRENT_PROJECT_VERSION = "";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Stopwatch_Prefix.pch;
+				INFOPLIST_FILE = "Stopwatch-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.segnetix.stopwatch;
+				PRODUCT_NAME = Splitwatch;
+				PROVISIONING_PROFILE = "81174d60-e4d4-4e08-9cf9-c2ca2145efd0";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Distribution;
+		};
+		C01FCF4F08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		C01FCF5008A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				SDKROOT = iphoneos;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "Stopwatch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1D6058940D05DD3E006BFB54 /* Debug */,
+				1D6058950D05DD3E006BFB54 /* Release */,
+				B0341E251145FB3B00E04D8A /* Distribution */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Stopwatch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4F08A954540054247B /* Debug */,
+				C01FCF5008A954540054247B /* Release */,
+				B0341E241145FB3B00E04D8A /* Distribution */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
+}

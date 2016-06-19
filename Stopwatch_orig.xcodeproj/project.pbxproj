@@ -1,0 +1,611 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1D3623260D0F684500981E51 /* StopwatchAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* StopwatchAppDelegate.m */; };
+		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
+		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
+		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
+		282CCBFE0DB6C98000C4EA27 /* SecondView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 282CCBFD0DB6C98000C4EA27 /* SecondView.xib */; };
+		288765080DF74369002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765070DF74369002DB57D /* CoreGraphics.framework */; };
+		28AD73880D9D96C1002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD73870D9D96C1002E5188 /* MainWindow.xib */; };
+		9828E09E10B9C729001CB672 /* HistoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9828E09D10B9C729001CB672 /* HistoryCell.m */; };
+		9828E0A210B9C756001CB672 /* HistoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9828E0A110B9C756001CB672 /* HistoryCell.xib */; };
+		B0004CF710A0FFCD00FC9CAD /* SplitDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0004CF610A0FFCD00FC9CAD /* SplitDetailViewController.m */; };
+		B0004D3F10A1049800FC9CAD /* 33-cabinet.png in Resources */ = {isa = PBXBuildFile; fileRef = B0004D3E10A1049800FC9CAD /* 33-cabinet.png */; };
+		B0004D9510A10A1100FC9CAD /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = B0004D9410A10A1100FC9CAD /* Event.m */; };
+		B025EC271139DC7D000EE205 /* HelpImage_SplitwatchTop.png in Resources */ = {isa = PBXBuildFile; fileRef = B025EC261139DC7D000EE205 /* HelpImage_SplitwatchTop.png */; };
+		B025ECBC1139F797000EE205 /* HelpImage_SplitwatchBottom.png in Resources */ = {isa = PBXBuildFile; fileRef = B025ECBB1139F797000EE205 /* HelpImage_SplitwatchBottom.png */; };
+		B025ECD61139F887000EE205 /* Help_History.html in Resources */ = {isa = PBXBuildFile; fileRef = B025ECD21139F887000EE205 /* Help_History.html */; };
+		B025ECD71139F887000EE205 /* Help_Multiwatch.html in Resources */ = {isa = PBXBuildFile; fileRef = B025ECD31139F887000EE205 /* Help_Multiwatch.html */; };
+		B025ECD81139F887000EE205 /* Help_Settings.html in Resources */ = {isa = PBXBuildFile; fileRef = B025ECD41139F887000EE205 /* Help_Settings.html */; };
+		B025ECD91139F887000EE205 /* Help_Splitwatch.html in Resources */ = {isa = PBXBuildFile; fileRef = B025ECD51139F887000EE205 /* Help_Splitwatch.html */; };
+		B025ED0B113A05BB000EE205 /* HelpImage_MultiwatchTop.png in Resources */ = {isa = PBXBuildFile; fileRef = B025ED0A113A05BB000EE205 /* HelpImage_MultiwatchTop.png */; };
+		B025ED19113A0AAB000EE205 /* HelpImage_MultiwatchCell.png in Resources */ = {isa = PBXBuildFile; fileRef = B025ED18113A0AAB000EE205 /* HelpImage_MultiwatchCell.png */; };
+		B025ED2A113A0D28000EE205 /* HelpImage_InfoButton.png in Resources */ = {isa = PBXBuildFile; fileRef = B025ED29113A0D28000EE205 /* HelpImage_InfoButton.png */; };
+		B025ED42113A1222000EE205 /* HelpImage_MultiwatchFlipside.png in Resources */ = {isa = PBXBuildFile; fileRef = B025ED41113A1222000EE205 /* HelpImage_MultiwatchFlipside.png */; };
+		B025ED8D113A2ACE000EE205 /* HelpImage_HistoryFilterTabBar.png in Resources */ = {isa = PBXBuildFile; fileRef = B025ED8B113A2ACE000EE205 /* HelpImage_HistoryFilterTabBar.png */; };
+		B025ED8E113A2ACE000EE205 /* HelpImage_HistoryOverview.png in Resources */ = {isa = PBXBuildFile; fileRef = B025ED8C113A2ACE000EE205 /* HelpImage_HistoryOverview.png */; };
+		B025EDA8113A3061000EE205 /* HelpImage_SplitDetailView.png in Resources */ = {isa = PBXBuildFile; fileRef = B025EDA7113A3061000EE205 /* HelpImage_SplitDetailView.png */; };
+		B025EDB2113A35BE000EE205 /* HelpImage_EmailComposer.png in Resources */ = {isa = PBXBuildFile; fileRef = B025EDB1113A35BE000EE205 /* HelpImage_EmailComposer.png */; };
+		B025EDCF113A3F9D000EE205 /* HelpImage_SettingsEmailSetup.png in Resources */ = {isa = PBXBuildFile; fileRef = B025EDCE113A3F9D000EE205 /* HelpImage_SettingsEmailSetup.png */; };
+		B025EDD1113A3FA5000EE205 /* HelpImage_SettingsOverview.png in Resources */ = {isa = PBXBuildFile; fileRef = B025EDD0113A3FA5000EE205 /* HelpImage_SettingsOverview.png */; };
+		B025EE0C113B3A7F000EE205 /* logo_5.png in Resources */ = {isa = PBXBuildFile; fileRef = B025EE0B113B3A7F000EE205 /* logo_5.png */; };
+		B02A948310A0FCC300DB5E7E /* StopwatchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B02A948210A0FCC300DB5E7E /* StopwatchViewController.m */; };
+		B02A948A10A0FD6D00DB5E7E /* MultiStopwatchMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B02A948910A0FD6D00DB5E7E /* MultiStopwatchMainViewController.m */; };
+		B02A948F10A0FDC400DB5E7E /* HistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B02A948E10A0FDC400DB5E7E /* HistoryViewController.m */; };
+		B02A949410A0FE5100DB5E7E /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B02A949310A0FE5100DB5E7E /* SettingsViewController.m */; };
+		B032A7C811112F3C00AB46E2 /* cell_flash_background.png in Resources */ = {isa = PBXBuildFile; fileRef = B032A7C711112F3C00AB46E2 /* cell_flash_background.png */; };
+		B066ABBE10B38608001D00D9 /* Tink.wav in Resources */ = {isa = PBXBuildFile; fileRef = B066ABBD10B38608001D00D9 /* Tink.wav */; };
+		B076011210A7C60800E60196 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B076011110A7C60800E60196 /* MessageUI.framework */; };
+		B07602D310A8EA7700E60196 /* SplitDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B07602D210A8EA7700E60196 /* SplitDetailCell.m */; };
+		B07602D810A8F5E200E60196 /* SplitDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B07602D710A8F5E200E60196 /* SplitDetailCell.xib */; };
+		B076FB3910A5C17E00E60196 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B076FB3810A5C17E00E60196 /* AudioToolbox.framework */; };
+		B076FB8F10A5CCFD00E60196 /* EventDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B076FB8E10A5CCFD00E60196 /* EventDetailViewController.m */; };
+		B076FC3910A5DAE600E60196 /* EventDetail.xib in Resources */ = {isa = PBXBuildFile; fileRef = B076FC3810A5DAE600E60196 /* EventDetail.xib */; };
+		B0804F4010B61ABA00F840EE /* MultiStopwatchFlipsideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0804F3E10B61ABA00F840EE /* MultiStopwatchFlipsideViewController.m */; };
+		B0804F6210B6351D00F840EE /* MultiStopwatchSetupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0804F6110B6351D00F840EE /* MultiStopwatchSetupViewController.xib */; };
+		B080509F10B7070200F840EE /* MultiStopwatchRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B080509E10B7070200F840EE /* MultiStopwatchRootViewController.m */; };
+		B082A709112D5E91007D6758 /* EmailAddressTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B082A707112D5E91007D6758 /* EmailAddressTableViewController.m */; };
+		B0830B2F112B83EB00395AED /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0830B2E112B83EB00395AED /* AddressBookUI.framework */; };
+		B0830B3E112B840B00395AED /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0830B3D112B840B00395AED /* AddressBook.framework */; };
+		B084F84D11335F5B008C4B00 /* EventData.db in Resources */ = {isa = PBXBuildFile; fileRef = B084F84C11335F5B008C4B00 /* EventData.db */; };
+		B084F87011336D8C008C4B00 /* HelpDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B084F86F11336D8C008C4B00 /* HelpDetailViewController.m */; };
+		B084F9751134B01F008C4B00 /* start_button_multi_main.png in Resources */ = {isa = PBXBuildFile; fileRef = B084F9741134B01F008C4B00 /* start_button_multi_main.png */; };
+		B084F9A51134BC6A008C4B00 /* lap_button_multi_cell.png in Resources */ = {isa = PBXBuildFile; fileRef = B084F9A11134BC6A008C4B00 /* lap_button_multi_cell.png */; };
+		B084F9A61134BC6A008C4B00 /* reset_button_multi_cell.png in Resources */ = {isa = PBXBuildFile; fileRef = B084F9A21134BC6A008C4B00 /* reset_button_multi_cell.png */; };
+		B084F9A71134BC6A008C4B00 /* start_button_multi_cell.png in Resources */ = {isa = PBXBuildFile; fileRef = B084F9A31134BC6A008C4B00 /* start_button_multi_cell.png */; };
+		B084F9A81134BC6A008C4B00 /* stop_button_multi_cell.png in Resources */ = {isa = PBXBuildFile; fileRef = B084F9A41134BC6A008C4B00 /* stop_button_multi_cell.png */; };
+		B084FAB81136B104008C4B00 /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = B084FAB61136B104008C4B00 /* settings.png */; };
+		B084FABE1136B13F008C4B00 /* multiwatch.png in Resources */ = {isa = PBXBuildFile; fileRef = B084FABC1136B13F008C4B00 /* multiwatch.png */; };
+		B084FABF1136B13F008C4B00 /* splitwatch.png in Resources */ = {isa = PBXBuildFile; fileRef = B084FABD1136B13F008C4B00 /* splitwatch.png */; };
+		B084FACB1136D7CA008C4B00 /* history.png in Resources */ = {isa = PBXBuildFile; fileRef = B084FACA1136D7CA008C4B00 /* history.png */; };
+		B084FD4911383A41008C4B00 /* AboutView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B084FD4711383A41008C4B00 /* AboutView.xib */; };
+		B084FEE31139AA27008C4B00 /* DS-Below.png in Resources */ = {isa = PBXBuildFile; fileRef = B084FEE21139AA27008C4B00 /* DS-Below.png */; };
+		B084FF091139AF59008C4B00 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = B084FF081139AF59008C4B00 /* icon.png */; };
+		B084FF641139BD1A008C4B00 /* About_small.png in Resources */ = {isa = PBXBuildFile; fileRef = B084FF611139BD1A008C4B00 /* About_small.png */; };
+		B084FF651139BD1A008C4B00 /* Help_small.png in Resources */ = {isa = PBXBuildFile; fileRef = B084FF621139BD1A008C4B00 /* Help_small.png */; };
+		B084FF661139BD1A008C4B00 /* Set_small.png in Resources */ = {isa = PBXBuildFile; fileRef = B084FF631139BD1A008C4B00 /* Set_small.png */; };
+		B08EE48210B0ADBC00CAE9FB /* MultiStopwatchTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B08EE48110B0ADBC00CAE9FB /* MultiStopwatchTableViewController.m */; };
+		B08EE71510B1134E00CAE9FB /* MultiStopwatchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B08EE71410B1134E00CAE9FB /* MultiStopwatchCell.m */; };
+		B08EE71E10B1140600CAE9FB /* MultiStopwatchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B08EE71D10B1140600CAE9FB /* MultiStopwatchCell.xib */; };
+		B093FC2F10B4001300535F70 /* Stopwatch.m in Sources */ = {isa = PBXBuildFile; fileRef = B093FC2E10B4001300535F70 /* Stopwatch.m */; };
+		B097C90A11225FE900C478BC /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B097C90911225FE900C478BC /* libsqlite3.0.dylib */; };
+		B0A7E6141140B8900024698E /* icon57.png in Resources */ = {isa = PBXBuildFile; fileRef = B0A7E6131140B8900024698E /* icon57.png */; };
+		B0A7E6911140DFE10024698E /* logo_2a.png in Resources */ = {isa = PBXBuildFile; fileRef = B0A7E6901140DFE10024698E /* logo_2a.png */; };
+		B0A7E6941140E0510024698E /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = B0A7E6931140E0510024698E /* logo.png */; };
+		B0BEBA9810AC6EFD009A2193 /* dark_black_gradient.png in Resources */ = {isa = PBXBuildFile; fileRef = B0BEBA9710AC6EFD009A2193 /* dark_black_gradient.png */; };
+		B0C4E71B111644A2005BFD02 /* EmailAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0C4E719111644A2005BFD02 /* EmailAddressViewController.m */; };
+		B0C4E7AF11164F4D005BFD02 /* Settings.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0C4E7AE11164F4D005BFD02 /* Settings.xib */; };
+		B0CE7E281131CCB100B5A30E /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = B0CE7E271131CCB100B5A30E /* Default.png */; };
+		B0CE7E731131DB3600B5A30E /* AccDisclosure.png in Resources */ = {isa = PBXBuildFile; fileRef = B0CE7E721131DB3600B5A30E /* AccDisclosure.png */; };
+		B0CE7EEB1131E5BE00B5A30E /* separator.png in Resources */ = {isa = PBXBuildFile; fileRef = B0CE7EEA1131E5BE00B5A30E /* separator.png */; };
+		B0CE80C21132237A00B5A30E /* logo_2.png in Resources */ = {isa = PBXBuildFile; fileRef = B0CE80C11132237A00B5A30E /* logo_2.png */; };
+		B0DE6BAE10A1CC4000FC81E5 /* Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = B0DE6BAD10A1CC4000FC81E5 /* Utilities.m */; };
+		B0F8EB5311272A2100740C3D /* HistoryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0F8EB5111272A2100740C3D /* HistoryTableViewController.m */; };
+		B0F8EB5411272A2100740C3D /* HistoryTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0F8EB5211272A2100740C3D /* HistoryTableViewController.xib */; };
+		B0FACE6F10AE5CE2004FEBC1 /* button_reset.png in Resources */ = {isa = PBXBuildFile; fileRef = B0FACE6B10AE5CE2004FEBC1 /* button_reset.png */; };
+		B0FACE7010AE5CE2004FEBC1 /* button_start.png in Resources */ = {isa = PBXBuildFile; fileRef = B0FACE6C10AE5CE2004FEBC1 /* button_start.png */; };
+		B0FACE7110AE5CE2004FEBC1 /* button_lap.png in Resources */ = {isa = PBXBuildFile; fileRef = B0FACE6D10AE5CE2004FEBC1 /* button_lap.png */; };
+		B0FACE7210AE5CE2004FEBC1 /* button_stop.png in Resources */ = {isa = PBXBuildFile; fileRef = B0FACE6E10AE5CE2004FEBC1 /* button_stop.png */; };
+		B0FACF1C10AF3B7A004FEBC1 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0FACF1B10AF3B7A004FEBC1 /* AboutViewController.m */; };
+		B0FACF2110AF3B8B004FEBC1 /* HelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0FACF2010AF3B8B004FEBC1 /* HelpViewController.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		1D3623240D0F684500981E51 /* StopwatchAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StopwatchAppDelegate.h; sourceTree = "<group>"; };
+		1D3623250D0F684500981E51 /* StopwatchAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StopwatchAppDelegate.m; sourceTree = "<group>"; };
+		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		282CCBFD0DB6C98000C4EA27 /* SecondView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SecondView.xib; sourceTree = "<group>"; };
+		288765070DF74369002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		28A0AB4B0D9B1048005BE974 /* Stopwatch_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Stopwatch_Prefix.pch; sourceTree = "<group>"; };
+		28AD73870D9D96C1002E5188 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
+		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		8D1107310486CEB800E47090 /* Stopwatch-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Stopwatch-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
+		9828E09C10B9C729001CB672 /* HistoryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryCell.h; sourceTree = "<group>"; };
+		9828E09D10B9C729001CB672 /* HistoryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryCell.m; sourceTree = "<group>"; };
+		9828E0A110B9C756001CB672 /* HistoryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = HistoryCell.xib; path = Classes/HistoryCell.xib; sourceTree = "<group>"; };
+		B0004CF510A0FFCD00FC9CAD /* SplitDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SplitDetailViewController.h; sourceTree = "<group>"; };
+		B0004CF610A0FFCD00FC9CAD /* SplitDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SplitDetailViewController.m; sourceTree = "<group>"; };
+		B0004D3E10A1049800FC9CAD /* 33-cabinet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "33-cabinet.png"; sourceTree = "<group>"; };
+		B0004D9310A10A1100FC9CAD /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Event.h; sourceTree = "<group>"; };
+		B0004D9410A10A1100FC9CAD /* Event.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Event.m; sourceTree = "<group>"; };
+		B025EC261139DC7D000EE205 /* HelpImage_SplitwatchTop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HelpImage_SplitwatchTop.png; sourceTree = "<group>"; };
+		B025ECBB1139F797000EE205 /* HelpImage_SplitwatchBottom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HelpImage_SplitwatchBottom.png; sourceTree = "<group>"; };
+		B025ECD21139F887000EE205 /* Help_History.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Help_History.html; sourceTree = "<group>"; };
+		B025ECD31139F887000EE205 /* Help_Multiwatch.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Help_Multiwatch.html; sourceTree = "<group>"; };
+		B025ECD41139F887000EE205 /* Help_Settings.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Help_Settings.html; sourceTree = "<group>"; };
+		B025ECD51139F887000EE205 /* Help_Splitwatch.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Help_Splitwatch.html; sourceTree = "<group>"; };
+		B025ED0A113A05BB000EE205 /* HelpImage_MultiwatchTop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HelpImage_MultiwatchTop.png; sourceTree = "<group>"; };
+		B025ED18113A0AAB000EE205 /* HelpImage_MultiwatchCell.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HelpImage_MultiwatchCell.png; sourceTree = "<group>"; };
+		B025ED29113A0D28000EE205 /* HelpImage_InfoButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HelpImage_InfoButton.png; sourceTree = "<group>"; };
+		B025ED41113A1222000EE205 /* HelpImage_MultiwatchFlipside.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HelpImage_MultiwatchFlipside.png; sourceTree = "<group>"; };
+		B025ED8B113A2ACE000EE205 /* HelpImage_HistoryFilterTabBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HelpImage_HistoryFilterTabBar.png; sourceTree = "<group>"; };
+		B025ED8C113A2ACE000EE205 /* HelpImage_HistoryOverview.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HelpImage_HistoryOverview.png; sourceTree = "<group>"; };
+		B025EDA7113A3061000EE205 /* HelpImage_SplitDetailView.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HelpImage_SplitDetailView.png; sourceTree = "<group>"; };
+		B025EDB1113A35BE000EE205 /* HelpImage_EmailComposer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HelpImage_EmailComposer.png; sourceTree = "<group>"; };
+		B025EDCE113A3F9D000EE205 /* HelpImage_SettingsEmailSetup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HelpImage_SettingsEmailSetup.png; sourceTree = "<group>"; };
+		B025EDD0113A3FA5000EE205 /* HelpImage_SettingsOverview.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HelpImage_SettingsOverview.png; sourceTree = "<group>"; };
+		B025EE0B113B3A7F000EE205 /* logo_5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_5.png; sourceTree = "<group>"; };
+		B02A948110A0FCC300DB5E7E /* StopwatchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StopwatchViewController.h; sourceTree = "<group>"; };
+		B02A948210A0FCC300DB5E7E /* StopwatchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StopwatchViewController.m; sourceTree = "<group>"; };
+		B02A948810A0FD6D00DB5E7E /* MultiStopwatchMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiStopwatchMainViewController.h; sourceTree = "<group>"; };
+		B02A948910A0FD6D00DB5E7E /* MultiStopwatchMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultiStopwatchMainViewController.m; sourceTree = "<group>"; };
+		B02A948D10A0FDC400DB5E7E /* HistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryViewController.h; sourceTree = "<group>"; };
+		B02A948E10A0FDC400DB5E7E /* HistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryViewController.m; sourceTree = "<group>"; };
+		B02A949210A0FE5100DB5E7E /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		B02A949310A0FE5100DB5E7E /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		B032A7C711112F3C00AB46E2 /* cell_flash_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cell_flash_background.png; sourceTree = "<group>"; };
+		B066ABBD10B38608001D00D9 /* Tink.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Tink.wav; sourceTree = "<group>"; };
+		B076011110A7C60800E60196 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		B07602D110A8EA7700E60196 /* SplitDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SplitDetailCell.h; sourceTree = "<group>"; };
+		B07602D210A8EA7700E60196 /* SplitDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SplitDetailCell.m; sourceTree = "<group>"; };
+		B07602D710A8F5E200E60196 /* SplitDetailCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SplitDetailCell.xib; sourceTree = "<group>"; };
+		B076FB3810A5C17E00E60196 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = /System/Library/Frameworks/AudioToolbox.framework; sourceTree = "<absolute>"; };
+		B076FB8D10A5CCFD00E60196 /* EventDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventDetailViewController.h; sourceTree = "<group>"; };
+		B076FB8E10A5CCFD00E60196 /* EventDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventDetailViewController.m; sourceTree = "<group>"; };
+		B076FC3810A5DAE600E60196 /* EventDetail.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = EventDetail.xib; path = Classes/EventDetail.xib; sourceTree = "<group>"; };
+		B0804F3D10B61ABA00F840EE /* MultiStopwatchFlipsideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiStopwatchFlipsideViewController.h; sourceTree = "<group>"; };
+		B0804F3E10B61ABA00F840EE /* MultiStopwatchFlipsideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultiStopwatchFlipsideViewController.m; sourceTree = "<group>"; };
+		B0804F6110B6351D00F840EE /* MultiStopwatchSetupViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = MultiStopwatchSetupViewController.xib; path = Classes/MultiStopwatchSetupViewController.xib; sourceTree = "<group>"; };
+		B080509D10B7070200F840EE /* MultiStopwatchRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiStopwatchRootViewController.h; sourceTree = "<group>"; };
+		B080509E10B7070200F840EE /* MultiStopwatchRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultiStopwatchRootViewController.m; sourceTree = "<group>"; };
+		B082A706112D5E91007D6758 /* EmailAddressTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmailAddressTableViewController.h; sourceTree = "<group>"; };
+		B082A707112D5E91007D6758 /* EmailAddressTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmailAddressTableViewController.m; sourceTree = "<group>"; };
+		B0830B2E112B83EB00395AED /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
+		B0830B3D112B840B00395AED /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		B084F84C11335F5B008C4B00 /* EventData.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = EventData.db; sourceTree = "<group>"; };
+		B084F86E11336D8C008C4B00 /* HelpDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpDetailViewController.h; sourceTree = "<group>"; };
+		B084F86F11336D8C008C4B00 /* HelpDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpDetailViewController.m; sourceTree = "<group>"; };
+		B084F9741134B01F008C4B00 /* start_button_multi_main.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = start_button_multi_main.png; sourceTree = "<group>"; };
+		B084F9A11134BC6A008C4B00 /* lap_button_multi_cell.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lap_button_multi_cell.png; sourceTree = "<group>"; };
+		B084F9A21134BC6A008C4B00 /* reset_button_multi_cell.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = reset_button_multi_cell.png; sourceTree = "<group>"; };
+		B084F9A31134BC6A008C4B00 /* start_button_multi_cell.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = start_button_multi_cell.png; sourceTree = "<group>"; };
+		B084F9A41134BC6A008C4B00 /* stop_button_multi_cell.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stop_button_multi_cell.png; sourceTree = "<group>"; };
+		B084FAB61136B104008C4B00 /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings.png; sourceTree = "<group>"; };
+		B084FABC1136B13F008C4B00 /* multiwatch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = multiwatch.png; sourceTree = "<group>"; };
+		B084FABD1136B13F008C4B00 /* splitwatch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = splitwatch.png; sourceTree = "<group>"; };
+		B084FACA1136D7CA008C4B00 /* history.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = history.png; sourceTree = "<group>"; };
+		B084FD4711383A41008C4B00 /* AboutView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AboutView.xib; sourceTree = "<group>"; };
+		B084FE2811386D9B008C4B00 /* Splitwatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Splitwatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B084FEE21139AA27008C4B00 /* DS-Below.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DS-Below.png"; sourceTree = "<group>"; };
+		B084FF081139AF59008C4B00 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
+		B084FF611139BD1A008C4B00 /* About_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = About_small.png; sourceTree = "<group>"; };
+		B084FF621139BD1A008C4B00 /* Help_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Help_small.png; sourceTree = "<group>"; };
+		B084FF631139BD1A008C4B00 /* Set_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Set_small.png; sourceTree = "<group>"; };
+		B08EE48010B0ADBC00CAE9FB /* MultiStopwatchTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiStopwatchTableViewController.h; sourceTree = "<group>"; };
+		B08EE48110B0ADBC00CAE9FB /* MultiStopwatchTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultiStopwatchTableViewController.m; sourceTree = "<group>"; };
+		B08EE71310B1134E00CAE9FB /* MultiStopwatchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MultiStopwatchCell.h; path = ../MultiStopwatchCell.h; sourceTree = "<group>"; };
+		B08EE71410B1134E00CAE9FB /* MultiStopwatchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MultiStopwatchCell.m; path = ../MultiStopwatchCell.m; sourceTree = "<group>"; };
+		B08EE71D10B1140600CAE9FB /* MultiStopwatchCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MultiStopwatchCell.xib; sourceTree = "<group>"; };
+		B093FC2D10B4001300535F70 /* Stopwatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Stopwatch.h; sourceTree = "<group>"; };
+		B093FC2E10B4001300535F70 /* Stopwatch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Stopwatch.m; sourceTree = "<group>"; };
+		B097C90911225FE900C478BC /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
+		B0A7E6131140B8900024698E /* icon57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon57.png; path = "/Users/steven/Dropbox/Splitwatch/App Icons/icon57.png"; sourceTree = "<absolute>"; };
+		B0A7E6901140DFE10024698E /* logo_2a.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_2a.png; sourceTree = "<group>"; };
+		B0A7E6931140E0510024698E /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = logo.png; path = /Users/steven/Dropbox/Splitwatch/Website/images/logo.png; sourceTree = "<absolute>"; };
+		B0BEBA9710AC6EFD009A2193 /* dark_black_gradient.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dark_black_gradient.png; sourceTree = "<group>"; };
+		B0C4E718111644A2005BFD02 /* EmailAddressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmailAddressViewController.h; sourceTree = "<group>"; };
+		B0C4E719111644A2005BFD02 /* EmailAddressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmailAddressViewController.m; sourceTree = "<group>"; };
+		B0C4E7AE11164F4D005BFD02 /* Settings.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Settings.xib; sourceTree = "<group>"; };
+		B0CE7E271131CCB100B5A30E /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		B0CE7E721131DB3600B5A30E /* AccDisclosure.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AccDisclosure.png; sourceTree = "<group>"; };
+		B0CE7EEA1131E5BE00B5A30E /* separator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = separator.png; sourceTree = "<group>"; };
+		B0CE80C11132237A00B5A30E /* logo_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_2.png; sourceTree = "<group>"; };
+		B0DE6BAC10A1CC4000FC81E5 /* Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utilities.h; sourceTree = "<group>"; };
+		B0DE6BAD10A1CC4000FC81E5 /* Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utilities.m; sourceTree = "<group>"; };
+		B0F8EB5011272A2100740C3D /* HistoryTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryTableViewController.h; sourceTree = "<group>"; };
+		B0F8EB5111272A2100740C3D /* HistoryTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryTableViewController.m; sourceTree = "<group>"; };
+		B0F8EB5211272A2100740C3D /* HistoryTableViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = HistoryTableViewController.xib; path = Classes/HistoryTableViewController.xib; sourceTree = "<group>"; };
+		B0FACE6B10AE5CE2004FEBC1 /* button_reset.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_reset.png; sourceTree = "<group>"; };
+		B0FACE6C10AE5CE2004FEBC1 /* button_start.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_start.png; sourceTree = "<group>"; };
+		B0FACE6D10AE5CE2004FEBC1 /* button_lap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_lap.png; sourceTree = "<group>"; };
+		B0FACE6E10AE5CE2004FEBC1 /* button_stop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_stop.png; sourceTree = "<group>"; };
+		B0FACF1A10AF3B7A004FEBC1 /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
+		B0FACF1B10AF3B7A004FEBC1 /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
+		B0FACF1F10AF3B8B004FEBC1 /* HelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpViewController.h; sourceTree = "<group>"; };
+		B0FACF2010AF3B8B004FEBC1 /* HelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpViewController.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1D60588F0D05DD3D006BFB54 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
+				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
+				288765080DF74369002DB57D /* CoreGraphics.framework in Frameworks */,
+				B076FB3910A5C17E00E60196 /* AudioToolbox.framework in Frameworks */,
+				B076011210A7C60800E60196 /* MessageUI.framework in Frameworks */,
+				B097C90A11225FE900C478BC /* libsqlite3.0.dylib in Frameworks */,
+				B0830B2F112B83EB00395AED /* AddressBookUI.framework in Frameworks */,
+				B0830B3E112B840B00395AED /* AddressBook.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		080E96DDFE201D6D7F000001 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				B0004D9310A10A1100FC9CAD /* Event.h */,
+				B0004D9410A10A1100FC9CAD /* Event.m */,
+				B093FC2D10B4001300535F70 /* Stopwatch.h */,
+				B093FC2E10B4001300535F70 /* Stopwatch.m */,
+				B0DE6BAC10A1CC4000FC81E5 /* Utilities.h */,
+				B0DE6BAD10A1CC4000FC81E5 /* Utilities.m */,
+				B02A948110A0FCC300DB5E7E /* StopwatchViewController.h */,
+				B02A948210A0FCC300DB5E7E /* StopwatchViewController.m */,
+				B0004CF510A0FFCD00FC9CAD /* SplitDetailViewController.h */,
+				B0004CF610A0FFCD00FC9CAD /* SplitDetailViewController.m */,
+				B080509D10B7070200F840EE /* MultiStopwatchRootViewController.h */,
+				B080509E10B7070200F840EE /* MultiStopwatchRootViewController.m */,
+				B02A948810A0FD6D00DB5E7E /* MultiStopwatchMainViewController.h */,
+				B02A948910A0FD6D00DB5E7E /* MultiStopwatchMainViewController.m */,
+				B08EE48010B0ADBC00CAE9FB /* MultiStopwatchTableViewController.h */,
+				B08EE48110B0ADBC00CAE9FB /* MultiStopwatchTableViewController.m */,
+				B0804F3D10B61ABA00F840EE /* MultiStopwatchFlipsideViewController.h */,
+				B0804F3E10B61ABA00F840EE /* MultiStopwatchFlipsideViewController.m */,
+				B08EE71310B1134E00CAE9FB /* MultiStopwatchCell.h */,
+				B08EE71410B1134E00CAE9FB /* MultiStopwatchCell.m */,
+				B02A948D10A0FDC400DB5E7E /* HistoryViewController.h */,
+				B02A948E10A0FDC400DB5E7E /* HistoryViewController.m */,
+				B0F8EB5011272A2100740C3D /* HistoryTableViewController.h */,
+				B0F8EB5111272A2100740C3D /* HistoryTableViewController.m */,
+				9828E09C10B9C729001CB672 /* HistoryCell.h */,
+				9828E09D10B9C729001CB672 /* HistoryCell.m */,
+				B076FB8D10A5CCFD00E60196 /* EventDetailViewController.h */,
+				B076FB8E10A5CCFD00E60196 /* EventDetailViewController.m */,
+				B02A949210A0FE5100DB5E7E /* SettingsViewController.h */,
+				B02A949310A0FE5100DB5E7E /* SettingsViewController.m */,
+				B0FACF1A10AF3B7A004FEBC1 /* AboutViewController.h */,
+				B0FACF1B10AF3B7A004FEBC1 /* AboutViewController.m */,
+				B0FACF1F10AF3B8B004FEBC1 /* HelpViewController.h */,
+				B0FACF2010AF3B8B004FEBC1 /* HelpViewController.m */,
+				B084F86E11336D8C008C4B00 /* HelpDetailViewController.h */,
+				B084F86F11336D8C008C4B00 /* HelpDetailViewController.m */,
+				1D3623240D0F684500981E51 /* StopwatchAppDelegate.h */,
+				1D3623250D0F684500981E51 /* StopwatchAppDelegate.m */,
+				B07602D110A8EA7700E60196 /* SplitDetailCell.h */,
+				B07602D210A8EA7700E60196 /* SplitDetailCell.m */,
+				B0C4E718111644A2005BFD02 /* EmailAddressViewController.h */,
+				B0C4E719111644A2005BFD02 /* EmailAddressViewController.m */,
+				B082A706112D5E91007D6758 /* EmailAddressTableViewController.h */,
+				B082A707112D5E91007D6758 /* EmailAddressTableViewController.m */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		29B97314FDCFA39411CA2CEA /* Stopwatch */ = {
+			isa = PBXGroup;
+			children = (
+				080E96DDFE201D6D7F000001 /* Classes */,
+				29B97315FDCFA39411CA2CEA /* Other Sources */,
+				29B97317FDCFA39411CA2CEA /* Resources */,
+				29B97323FDCFA39411CA2CEA /* Frameworks */,
+				B084FE2911386D9B008C4B00 /* Products */,
+			);
+			name = Stopwatch;
+			sourceTree = "<group>";
+		};
+		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
+			isa = PBXGroup;
+			children = (
+				28A0AB4B0D9B1048005BE974 /* Stopwatch_Prefix.pch */,
+				29B97316FDCFA39411CA2CEA /* main.m */,
+			);
+			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+		29B97317FDCFA39411CA2CEA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				8D1107310486CEB800E47090 /* Stopwatch-Info.plist */,
+				B084F84C11335F5B008C4B00 /* EventData.db */,
+				B0CE7E271131CCB100B5A30E /* Default.png */,
+				B0A7E6931140E0510024698E /* logo.png */,
+				B0CE80C11132237A00B5A30E /* logo_2.png */,
+				B0A7E6901140DFE10024698E /* logo_2a.png */,
+				B025EE0B113B3A7F000EE205 /* logo_5.png */,
+				B084FF081139AF59008C4B00 /* icon.png */,
+				B0A7E6131140B8900024698E /* icon57.png */,
+				B084FEE21139AA27008C4B00 /* DS-Below.png */,
+				B0CE7E721131DB3600B5A30E /* AccDisclosure.png */,
+				B0CE7EEA1131E5BE00B5A30E /* separator.png */,
+				B084FACA1136D7CA008C4B00 /* history.png */,
+				B084FAB61136B104008C4B00 /* settings.png */,
+				B084FABC1136B13F008C4B00 /* multiwatch.png */,
+				B084FABD1136B13F008C4B00 /* splitwatch.png */,
+				B084FF611139BD1A008C4B00 /* About_small.png */,
+				B084FF621139BD1A008C4B00 /* Help_small.png */,
+				B084FF631139BD1A008C4B00 /* Set_small.png */,
+				B0004D3E10A1049800FC9CAD /* 33-cabinet.png */,
+				B066ABBD10B38608001D00D9 /* Tink.wav */,
+				B025EC261139DC7D000EE205 /* HelpImage_SplitwatchTop.png */,
+				B025ECBB1139F797000EE205 /* HelpImage_SplitwatchBottom.png */,
+				B025ED0A113A05BB000EE205 /* HelpImage_MultiwatchTop.png */,
+				B025ED18113A0AAB000EE205 /* HelpImage_MultiwatchCell.png */,
+				B025ED41113A1222000EE205 /* HelpImage_MultiwatchFlipside.png */,
+				B025ED29113A0D28000EE205 /* HelpImage_InfoButton.png */,
+				B025ED8B113A2ACE000EE205 /* HelpImage_HistoryFilterTabBar.png */,
+				B025ED8C113A2ACE000EE205 /* HelpImage_HistoryOverview.png */,
+				B025EDA7113A3061000EE205 /* HelpImage_SplitDetailView.png */,
+				B025EDB1113A35BE000EE205 /* HelpImage_EmailComposer.png */,
+				B025EDD0113A3FA5000EE205 /* HelpImage_SettingsOverview.png */,
+				B025EDCE113A3F9D000EE205 /* HelpImage_SettingsEmailSetup.png */,
+				B025ECD21139F887000EE205 /* Help_History.html */,
+				B025ECD31139F887000EE205 /* Help_Multiwatch.html */,
+				B025ECD41139F887000EE205 /* Help_Settings.html */,
+				B025ECD51139F887000EE205 /* Help_Splitwatch.html */,
+				B0BEBA9710AC6EFD009A2193 /* dark_black_gradient.png */,
+				B032A7C711112F3C00AB46E2 /* cell_flash_background.png */,
+				B0FACE6B10AE5CE2004FEBC1 /* button_reset.png */,
+				B0FACE6C10AE5CE2004FEBC1 /* button_start.png */,
+				B0FACE6D10AE5CE2004FEBC1 /* button_lap.png */,
+				B0FACE6E10AE5CE2004FEBC1 /* button_stop.png */,
+				B084F9741134B01F008C4B00 /* start_button_multi_main.png */,
+				B084F9A11134BC6A008C4B00 /* lap_button_multi_cell.png */,
+				B084F9A21134BC6A008C4B00 /* reset_button_multi_cell.png */,
+				B084F9A31134BC6A008C4B00 /* start_button_multi_cell.png */,
+				B084F9A41134BC6A008C4B00 /* stop_button_multi_cell.png */,
+				B084FD4711383A41008C4B00 /* AboutView.xib */,
+				B076FC3810A5DAE600E60196 /* EventDetail.xib */,
+				9828E0A110B9C756001CB672 /* HistoryCell.xib */,
+				B0F8EB5211272A2100740C3D /* HistoryTableViewController.xib */,
+				28AD73870D9D96C1002E5188 /* MainWindow.xib */,
+				B08EE71D10B1140600CAE9FB /* MultiStopwatchCell.xib */,
+				B0804F6110B6351D00F840EE /* MultiStopwatchSetupViewController.xib */,
+				282CCBFD0DB6C98000C4EA27 /* SecondView.xib */,
+				B0C4E7AE11164F4D005BFD02 /* Settings.xib */,
+				B07602D710A8F5E200E60196 /* SplitDetailCell.xib */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B076011110A7C60800E60196 /* MessageUI.framework */,
+				B076FB3810A5C17E00E60196 /* AudioToolbox.framework */,
+				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
+				1D30AB110D05D00D00671497 /* Foundation.framework */,
+				288765070DF74369002DB57D /* CoreGraphics.framework */,
+				B097C90911225FE900C478BC /* libsqlite3.0.dylib */,
+				B0830B2E112B83EB00395AED /* AddressBookUI.framework */,
+				B0830B3D112B840B00395AED /* AddressBook.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B084FE2911386D9B008C4B00 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B084FE2811386D9B008C4B00 /* Splitwatch.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1D6058900D05DD3D006BFB54 /* Stopwatch */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "Stopwatch" */;
+			buildPhases = (
+				1D60588D0D05DD3D006BFB54 /* Resources */,
+				1D60588E0D05DD3D006BFB54 /* Sources */,
+				1D60588F0D05DD3D006BFB54 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Stopwatch;
+			productName = Stopwatch;
+			productReference = B084FE2811386D9B008C4B00 /* Splitwatch.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		29B97313FDCFA39411CA2CEA /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Stopwatch_orig" */;
+			compatibilityVersion = "Xcode 3.1";
+			hasScannedForEncodings = 1;
+			mainGroup = 29B97314FDCFA39411CA2CEA /* Stopwatch */;
+			productRefGroup = B084FE2911386D9B008C4B00 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1D6058900D05DD3D006BFB54 /* Stopwatch */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1D60588D0D05DD3D006BFB54 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				28AD73880D9D96C1002E5188 /* MainWindow.xib in Resources */,
+				282CCBFE0DB6C98000C4EA27 /* SecondView.xib in Resources */,
+				B0004D3F10A1049800FC9CAD /* 33-cabinet.png in Resources */,
+				B076FC3910A5DAE600E60196 /* EventDetail.xib in Resources */,
+				B07602D810A8F5E200E60196 /* SplitDetailCell.xib in Resources */,
+				B0BEBA9810AC6EFD009A2193 /* dark_black_gradient.png in Resources */,
+				B0FACE6F10AE5CE2004FEBC1 /* button_reset.png in Resources */,
+				B0FACE7010AE5CE2004FEBC1 /* button_start.png in Resources */,
+				B0FACE7110AE5CE2004FEBC1 /* button_lap.png in Resources */,
+				B0FACE7210AE5CE2004FEBC1 /* button_stop.png in Resources */,
+				B08EE71E10B1140600CAE9FB /* MultiStopwatchCell.xib in Resources */,
+				B066ABBE10B38608001D00D9 /* Tink.wav in Resources */,
+				B0804F6210B6351D00F840EE /* MultiStopwatchSetupViewController.xib in Resources */,
+				9828E0A210B9C756001CB672 /* HistoryCell.xib in Resources */,
+				B032A7C811112F3C00AB46E2 /* cell_flash_background.png in Resources */,
+				B0C4E7AF11164F4D005BFD02 /* Settings.xib in Resources */,
+				B0F8EB5411272A2100740C3D /* HistoryTableViewController.xib in Resources */,
+				B0CE7E281131CCB100B5A30E /* Default.png in Resources */,
+				B0CE7E731131DB3600B5A30E /* AccDisclosure.png in Resources */,
+				B0CE7EEB1131E5BE00B5A30E /* separator.png in Resources */,
+				B0CE80C21132237A00B5A30E /* logo_2.png in Resources */,
+				B084F84D11335F5B008C4B00 /* EventData.db in Resources */,
+				B084F9751134B01F008C4B00 /* start_button_multi_main.png in Resources */,
+				B084F9A51134BC6A008C4B00 /* lap_button_multi_cell.png in Resources */,
+				B084F9A61134BC6A008C4B00 /* reset_button_multi_cell.png in Resources */,
+				B084F9A71134BC6A008C4B00 /* start_button_multi_cell.png in Resources */,
+				B084F9A81134BC6A008C4B00 /* stop_button_multi_cell.png in Resources */,
+				B084FAB81136B104008C4B00 /* settings.png in Resources */,
+				B084FABE1136B13F008C4B00 /* multiwatch.png in Resources */,
+				B084FABF1136B13F008C4B00 /* splitwatch.png in Resources */,
+				B084FACB1136D7CA008C4B00 /* history.png in Resources */,
+				B084FD4911383A41008C4B00 /* AboutView.xib in Resources */,
+				B084FEE31139AA27008C4B00 /* DS-Below.png in Resources */,
+				B084FF091139AF59008C4B00 /* icon.png in Resources */,
+				B084FF641139BD1A008C4B00 /* About_small.png in Resources */,
+				B084FF651139BD1A008C4B00 /* Help_small.png in Resources */,
+				B084FF661139BD1A008C4B00 /* Set_small.png in Resources */,
+				B025EC271139DC7D000EE205 /* HelpImage_SplitwatchTop.png in Resources */,
+				B025ECBC1139F797000EE205 /* HelpImage_SplitwatchBottom.png in Resources */,
+				B025ECD61139F887000EE205 /* Help_History.html in Resources */,
+				B025ECD71139F887000EE205 /* Help_Multiwatch.html in Resources */,
+				B025ECD81139F887000EE205 /* Help_Settings.html in Resources */,
+				B025ECD91139F887000EE205 /* Help_Splitwatch.html in Resources */,
+				B025ED0B113A05BB000EE205 /* HelpImage_MultiwatchTop.png in Resources */,
+				B025ED19113A0AAB000EE205 /* HelpImage_MultiwatchCell.png in Resources */,
+				B025ED2A113A0D28000EE205 /* HelpImage_InfoButton.png in Resources */,
+				B025ED42113A1222000EE205 /* HelpImage_MultiwatchFlipside.png in Resources */,
+				B025ED8D113A2ACE000EE205 /* HelpImage_HistoryFilterTabBar.png in Resources */,
+				B025ED8E113A2ACE000EE205 /* HelpImage_HistoryOverview.png in Resources */,
+				B025EDA8113A3061000EE205 /* HelpImage_SplitDetailView.png in Resources */,
+				B025EDB2113A35BE000EE205 /* HelpImage_EmailComposer.png in Resources */,
+				B025EDCF113A3F9D000EE205 /* HelpImage_SettingsEmailSetup.png in Resources */,
+				B025EDD1113A3FA5000EE205 /* HelpImage_SettingsOverview.png in Resources */,
+				B025EE0C113B3A7F000EE205 /* logo_5.png in Resources */,
+				B0A7E6141140B8900024698E /* icon57.png in Resources */,
+				B0A7E6911140DFE10024698E /* logo_2a.png in Resources */,
+				B0A7E6941140E0510024698E /* logo.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1D60588E0D05DD3D006BFB54 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
+				1D3623260D0F684500981E51 /* StopwatchAppDelegate.m in Sources */,
+				B02A948310A0FCC300DB5E7E /* StopwatchViewController.m in Sources */,
+				B02A948A10A0FD6D00DB5E7E /* MultiStopwatchMainViewController.m in Sources */,
+				B02A948F10A0FDC400DB5E7E /* HistoryViewController.m in Sources */,
+				B02A949410A0FE5100DB5E7E /* SettingsViewController.m in Sources */,
+				B0004CF710A0FFCD00FC9CAD /* SplitDetailViewController.m in Sources */,
+				B0004D9510A10A1100FC9CAD /* Event.m in Sources */,
+				B0DE6BAE10A1CC4000FC81E5 /* Utilities.m in Sources */,
+				B076FB8F10A5CCFD00E60196 /* EventDetailViewController.m in Sources */,
+				B07602D310A8EA7700E60196 /* SplitDetailCell.m in Sources */,
+				B0FACF1C10AF3B7A004FEBC1 /* AboutViewController.m in Sources */,
+				B0FACF2110AF3B8B004FEBC1 /* HelpViewController.m in Sources */,
+				B08EE48210B0ADBC00CAE9FB /* MultiStopwatchTableViewController.m in Sources */,
+				B08EE71510B1134E00CAE9FB /* MultiStopwatchCell.m in Sources */,
+				B093FC2F10B4001300535F70 /* Stopwatch.m in Sources */,
+				B0804F4010B61ABA00F840EE /* MultiStopwatchFlipsideViewController.m in Sources */,
+				B080509F10B7070200F840EE /* MultiStopwatchRootViewController.m in Sources */,
+				9828E09E10B9C729001CB672 /* HistoryCell.m in Sources */,
+				B0C4E71B111644A2005BFD02 /* EmailAddressViewController.m in Sources */,
+				B0F8EB5311272A2100740C3D /* HistoryTableViewController.m in Sources */,
+				B082A709112D5E91007D6758 /* EmailAddressTableViewController.m in Sources */,
+				B084F87011336D8C008C4B00 /* HelpDetailViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		1D6058940D05DD3E006BFB54 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Stopwatch_Prefix.pch;
+				INFOPLIST_FILE = "Stopwatch-Info.plist";
+				PRODUCT_NAME = Splitwatch;
+				RUN_CLANG_STATIC_ANALYZER = YES;
+			};
+			name = Debug;
+		};
+		1D6058950D05DD3E006BFB54 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Stopwatch_Prefix.pch;
+				INFOPLIST_FILE = "Stopwatch-Info.plist";
+				PRODUCT_NAME = Splitwatch;
+			};
+			name = Release;
+		};
+		C01FCF4F08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				PREBINDING = NO;
+				SDKROOT = iphoneos3.1;
+			};
+			name = Debug;
+		};
+		C01FCF5008A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				PREBINDING = NO;
+				SDKROOT = iphoneos3.1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "Stopwatch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1D6058940D05DD3E006BFB54 /* Debug */,
+				1D6058950D05DD3E006BFB54 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Stopwatch_orig" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4F08A954540054247B /* Debug */,
+				C01FCF5008A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
+}

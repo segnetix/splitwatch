@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>Date</key>
+		<real>279416804.83713102</real>
+		<key>Distance</key>
+		<integer>1600</integer>
+		<key>FinalTime</key>
+		<real>15.536565005779266</real>
+		<key>LapDistance</key>
+		<integer>100</integer>
+		<key>Location</key>
+		<string>Olympics</string>
+		<key>RunnerName</key>
+		<string>Emily</string>
+		<key>SplitData</key>
+		<array>
+			<real>0.83147603273391724</real>
+			<real>1.4491320252418518</real>
+			<real>1.9674220085144043</real>
+			<real>2.3688790202140808</real>
+			<real>2.8540910482406616</real>
+			<real>3.3380489945411682</real>
+			<real>3.7559750080108643</real>
+			<real>4.1403180360794067</real>
+			<real>6.2617329955101013</real>
+			<real>6.6797580122947693</real>
+			<real>7.0801340341567993</real>
+			<real>7.4824640154838562</real>
+			<real>8.1832630038261414</real>
+			<real>10.924096047878265</real>
+			<real>11.842904031276703</real>
+			<real>15.536565005779266</real>
+		</array>
+	</dict>
+	<dict>
+		<key>Date</key>
+		<real>279414561.05937397</real>
+		<key>Distance</key>
+		<integer>3200</integer>
+		<key>FinalTime</key>
+		<real>16.47950804233551</real>
+		<key>LapDistance</key>
+		<integer>400</integer>
+		<key>Location</key>
+		<string>Penn Relays</string>
+		<key>RunnerName</key>
+		<string>Heather</string>
+		<key>SplitData</key>
+		<array>
+			<real>5.3170440196990967</real>
+			<real>5.9184090495109558</real>
+			<real>8.3081050515174866</real>
+			<real>9.2269459962844849</real>
+			<real>11.416144013404846</real>
+			<real>12.351734042167664</real>
+			<real>14.774274051189423</real>
+			<real>16.47950804233551</real>
+		</array>
+	</dict>
+	<dict>
+		<key>Date</key>
+		<real>279414529.71135402</real>
+		<key>Distance</key>
+		<integer>800</integer>
+		<key>FinalTime</key>
+		<real>27.506758987903595</real>
+		<key>LapDistance</key>
+		<integer>200</integer>
+		<key>Location</key>
+		<string>West Coast Relays</string>
+		<key>RunnerName</key>
+		<string>Paige</string>
+		<key>SplitData</key>
+		<array>
+			<real>5.2478430271148682</real>
+			<real>12.951965987682343</real>
+			<real>21.189799010753632</real>
+			<real>27.506758987903595</real>
+		</array>
+	</dict>
+</array>
+</plist>

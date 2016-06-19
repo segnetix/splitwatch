@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clearsContextBeforeDrawing="NO" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="EventCellIdentifier" id="17" customClass="HistoryCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="36"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="17" id="jnm-UA-LxG">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="35"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="28">
+                        <rect key="frame" x="8" y="0.0" width="304" height="36"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="Date" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="18">
+                        <rect key="frame" x="10" y="10" width="70" height="18"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="70" id="J6Y-Yx-cvV"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="13"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="Athlete" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="19">
+                        <rect key="frame" x="200" y="7" width="100" height="24"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="24" id="MNF-aU-wqc"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="13"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="Event" textAlignment="right" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="20">
+                        <rect key="frame" x="82" y="10" width="38" height="18"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="38" id="QiN-5X-8m2"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="13"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="Time" textAlignment="right" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="21">
+                        <rect key="frame" x="128" y="10" width="64" height="18"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="64" id="pZj-Tp-qKT"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="13"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="18" firstAttribute="leading" secondItem="jnm-UA-LxG" secondAttribute="leadingMargin" constant="2" id="2Sj-tO-chf"/>
+                    <constraint firstItem="28" firstAttribute="leading" secondItem="jnm-UA-LxG" secondAttribute="leadingMargin" id="6bI-oD-E58"/>
+                    <constraint firstItem="28" firstAttribute="top" secondItem="jnm-UA-LxG" secondAttribute="top" id="A3a-Mh-6t3"/>
+                    <constraint firstItem="21" firstAttribute="leading" secondItem="20" secondAttribute="trailing" constant="8" symbolic="YES" id="AaP-eq-kjO"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="19" secondAttribute="trailing" constant="12" id="B0O-sl-MCB"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="28" secondAttribute="trailing" id="CKp-Pr-68W"/>
+                    <constraint firstItem="18" firstAttribute="centerY" secondItem="21" secondAttribute="centerY" id="KLz-3g-s1N"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="28" secondAttribute="bottom" constant="-9" id="WrD-Cn-dhA"/>
+                    <constraint firstItem="18" firstAttribute="centerY" secondItem="20" secondAttribute="centerY" id="XpH-ol-nrK"/>
+                    <constraint firstItem="18" firstAttribute="centerY" secondItem="19" secondAttribute="centerY" id="dJj-9w-m9t"/>
+                    <constraint firstItem="19" firstAttribute="leading" secondItem="21" secondAttribute="trailing" constant="8" id="j7Z-Ur-81C"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="19" secondAttribute="bottom" constant="-4" id="lWd-PN-NUq"/>
+                    <constraint firstItem="20" firstAttribute="leading" secondItem="18" secondAttribute="trailing" constant="2" id="sxJ-5u-QJr"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+            <connections>
+                <outlet property="backgroundView" destination="28" id="29"/>
+                <outlet property="dateLabel" destination="18" id="24"/>
+                <outlet property="eventLabel" destination="20" id="25"/>
+                <outlet property="nameLabel" destination="19" id="26"/>
+                <outlet property="timeLabel" destination="21" id="27"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+</document>

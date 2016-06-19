@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "-[MultiStopwatchTableViewController tableView:cellForRowAtIndexPath:]:MultiStopwatchTableViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "watches.count">
+            </PersistentString>
+            <PersistentString
+               value = "multiWatchCells">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[Stopwatch startStopButtonPressed]:Stopwatch.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[SplitEditViewController initWithEvent:]:SplitEditViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[MultiStopwatchCell updateButtonState]:MultiStopwatchCell.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "watch.lapCount">
+            </PersistentString>
+            <PersistentString
+               value = "watch.runnerName">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[MultiStopwatchTableViewController tableView:numberOfRowsInSection:]:MultiStopwatchTableViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "watches">
+            </PersistentString>
+            <PersistentString
+               value = "watches.count">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[MultiStopwatchViewController startStopButtonPressed]:MultiStopwatchViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[HistoryViewController sortControlHit:]:HistoryViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "sortSegmentedControl.selectedSegmentIndex">
+            </PersistentString>
+            <PersistentString
+               value = "historyTableViewController.filterSelection">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[EventDetailViewController viewDidLoad]:EventDetailViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[EventDetailViewController initWithEvent:settingsVC:]:EventDetailViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[MultiStopwatchTableViewController startAllWatches:]:MultiStopwatchTableViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "watch.bTimerRunning">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[HistoryTableViewController viewWillLayoutSubviews]:HistoryTableViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.view">
+            </PersistentString>
+            <PersistentString
+               value = "self.view.frame">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[MultiStopwatchTableViewController resetAllWatches]:MultiStopwatchTableViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[MultiStopwatchCell lapResetButtonPressed:]:MultiStopwatchCell.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[MultiStopwatchCell startStopButtonPressed:]:MultiStopwatchCell.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[SplitEditViewController viewDidLoad]:SplitEditViewController.m">
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

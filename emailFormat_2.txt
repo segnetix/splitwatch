@@ -1,0 +1,210 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title>Test</title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1038.25">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Arial}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Arial; min-height: 16.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-align: right; font: 14.0px Arial}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; text-align: center; font: 14.0px Arial}
+    span.s1 {color: #0000ee}
+    td.td1 {width: 98.0px; padding: 1.0px 1.0px 1.0px 1.0px}
+    td.td2 {width: 4.0px; padding: 1.0px 1.0px 1.0px 1.0px}
+    td.td3 {width: 51.0px; padding: 1.0px 1.0px 1.0px 1.0px}
+    td.td4 {width: 32.0px; padding: 5.0px 5.0px 5.0px 5.0px}
+    td.td5 {width: 76.0px; padding: 5.0px 5.0px 5.0px 5.0px}
+  </style>
+</head>
+<body>
+<p class="p1"><b>Track Coach Pro Split Report by </b><a href="file:///Volumes/SANDISK/www.segnetix.com"><span class="s1"><b>SEGNETIX</b></span></a></p>
+<p class="p2"><br></p>
+<table cellspacing="0" cellpadding="0">
+  <tbody>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1">Runner:</p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p1"> </p>
+      </td>
+      <td valign="middle" class="td3">
+        <p class="p1">Heather</p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1">Event Location:</p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p1"> </p>
+      </td>
+      <td valign="middle" class="td3">
+        <p class="p1">Heather</p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1">Date:</p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p1"> </p>
+      </td>
+      <td valign="middle" class="td3">
+        <p class="p1">Heather</p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1">Event:</p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p1"> </p>
+      </td>
+      <td valign="middle" class="td3">
+        <p class="p1">Heather</p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1">Time:</p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p1"> </p>
+      </td>
+      <td valign="middle" class="td3">
+        <p class="p1">Heather</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<p class="p2"><br></p>
+<table cellspacing="0" cellpadding="0">
+  <tbody>
+    <tr>
+      <td valign="middle" class="td4">
+        <p class="p3"><b>Lap</b></p>
+      </td>
+      <td valign="middle" class="td5">
+        <p class="p4"><b>Time</b></p>
+      </td>
+      <td valign="middle" class="td5">
+        <p class="p4"><b>200</b></p>
+      </td>
+      <td valign="middle" class="td5">
+        <p class="p4"><b>400</b></p>
+      </td>
+      <td valign="middle" class="td5">
+        <p class="p4"><b>800</b></p>
+      </td>
+      <td valign="middle" class="td5">
+        <p class="p4"><b>1600</b></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td4">
+        <p class="p3">200</p>
+      </td>
+      <td valign="middle" class="td5">
+        <p class="p3">30:10.10</p>
+      </td>
+      <td valign="middle" class="td5">
+        <p class="p3">30:10.10</p>
+      </td>
+      <td valign="middle" class="td5">
+        <p class="p3">30:10.10</p>
+      </td>
+      <td valign="middle" class="td5">
+        <p class="p3">30:10.10</p>
+      </td>
+      <td valign="middle" class="td5">
+        <p class="p3">30:10.10</p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td4">
+        <p class="p3">400</p>
+      </td>
+      <td valign="middle" class="td5">
+        <p class="p3">30:10.10</p>
+      </td>
+      <td valign="middle" class="td5">
+        <p class="p3">30:10.10</p>
+      </td>
+      <td valign="middle" class="td5">
+        <p class="p3">30:10.10</p>
+      </td>
+      <td valign="middle" class="td5">
+        <p class="p3">30:10.10</p>
+      </td>
+      <td valign="middle" class="td5">
+        <p class="p3">30:10.10</p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td4">
+        <p class="p3">600</p>
+      </td>
+      <td valign="middle" class="td5">
+        <p class="p3">30:10.10</p>
+      </td>
+      <td valign="middle" class="td5">
+        <p class="p3">30:10.10</p>
+      </td>
+      <td valign="middle" class="td5">
+        <p class="p3">30:10.10</p>
+      </td>
+      <td valign="middle" class="td5">
+        <p class="p3">30:10.10</p>
+      </td>
+      <td valign="middle" class="td5">
+        <p class="p3">30:10.10</p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td4">
+        <p class="p3">800</p>
+      </td>
+      <td valign="middle" class="td5">
+        <p class="p3">30:10.10</p>
+      </td>
+      <td valign="middle" class="td5">
+        <p class="p3">30:10.10</p>
+      </td>
+      <td valign="middle" class="td5">
+        <p class="p3">30:10.10</p>
+      </td>
+      <td valign="middle" class="td5">
+        <p class="p3">30:10.10</p>
+      </td>
+      <td valign="middle" class="td5">
+        <p class="p3">30:10.10</p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td4">
+        <p class="p3">1000</p>
+      </td>
+      <td valign="middle" class="td5">
+        <p class="p3">30:10.10</p>
+      </td>
+      <td valign="middle" class="td5">
+        <p class="p3">30:10.10</p>
+      </td>
+      <td valign="middle" class="td5">
+        <p class="p3">30:10.10</p>
+      </td>
+      <td valign="middle" class="td5">
+        <p class="p3">30:10.10</p>
+      </td>
+      <td valign="middle" class="td5">
+        <p class="p3">30:10.10</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</body>
+</html>

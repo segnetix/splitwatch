@@ -1,0 +1,1052 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1038\cocoasubrtf250
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fmodern\fcharset0 Courier;\f2\fnil\fcharset0 AndaleMono;
+}
+{\colortbl;\red255\green255\blue255;\red86\green86\blue86;\red0\green116\blue0;\red100\green56\blue32;
+\red196\green26\blue22;\red170\green13\blue145;\red63\green110\blue116;\red92\green38\blue153;\red46\green13\blue110;
+\red38\green71\blue75;\red28\green0\blue207;}
+\margl1440\margr1440\vieww15900\viewh17120\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\ql\qnatural\pardirnatural
+
+\f0\fs24 \cf0 SQLite3 EventData.db\
+\
+CREATE TABLE Event (\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\ql\qnatural\pardirnatural
+\cf0 EventNum INTEGER PRIMARY KEY,\
+EventName TEXT,\
+EventLocation TEXT,\
+EventDate REAL,\
+EventFinalTime REAL,\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\ql\qnatural\pardirnatural
+\cf0 EventDistance INTEGER,\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\ql\qnatural\pardirnatural
+\cf0 LapDistance INTEGER,\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\ql\qnatural\pardirnatural
+\cf0 MetricUnits INTEGER,\
+KiloSplits INTEGER,\
+RunnerName TEXT);\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\ql\qnatural\pardirnatural
+\cf0 CREATE TABLE Split (\
+EventNum INTEGER,\
+SplitSeqNum INTEGER,\
+Split REAL);\
+\
+\
+\
+\pard\pardeftab720\sl400\ql\qnatural
+
+\f1\fs26 \cf2 INSERT INTO Event(EventName, EventLocation, EventDate, EventFinalTime, EventDistance, LapDistance, MetricUnits, KiloSplits, RunnerName)\
+VALUES('Test Coast Relays', 'Fresno, CA', 286941460.787487, 353.8, 1600, 400, 1, 0, 'Heather Gentry');\
+\
+INSERT INTO Split(EventNum, SplitSeqNum, Split) VALUES(1, 1, 87.5);\uc0\u8232 INSERT INTO Split(EventNum, SplitSeqNum, Split) VALUES(1, 2, 90.4);\u8232 INSERT INTO Split(EventNum, SplitSeqNum, Split) VALUES(1, 3, 89.6);\
+INSERT INTO Split(EventNum, SplitSeqNum, Split) VALUES(1, 4, 86.3);\
+\
+\
+INSERT INTO Event(EventName, EventLocation, EventDate, EventFinalTime, EventDistance, LapDistance, MetricUnits, KiloSplits, RunnerName)\
+VALUES('Test Coast Relays', 'Denver', 286847463.146, 349.8, 1760, 440, 0, 0, 'Paige Gentry');\
+\
+INSERT INTO Split(EventNum, SplitSeqNum, Split) VALUES(2, 1, 86.5);\uc0\u8232 INSERT INTO Split(EventNum, SplitSeqNum, Split) VALUES(2, 2, 89.4);\u8232 INSERT INTO Split(EventNum, SplitSeqNum, Split) VALUES(2, 3, 88.6);\
+INSERT INTO Split(EventNum, SplitSeqNum, Split) VALUES(2, 4, 85.3);\
+\
+\
+=====================================\
+\pard\tx560\pardeftab560\ql\qnatural\pardirnatural
+
+\f2\fs24 \cf3 \CocoaLigature0 //\cf0 \
+\cf3 //  RootViewController.h\cf0 \
+\cf3 //  todo\cf0 \
+\cf3 //\cf0 \
+\cf3 //  Created by Brandon Trebitowski on 8/17/08.\cf0 \
+\cf3 //  Copyright __MyCompanyName__ 2008. All rights reserved.\cf0 \
+\cf3 //\cf0 \
+\
+\cf4 #import \cf5 <UIKit/UIKit.h>\cf4 \
+#import \cf5 "TodoViewController.h"\cf4 \
+\cf0 \
+\cf6 @interface\cf0  RootViewController : UITableViewController \{\
+	\cf7 TodoViewController\cf0  *\cf7 todoView\cf0 ;\
+\}\
+\
+\cf6 @property\cf0 (\cf6 nonatomic\cf0 ,\cf6 retain\cf0 ) TodoViewController *todoView;\
+\
+\cf6 @end\cf0 \
+\pard\pardeftab720\sl400\ql\qnatural
+
+\f1\fs26 \cf2 \CocoaLigature1 \
+=====================================\
+\pard\tx560\pardeftab560\ql\qnatural\pardirnatural
+
+\f2\fs24 \cf3 \CocoaLigature0 //\cf0 \
+\cf3 //  RootViewController.m\cf0 \
+\cf3 //  todo\cf0 \
+\cf3 //\cf0 \
+\cf3 //  Created by Brandon Trebitowski on 8/17/08.\cf0 \
+\cf3 //  Copyright __MyCompanyName__ 2008. All rights reserved.\cf0 \
+\cf3 //\cf0 \
+\
+\cf4 #import \cf5 "RootViewController.h"\cf4 \
+#import \cf5 "todoAppDelegate.h"\cf4 \
+#import \cf5 "Todo.h"\cf4 \
+#import \cf5 "TodoCell.h"\cf4 \
+\cf0 \
+\cf6 @implementation\cf0  RootViewController\
+\cf6 @synthesize\cf0  todoView;\
+\
+- (\cf6 void\cf0 )viewDidLoad \{\
+	\cf6 self\cf0 .\cf8 title\cf0  = \cf5 @"Todo Items"\cf0 ;\
+	\cf6 self\cf0 .\cf8 navigationItem\cf0 .\cf8 leftBarButtonItem\cf0  = \cf6 self\cf0 .editButtonItem;\
+\
+	\cf8 UIBarButtonItem\cf0  * btn = [[\cf8 UIBarButtonItem\cf0  \cf9 alloc\cf0 ] \cf9 initWithTitle\cf0 :\cf5 @"Add"\cf0  \
+															 \cf9 style\cf0 :\cf9 UIBarButtonItemStyleBordered\cf0  \
+															 \cf9 target\cf0 :\cf6 self\cf0  \cf9 action\cf0 :\cf6 @selector\cf0 (\cf10 addTodo\cf0 :)];\
+	\cf6 self\cf0 .\cf8 navigationItem\cf0 .\cf8 rightBarButtonItem\cf0  = btn;\
+\}\
+\
+- (\cf6 void\cf0 ) addTodo:(\cf6 id\cf0 )sender \{\
+	\cf7 todoAppDelegate\cf0  *appDelegate = (\cf7 todoAppDelegate\cf0  *)[[\cf8 UIApplication\cf0  \cf9 sharedApplication\cf0 ] delegate];\
+	\
+	\cf6 if\cf0 (\cf6 self\cf0 .\cf7 todoView\cf0  == \cf6 nil\cf0 ) \{\
+		\cf7 TodoViewController\cf0  *viewController = [[\cf7 TodoViewController\cf0  \cf9 alloc\cf0 ] \
+											  \cf9 initWithNibName\cf0 :\cf5 @"TodoViewController"\cf0  \cf9 bundle\cf0 :[\cf8 NSBundle\cf0  \cf9 mainBundle\cf0 ]];\
+		\cf6 self\cf0 .\cf7 todoView\cf0  = viewController;\
+		[viewController \cf9 release\cf0 ];\
+	\}\
+	\
+	\cf7 Todo\cf0  *todo = [appDelegate \cf10 addTodo\cf0 ];\
+	[\cf6 self\cf0 .\cf8 navigationController\cf0  \cf9 pushViewController\cf0 :\cf6 self\cf0 .\cf7 todoView\cf0  \cf9 animated\cf0 :\cf6 YES\cf0 ];\
+	\cf6 self\cf0 .\cf7 todoView\cf0 .\cf7 todo\cf0  = todo;\
+	\cf6 self\cf0 .\cf7 todoView\cf0 .\cf8 title\cf0  = todo.\cf7 runnerName\cf0 ;\
+	[\cf6 self\cf0 .\cf7 todoView\cf0 .\cf7 todoText\cf0  \cf9 setText\cf0 :todo.\cf10 runnerName\cf0 ];	\
+	\
+\}\
+\
+- (\cf6 void\cf0 )setEditing:(\cf6 BOOL\cf0 )\cf8 editing\cf0  animated:(\cf6 BOOL\cf0 )animated \{\
+    \cf3 // Updates the appearance of the Edit|Done button as necessary.\cf0 \
+    [\cf6 super\cf0  \cf9 setEditing\cf0 :\cf8 editing\cf0  \cf9 animated\cf0 :animated];\
+    [\cf6 self\cf0 .\cf8 tableView\cf0  \cf9 setEditing\cf0 :\cf8 editing\cf0  \cf9 animated\cf0 :\cf6 YES\cf0 ];\
+    \cf3 // Disable the add button while editing.\cf0 \
+    \cf6 if\cf0  (\cf8 editing\cf0 ) \{\
+        \cf6 self\cf0 .\cf8 navigationItem\cf0 .\cf8 rightBarButtonItem\cf0 .\cf8 enabled\cf0  = \cf6 NO\cf0 ;\
+    \} \cf6 else\cf0  \{\
+        \cf6 self\cf0 .\cf8 navigationItem\cf0 .\cf8 rightBarButtonItem\cf0 .\cf8 enabled\cf0  = \cf6 YES\cf0 ;\
+    \}\
+\}\
+\
+- (\cf8 NSInteger\cf0 )numberOfSectionsInTableView:(\cf8 UITableView\cf0  *)\cf8 tableView\cf0  \{\
+	\cf6 return\cf0  \cf11 1\cf0 ;\
+\}\
+\
+- (\cf8 NSInteger\cf0 )tableView:(\cf8 UITableView\cf0  *)\cf8 tableView\cf0  numberOfRowsInSection:(\cf8 NSInteger\cf0 )section \{\
+	\cf7 todoAppDelegate\cf0  *appDelegate = (\cf7 todoAppDelegate\cf0  *)[[\cf8 UIApplication\cf0  \cf9 sharedApplication\cf0 ] delegate];\
+    \cf6 return\cf0  appDelegate.\cf7 todos\cf0 .count;\
+\}\
+\
+- (\cf8 UITableViewCell\cf0  *)tableView:(\cf8 UITableView\cf0  *)\cf8 tableView\cf0  cellForRowAtIndexPath:(\cf8 NSIndexPath\cf0  *)indexPath \{\
+	\
+	\cf6 static\cf0  \cf8 NSString\cf0  *MyIdentifier = \cf5 @"MyIdentifier"\cf0 ;\
+	\
+	\cf7 TodoCell\cf0  *cell = (\cf7 TodoCell\cf0  *)[\cf8 tableView\cf0  \cf9 dequeueReusableCellWithIdentifier\cf0 :MyIdentifier];\
+	\cf6 if\cf0  (cell == \cf6 nil\cf0 ) \{\
+		cell = [[[\cf7 TodoCell\cf0  \cf9 alloc\cf0 ] \cf9 initWithFrame\cf0 :\cf8 CGRectZero\cf0  \cf9 reuseIdentifier\cf0 :MyIdentifier] \cf9 autorelease\cf0 ];\
+	\}\
+	\
+	\cf7 todoAppDelegate\cf0  *appDelegate = (\cf7 todoAppDelegate\cf0  *)[[\cf8 UIApplication\cf0  \cf9 sharedApplication\cf0 ] delegate];\
+	\cf7 Todo\cf0  *td = [appDelegate.\cf7 todos\cf0  \cf9 objectAtIndex\cf0 :indexPath.\cf9 row\cf0 ];\
+	\
+	[cell \cf10 setTodo\cf0 :td];\
+	\
+	\cf3 // Set up the cell\cf0 \
+	\cf6 return\cf0  cell;\
+\}\
+\
+- (\cf6 void\cf0 )tableView:(\cf8 UITableView\cf0  *)\cf8 tableView\cf0  didSelectRowAtIndexPath:(\cf8 NSIndexPath\cf0  *)indexPath \{\
+	 \cf7 todoAppDelegate\cf0  *appDelegate = (\cf7 todoAppDelegate\cf0  *)[[\cf8 UIApplication\cf0  \cf9 sharedApplication\cf0 ] delegate];\
+	 \cf7 Todo\cf0  *todo = (\cf7 Todo\cf0  *)[appDelegate.\cf7 todos\cf0  \cf9 objectAtIndex\cf0 :indexPath.\cf8 row\cf0 ];\
+	 \
+	 \cf6 if\cf0 (\cf6 self\cf0 .\cf7 todoView\cf0  == \cf6 nil\cf0 ) \{\
+		 \cf7 TodoViewController\cf0  *viewController = [[\cf7 TodoViewController\cf0  \cf9 alloc\cf0 ] \
+											   \cf9 initWithNibName\cf0 :\cf5 @"TodoViewController"\cf0  \cf9 bundle\cf0 :[\cf8 NSBundle\cf0  \cf9 mainBundle\cf0 ]];\
+		 \cf6 self\cf0 .\cf7 todoView\cf0  = viewController;\
+		 [viewController \cf9 release\cf0 ];\
+	 \}\
+	 \
+	 [\cf6 self\cf0 .\cf8 navigationController\cf0  \cf9 pushViewController\cf0 :\cf6 self\cf0 .\cf7 todoView\cf0  \cf9 animated\cf0 :\cf6 YES\cf0 ];\
+	 \cf6 self\cf0 .\cf7 todoView\cf0 .\cf7 todo\cf0  = todo;\
+	 \cf6 self\cf0 .\cf7 todoView\cf0 .\cf8 title\cf0  = todo.\cf7 runnerName\cf0 ;\
+	 [\cf6 self\cf0 .\cf7 todoView\cf0 .\cf7 todoText\cf0  \cf9 setText\cf0 :todo.\cf10 runnerName\cf0 ];\
+	 \
+	 \cf8 NSInteger\cf0  priority = todo.\cf7 eventDistance\cf0  - \cf11 1\cf0 ;\
+	 \cf6 if\cf0 (priority > \cf11 2\cf0  || priority < \cf11 0\cf0 ) \{\
+		 priority = \cf11 1\cf0 ;\
+	 \}\
+	 priority = \cf11 2\cf0  - priority;\
+	 \
+	 [\cf6 self\cf0 .\cf7 todoView\cf0 .\cf7 todoPriority\cf0  \cf9 setSelectedSegmentIndex\cf0 :priority];\
+	 \
+	 \cf6 if\cf0 (todo.\cf7 status\cf0  == \cf11 1\cf0 ) \{\
+		 [\cf6 self\cf0 .\cf7 todoView\cf0 .\cf7 todoButton\cf0  \cf9 setTitle\cf0 :\cf5 @"Mark As In Progress"\cf0  \cf9 forState\cf0 :\cf9 UIControlStateNormal\cf0 ];\
+		 [\cf6 self\cf0 .\cf7 todoView\cf0 .\cf7 todoButton\cf0  \cf9 setTitle\cf0 :\cf5 @"Mark As In Progress"\cf0  \cf9 forState\cf0 :\cf9 UIControlStateHighlighted\cf0 ];\
+		 [\cf6 self\cf0 .\cf7 todoView\cf0 .\cf7 todoStatus\cf0  \cf9 setText\cf0 :\cf5 @"Complete"\cf0 ];\
+	 \} \cf6 else\cf0  \{\
+		 [\cf6 self\cf0 .\cf7 todoView\cf0 .\cf7 todoButton\cf0  \cf9 setTitle\cf0 :\cf5 @"Mark As Complete"\cf0  \cf9 forState\cf0 :\cf9 UIControlStateNormal\cf0 ];\
+		 [\cf6 self\cf0 .\cf7 todoView\cf0 .\cf7 todoButton\cf0  \cf9 setTitle\cf0 :\cf5 @"Mark As Complete"\cf0  \cf9 forState\cf0 :\cf9 UIControlStateHighlighted\cf0 ];\
+		  [\cf6 self\cf0 .\cf7 todoView\cf0 .\cf7 todoStatus\cf0  \cf9 setText\cf0 :\cf5 @"In Progress"\cf0 ];\
+	 \}\
+\}\
+\
+\cf3 // Override if you support editing the list\cf0 \
+- (\cf6 void\cf0 )tableView:(\cf8 UITableView\cf0  *)\cf8 tableView\cf0  commitEditingStyle:\
+	(\cf8 UITableViewCellEditingStyle\cf0 )editingStyle forRowAtIndexPath:(\cf8 NSIndexPath\cf0  *)indexPath \{\
+	\
+	\cf7 todoAppDelegate\cf0  *appDelegate = (\cf7 todoAppDelegate\cf0  *)[[\cf8 UIApplication\cf0  \cf9 sharedApplication\cf0 ] delegate];\
+	\cf7 Todo\cf0  *todo = (\cf7 Todo\cf0  *)[appDelegate.\cf7 todos\cf0  \cf9 objectAtIndex\cf0 :indexPath.\cf8 row\cf0 ];\
+	\
+	\cf6 if\cf0  (editingStyle == \cf9 UITableViewCellEditingStyleDelete\cf0 ) \{\
+		[appDelegate \cf10 removeTodo\cf0 :todo];\
+		\cf3 // Delete the row from the data source\cf0 \
+		[\cf8 tableView\cf0  \cf9 deleteRowsAtIndexPaths\cf0 :[\cf8 NSArray\cf0  \cf9 arrayWithObject\cf0 :indexPath] \cf9 withRowAnimation\cf0 :\cf6 YES\cf0 ];\
+	\}	\
+\}\
+\
+- (\cf6 void\cf0 )viewWillAppear:(\cf6 BOOL\cf0 )animated \{\
+	[\cf6 self\cf0 .\cf8 tableView\cf0  \cf9 reloadData\cf0 ];\
+	[\cf6 super\cf0  \cf9 viewWillAppear\cf0 :animated];\
+\}\
+\
+- (\cf6 void\cf0 )viewDidAppear:(\cf6 BOOL\cf0 )animated \{\
+	[\cf6 super\cf0  \cf9 viewDidAppear\cf0 :animated];\
+\}\
+\
+- (\cf6 void\cf0 )viewWillDisappear:(\cf6 BOOL\cf0 )animated \{\
+\}\
+\
+- (\cf6 void\cf0 )viewDidDisappear:(\cf6 BOOL\cf0 )animated \{\
+\}\
+\
+\
+- (\cf6 BOOL\cf0 )shouldAutorotateToInterfaceOrientation:(\cf8 UIInterfaceOrientation\cf0 )\cf8 interfaceOrientation\cf0  \{\
+	\cf3 // Return YES for supported orientations\cf0 \
+	\cf6 return\cf0  (\cf8 interfaceOrientation\cf0  == \cf9 UIInterfaceOrientationPortrait\cf0 );\
+\}\
+\
+\
+- (\cf6 void\cf0 )didReceiveMemoryWarning \{\
+	[\cf6 super\cf0  \cf9 didReceiveMemoryWarning\cf0 ]; \cf3 // Releases the view if it doesn't have a superview\cf0 \
+	\cf3 // Release anything that's not essential, such as cached data\cf0 \
+\}\
+\
+\
+- (\cf6 void\cf0 )dealloc \{\
+	[\cf6 super\cf0  \cf9 dealloc\cf0 ];\
+\}\
+\
+\
+\cf6 @end\cf0 \
+\
+\pard\pardeftab720\sl400\ql\qnatural
+
+\f1\fs26 \cf2 \CocoaLigature1 ======================================\
+\pard\tx560\pardeftab560\ql\qnatural\pardirnatural
+
+\f2\fs24 \cf3 \CocoaLigature0 //\cf0 \
+\cf3 //  todoAppDelegate.h\cf0 \
+\cf3 //  todo\cf0 \
+\cf3 //\cf0 \
+\cf3 //  Created by Brandon Trebitowski on 8/17/08.\cf0 \
+\cf3 //  Copyright __MyCompanyName__ 2008. All rights reserved.\cf0 \
+\cf3 //\cf0 \
+\
+\cf4 #import \cf5 <UIKit/UIKit.h>\cf4 \
+#import \cf5 <sqlite3.h>\cf4 \
+#import \cf5 "Todo.h"\cf4 \
+\cf0 \
+\cf6 @interface\cf0  todoAppDelegate : NSObject <UIApplicationDelegate> \{\
+	\
+	\cf6 IBOutlet\cf0  \cf8 UIWindow\cf0  *\cf7 window\cf0 ;\
+	\cf6 IBOutlet\cf0  \cf8 UINavigationController\cf0  *\cf7 navigationController\cf0 ;\
+\
+	\cf8 sqlite3\cf0  *\cf7 database\cf0 ;\
+	\cf8 NSMutableArray\cf0  *\cf7 todos\cf0 ;\
+\}\
+\
+\cf6 @property\cf0  (\cf6 nonatomic\cf0 , \cf6 retain\cf0 ) UIWindow *window;\
+\cf6 @property\cf0  (\cf6 nonatomic\cf0 , \cf6 retain\cf0 ) UINavigationController *navigationController;\
+\cf6 @property\cf0  (\cf6 nonatomic\cf0 , \cf6 retain\cf0 ) NSMutableArray *todos;\
+\
+-(\cf6 void\cf0 )removeTodo:(\cf7 Todo\cf0  *)todo;\
+-(\cf7 Todo\cf0  *)addTodo;\
+\
+\cf6 @end\cf0 \
+\
+\pard\pardeftab720\sl400\ql\qnatural
+
+\f1\fs26 \cf2 \CocoaLigature1 ======================================\
+\pard\tx560\pardeftab560\ql\qnatural\pardirnatural
+
+\f2\fs24 \cf3 \CocoaLigature0 //\cf0 \
+\cf3 //  todoAppDelegate.m\cf0 \
+\cf3 //  todo\cf0 \
+\cf3 //\cf0 \
+\cf3 //  Created by Brandon Trebitowski on 8/17/08.\cf0 \
+\cf3 //  Copyright __MyCompanyName__ 2008. All rights reserved.\cf0 \
+\cf3 //\cf0 \
+\
+\cf4 #import \cf5 "todoAppDelegate.h"\cf4 \
+#import \cf5 "RootViewController.h"\cf4 \
+#import \cf5 "Todo.h"\cf4 \
+\cf0 \
+\cf6 @interface\cf0  todoAppDelegate (Private)\
+- (\cf6 void\cf0 )createEditableCopyOfDatabaseIfNeeded;\
+- (\cf6 void\cf0 )initializeDatabase;\
+\cf6 @end\cf0 \
+\
+\cf6 @implementation\cf0  todoAppDelegate\
+\
+\cf6 @synthesize\cf0  window;\
+\cf6 @synthesize\cf0  navigationController;\
+\cf6 @synthesize\cf0  todos;\
+\
+- (\cf6 id\cf0 )init \{\
+	\cf6 if\cf0  (\cf6 self\cf0  = [\cf6 super\cf0  \cf9 init\cf0 ]) \{\
+		\cf3 // \cf0 \
+	\}\
+	\cf6 return\cf0  \cf6 self\cf0 ;\
+\}\
+\
+\
+- (\cf6 void\cf0 )applicationDidFinishLaunching:(\cf8 UIApplication\cf0  *)application \{\
+	\
+	[\cf6 self\cf0  \cf10 createEditableCopyOfDatabaseIfNeeded\cf0 ];\
+	[\cf6 self\cf0  \cf10 initializeDatabase\cf0 ];\
+	\
+	\cf3 // Configure and show the window\cf0 \
+	[\cf7 window\cf0  \cf9 addSubview\cf0 :[\cf7 navigationController\cf0  \cf9 view\cf0 ]];\
+	[\cf7 window\cf0  \cf9 makeKeyAndVisible\cf0 ];\
+\}\
+\
+\cf3 // Creates a writable copy of the bundled default database in the application Documents directory.\cf0 \
+- (\cf6 void\cf0 )createEditableCopyOfDatabaseIfNeeded \{\
+    \cf3 // First, test for existence.\cf0 \
+    \cf6 BOOL\cf0  success;\
+    \cf8 NSFileManager\cf0  *fileManager = [\cf8 NSFileManager\cf0  \cf9 defaultManager\cf0 ];\
+    \cf8 NSError\cf0  *error;\
+    \cf8 NSArray\cf0  *paths = \cf9 NSSearchPathForDirectoriesInDomains\cf0 (\cf9 NSDocumentDirectory\cf0 , \cf9 NSUserDomainMask\cf0 , \cf6 YES\cf0 );\
+    \cf8 NSString\cf0  *documentsDirectory = [paths \cf9 objectAtIndex\cf0 :\cf11 0\cf0 ];\
+    \cf8 NSString\cf0  *writableDBPath = [documentsDirectory \cf9 stringByAppendingPathComponent\cf0 :\cf5 @"EventData.db"\cf0 ];\
+    success = [fileManager \cf9 fileExistsAtPath\cf0 :writableDBPath];\
+    \cf6 if\cf0  (success) \cf6 return\cf0 ;\
+    \cf3 // The writable database does not exist, so copy the default to the appropriate location.\cf0 \
+    \cf8 NSString\cf0  *defaultDBPath = [[[\cf8 NSBundle\cf0  \cf9 mainBundle\cf0 ] \cf9 resourcePath\cf0 ] \cf9 stringByAppendingPathComponent\cf0 :\cf5 @"EventData.db"\cf0 ];\
+    success = [fileManager \cf9 copyItemAtPath\cf0 :defaultDBPath \cf9 toPath\cf0 :writableDBPath \cf9 error\cf0 :&error];\
+    \cf6 if\cf0  (!success) \{\
+        \cf4 NSAssert1\cf0 (\cf11 0\cf0 , \cf5 @"Failed to create writable database file with message '%@'."\cf0 , [error \cf9 localizedDescription\cf0 ]);\
+    \}\
+\}\
+\
+\cf3 // Open the database connection and retrieve minimal information for all objects.\cf0 \
+- (\cf6 void\cf0 )initializeDatabase \{\
+    \cf8 NSMutableArray\cf0  *todoArray = [[\cf8 NSMutableArray\cf0  \cf9 alloc\cf0 ] \cf9 init\cf0 ];\
+    \cf6 self\cf0 .\cf7 todos\cf0  = todoArray;\
+    [todoArray \cf9 release\cf0 ];\
+    \cf3 // The database is stored in the application bundle. \cf0 \
+    \cf8 NSArray\cf0  *paths = \cf9 NSSearchPathForDirectoriesInDomains\cf0 (\cf9 NSDocumentDirectory\cf0 , \cf9 NSUserDomainMask\cf0 , \cf6 YES\cf0 );\
+    \cf8 NSString\cf0  *documentsDirectory = [paths \cf9 objectAtIndex\cf0 :\cf11 0\cf0 ];\
+    \cf8 NSString\cf0  *path = [documentsDirectory \cf9 stringByAppendingPathComponent\cf0 :\cf5 @"EventData.db"\cf0 ];\
+    \cf3 // Open the database. The database was prepared outside the application.\cf0 \
+    \cf6 if\cf0  (\cf9 sqlite3_open\cf0 ([path \cf9 UTF8String\cf0 ], &\cf7 database\cf0 ) == \cf4 SQLITE_OK\cf0 ) \{\
+        \cf3 // Get the primary key for all books.\cf0 \
+        \cf6 const\cf0  \cf6 char\cf0  *sql = \cf5 "SELECT EventNum FROM Event"\cf0 ;\
+        \cf8 sqlite3_stmt\cf0  *statement;\
+        \cf3 // Preparing a statement compiles the SQL query into a byte-code program in the SQLite library.\cf0 \
+        \cf3 // The third parameter is either the length of the SQL string or -1 to read up to the first null terminator.        \cf0 \
+        \cf6 if\cf0  (\cf9 sqlite3_prepare_v2\cf0 (\cf7 database\cf0 , sql, -\cf11 1\cf0 , &statement, \cf6 NULL\cf0 ) == \cf4 SQLITE_OK\cf0 ) \{\
+            \cf3 // We "step" through the results - once for each row.\cf0 \
+            \cf6 while\cf0  (\cf9 sqlite3_step\cf0 (statement) == \cf4 SQLITE_ROW\cf0 ) \{\
+                \cf3 // The second parameter indicates the column index into the result set.\cf0 \
+                \cf6 int\cf0  primaryKey = \cf9 sqlite3_column_int\cf0 (statement, \cf11 0\cf0 );\
+                \cf3 // We avoid the alloc-init-autorelease pattern here because we are in a tight loop and\cf0 \
+                \cf3 // autorelease is slightly more expensive than release. This design choice has nothing to do with\cf0 \
+                \cf3 // actual memory management - at the end of this block of code, all the book objects allocated\cf0 \
+                \cf3 // here will be in memory regardless of whether we use autorelease or release, because they are\cf0 \
+                \cf3 // retained by the books array.\cf0 \
+                \cf7 Todo\cf0  *td = [[\cf7 Todo\cf0  \cf9 alloc\cf0 ] \cf10 initWithPrimaryKey\cf0 :primaryKey \cf10 database\cf0 :\cf7 database\cf0 ];\
+				\
+                [\cf7 todos\cf0  \cf9 addObject\cf0 :td];\
+                [td \cf9 release\cf0 ];\
+            \}\
+        \}\
+        \cf3 // "Finalize" the statement - releases the resources associated with the statement.\cf0 \
+        \cf9 sqlite3_finalize\cf0 (statement);\
+    \} \cf6 else\cf0  \{\
+        \cf3 // Even though the open failed, call close to properly clean up resources.\cf0 \
+        \cf9 sqlite3_close\cf0 (\cf7 database\cf0 );\
+        \cf4 NSAssert1\cf0 (\cf11 0\cf0 , \cf5 @"Failed to open database with message '%s'."\cf0 , \cf9 sqlite3_errmsg\cf0 (\cf7 database\cf0 ));\
+        \cf3 // Additional error handling, as appropriate...\cf0 \
+    \}\
+\}\
+\
+-(\cf6 void\cf0 )removeTodo:(\cf7 Todo\cf0  *)todo \{\
+	\cf8 NSUInteger\cf0  index = [\cf7 todos\cf0  \cf9 indexOfObject\cf0 :todo];\
+\
+    \cf6 if\cf0  (index == \cf9 NSNotFound\cf0 ) \cf6 return\cf0 ;\
+\
+    [todo \cf10 deleteFromDatabase\cf0 ];\
+    [\cf7 todos\cf0  \cf9 removeObject\cf0 :todo];\
+\}\
+\
+-(\cf7 Todo\cf0  *) addTodo \{\
+	\cf8 NSInteger\cf0  primaryKey = [\cf7 Todo\cf0  \cf10 insertNewTodoIntoDatabase\cf0 :\cf7 database\cf0 ];\
+    \cf7 Todo\cf0  *newTodo = [[\cf7 Todo\cf0  \cf9 alloc\cf0 ] \cf10 initWithPrimaryKey\cf0 :primaryKey \cf10 database\cf0 :\cf7 database\cf0 ];\
+\
+	[\cf7 todos\cf0  \cf9 addObject\cf0 :newTodo];\
+     \cf6 return\cf0  newTodo;\
+\}\
+\
+- (\cf6 void\cf0 )applicationWillTerminate:(\cf8 UIApplication\cf0  *)application \{\
+	\cf3 // Save data if appropriate\cf0 \
+	[\cf7 todos\cf0  \cf9 makeObjectsPerformSelector\cf0 :\cf6 @selector\cf0 (\cf10 dehydrate\cf0 )];\
+\}\
+\
+\
+- (\cf6 void\cf0 )dealloc \{\
+	[\cf7 navigationController\cf0  \cf9 release\cf0 ];\
+	[\cf7 window\cf0  \cf9 release\cf0 ];\
+	[\cf6 super\cf0  \cf9 dealloc\cf0 ];\
+\}\
+\
+\cf6 @end\cf0 \
+\pard\pardeftab720\sl400\ql\qnatural
+
+\f1\fs26 \cf2 \CocoaLigature1 \
+===============================================\
+\pard\tx560\pardeftab560\ql\qnatural\pardirnatural
+
+\f2\fs24 \cf3 \CocoaLigature0 //\cf0 \
+\cf3 //  todoAppDelegate.m\cf0 \
+\cf3 //  todo\cf0 \
+\cf3 //\cf0 \
+\cf3 //  Created by Brandon Trebitowski on 8/17/08.\cf0 \
+\cf3 //  Copyright __MyCompanyName__ 2008. All rights reserved.\cf0 \
+\cf3 //\cf0 \
+\
+\cf4 #import \cf5 "todoAppDelegate.h"\cf4 \
+#import \cf5 "RootViewController.h"\cf4 \
+#import \cf5 "Todo.h"\cf4 \
+\cf0 \
+\cf6 @interface\cf0  todoAppDelegate (Private)\
+- (\cf6 void\cf0 )createEditableCopyOfDatabaseIfNeeded;\
+- (\cf6 void\cf0 )initializeDatabase;\
+\cf6 @end\cf0 \
+\
+\cf6 @implementation\cf0  todoAppDelegate\
+\
+\cf6 @synthesize\cf0  window;\
+\cf6 @synthesize\cf0  navigationController;\
+\cf6 @synthesize\cf0  todos;\
+\
+- (\cf6 id\cf0 )init \{\
+	\cf6 if\cf0  (\cf6 self\cf0  = [\cf6 super\cf0  \cf9 init\cf0 ]) \{\
+		\cf3 // \cf0 \
+	\}\
+	\cf6 return\cf0  \cf6 self\cf0 ;\
+\}\
+\
+\
+- (\cf6 void\cf0 )applicationDidFinishLaunching:(\cf8 UIApplication\cf0  *)application \{\
+	\
+	[\cf6 self\cf0  \cf10 createEditableCopyOfDatabaseIfNeeded\cf0 ];\
+	[\cf6 self\cf0  \cf10 initializeDatabase\cf0 ];\
+	\
+	\cf3 // Configure and show the window\cf0 \
+	[\cf7 window\cf0  \cf9 addSubview\cf0 :[\cf7 navigationController\cf0  \cf9 view\cf0 ]];\
+	[\cf7 window\cf0  \cf9 makeKeyAndVisible\cf0 ];\
+\}\
+\
+\cf3 // Creates a writable copy of the bundled default database in the application Documents directory.\cf0 \
+- (\cf6 void\cf0 )createEditableCopyOfDatabaseIfNeeded \{\
+    \cf3 // First, test for existence.\cf0 \
+    \cf6 BOOL\cf0  success;\
+    \cf8 NSFileManager\cf0  *fileManager = [\cf8 NSFileManager\cf0  \cf9 defaultManager\cf0 ];\
+    \cf8 NSError\cf0  *error;\
+    \cf8 NSArray\cf0  *paths = \cf9 NSSearchPathForDirectoriesInDomains\cf0 (\cf9 NSDocumentDirectory\cf0 , \cf9 NSUserDomainMask\cf0 , \cf6 YES\cf0 );\
+    \cf8 NSString\cf0  *documentsDirectory = [paths \cf9 objectAtIndex\cf0 :\cf11 0\cf0 ];\
+    \cf8 NSString\cf0  *writableDBPath = [documentsDirectory \cf9 stringByAppendingPathComponent\cf0 :\cf5 @"EventData.db"\cf0 ];\
+    success = [fileManager \cf9 fileExistsAtPath\cf0 :writableDBPath];\
+    \cf6 if\cf0  (success) \cf6 return\cf0 ;\
+    \cf3 // The writable database does not exist, so copy the default to the appropriate location.\cf0 \
+    \cf8 NSString\cf0  *defaultDBPath = [[[\cf8 NSBundle\cf0  \cf9 mainBundle\cf0 ] \cf9 resourcePath\cf0 ] \cf9 stringByAppendingPathComponent\cf0 :\cf5 @"EventData.db"\cf0 ];\
+    success = [fileManager \cf9 copyItemAtPath\cf0 :defaultDBPath \cf9 toPath\cf0 :writableDBPath \cf9 error\cf0 :&error];\
+    \cf6 if\cf0  (!success) \{\
+        \cf4 NSAssert1\cf0 (\cf11 0\cf0 , \cf5 @"Failed to create writable database file with message '%@'."\cf0 , [error \cf9 localizedDescription\cf0 ]);\
+    \}\
+\}\
+\
+\cf3 // Open the database connection and retrieve minimal information for all objects.\cf0 \
+- (\cf6 void\cf0 )initializeDatabase \{\
+    \cf8 NSMutableArray\cf0  *todoArray = [[\cf8 NSMutableArray\cf0  \cf9 alloc\cf0 ] \cf9 init\cf0 ];\
+    \cf6 self\cf0 .\cf7 todos\cf0  = todoArray;\
+    [todoArray \cf9 release\cf0 ];\
+    \cf3 // The database is stored in the application bundle. \cf0 \
+    \cf8 NSArray\cf0  *paths = \cf9 NSSearchPathForDirectoriesInDomains\cf0 (\cf9 NSDocumentDirectory\cf0 , \cf9 NSUserDomainMask\cf0 , \cf6 YES\cf0 );\
+    \cf8 NSString\cf0  *documentsDirectory = [paths \cf9 objectAtIndex\cf0 :\cf11 0\cf0 ];\
+    \cf8 NSString\cf0  *path = [documentsDirectory \cf9 stringByAppendingPathComponent\cf0 :\cf5 @"EventData.db"\cf0 ];\
+    \cf3 // Open the database. The database was prepared outside the application.\cf0 \
+    \cf6 if\cf0  (\cf9 sqlite3_open\cf0 ([path \cf9 UTF8String\cf0 ], &\cf7 database\cf0 ) == \cf4 SQLITE_OK\cf0 ) \{\
+        \cf3 // Get the primary key for all books.\cf0 \
+        \cf6 const\cf0  \cf6 char\cf0  *sql = \cf5 "SELECT EventNum FROM Event"\cf0 ;\
+        \cf8 sqlite3_stmt\cf0  *statement;\
+        \cf3 // Preparing a statement compiles the SQL query into a byte-code program in the SQLite library.\cf0 \
+        \cf3 // The third parameter is either the length of the SQL string or -1 to read up to the first null terminator.        \cf0 \
+        \cf6 if\cf0  (\cf9 sqlite3_prepare_v2\cf0 (\cf7 database\cf0 , sql, -\cf11 1\cf0 , &statement, \cf6 NULL\cf0 ) == \cf4 SQLITE_OK\cf0 ) \{\
+            \cf3 // We "step" through the results - once for each row.\cf0 \
+            \cf6 while\cf0  (\cf9 sqlite3_step\cf0 (statement) == \cf4 SQLITE_ROW\cf0 ) \{\
+                \cf3 // The second parameter indicates the column index into the result set.\cf0 \
+                \cf6 int\cf0  primaryKey = \cf9 sqlite3_column_int\cf0 (statement, \cf11 0\cf0 );\
+                \cf3 // We avoid the alloc-init-autorelease pattern here because we are in a tight loop and\cf0 \
+                \cf3 // autorelease is slightly more expensive than release. This design choice has nothing to do with\cf0 \
+                \cf3 // actual memory management - at the end of this block of code, all the book objects allocated\cf0 \
+                \cf3 // here will be in memory regardless of whether we use autorelease or release, because they are\cf0 \
+                \cf3 // retained by the books array.\cf0 \
+                \cf7 Todo\cf0  *td = [[\cf7 Todo\cf0  \cf9 alloc\cf0 ] \cf10 initWithPrimaryKey\cf0 :primaryKey \cf10 database\cf0 :\cf7 database\cf0 ];\
+				\
+                [\cf7 todos\cf0  \cf9 addObject\cf0 :td];\
+                [td \cf9 release\cf0 ];\
+            \}\
+        \}\
+        \cf3 // "Finalize" the statement - releases the resources associated with the statement.\cf0 \
+        \cf9 sqlite3_finalize\cf0 (statement);\
+    \} \cf6 else\cf0  \{\
+        \cf3 // Even though the open failed, call close to properly clean up resources.\cf0 \
+        \cf9 sqlite3_close\cf0 (\cf7 database\cf0 );\
+        \cf4 NSAssert1\cf0 (\cf11 0\cf0 , \cf5 @"Failed to open database with message '%s'."\cf0 , \cf9 sqlite3_errmsg\cf0 (\cf7 database\cf0 ));\
+        \cf3 // Additional error handling, as appropriate...\cf0 \
+    \}\
+\}\
+\
+-(\cf6 void\cf0 )removeTodo:(\cf7 Todo\cf0  *)todo \{\
+	\cf8 NSUInteger\cf0  index = [\cf7 todos\cf0  \cf9 indexOfObject\cf0 :todo];\
+\
+    \cf6 if\cf0  (index == \cf9 NSNotFound\cf0 ) \cf6 return\cf0 ;\
+\
+    [todo \cf10 deleteFromDatabase\cf0 ];\
+    [\cf7 todos\cf0  \cf9 removeObject\cf0 :todo];\
+\}\
+\
+-(\cf7 Todo\cf0  *) addTodo \{\
+	\cf8 NSInteger\cf0  primaryKey = [\cf7 Todo\cf0  \cf10 insertNewTodoIntoDatabase\cf0 :\cf7 database\cf0 ];\
+    \cf7 Todo\cf0  *newTodo = [[\cf7 Todo\cf0  \cf9 alloc\cf0 ] \cf10 initWithPrimaryKey\cf0 :primaryKey \cf10 database\cf0 :\cf7 database\cf0 ];\
+\
+	[\cf7 todos\cf0  \cf9 addObject\cf0 :newTodo];\
+     \cf6 return\cf0  newTodo;\
+\}\
+\
+- (\cf6 void\cf0 )applicationWillTerminate:(\cf8 UIApplication\cf0  *)application \{\
+	\cf3 // Save data if appropriate\cf0 \
+	[\cf7 todos\cf0  \cf9 makeObjectsPerformSelector\cf0 :\cf6 @selector\cf0 (\cf10 dehydrate\cf0 )];\
+\}\
+\
+\
+- (\cf6 void\cf0 )dealloc \{\
+	[\cf7 navigationController\cf0  \cf9 release\cf0 ];\
+	[\cf7 window\cf0  \cf9 release\cf0 ];\
+	[\cf6 super\cf0  \cf9 dealloc\cf0 ];\
+\}\
+\
+\cf6 @end\cf0 \
+\pard\pardeftab720\sl400\ql\qnatural
+
+\f1\fs26 \cf2 \CocoaLigature1 \
+==========================================\
+\pard\tx560\pardeftab560\ql\qnatural\pardirnatural
+
+\f2\fs24 \cf3 \CocoaLigature0 //\cf0 \
+\cf3 //  Todo.m\cf0 \
+\cf3 //  todo\cf0 \
+\cf3 //\cf0 \
+\cf3 //  Created by Brandon Trebitowski on 8/17/08.\cf0 \
+\cf3 //  Copyright 2008 __MyCompanyName__. All rights reserved.\cf0 \
+\cf3 //\cf0 \
+\
+\cf4 #import \cf5 "Todo.h"\cf4 \
+\cf0 \
+\cf6 static\cf0  sqlite3_stmt *init_statement = \cf6 nil\cf0 ;\
+\cf6 static\cf0  sqlite3_stmt *dehydrate_statment = \cf6 nil\cf0 ;\
+\cf6 static\cf0  sqlite3_stmt *delete_statment = \cf6 nil\cf0 ;\
+\cf6 static\cf0  sqlite3_stmt *insert_statement = \cf6 nil\cf0 ;\
+\
+\cf6 @implementation\cf0  Todo\
+\cf6 @synthesize\cf0  eventNum,runnerName,eventDistance,status;\
+\
++ (\cf8 NSInteger\cf0 )insertNewTodoIntoDatabase:(\cf8 sqlite3\cf0  *)\cf7 database\cf0  \{\
+\
+    \cf6 if\cf0  (\cf7 insert_statement\cf0  == \cf6 nil\cf0 ) \{\
+        \cf6 static\cf0  \cf6 char\cf0  *sql = \cf5 "INSERT INTO todo (text,priority,complete) VALUES('New Todo','3','0')"\cf0 ;\
+        \cf6 if\cf0  (\cf9 sqlite3_prepare_v2\cf0 (\cf7 database\cf0 , sql, -\cf11 1\cf0 , &\cf7 insert_statement\cf0 , \cf6 NULL\cf0 ) != \cf4 SQLITE_OK\cf0 ) \{\
+            \cf4 NSAssert1\cf0 (\cf11 0\cf0 , \cf5 @"Error: failed to prepare statement with message '%s'."\cf0 , \cf9 sqlite3_errmsg\cf0 (\cf7 database\cf0 ));\
+        \}\
+    \}\
+    \cf6 int\cf0  success = \cf9 sqlite3_step\cf0 (\cf7 insert_statement\cf0 );\
+\
+    \cf9 sqlite3_reset\cf0 (\cf7 insert_statement\cf0 );\
+    \cf6 if\cf0  (success != \cf4 SQLITE_ERROR\cf0 ) \{\
+        \cf6 return\cf0  \cf9 sqlite3_last_insert_rowid\cf0 (\cf7 database\cf0 );\
+    \}\
+    \cf4 NSAssert1\cf0 (\cf11 0\cf0 , \cf5 @"Error: failed to insert into the database with message '%s'."\cf0 , \cf9 sqlite3_errmsg\cf0 (\cf7 database\cf0 ));\
+    \cf6 return\cf0  -\cf11 1\cf0 ;\
+ \
+\}\
+\
+- (\cf6 id\cf0 )initWithPrimaryKey:(\cf8 NSInteger\cf0 )pk database:(\cf8 sqlite3\cf0  *)db\
+\{\
+	\
+	\cf6 if\cf0  (\cf6 self\cf0  = [\cf6 super\cf0  \cf9 init\cf0 ]) \{\
+        \cf7 eventNum\cf0  = pk;\
+        \cf7 database\cf0  = db;\
+        \cf3 // Compile the query for retrieving book data. See insertNewBookIntoDatabase: for more detail.\cf0 \
+        \cf6 if\cf0  (\cf7 init_statement\cf0  == \cf6 nil\cf0 ) \{\
+            \cf3 // Note the '?' at the end of the query. This is a parameter which can be replaced by a bound variable.\cf0 \
+            \cf3 // This is a great way to optimize because frequently used queries can be compiled once, then with each\cf0 \
+            \cf3 // use new variable values can be bound to placeholders.\cf0 \
+            \cf6 const\cf0  \cf6 char\cf0  *sql = \cf5 "SELECT EventNum,RunnerName,EventDistance,EventFinalTime FROM Event WHERE EventNum=?"\cf0 ;\
+            \cf6 if\cf0  (\cf9 sqlite3_prepare_v2\cf0 (\cf7 database\cf0 , sql, -\cf11 1\cf0 , &\cf7 init_statement\cf0 , \cf6 NULL\cf0 ) != \cf4 SQLITE_OK\cf0 ) \{\
+                \cf4 NSAssert1\cf0 (\cf11 0\cf0 , \cf5 @"Error: failed to prepare statement with message '%s'."\cf0 , \cf9 sqlite3_errmsg\cf0 (\cf7 database\cf0 ));\
+            \}\
+        \}\
+		\
+        \cf3 // For this query, we bind the primary key to the first placeholder in the statement.\cf0 \
+        \cf3 // Note that the parameters are numbered from 1, not from 0.\cf0 \
+        \cf9 sqlite3_bind_int\cf0 (\cf7 init_statement\cf0 , \cf11 1\cf0 , \cf7 eventNum\cf0 );\
+		\
+        \cf6 if\cf0  (\cf9 sqlite3_step\cf0 (\cf7 init_statement\cf0 ) == \cf4 SQLITE_ROW\cf0 )\
+		\{\
+            \cf6 self\cf0 .\cf7 runnerName\cf0  = [\cf8 NSString\cf0  \cf9 stringWithUTF8String\cf0 :(\cf6 char\cf0  *)\cf9 sqlite3_column_text\cf0 (\cf7 init_statement\cf0 , \cf11 1\cf0 )];\
+			\cf6 self\cf0 .\cf7 eventDistance\cf0  = \cf9 sqlite3_column_int\cf0 (\cf7 init_statement\cf0 , \cf11 2\cf0 );\
+        \}\
+		\cf6 else\cf0 \
+		\{\
+            \cf6 self\cf0 .\cf7 runnerName\cf0  = \cf5 @"Nothing"\cf0 ;\
+        \}\
+		\
+        \cf3 // Reset the statement for future reuse.\cf0 \
+        \cf9 sqlite3_reset\cf0 (\cf7 init_statement\cf0 );\
+    \}\
+    \cf6 return\cf0  \cf6 self\cf0 ;\
+\}\
+\
+- (\cf6 void\cf0 )updateStatus:(\cf8 NSInteger\cf0 )newStatus \{\
+	\cf6 self\cf0 .\cf7 status\cf0  = newStatus;\
+	\cf7 dirty\cf0  = \cf6 YES\cf0 ;\
+	\
+\}\
+\
+- (\cf6 void\cf0 )updatePriority:(\cf8 NSInteger\cf0 )newPriority \{\
+	\cf6 self\cf0 .\cf7 eventDistance\cf0  = newPriority;\
+	\cf7 dirty\cf0  = \cf6 YES\cf0 ;\
+\}\
+\
+- (\cf6 void\cf0 ) dehydrate \{\
+	\cf6 if\cf0 (\cf7 dirty\cf0 ) \{\
+		\
+		\cf6 if\cf0  (\cf7 dehydrate_statment\cf0  == \cf6 nil\cf0 ) \{\
+			\cf6 const\cf0  \cf6 char\cf0  *sql = \cf5 "UPDATE todo SET text = ? , priority = ?,complete = ? WHERE pk=?"\cf0 ;\
+			\cf6 if\cf0  (\cf9 sqlite3_prepare_v2\cf0 (\cf7 database\cf0 , sql, -\cf11 1\cf0 , &\cf7 dehydrate_statment\cf0 , \cf6 NULL\cf0 ) != \cf4 SQLITE_OK\cf0 ) \{\
+				\cf4 NSAssert1\cf0 (\cf11 0\cf0 , \cf5 @"Error: failed to prepare statement with message '%s'."\cf0 , \cf9 sqlite3_errmsg\cf0 (\cf7 database\cf0 ));\
+			\}\
+		\}\
+		\
+		\cf9 sqlite3_bind_int\cf0 (\cf7 dehydrate_statment\cf0 , \cf11 4\cf0 , \cf6 self\cf0 .\cf7 eventNum\cf0 );\
+		\cf9 sqlite3_bind_int\cf0 (\cf7 dehydrate_statment\cf0 , \cf11 3\cf0 , \cf6 self\cf0 .\cf7 status\cf0 );\
+		\cf9 sqlite3_bind_int\cf0 (\cf7 dehydrate_statment\cf0 , \cf11 2\cf0 , \cf6 self\cf0 .\cf7 eventDistance\cf0 );\
+		\cf9 sqlite3_bind_text\cf0 (\cf7 dehydrate_statment\cf0 , \cf11 1\cf0 , [\cf6 self\cf0 .\cf7 runnerName\cf0  \cf9 UTF8String\cf0 ], -\cf11 1\cf0 , \cf4 SQLITE_TRANSIENT\cf0 );\
+		\cf6 int\cf0  success = \cf9 sqlite3_step\cf0 (\cf7 dehydrate_statment\cf0 );\
+		\
+		\cf6 if\cf0  (success != \cf4 SQLITE_DONE\cf0 ) \{\
+			\cf4 NSAssert1\cf0 (\cf11 0\cf0 , \cf5 @"Error: failed to save priority with message '%s'."\cf0 , \cf9 sqlite3_errmsg\cf0 (\cf7 database\cf0 ));\
+		\}\
+		\
+		\cf9 sqlite3_reset\cf0 (\cf7 dehydrate_statment\cf0 );\
+		\cf7 dirty\cf0  = \cf6 NO\cf0 ;\
+	\}\
+	\
+\}\
+\
+-(\cf6 void\cf0 ) deleteFromDatabase \{\
+	\cf6 if\cf0  (\cf7 delete_statment\cf0  == \cf6 nil\cf0 ) \{\
+		\cf6 const\cf0  \cf6 char\cf0  *sql = \cf5 "DELETE FROM todo WHERE pk=?"\cf0 ;\
+		\cf6 if\cf0  (\cf9 sqlite3_prepare_v2\cf0 (\cf7 database\cf0 , sql, -\cf11 1\cf0 , &\cf7 delete_statment\cf0 , \cf6 NULL\cf0 ) != \cf4 SQLITE_OK\cf0 ) \{\
+			\cf4 NSAssert1\cf0 (\cf11 0\cf0 , \cf5 @"Error: failed to prepare statement with message '%s'."\cf0 , \cf9 sqlite3_errmsg\cf0 (\cf7 database\cf0 ));\
+		\}\
+	\}\
+	\
+	\cf9 sqlite3_bind_int\cf0 (\cf7 delete_statment\cf0 , \cf11 1\cf0 , \cf6 self\cf0 .\cf7 eventNum\cf0 );\
+	\cf6 int\cf0  success = \cf9 sqlite3_step\cf0 (\cf7 delete_statment\cf0 );\
+	\
+	\cf6 if\cf0  (success != \cf4 SQLITE_DONE\cf0 ) \{\
+		\cf4 NSAssert1\cf0 (\cf11 0\cf0 , \cf5 @"Error: failed to save priority with message '%s'."\cf0 , \cf9 sqlite3_errmsg\cf0 (\cf7 database\cf0 ));\
+	\}\
+	\
+	\cf9 sqlite3_reset\cf0 (\cf7 delete_statment\cf0 );\
+\}\
+\
+\cf6 @end\cf0 \
+\pard\pardeftab720\sl400\ql\qnatural
+
+\f1\fs26 \cf2 \CocoaLigature1 \
+=============================================\
+\pard\tx560\pardeftab560\ql\qnatural\pardirnatural
+
+\f2\fs24 \cf3 \CocoaLigature0 //\cf0 \
+\cf3 //  TodoCell.h\cf0 \
+\cf3 //  todo\cf0 \
+\cf3 //\cf0 \
+\cf3 //  Created by Brandon Trebitowski on 9/1/08.\cf0 \
+\cf3 //  Copyright 2008 __MyCompanyName__. All rights reserved.\cf0 \
+\cf3 //\cf0 \
+\
+\cf4 #import \cf5 <UIKit/UIKit.h>\cf4 \
+#import \cf5 "Todo.h"\cf4 \
+\cf0 \
+\cf6 @interface\cf0  TodoCell : UITableViewCell \{\
+	\cf7 Todo\cf0         *\cf7 todo\cf0 ;\
+    \cf8 UILabel\cf0      *\cf7 todoTextLabel\cf0 ;\
+    \cf8 UILabel\cf0      *\cf7 todoPriorityLabel\cf0 ;\
+    \cf8 UIImageView\cf0  *\cf7 todoPriorityImageView\cf0 ;\
+\}\
+\
+\cf6 @property\cf0  (\cf6 nonatomic\cf0 , \cf6 retain\cf0 ) UILabel     *todoTextLabel;\
+\cf6 @property\cf0  (\cf6 nonatomic\cf0 , \cf6 retain\cf0 ) UILabel     *todoPriorityLabel;\
+\cf6 @property\cf0  (\cf6 nonatomic\cf0 , \cf6 retain\cf0 ) UIImageView *todoPriorityImageView;\
+\
+- (\cf8 UIImage\cf0  *)imageForPriority:(\cf8 NSInteger\cf0 )priority;\
+\
+- (\cf7 Todo\cf0  *)todo;\
+- (\cf6 void\cf0 )setTodo:(\cf7 Todo\cf0  *)newTodo;\
+\
+\cf6 @end
+\f1\fs26 \cf2 \CocoaLigature1 \
+\pard\pardeftab720\sl400\ql\qnatural
+\cf2 ==============================================\
+\pard\tx560\pardeftab560\ql\qnatural\pardirnatural
+
+\f2\fs24 \cf3 \CocoaLigature0 //\cf0 \
+\cf3 //  TodoCell.m\cf0 \
+\cf3 //  todo\cf0 \
+\cf3 //\cf0 \
+\cf3 //  Created by Brandon Trebitowski on 9/1/08.\cf0 \
+\cf3 //  Copyright 2008 __MyCompanyName__. All rights reserved.\cf0 \
+\cf3 //\cf0 \
+\
+\cf4 #import \cf5 "TodoCell.h"\cf4 \
+\cf0 \
+\cf6 static\cf0  UIImage *priority1Image = \cf6 nil\cf0 ;\
+\cf6 static\cf0  UIImage *priority2Image = \cf6 nil\cf0 ;\
+\cf6 static\cf0  UIImage *priority3Image = \cf6 nil\cf0 ;\
+\
+\cf6 @interface\cf0  TodoCell()\
+- (\cf8 UILabel\cf0  *)newLabelWithPrimaryColor:(\cf8 UIColor\cf0  *)primaryColor selectedColor:\
+	(\cf8 UIColor\cf0  *)selectedColor fontSize:(\cf8 CGFloat\cf0 )fontSize bold:(\cf6 BOOL\cf0 )\cf9 bold\cf0 ;\
+\cf6 @end\cf0 \
+\
+\cf6 @implementation\cf0  TodoCell\
+\
+\cf6 @synthesize\cf0  todoTextLabel,todoPriorityLabel,todoPriorityImageView;\
+\
++ (\cf6 void\cf0 )initialize\
+\{\
+    \cf3 // The priority images are cached as part of the class, so they need to be\cf0 \
+    \cf3 // explicitly retained.\cf0 \
+    \cf7 priority1Image\cf0  = [[\cf8 UIImage\cf0  \cf9 imageNamed\cf0 :\cf5 @"red.png"\cf0 ] \cf9 retain\cf0 ];\
+    \cf7 priority2Image\cf0  = [[\cf8 UIImage\cf0  \cf9 imageNamed\cf0 :\cf5 @"yellow.png"\cf0 ] \cf9 retain\cf0 ];\
+	\cf7 priority3Image\cf0  = [[\cf8 UIImage\cf0  \cf9 imageNamed\cf0 :\cf5 @"green.png"\cf0 ] \cf9 retain\cf0 ];\
+\}\
+\
+- (\cf6 id\cf0 )initWithStyle:(\cf8 UITableViewCellStyle\cf0 )style reuseIdentifier:(\cf8 NSString\cf0  *)\cf8 reuseIdentifier\cf0  \{\
+	\cf6 if\cf0  (\cf6 self\cf0  = [\cf6 super\cf0  \cf9 initWithStyle\cf0 :style \cf9 reuseIdentifier\cf0 :\cf8 reuseIdentifier\cf0 ]) \{\
+        \cf8 UIView\cf0  *myContentView = \cf6 self\cf0 .\cf8 contentView\cf0 ;\
+        \
+		\cf6 self\cf0 .\cf7 todoPriorityImageView\cf0  = [[\cf8 UIImageView\cf0  \cf9 alloc\cf0 ] \cf9 initWithImage\cf0 :\cf7 priority1Image\cf0 ];\
+		[myContentView \cf9 addSubview\cf0 :\cf6 self\cf0 .\cf10 todoPriorityImageView\cf0 ];\
+        [\cf6 self\cf0 .\cf7 todoPriorityImageView\cf0  \cf9 release\cf0 ];\
+        \
+        \cf6 self\cf0 .\cf7 todoTextLabel\cf0  = [\cf6 self\cf0  \cf10 newLabelWithPrimaryColor\cf0 :[\cf8 UIColor\cf0  \cf9 blackColor\cf0 ] \
+											  \cf10 selectedColor\cf0 :[\cf8 UIColor\cf0  \cf9 whiteColor\cf0 ] \cf10 fontSize\cf0 :\cf11 14.0\cf0  \cf10 bold\cf0 :\cf6 YES\cf0 ]; \
+		\cf6 self\cf0 .\cf7 todoTextLabel\cf0 .\cf8 textAlignment\cf0  = \cf9 UITextAlignmentLeft\cf0 ; \cf3 // default\cf0 \
+		[myContentView \cf9 addSubview\cf0 :\cf6 self\cf0 .\cf10 todoTextLabel\cf0 ];\
+		[\cf6 self\cf0 .\cf7 todoTextLabel\cf0  \cf9 release\cf0 ];\
+      \
+        \cf6 self\cf0 .\cf7 todoPriorityLabel\cf0  = [\cf6 self\cf0  \cf10 newLabelWithPrimaryColor\cf0 :[\cf8 UIColor\cf0  \cf9 blackColor\cf0 ] \
+												  \cf10 selectedColor\cf0 :[\cf8 UIColor\cf0  \cf9 whiteColor\cf0 ] \cf10 fontSize\cf0 :\cf11 10.0\cf0  \cf10 bold\cf0 :\cf6 YES\cf0 ];\
+		\cf6 self\cf0 .\cf7 todoPriorityLabel\cf0 .\cf8 textAlignment\cf0  = \cf9 UITextAlignmentRight\cf0 ;\
+		[myContentView \cf9 addSubview\cf0 :\cf6 self\cf0 .\cf10 todoPriorityLabel\cf0 ];\
+		[\cf6 self\cf0 .\cf7 todoPriorityLabel\cf0  \cf9 release\cf0 ];\
+        \
+        \cf3 // Position the todoPriorityImageView above all of the other views so\cf0 \
+        \cf3 // it's not obscured. It's a transparent image, so any views\cf0 \
+        \cf3 // that overlap it will still be visible.\cf0 \
+        [myContentView \cf9 bringSubviewToFront\cf0 :\cf6 self\cf0 .\cf10 todoPriorityImageView\cf0 ];\
+    \}\
+    \cf6 return\cf0  \cf6 self\cf0 ;\
+\}\
+\
+- (\cf7 Todo\cf0  *)todo\
+\{\
+    \cf6 return\cf0  \cf6 self\cf0 .\cf7 todo\cf0 ;\
+\}\
+\
+- (\cf6 void\cf0 )setTodo:(\cf7 Todo\cf0  *)newTodo\
+\{\
+\
+    \cf7 todo\cf0  = newTodo;\
+    \
+    \cf6 self\cf0 .\cf7 todoTextLabel\cf0 .\cf8 text\cf0  = newTodo.\cf7 runnerName\cf0 ;\
+    \cf6 self\cf0 .\cf7 todoPriorityImageView\cf0 .\cf8 image\cf0  = [\cf6 self\cf0  \cf10 imageForPriority\cf0 :newTodo.\cf10 eventDistance\cf0 ];\
+    \
+	\cf6 switch\cf0 (newTodo.\cf7 eventDistance\cf0 ) \{\
+		\cf6 case\cf0  \cf11 2\cf0 :\
+			\cf6 self\cf0 .\cf7 todoPriorityLabel\cf0 .\cf8 text\cf0  = \cf5 @"Medium"\cf0 ;\
+			\cf6 break\cf0 ;\
+		\cf6 case\cf0  \cf11 3\cf0 :\
+			\cf6 self\cf0 .\cf7 todoPriorityLabel\cf0 .\cf8 text\cf0  = \cf5 @"Low"\cf0 ;\
+			\cf6 break\cf0 ;\
+		\cf6 default\cf0 :\
+			\cf6 self\cf0 .\cf7 todoPriorityLabel\cf0 .\cf8 text\cf0  = \cf5 @"High"\cf0 ;\
+			\cf6 break\cf0 ;\
+	\}\
+	\
+    [\cf6 self\cf0  \cf9 setNeedsDisplay\cf0 ];\
+\}\
+\
+\
+\
+- (\cf6 void\cf0 )layoutSubviews \{\
+    \
+\cf4 #define LEFT_COLUMN_OFFSET \cf11 1\cf4 \
+#define LEFT_COLUMN_WIDTH \cf11 50\cf4 \
+\cf0 	\
+\cf4 #define RIGHT_COLUMN_OFFSET \cf11 75\cf4 \
+#define RIGHT_COLUMN_WIDTH \cf11 240\cf4 \
+\cf0 	\
+\cf4 #define UPPER_ROW_TOP \cf11 4\cf4 \
+\cf0     \
+    [\cf6 super\cf0  \cf9 layoutSubviews\cf0 ];\
+    \cf8 CGRect\cf0  contentRect = \cf6 self\cf0 .\cf8 contentView\cf0 .\cf8 bounds\cf0 ;\
+	\
+    \cf6 if\cf0  (!\cf6 self\cf0 .\cf8 editing\cf0 ) \{\
+		\
+        \cf8 CGFloat\cf0  boundsX = contentRect.\cf8 origin\cf0 .\cf8 x\cf0 ;\
+		\cf8 CGRect\cf0  \cf8 frame\cf0 ;\
+        \
+        \cf3 // Place the Text label.\cf0 \
+		\cf8 frame\cf0  = \cf9 CGRectMake\cf0 (boundsX +\cf4 RIGHT_COLUMN_OFFSET\cf0   , \cf4 UPPER_ROW_TOP\cf0 , \cf4 RIGHT_COLUMN_WIDTH\cf0 , \cf11 13\cf0 );\
+		\cf8 frame\cf0 .\cf8 origin\cf0 .\cf8 y\cf0  = \cf11 15\cf0 ;\
+		\cf6 self\cf0 .\cf7 todoTextLabel\cf0 .\cf8 frame\cf0  = \cf8 frame\cf0 ;\
+        \
+        \cf3 // Place the priority image.\cf0 \
+        \cf8 UIImageView\cf0  *\cf8 imageView\cf0  = \cf6 self\cf0 .\cf7 todoPriorityImageView\cf0 ;\
+        \cf8 frame\cf0  = [\cf8 imageView\cf0  \cf9 frame\cf0 ];\
+		\cf8 frame\cf0 .\cf8 origin\cf0 .\cf8 x\cf0  = boundsX + \cf4 LEFT_COLUMN_OFFSET\cf0 ;\
+		\cf8 frame\cf0 .\cf8 origin\cf0 .\cf8 y\cf0  = \cf11 10\cf0 ;\
+ 		\cf8 imageView\cf0 .\cf8 frame\cf0  = \cf8 frame\cf0 ;\
+        \
+        \cf3 // Place the priority label.\cf0 \
+        \cf8 CGSize\cf0  prioritySize = [\cf6 self\cf0 .\cf7 todoPriorityLabel\cf0 .\cf8 text\cf0  \cf9 sizeWithFont\cf0 :\cf6 self\cf0 .\cf7 todoPriorityLabel\cf0 .\cf8 font\cf0  \
+							   \cf9 forWidth\cf0 :\cf4 RIGHT_COLUMN_WIDTH\cf0  \cf9 lineBreakMode\cf0 :\cf9 UILineBreakModeTailTruncation\cf0 ];\
+        \cf8 CGFloat\cf0  priorityX = \cf8 frame\cf0 .\cf8 origin\cf0 .\cf8 x\cf0  + \cf8 imageView\cf0 .\cf8 frame\cf0 .\cf8 size\cf0 .\cf8 width\cf0  + \cf11 8.0\cf0 ;\
+        \cf8 frame\cf0  = \cf9 CGRectMake\cf0 (priorityX, \cf4 UPPER_ROW_TOP\cf0 , prioritySize.\cf8 width\cf0 , prioritySize.\cf8 height\cf0 );\
+		\cf8 frame\cf0 .\cf8 origin\cf0 .\cf8 y\cf0  = \cf11 15\cf0 ;\
+        \cf6 self\cf0 .\cf7 todoPriorityLabel\cf0 .\cf8 frame\cf0  = \cf8 frame\cf0 ;\
+    \}\
+\}\
+\
+\
+- (\cf6 void\cf0 )setSelected:(\cf6 BOOL\cf0 )\cf8 selected\cf0  animated:(\cf6 BOOL\cf0 )animated \{\
+\
+	[\cf6 super\cf0  \cf9 setSelected\cf0 :\cf8 selected\cf0  \cf9 animated\cf0 :animated];\
+	\
+	\cf8 UIColor\cf0  *\cf8 backgroundColor\cf0  = \cf6 nil\cf0 ;\
+	\cf6 if\cf0  (\cf8 selected\cf0 ) \{\
+	    \cf8 backgroundColor\cf0  = [\cf8 UIColor\cf0  \cf9 clearColor\cf0 ];\
+	\} \cf6 else\cf0  \{\
+		\cf8 backgroundColor\cf0  = [\cf8 UIColor\cf0  \cf9 whiteColor\cf0 ];\
+	\}\
+    \
+	\cf6 self\cf0 .\cf7 todoTextLabel\cf0 .\cf8 backgroundColor\cf0  = \cf8 backgroundColor\cf0 ;\
+	\cf6 self\cf0 .\cf7 todoTextLabel\cf0 .\cf8 highlighted\cf0  = \cf8 selected\cf0 ;\
+	\cf6 self\cf0 .\cf7 todoTextLabel\cf0 .\cf8 opaque\cf0  = !\cf8 selected\cf0 ;\
+	\
+	\cf6 self\cf0 .\cf7 todoPriorityLabel\cf0 .\cf8 backgroundColor\cf0  = \cf8 backgroundColor\cf0 ;\
+	\cf6 self\cf0 .\cf7 todoPriorityLabel\cf0 .\cf8 highlighted\cf0  = \cf8 selected\cf0 ;\
+	\cf6 self\cf0 .\cf7 todoPriorityLabel\cf0 .\cf8 opaque\cf0  = !\cf8 selected\cf0 ;\
+\}\
+\
+\
+- (\cf8 UILabel\cf0  *)newLabelWithPrimaryColor:(\cf8 UIColor\cf0  *)primaryColor \
+						selectedColor:(\cf8 UIColor\cf0  *)selectedColor fontSize:(\cf8 CGFloat\cf0 )fontSize bold:(\cf6 BOOL\cf0 )\cf9 bold\cf0 \
+\{\
+\
+    \cf8 UIFont\cf0  *\cf8 font\cf0 ;\
+    \cf6 if\cf0  (\cf9 bold\cf0 ) \{\
+        \cf8 font\cf0  = [\cf8 UIFont\cf0  \cf9 boldSystemFontOfSize\cf0 :fontSize];\
+    \} \cf6 else\cf0  \{\
+        \cf8 font\cf0  = [\cf8 UIFont\cf0  \cf9 systemFontOfSize\cf0 :fontSize];\
+    \}\
+    \
+	\cf8 UILabel\cf0  *newLabel = [[\cf8 UILabel\cf0  \cf9 alloc\cf0 ] \cf9 initWithFrame\cf0 :\cf8 CGRectZero\cf0 ];\
+	newLabel.\cf8 backgroundColor\cf0  = [\cf8 UIColor\cf0  \cf9 whiteColor\cf0 ];\
+	newLabel.\cf8 opaque\cf0  = \cf6 YES\cf0 ;\
+	newLabel.\cf8 textColor\cf0  = primaryColor;\
+	newLabel.\cf8 highlightedTextColor\cf0  = selectedColor;\
+	newLabel.\cf8 font\cf0  = \cf8 font\cf0 ;\
+	\
+	\cf6 return\cf0  newLabel;\
+\}\
+\
+- (\cf8 UIImage\cf0  *)imageForPriority:(\cf8 NSInteger\cf0 )priority\
+\{\
+	\cf6 switch\cf0  (priority) \{\
+		\cf6 case\cf0  \cf11 2\cf0 :\
+			\cf6 return\cf0  \cf7 priority2Image\cf0 ;\
+			\cf6 break\cf0 ;\
+		\cf6 case\cf0  \cf11 3\cf0 :\
+			\cf6 return\cf0  \cf7 priority3Image\cf0 ;\
+			\cf6 break\cf0 ;\
+		\cf6 default\cf0 :\
+			\cf6 return\cf0  \cf7 priority1Image\cf0 ;\
+			\cf6 break\cf0 ;\
+	\}\
+	\cf6 return\cf0  \cf6 nil\cf0 ;\
+\}\
+\
+\
+- (\cf6 void\cf0 )dealloc \{\
+	[\cf6 super\cf0  \cf9 dealloc\cf0 ];\
+\}\
+\
+\
+\cf6 @end\cf0 \
+\pard\pardeftab720\sl400\ql\qnatural
+
+\f1\fs26 \cf2 \CocoaLigature1 \
+=====================================================\
+\pard\tx560\pardeftab560\ql\qnatural\pardirnatural
+
+\f2\fs24 \cf3 \CocoaLigature0 //\cf0 \
+\cf3 //  TodoViewController.h\cf0 \
+\cf3 //  todo\cf0 \
+\cf3 //\cf0 \
+\cf3 //  Created by Brandon Trebitowski on 9/6/08.\cf0 \
+\cf3 //  Copyright 2008 __MyCompanyName__. All rights reserved.\cf0 \
+\cf3 //\cf0 \
+\
+\cf4 #import \cf5 <UIKit/UIKit.h>\cf4 \
+#import \cf5 "Todo.h"\cf4 \
+\cf0 \
+\cf6 @interface\cf0  TodoViewController : UIViewController \{\
+	\cf6 IBOutlet\cf0  \cf8 UITextField\cf0         *\cf7 todoText\cf0 ;\
+	\cf6 IBOutlet\cf0  \cf8 UISegmentedControl\cf0  *\cf7 todoPriority\cf0 ;\
+	\cf6 IBOutlet\cf0  \cf8 UILabel\cf0             *\cf7 todoStatus\cf0 ;\
+	\cf6 IBOutlet\cf0  \cf8 UIButton\cf0 			*\cf7 todoButton\cf0 ;\
+	\cf7 Todo\cf0 						*\cf7 todo\cf0 ;\
+\}\
+\
+\cf6 @property\cf0 (\cf6 nonatomic\cf0 ,\cf6 retain\cf0 ) \cf6 IBOutlet\cf0  UITextField        *todoText;\
+\cf6 @property\cf0 (\cf6 nonatomic\cf0 ,\cf6 retain\cf0 ) \cf6 IBOutlet\cf0  UISegmentedControl *todoPriority;\
+\cf6 @property\cf0 (\cf6 nonatomic\cf0 ,\cf6 retain\cf0 ) \cf6 IBOutlet\cf0  UILabel            *todoStatus;\
+\cf6 @property\cf0 (\cf6 nonatomic\cf0 ,\cf6 retain\cf0 ) \cf6 IBOutlet\cf0  UIButton           *todoButton;\
+\cf6 @property\cf0 (\cf6 nonatomic\cf0 ,\cf6 retain\cf0 ) Todo						*todo;\
+\
+- (\cf6 IBAction\cf0 ) updateStatus:(\cf6 id\cf0 ) sender;\
+- (\cf6 IBAction\cf0 ) updatePriority:(\cf6 id\cf0 ) sender;\
+- (\cf6 IBAction\cf0 ) updateText:(\cf6 id\cf0 ) sender;\
+\
+\cf6 @end\cf0 \
+\pard\pardeftab720\sl400\ql\qnatural
+
+\f1\fs26 \cf2 \CocoaLigature1 \
+====================================================\
+\pard\tx560\pardeftab560\ql\qnatural\pardirnatural
+
+\f2\fs24 \cf3 \CocoaLigature0 //\cf0 \
+\cf3 //  TodoViewController.m\cf0 \
+\cf3 //  todo\cf0 \
+\cf3 //\cf0 \
+\cf3 //  Created by Brandon Trebitowski on 9/6/08.\cf0 \
+\cf3 //  Copyright 2008 __MyCompanyName__. All rights reserved.\cf0 \
+\cf3 //\cf0 \
+\
+\cf4 #import \cf5 "TodoViewController.h"\cf4 \
+\cf0 \
+\
+\cf6 @implementation\cf0  TodoViewController\
+\
+\cf6 @synthesize\cf0  todoText,todoPriority,todoStatus,todoButton,todo;\
+\
+- (\cf6 id\cf0 )initWithNibName:(\cf8 NSString\cf0  *)nibNameOrNil bundle:(\cf8 NSBundle\cf0  *)nibBundleOrNil \{\
+	\cf6 if\cf0  (\cf6 self\cf0  = [\cf6 super\cf0  \cf9 initWithNibName\cf0 :nibNameOrNil \cf9 bundle\cf0 :nibBundleOrNil]) \{\
+		\cf3 // Initialization code\cf0 \
+	\}\
+	\cf6 return\cf0  \cf6 self\cf0 ;\
+\}\
+\
+- (\cf6 IBAction\cf0 ) updateStatus:(\cf6 id\cf0 ) sender \{\
+	\cf6 if\cf0 (\cf6 self\cf0 .\cf7 todo\cf0 .\cf7 status\cf0  == \cf11 0\cf0 ) \{\
+		[\cf6 self\cf0 .\cf7 todoButton\cf0  \cf9 setTitle\cf0 :\cf5 @"Mark As In Progress"\cf0  \cf9 forState\cf0 :\cf9 UIControlStateNormal\cf0 ];\
+		[\cf6 self\cf0 .\cf7 todoButton\cf0  \cf9 setTitle\cf0 :\cf5 @"Mark As In Progress"\cf0  \cf9 forState\cf0 :\cf9 UIControlStateHighlighted\cf0 ];\
+		[\cf6 self\cf0 .\cf7 todoStatus\cf0  \cf9 setText\cf0 :\cf5 @"Complete"\cf0 ];\
+		[\cf6 self\cf0 .\cf7 todo\cf0  \cf10 updateStatus\cf0 :\cf11 1\cf0 ];\
+	\} \cf6 else\cf0  \{\
+		[\cf6 self\cf0 .\cf7 todoButton\cf0  \cf9 setTitle\cf0 :\cf5 @"Mark As Complete"\cf0  \cf9 forState\cf0 :\cf9 UIControlStateNormal\cf0 ];\
+		[\cf6 self\cf0 .\cf7 todoButton\cf0  \cf9 setTitle\cf0 :\cf5 @"Mark As Complete"\cf0  \cf9 forState\cf0 :\cf9 UIControlStateHighlighted\cf0 ];\
+		[\cf6 self\cf0 .\cf7 todoStatus\cf0  \cf9 setText\cf0 :\cf5 @"In Progress"\cf0 ];\
+		[\cf6 self\cf0 .\cf7 todo\cf0  \cf10 updateStatus\cf0 :\cf11 0\cf0 ];\
+	\}\
+\}\
+\
+- (\cf6 IBAction\cf0 ) updatePriority:(\cf6 id\cf0 )sender \{\
+	\cf6 int\cf0  priority = [\cf6 self\cf0 .\cf7 todoPriority\cf0  \cf9 selectedSegmentIndex\cf0 ];\
+	[\cf6 self\cf0 .\cf7 todo\cf0  \cf10 updatePriority\cf0 :(\cf11 2\cf0 -priority+\cf11 1\cf0 )];\
+\}\
+\
+- (\cf6 IBAction\cf0 ) updateText:(\cf6 id\cf0 ) sender \{\
+	\cf6 self\cf0 .\cf7 todo\cf0 .\cf7 runnerName\cf0  = \cf6 self\cf0 .\cf7 todoText\cf0 .\cf8 text\cf0 ;\
+\}\
+\
+\cf3 /*\
+ Implement loadView if you want to create a view hierarchy programmatically\
+- (void)loadView \{\
+\}\
+ */\cf0 \
+\
+\cf3 /*\
+ If you need to do additional setup after loading the view, override viewDidLoad.\
+- (void)viewDidLoad \{\
+\}\
+ */\cf0 \
+\
+\
+- (\cf6 BOOL\cf0 )shouldAutorotateToInterfaceOrientation:(\cf8 UIInterfaceOrientation\cf0 )\cf8 interfaceOrientation\cf0  \{\
+	\cf3 // Return YES for supported orientations\cf0 \
+	\cf6 return\cf0  (\cf8 interfaceOrientation\cf0  == \cf9 UIInterfaceOrientationPortrait\cf0 );\
+\}\
+\
+\
+- (\cf6 void\cf0 )didReceiveMemoryWarning \{\
+	[\cf6 super\cf0  \cf9 didReceiveMemoryWarning\cf0 ]; \cf3 // Releases the view if it doesn't have a superview\cf0 \
+	\cf3 // Release anything that's not essential, such as cached data\cf0 \
+\}\
+\
+\
+- (\cf6 void\cf0 )dealloc \{\
+	[\cf6 super\cf0  \cf9 dealloc\cf0 ];\
+\}\
+\
+\
+\cf6 @end\cf0 \
+\pard\pardeftab720\sl400\ql\qnatural
+
+\f1\fs26 \cf2 \CocoaLigature1 \
+\
+\
+\
+\
+}
