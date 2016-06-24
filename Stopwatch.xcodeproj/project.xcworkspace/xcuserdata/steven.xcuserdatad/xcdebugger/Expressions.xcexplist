@@ -3,6 +3,12 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "-[SplitEditViewController initWithEvent:]:SplitEditViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[Stopwatch startStopButtonPressed]:Stopwatch.m">
+      </ContextState>
+      <ContextState
          contextName = "-[MultiStopwatchTableViewController tableView:cellForRowAtIndexPath:]:MultiStopwatchTableViewController.m">
          <PersistentStrings>
             <PersistentString
@@ -12,12 +18,6 @@
                value = "multiWatchCells">
             </PersistentString>
          </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "-[Stopwatch startStopButtonPressed]:Stopwatch.m">
-      </ContextState>
-      <ContextState
-         contextName = "-[SplitEditViewController initWithEvent:]:SplitEditViewController.m">
       </ContextState>
       <ContextState
          contextName = "-[MultiStopwatchCell updateButtonState]:MultiStopwatchCell.m">

@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "SplitDetailViewController.h"
 #import "SettingsViewController.h"
+#import "SplitHeaderView.h"
 
 @class StopwatchAppDelegate;
 
@@ -23,10 +24,12 @@
 	UILabel *lapTimeLabel;
 	UILabel	*lapCountLabel;
 	UILabel *intervalDistanceLabel;
-	UILabel *splitViewHeader;
+	SplitHeaderView *splitViewHeader;
 	UIButton *startStopButton;
 	UIButton *lapResetButton;
 	UIButton *clearToggleButton;
+    UIImageView *topSeparatorImageView;
+    UIImageView *bottomSeparatorImageView;
 	SplitDetailViewController *splitDetailViewController;
 	SettingsViewController *settingsViewController;
 	StopwatchAppDelegate *appDelegate;
@@ -62,10 +65,12 @@
 @property (nonatomic, assign) UILabel	*lapTimeLabel;
 @property (nonatomic, assign) UILabel	*lapCountLabel;
 @property (nonatomic, assign) UILabel	*intervalDistanceLabel;
-@property (nonatomic, assign) UILabel	*splitViewHeader;
+@property (nonatomic, assign) SplitHeaderView	*splitViewHeader;
 @property (nonatomic, assign) UIButton	*startStopButton;
 @property (nonatomic, assign) UIButton	*lapResetButton;
 @property (nonatomic, retain) UIButton	*clearToggleButton;
+@property (nonatomic, retain) UIImageView *topSeparatorImageView;
+@property (nonatomic, retain) UIImageView *bottomSeparatorImageView;
 @property (nonatomic, assign) SplitDetailViewController *splitDetailViewController;
 @property (nonatomic, assign) SettingsViewController *settingsViewController;
 @property (nonatomic, assign) StopwatchAppDelegate *appDelegate;

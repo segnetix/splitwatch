@@ -13,6 +13,7 @@
 @interface SplitPickerViewController : UIViewController <UIPickerViewDelegate, UIPickerViewDataSource, UIAlertViewDelegate>
 {
     StopwatchAppDelegate *appDelegate;
+    SplitDetailViewController *splitDetailViewController;
     Event *event;
     sqlite3 *database;
     int pickerSplitIndex;
@@ -43,6 +44,7 @@
 @property (nonatomic, retain) IBOutlet UILabel *beforeSplitLabel;
 @property (nonatomic, retain) IBOutlet UILabel *afterTimeLabel;
 @property (nonatomic, retain) IBOutlet UILabel *afterSplitLabel;
+@property (nonatomic, weak) SplitDetailViewController *splitDetailViewController;
 
 - (id)initWithEvent:(Event *)theEvent andRow:(int)row;
 

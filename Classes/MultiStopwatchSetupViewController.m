@@ -12,14 +12,17 @@
 
 #define kAthletes					  1
 #define kEvents						  2
-#define kCellHeight                  36
-#define kCellFontSize                24
+#define kiPhoneCellHeight            36
+#define kiPhoneCellFontSize          24
+#define kiPadCellHeight              42
+#define kiPadCellFontSize            30
 
 @implementation MultiStopwatchSetupViewController
 
 @synthesize mainViewController;
 @synthesize pickView;
 @synthesize pickerToolbar;
+@synthesize pickerSeparatorImageView;
 @synthesize athleteField;
 @synthesize eventField;
 @synthesize athleteLabel;
@@ -52,6 +55,11 @@
         
         UIBarButtonItem *doneBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStylePlain target:nil action:NULL];
         self.navigationItem.rightBarButtonItem = doneBarButton;
+        
+        // picker separator
+        UIImage *separatorImage = [UIImage imageNamed:@"separator_dark_gray.png"];
+        pickerSeparatorImageView = [[UIImageView alloc] initWithImage:separatorImage];
+        pickerSeparatorImageView.translatesAutoresizingMaskIntoConstraints = NO;
         
         // set target and action for Done button
         doneBarButton.target = self;
@@ -136,6 +144,11 @@
     [self.view addSubview:pickerToolbar];
     [pickerToolbar release];
     
+    // picker separator
+    [self.view addSubview:pickerSeparatorImageView];
+    pickerSeparatorImageView.hidden = YES;
+    [pickerSeparatorImageView release];
+    
     UIBarButtonItem *pickerCancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
                                                                                         target:self
                                                                                         action:@selector(pickerCancel)];
@@ -154,10 +167,15 @@
     [pickEventButton   addTarget:self action:@selector(openPicker:) forControlEvents:UIControlEventTouchUpInside];
     [clearAllButton   addTarget:self action:@selector(clearAll:) forControlEvents:UIControlEventTouchUpInside];
     
-    NSDictionary *views = NSDictionaryOfVariableBindings(pickView, pickerToolbar);
+    NSDictionary *views = NSDictionaryOfVariableBindings(pickView, pickerToolbar, pickerSeparatorImageView);
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[pickView]|" options:0 metrics:nil views:views]];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[pickerToolbar]|" options:0 metrics:nil views:views]];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[pickView(162)][pickerToolbar]-50-|" options:0 metrics:nil views:views]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[pickerSeparatorImageView]|" options:0 metrics:nil views:views]];
+    if (IPAD) {
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-222-[pickView(216)][pickerToolbar][pickerSeparatorImageView(1)]" options:0 metrics:nil views:views]];
+    } else {
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-193-[pickView(162)][pickerToolbar][pickerSeparatorImageView(1)]" options:0 metrics:nil views:views]];
+    }
     
     tapGesture =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(pickerDoubleTap)];
     tapGesture.numberOfTapsRequired = 2;
@@ -183,11 +201,18 @@
 	// clear text fields
 	athleteField.text = @"";
 	
-	eventField.text = [mainViewController getEventName];
-	nameArray = [[mainViewController getNames] mutableCopy];
+    if (eventField.text.length > 0) {
+        eventField.text = [mainViewController getEventName];
+    }
+    
+    if (nameArray == nil || (nameArray != nil && nameArray.count == 0)) {
+        nameArray = [[mainViewController getNames] mutableCopy];
+    }
     
     pickView.hidden = YES;
     pickerToolbar.hidden = YES;
+    pickerSeparatorImageView.hidden = YES;
+    nameTable.hidden = NO;
     
     pickAthleteButton.enabled = YES;
     pickEventButton.enabled = YES;
@@ -289,7 +314,7 @@
         nameArray.count > 0)
     {
         // are you sure you want to delete?
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Clear this watch setup?"
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Clear this Multiwatch setup?"
                                                             message:@""
                                                            delegate:self
                                                   cancelButtonTitle:@"Cancel"
@@ -311,6 +336,8 @@
 		eventField.text = @"";
         
         [nameArray removeAllObjects];
+        [mainViewController updateFromSetupWithNames:[[nameArray copy] autorelease] andEvent:eventField.text];
+        
         [nameTable reloadData];
 	}
 }
@@ -324,7 +351,9 @@
 	
 	pickView.hidden = NO;
 	pickerToolbar.hidden = NO;
-	
+	pickerSeparatorImageView.hidden = NO;
+    nameTable.hidden = YES;
+    
 	if (sender == pickAthleteButton)
     {
 		currentEditField = athleteField;
@@ -352,7 +381,9 @@
 	pickAthleteButton.enabled = YES;
 	pickEventButton.enabled = YES;
     pickView.hidden = YES;
+    nameTable.hidden = NO;
     pickerToolbar.hidden = YES;
+    pickerSeparatorImageView.hidden = YES;
 }
 
 - (void)pickerDoubleTap
@@ -378,7 +409,9 @@
     pickAthleteButton.enabled = YES;
     pickEventButton.enabled = YES;
     pickView.hidden = YES;
+    nameTable.hidden = NO;
     pickerToolbar.hidden = YES;
+    pickerSeparatorImageView.hidden = YES;
 }
 
 -(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
@@ -475,7 +508,11 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return kCellHeight;
+    if (IPAD) {
+        return kiPadCellHeight;
+    } else {
+        return kiPhoneCellHeight;
+    }
 }
 
 // Customize the appearance of table view cells.
@@ -491,7 +528,11 @@
     }
     
     cell.textLabel.text = [nameArray objectAtIndex:indexPath.row];
-    cell.textLabel.font = [UIFont fontWithName:FONT_NAME size:kCellFontSize];
+    if (IPAD) {
+        cell.textLabel.font = [UIFont fontWithName:FONT_NAME size:kiPadCellFontSize];
+    } else {
+        cell.textLabel.font = [UIFont fontWithName:FONT_NAME size:kiPhoneCellFontSize];
+    }
     cell.backgroundColor = [UIColor whiteColor];
     
     return cell;

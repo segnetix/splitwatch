@@ -7,6 +7,7 @@
 //
 
 #import "SplitDetailCell.h"
+#import "Utilities.h"
 
 @implementation SplitDetailCell
 
@@ -46,10 +47,6 @@
 	[splitColumn2 release];
 	[splitColumn3 release];
 	[splitColumn4 release];
-	//[accDisclosureImage release];
-	//[separatorImage release];
-	//[accImageView release];
-	//[separatorImageView release];
 	
 	lapColumn = nil;
 	timeColumn = nil;
@@ -69,15 +66,31 @@
 {	
 	accDisclosureImage = [UIImage imageNamed:@"AccDisclosure.png"];
 	accImageView = [[UIImageView alloc] initWithImage:accDisclosureImage];
-	accImageView.frame = CGRectMake(308, 2, 12, 14);
+    accImageView.translatesAutoresizingMaskIntoConstraints = NO;
+	//accImageView.frame = CGRectMake(308, 2, 12, 14);
 	[self addSubview:accImageView];
 	[accImageView release];
 	
 	separatorImage = [UIImage imageNamed:@"separator.png"];
 	separatorImageView = [[UIImageView alloc] initWithImage:separatorImage];
-	separatorImageView.frame = CGRectMake(1, 18, 308, 1);
+    separatorImageView.translatesAutoresizingMaskIntoConstraints = NO;
+	//separatorImageView.frame = CGRectMake(1, 18, 308, 1);
 	[self addSubview:separatorImageView];
 	[separatorImageView release];
+    
+    NSDictionary *views = NSDictionaryOfVariableBindings(accImageView, separatorImageView);
+    
+    if (IPAD) {
+        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[accImageView(12)]-1-|" options:0 metrics:nil views:views]];
+        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-14-[accImageView(14)]" options:0 metrics:nil views:views]];
+    } else {
+        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[accImageView(12)]-1-|" options:0 metrics:nil views:views]];
+        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-8-[accImageView(14)]" options:0 metrics:nil views:views]];
+    }
+    
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[separatorImageView]-12-|" options:0 metrics:nil views:views]];
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[separatorImageView(1)]|" options:0 metrics:nil views:views]];
+    
 }
 
 @end

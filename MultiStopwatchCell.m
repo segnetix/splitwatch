@@ -33,21 +33,10 @@
     appDelegate = (StopwatchAppDelegate *)[[UIApplication sharedApplication] delegate];
     self.GREEN_COLOR = [UIColor colorWithRed:.2  green:.8 blue:.2 alpha: 1.0];
     self.RED_COLOR = [UIColor colorWithRed:1     green:0  blue:0  alpha: 1.0];
-    
-	//startButtonImage = [[UIImage imageNamed:@"start_button_multi_cell.png"] retain];
-	//stopButtonImage = [[UIImage imageNamed:@"stop_button_multi_cell.png"] retain];
-	//lapButtonImage = [[UIImage imageNamed:@"lap_button_multi_cell.png"] retain];
-	//resetButtonImage = [[UIImage imageNamed:@"reset_button_multi_cell.png"] retain];
-	//backgroundGradientImage = [[UIImage imageNamed:@"dark_black_gradient_cell.png"] retain];
-	
-    //backgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 67)];
 	
 	lapTimeLabel.text = @"";
 	runningTimeLabel.text = [Utilities shortFormatTime:0 precision:2];
 	lapCountLabel.text = [Utilities formatLap:0];
-	
-	//[startStopButton setBackgroundImage:startButtonImage forState:UIControlStateNormal];
-	//[lapResetButton setBackgroundImage:lapButtonImage forState:UIControlStateNormal];
 	
     // startStop button
     [startStopButton setTitle:@"Start" forState:UIControlStateNormal];
@@ -55,9 +44,15 @@
     [startStopButton setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
     [startStopButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateDisabled];
     startStopButton.layer.borderColor = GREEN_COLOR.CGColor;
-    startStopButton.titleLabel.font = [UIFont fontWithName:FONT_NAME size:20];
-    startStopButton.layer.borderWidth = 1.0f;
-    startStopButton.layer.cornerRadius = 12.0f;
+    if (IPAD) {
+        startStopButton.titleLabel.font = [UIFont fontWithName:FONT_NAME size:32];
+        startStopButton.layer.borderWidth = 2.0f;
+        startStopButton.layer.cornerRadius = 20.0f;
+    } else {
+        startStopButton.titleLabel.font = [UIFont fontWithName:FONT_NAME size:20];
+        startStopButton.layer.borderWidth = 1.0f;
+        startStopButton.layer.cornerRadius = 12.0f;
+    }
     startStopButton.showsTouchWhenHighlighted = NO;
     [startStopButton addTarget:self action:@selector(startStopButtonPressed) forControlEvents:UIControlEventTouchDown];
 
@@ -66,10 +61,16 @@
     [lapResetButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateHighlighted];
     [lapResetButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateDisabled];
     [lapResetButton setTitle:@"Lap" forState:UIControlStateNormal];
-    lapResetButton.titleLabel.font = [UIFont fontWithName:FONT_NAME size:20];
-    lapResetButton.layer.borderWidth = 1.0f;
+    if (IPAD) {
+        lapResetButton.titleLabel.font = [UIFont fontWithName:FONT_NAME size:32];
+        lapResetButton.layer.borderWidth = 2.0f;
+        lapResetButton.layer.cornerRadius = 20.0f;
+    } else {
+        lapResetButton.titleLabel.font = [UIFont fontWithName:FONT_NAME size:20];
+        lapResetButton.layer.borderWidth = 1.0f;
+        lapResetButton.layer.cornerRadius = 12.0f;
+    }
     lapResetButton.layer.borderColor = [UIColor blackColor].CGColor;
-    lapResetButton.layer.cornerRadius = 12.0f;
     [lapResetButton addTarget:self action:@selector(lapResetButtonPressed) forControlEvents:UIControlEventTouchDown];
     lapResetButton.showsTouchWhenHighlighted = NO;
     

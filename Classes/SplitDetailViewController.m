@@ -19,6 +19,7 @@
 @synthesize bEditMode;
 @synthesize splitEditViewController;
 @synthesize appDelegate;
+@synthesize bWideDisplay;
 
 #pragma mark -
 
@@ -47,10 +48,10 @@
 			// edit mode setup
 			self.tableView.allowsSelection = YES;
 		}
-		
+        
 		[self resetLapInterval:distance Units:iUnits KiloSplits:bKiloSplits FurlongMode:bFurlongMode];
     }
-	
+    
     self.tableView.clearsContextBeforeDrawing = YES;
     
     return self;
@@ -201,7 +202,20 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	return 20.0;
+    if (bEditMode) {
+        if (IPAD) {
+            return 40.0;
+        } else {
+            return 26.0;
+        }
+    } else {
+        if (IPAD) {
+            return 30.0;
+        } else {
+            return 20.0;
+        }
+    }
+    
 }
 
 // Customize the appearance of table view cells.
@@ -212,17 +226,14 @@
     SplitDetailCell *cell = (SplitDetailCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 	
     if (cell == nil)
-	{
+    {
 		NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"SplitDetailCell" owner:self options:nil];
 		
-		for (id obj in nib)
-		{
-			if ([obj isKindOfClass:[SplitDetailCell class]])
-			{
+		for (id obj in nib) {
+			if ([obj isKindOfClass:[SplitDetailCell class]]) {
 				cell = (SplitDetailCell *)obj;
 				
-				if (bEditMode)
-				{
+				if (bEditMode) {
 					[cell additionalSetup];
 				}
 			}
@@ -281,9 +292,9 @@
 	}
 }
 
+/*
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    /*
     //if (indexPath.row == 0 || indexPath.row % 2 == 0)
 	if (indexPath.row == (splits.count + 1) && splits.count > 0)
     {
@@ -291,8 +302,8 @@
         //cell.backgroundColor = altCellColor;
         //cell.backgroundColor = [UIColor groupTableViewBackgroundColor];
     }
-     */
 }
+*/
 
 #pragma mark -
 #pragma mark Cell Text Methods
@@ -770,12 +781,31 @@
 	return splitDataStr;
 }
 
-/*
- // Override to allow orientations other than the default portrait orientation.
- - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
- // Return YES for supported orientations
- return (interfaceOrientation == UIInterfaceOrientationPortrait);
- }
- */
+// scroll to and flash the modified/inserted splits
+- (void)flashSplitCellsInRow:(int)row
+{
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:0];
+    SplitDetailCell *cell = (SplitDetailCell *)[self.tableView cellForRowAtIndexPath:indexPath];
+    
+    [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionMiddle animated:NO];
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.35 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        cell.lapColumn.textColor = [UIColor redColor];
+        cell.timeColumn.textColor = [UIColor redColor];
+        cell.splitColumn1.textColor = [UIColor redColor];
+        cell.splitColumn2.textColor = [UIColor redColor];
+        cell.splitColumn3.textColor = [UIColor redColor];
+        cell.splitColumn4.textColor = [UIColor redColor];
+
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+            cell.lapColumn.textColor = [UIColor blackColor];
+            cell.timeColumn.textColor = [UIColor blackColor];
+            cell.splitColumn1.textColor = [UIColor blackColor];
+            cell.splitColumn2.textColor = [UIColor blackColor];
+            cell.splitColumn3.textColor = [UIColor blackColor];
+            cell.splitColumn4.textColor = [UIColor blackColor];
+        });
+    });
+}
 
 @end

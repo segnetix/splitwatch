@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -15,68 +16,67 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="35"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="28">
-                        <rect key="frame" x="8" y="0.0" width="304" height="36"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="Date" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="18">
-                        <rect key="frame" x="10" y="10" width="70" height="18"/>
+                        <rect key="frame" x="15" y="4" width="64" height="27"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="70" id="J6Y-Yx-cvV"/>
-                        </constraints>
                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="13"/>
                         <nil key="highlightedColor"/>
+                        <variation key="widthClass=regular">
+                            <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="24"/>
+                        </variation>
                     </label>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="Athlete" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="19">
-                        <rect key="frame" x="200" y="7" width="100" height="24"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="24" id="MNF-aU-wqc"/>
-                        </constraints>
+                        <rect key="frame" x="191" y="4" width="109" height="27"/>
                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="13"/>
                         <nil key="highlightedColor"/>
+                        <variation key="widthClass=regular">
+                            <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="24"/>
+                        </variation>
                     </label>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="Event" textAlignment="right" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="20">
-                        <rect key="frame" x="82" y="10" width="38" height="18"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="38" id="QiN-5X-8m2"/>
-                        </constraints>
+                        <rect key="frame" x="85" y="4" width="38" height="27"/>
                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="13"/>
                         <nil key="highlightedColor"/>
+                        <variation key="widthClass=regular">
+                            <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="24"/>
+                        </variation>
                     </label>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="Time" textAlignment="right" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="21">
-                        <rect key="frame" x="128" y="10" width="64" height="18"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="64" id="pZj-Tp-qKT"/>
-                        </constraints>
+                        <rect key="frame" x="131" y="4" width="48" height="27"/>
                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="13"/>
                         <nil key="highlightedColor"/>
+                        <variation key="widthClass=regular">
+                            <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="24"/>
+                        </variation>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="18" firstAttribute="leading" secondItem="jnm-UA-LxG" secondAttribute="leadingMargin" constant="2" id="2Sj-tO-chf"/>
-                    <constraint firstItem="28" firstAttribute="leading" secondItem="jnm-UA-LxG" secondAttribute="leadingMargin" id="6bI-oD-E58"/>
-                    <constraint firstItem="28" firstAttribute="top" secondItem="jnm-UA-LxG" secondAttribute="top" id="A3a-Mh-6t3"/>
-                    <constraint firstItem="21" firstAttribute="leading" secondItem="20" secondAttribute="trailing" constant="8" symbolic="YES" id="AaP-eq-kjO"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="19" secondAttribute="trailing" constant="12" id="B0O-sl-MCB"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="28" secondAttribute="trailing" id="CKp-Pr-68W"/>
-                    <constraint firstItem="18" firstAttribute="centerY" secondItem="21" secondAttribute="centerY" id="KLz-3g-s1N"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="28" secondAttribute="bottom" constant="-9" id="WrD-Cn-dhA"/>
-                    <constraint firstItem="18" firstAttribute="centerY" secondItem="20" secondAttribute="centerY" id="XpH-ol-nrK"/>
-                    <constraint firstItem="18" firstAttribute="centerY" secondItem="19" secondAttribute="centerY" id="dJj-9w-m9t"/>
-                    <constraint firstItem="19" firstAttribute="leading" secondItem="21" secondAttribute="trailing" constant="8" id="j7Z-Ur-81C"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="19" secondAttribute="bottom" constant="-4" id="lWd-PN-NUq"/>
-                    <constraint firstItem="20" firstAttribute="leading" secondItem="18" secondAttribute="trailing" constant="2" id="sxJ-5u-QJr"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="19" secondAttribute="trailing" constant="12" id="9Dd-uT-Zhs"/>
+                    <constraint firstItem="21" firstAttribute="top" secondItem="jnm-UA-LxG" secondAttribute="top" constant="4" id="9EG-13-sFJ"/>
+                    <constraint firstItem="18" firstAttribute="leading" secondItem="jnm-UA-LxG" secondAttribute="leading" constant="15" id="Cnh-A4-No3"/>
+                    <constraint firstItem="18" firstAttribute="top" secondItem="jnm-UA-LxG" secondAttribute="top" constant="4" id="DOo-cG-BNt"/>
+                    <constraint firstItem="19" firstAttribute="top" secondItem="jnm-UA-LxG" secondAttribute="top" constant="4" id="GHb-mq-aH7"/>
+                    <constraint firstAttribute="bottom" secondItem="21" secondAttribute="bottom" constant="4" id="LvJ-fc-i80"/>
+                    <constraint firstAttribute="bottom" secondItem="19" secondAttribute="bottom" constant="4" id="NeM-DW-fUb"/>
+                    <constraint firstItem="18" firstAttribute="width" secondItem="jnm-UA-LxG" secondAttribute="width" multiplier="0.2" id="WNx-UG-C4l"/>
+                    <constraint firstItem="20" firstAttribute="top" secondItem="jnm-UA-LxG" secondAttribute="top" constant="4" id="a4e-tt-Oxi"/>
+                    <constraint firstItem="19" firstAttribute="leading" secondItem="21" secondAttribute="trailing" constant="12" id="gRA-Ho-kyp"/>
+                    <constraint firstItem="20" firstAttribute="leading" secondItem="18" secondAttribute="trailing" constant="6" id="h2E-Ex-jik"/>
+                    <constraint firstAttribute="bottom" secondItem="18" secondAttribute="bottom" constant="4" id="qPS-4k-1d3"/>
+                    <constraint firstItem="21" firstAttribute="width" secondItem="jnm-UA-LxG" secondAttribute="width" multiplier="0.15" id="rbF-wj-cxg"/>
+                    <constraint firstAttribute="bottom" secondItem="20" secondAttribute="bottom" constant="4" id="ruo-ye-ovp"/>
+                    <constraint firstItem="20" firstAttribute="width" secondItem="jnm-UA-LxG" secondAttribute="width" multiplier="0.12" id="vlg-ca-O0t"/>
+                    <constraint firstItem="21" firstAttribute="leading" secondItem="20" secondAttribute="trailing" constant="8" id="x26-Kv-K0n"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
             <connections>
-                <outlet property="backgroundView" destination="28" id="29"/>
                 <outlet property="dateLabel" destination="18" id="24"/>
                 <outlet property="eventLabel" destination="20" id="25"/>
                 <outlet property="nameLabel" destination="19" id="26"/>
                 <outlet property="timeLabel" destination="21" id="27"/>
             </connections>
+            <point key="canvasLocation" x="717" y="459"/>
         </tableViewCell>
     </objects>
 </document>

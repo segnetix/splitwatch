@@ -106,6 +106,7 @@
 		B0CE7EEB1131E5BE00B5A30E /* separator.png in Resources */ = {isa = PBXBuildFile; fileRef = B0CE7EEA1131E5BE00B5A30E /* separator.png */; };
 		B0D23BE21D15CA0C00FADC30 /* logo_black_hires6.png in Resources */ = {isa = PBXBuildFile; fileRef = B0D23BE11D15CA0C00FADC30 /* logo_black_hires6.png */; };
 		B0DE6BAE10A1CC4000FC81E5 /* Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = B0DE6BAD10A1CC4000FC81E5 /* Utilities.m */; };
+		B0F873251D19E3EB0020DCB2 /* SplitHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = B0F873241D19E3EB0020DCB2 /* SplitHeaderView.m */; };
 		B0F8EB5311272A2100740C3D /* HistoryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0F8EB5111272A2100740C3D /* HistoryTableViewController.m */; };
 		B0F8EB5411272A2100740C3D /* HistoryTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0F8EB5211272A2100740C3D /* HistoryTableViewController.xib */; };
 		B0FACF1C10AF3B7A004FEBC1 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0FACF1B10AF3B7A004FEBC1 /* AboutViewController.m */; };
@@ -235,6 +236,8 @@
 		B0D23BE11D15CA0C00FADC30 /* logo_black_hires6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_black_hires6.png; sourceTree = "<group>"; };
 		B0DE6BAC10A1CC4000FC81E5 /* Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utilities.h; sourceTree = "<group>"; };
 		B0DE6BAD10A1CC4000FC81E5 /* Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utilities.m; sourceTree = "<group>"; };
+		B0F873231D19E3EB0020DCB2 /* SplitHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SplitHeaderView.h; path = ../SplitHeaderView.h; sourceTree = "<group>"; };
+		B0F873241D19E3EB0020DCB2 /* SplitHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SplitHeaderView.m; path = ../SplitHeaderView.m; sourceTree = "<group>"; };
 		B0F8EB5011272A2100740C3D /* HistoryTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryTableViewController.h; sourceTree = "<group>"; };
 		B0F8EB5111272A2100740C3D /* HistoryTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryTableViewController.m; sourceTree = "<group>"; };
 		B0F8EB5211272A2100740C3D /* HistoryTableViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = HistoryTableViewController.xib; path = Classes/HistoryTableViewController.xib; sourceTree = "<group>"; };
@@ -278,6 +281,12 @@
 				B02A948210A0FCC300DB5E7E /* StopwatchViewController.m */,
 				B0004CF510A0FFCD00FC9CAD /* SplitDetailViewController.h */,
 				B0004CF610A0FFCD00FC9CAD /* SplitDetailViewController.m */,
+				B07602D110A8EA7700E60196 /* SplitDetailCell.h */,
+				B07602D210A8EA7700E60196 /* SplitDetailCell.m */,
+				B0F873231D19E3EB0020DCB2 /* SplitHeaderView.h */,
+				B0F873241D19E3EB0020DCB2 /* SplitHeaderView.m */,
+				B076FB8D10A5CCFD00E60196 /* EventDetailViewController.h */,
+				B076FB8E10A5CCFD00E60196 /* EventDetailViewController.m */,
 				B02A948810A0FD6D00DB5E7E /* MultiStopwatchViewController.h */,
 				B02A948910A0FD6D00DB5E7E /* MultiStopwatchViewController.m */,
 				B08EE48010B0ADBC00CAE9FB /* MultiStopwatchTableViewController.h */,
@@ -292,8 +301,6 @@
 				B0F8EB5111272A2100740C3D /* HistoryTableViewController.m */,
 				9828E09C10B9C729001CB672 /* HistoryCell.h */,
 				9828E09D10B9C729001CB672 /* HistoryCell.m */,
-				B076FB8D10A5CCFD00E60196 /* EventDetailViewController.h */,
-				B076FB8E10A5CCFD00E60196 /* EventDetailViewController.m */,
 				B02A949210A0FE5100DB5E7E /* SettingsViewController.h */,
 				B02A949310A0FE5100DB5E7E /* SettingsViewController.m */,
 				B0FACF1A10AF3B7A004FEBC1 /* AboutViewController.h */,
@@ -304,8 +311,6 @@
 				B084F86F11336D8C008C4B00 /* HelpDetailViewController.m */,
 				1D3623240D0F684500981E51 /* StopwatchAppDelegate.h */,
 				1D3623250D0F684500981E51 /* StopwatchAppDelegate.m */,
-				B07602D110A8EA7700E60196 /* SplitDetailCell.h */,
-				B07602D210A8EA7700E60196 /* SplitDetailCell.m */,
 				B0C4E718111644A2005BFD02 /* EmailAddressViewController.h */,
 				B0C4E719111644A2005BFD02 /* EmailAddressViewController.m */,
 				B082A706112D5E91007D6758 /* EmailAddressTableViewController.h */,
@@ -579,6 +584,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B0F873251D19E3EB0020DCB2 /* SplitHeaderView.m in Sources */,
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				1D3623260D0F684500981E51 /* StopwatchAppDelegate.m in Sources */,
 				B02A948310A0FCC300DB5E7E /* StopwatchViewController.m in Sources */,

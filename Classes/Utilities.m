@@ -10,6 +10,7 @@
 
 @implementation Utilities
 
+/*
 + (NSString *)getSplitViewHeaderText:(NSInteger)lapDistance
 						 Units:(int)units
 						  KiloSplits:(BOOL)kiloSplits
@@ -69,6 +70,72 @@
 	}
 	
 	return splitViewHeaderText;
+}
+*/
+
++ (NSMutableArray *)getSplitViewHeaderArray:(NSInteger)lapDistance
+                               Units:(int)units
+                          KiloSplits:(BOOL)kiloSplits
+                  FurlongDisplayMode:(BOOL)furlongDisplayMode
+{
+    NSMutableArray *splitHeaderArray = [[[NSMutableArray alloc] init] autorelease];
+    
+    if (units == kMetric)
+    {
+        [splitHeaderArray addObjectsFromArray: @[@"Lap", @"Time"]];
+        
+        if (kiloSplits)
+        {
+            switch (lapDistance) {
+                case  25:	[splitHeaderArray addObjectsFromArray: @[ @"25",  @"50",  @"100",  @"200"]];	break;
+                case  50:	[splitHeaderArray addObjectsFromArray: @[ @"50", @"100",  @"200",  @"400"]];	break;
+                case 100:	[splitHeaderArray addObjectsFromArray: @[@"100", @"200",  @"400",  @"800"]];	break;
+                case 200:	[splitHeaderArray addObjectsFromArray: @[@"200", @"400",  @"800", @"1000"]];	break;
+                case 400:	[splitHeaderArray addObjectsFromArray: @[@"400", @"800", @"1000", @"1600"]];	break;
+                default:	break;
+            }
+        }
+        else
+        {
+            switch (lapDistance) {
+                case  25:	[splitHeaderArray addObjectsFromArray: @[ @"25",  @"50",  @"100",  @"200"]];	break;
+                case  50:	[splitHeaderArray addObjectsFromArray: @[ @"50", @"100",  @"200",  @"400"]];	break;
+                case 100:	[splitHeaderArray addObjectsFromArray: @[@"100", @"200",  @"400",  @"800"]];	break;
+                case 200:	[splitHeaderArray addObjectsFromArray: @[@"200", @"400",  @"800", @"1600"]];	break;
+                case 400:	[splitHeaderArray addObjectsFromArray: @[@"400", @"800", @"1600", @"3200"]];	break;
+                default:	break;
+            }
+        }
+    }
+    else if (units == kEnglish)
+    {
+        [splitHeaderArray addObjectsFromArray: @[@"Lap", @"Time"]];
+        
+        if (furlongDisplayMode && (lapDistance == 220 || lapDistance == 440))
+        {
+            switch (lapDistance) {
+                case 220: [splitHeaderArray addObjectsFromArray: @[ @"1/8",  @"1/4",   @"1/2",     @"Mile"]];	break;
+                case 440: [splitHeaderArray addObjectsFromArray: @[ @"1/4",  @"1/2",  @"Mile",   @"2-Mile"]];	break;
+            }
+        }
+        else
+        {
+            switch (lapDistance) {
+                case  25:	[splitHeaderArray addObjectsFromArray: @[ @"25",  @"50",   @"100",     @"200"]];	break;
+                case  50:	[splitHeaderArray addObjectsFromArray: @[ @"50", @"100",   @"200",     @"400"]];	break;
+                case 110:	[splitHeaderArray addObjectsFromArray: @[@"110", @"220",   @"440",     @"880"]];	break;
+                case 220:	[splitHeaderArray addObjectsFromArray: @[@"220", @"440",   @"880",    @"Mile"]];	break;
+                case 440:	[splitHeaderArray addObjectsFromArray: @[@"440", @"880",  @"Mile",  @"2-Mile"]];	break;
+                default:	break;
+            }		
+        }
+    }
+    else if (units == kLap)
+    {
+        [splitHeaderArray addObjectsFromArray: @[ @"Split",  @"Time",   @"Interval"]];
+    }
+    
+    return splitHeaderArray;
 }
 
 + (NSString *)formatTime:(NSTimeInterval)timeInterval minDigits:(int)minDigits precision:(int)precision
@@ -244,7 +311,7 @@
 + (NSString *)formatDate:(NSTimeInterval)dateTimeInterval
 {
 	NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-	[dateFormatter setTimeStyle:NSDateFormatterMediumStyle];
+	[dateFormatter setTimeStyle:NSDateFormatterShortStyle];
 	[dateFormatter setDateStyle:NSDateFormatterMediumStyle];
 	
 	NSDate *date = [NSDate dateWithTimeIntervalSinceReferenceDate:dateTimeInterval];

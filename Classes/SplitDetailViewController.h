@@ -22,6 +22,7 @@
 	BOOL bFurlongMode;
 	BOOL bFinished;
 	BOOL bEditMode;
+    BOOL bWideDisplay;
 	
 	SplitEditViewController *splitEditViewController;
 	StopwatchAppDelegate *appDelegate;
@@ -30,6 +31,7 @@
 @property (nonatomic, retain) NSMutableArray *splits;
 @property BOOL bFinished;
 @property BOOL bEditMode;
+@property BOOL bWideDisplay;
 @property (nonatomic, assign) SplitEditViewController *splitEditViewController;
 @property (nonatomic, assign) StopwatchAppDelegate *appDelegate;
 @property (nonatomic, retain) Event *event;
@@ -43,6 +45,7 @@
 - (void)resetLapInterval:(NSInteger)distance Units:(int)units KiloSplits:(BOOL)kiloSplits FurlongMode:(BOOL)furlongMode;
 - (void)scrollToLastLine;
 - (void)scrollToTop;
+- (void)flashSplitCellsInRow:(int)row;
 - (void)refreshSplitView:(BOOL)scrollToLastLine;
 
 - (NSString *)lapTextForRow:(NSInteger)row forDisplayMode:(NSInteger)mode;

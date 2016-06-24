@@ -10,6 +10,7 @@
 #import "SplitDetailViewController.h"
 #import "Event.h"
 #import "SettingsViewController.h"
+#import "SplitHeaderView.h"
 #import <MessageUI/MessageUI.h>
 #import <MessageUI/MFMailComposeViewController.h>
 #import <sqlite3.h>
@@ -26,7 +27,7 @@
 	
 	UILabel *athleteLabel;
 	UILabel *distanceLabel;
-	UILabel *splitViewHeader;
+    SplitHeaderView *splitHeader;
 	
 	SplitDetailViewController *splitDetailViewController;
 	SettingsViewController *settingsViewController;
@@ -54,7 +55,7 @@
 @property (nonatomic, retain) IBOutlet UILabel *time;
 @property (nonatomic, retain) IBOutlet UILabel *distanceLabel;
 @property (nonatomic, retain) IBOutlet UILabel *athleteLabel;
-@property (nonatomic, retain) IBOutlet UILabel *splitViewHeader;
+@property (nonatomic, retain) SplitHeaderView *splitViewHeader;
 @property (nonatomic, retain) IBOutlet SplitDetailViewController *splitDetailViewController;
 @property (nonatomic, assign) SettingsViewController *settingsViewController;
 @property (nonatomic, retain) IBOutlet UIPickerView *pickView;

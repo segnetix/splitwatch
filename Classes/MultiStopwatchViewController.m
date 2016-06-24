@@ -23,6 +23,8 @@
 @synthesize clearResetButton;
 @synthesize setupButton;
 @synthesize settingsViewController;
+@synthesize topSeparatorImageView;
+@synthesize bottomSeparatorImageView;
 @synthesize multiStopwatchTableViewController;
 @synthesize appDelegate;
 @synthesize bTimerRunning;
@@ -78,6 +80,13 @@
         setupButton.translatesAutoresizingMaskIntoConstraints = NO;
         setupButton.tag = @"setupButton";
         
+        UIImage *separatorImage = [UIImage imageNamed:@"separator_dark_gray.png"];
+        topSeparatorImageView = [[UIImageView alloc] initWithImage:separatorImage];
+        topSeparatorImageView.translatesAutoresizingMaskIntoConstraints = NO;
+        
+        bottomSeparatorImageView = [[UIImageView alloc] initWithImage:separatorImage];
+        bottomSeparatorImageView.translatesAutoresizingMaskIntoConstraints = NO;
+        
         // multiStopwatchTableViewController
         multiStopwatchTableViewController = [[MultiStopwatchTableViewController alloc]
                                              initWithIntervalDistance:[settingsViewController getLapInterval]
@@ -116,36 +125,59 @@
     UIView* multiStopwatchView = multiStopwatchTableViewController.view;
     multiStopwatchView.tag = @"multiStopwatchView";
     
-    NSDictionary *views = NSDictionaryOfVariableBindings(startStopButton, clearResetButton, setupButton, runningTimeLabel, intervalDistanceLabel, multiStopwatchView);
+    NSDictionary *views = NSDictionaryOfVariableBindings(topSeparatorImageView, bottomSeparatorImageView, startStopButton, clearResetButton, setupButton, runningTimeLabel, intervalDistanceLabel, multiStopwatchView);
 
     [self.view addSubview:runningTimeLabel];
     runningTimeLabel.hidden = YES;
     
     // runningTime
     //runningTimeLabel.frame = CGRectMake(40, 20, 270, 40);
-    runningTimeLabel.font = [UIFont fontWithName:FONT_NAME size:48];
+    if (IPAD) {
+        runningTimeLabel.font = [UIFont fontWithName:FONT_NAME size:72];
+    } else {
+        runningTimeLabel.font = [UIFont fontWithName:FONT_NAME size:48];
+    }
     runningTimeLabel.textAlignment = NSTextAlignmentRight;
     runningTimeLabel.textColor = [UIColor blackColor];
     runningTimeLabel.backgroundColor = [UIColor clearColor];
-    runningTimeLabel.text = [Utilities shortFormatTime:0 precision:2];
-    runningTimeLabel.hidden = YES;
+    if (elapsedTime > 0 || bTimerRunning) {
+        [self updateTimeDisplays];
+        runningTimeLabel.hidden = NO;
+    } else {
+        runningTimeLabel.text = [Utilities shortFormatTime:0 precision:2];
+        runningTimeLabel.hidden = YES;
+    }
     [self.view addSubview:runningTimeLabel];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-90-[runningTimeLabel]-20-|" options:0 metrics:nil views:views]];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-26-[runningTimeLabel(64)]" options:0 metrics:nil views:views]];
+    if (IPAD) {
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-180-[runningTimeLabel]-20-|" options:0 metrics:nil views:views]];
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-36-[runningTimeLabel(86)]" options:0 metrics:nil views:views]];
+    } else {
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-90-[runningTimeLabel]-20-|" options:0 metrics:nil views:views]];
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-26-[runningTimeLabel(64)]" options:0 metrics:nil views:views]];
+    }
     [runningTimeLabel release];
     
     // intervalDistance label
     //intervalDistanceLabel.frame = CGRectMake(6, 12, 60, 26);
-    intervalDistanceLabel.font = [UIFont fontWithName:FONT_NAME size:20];
+    if (IPAD) {
+        intervalDistanceLabel.font = [UIFont fontWithName:FONT_NAME size:30];
+    } else {
+        intervalDistanceLabel.font = [UIFont fontWithName:FONT_NAME size:20];
+    }
     intervalDistanceLabel.textColor = [UIColor blackColor];
     intervalDistanceLabel.backgroundColor = [UIColor clearColor];
-    intervalDistanceLabel.text = [Utilities shortFormatTime:0 precision:2];
+    //intervalDistanceLabel.text = [Utilities shortFormatTime:0 precision:2];
     intervalDistanceLabel.textAlignment = NSTextAlignmentRight;
     if (!bTimerRunning)
         [self resetIntervalUnitsFromCurrentSettings];
     [self.view addSubview:intervalDistanceLabel];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-7-[intervalDistanceLabel(60)]" options:0 metrics:nil views:views]];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-26-[intervalDistanceLabel(26)]" options:0 metrics:nil views:views]];
+    if (IPAD) {
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-13-[intervalDistanceLabel(84)]" options:0 metrics:nil views:views]];
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-26-[intervalDistanceLabel(40)]" options:0 metrics:nil views:views]];
+    } else {
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-7-[intervalDistanceLabel(60)]" options:0 metrics:nil views:views]];
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-26-[intervalDistanceLabel(26)]" options:0 metrics:nil views:views]];
+    }
     [intervalDistanceLabel release];
     
     // setupButton
@@ -156,12 +188,23 @@
     [setupButton setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
     [setupButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateDisabled];
     setupButton.layer.borderColor = self.view.tintColor.CGColor;
-    setupButton.titleLabel.font = [UIFont fontWithName:FONT_NAME size:12];
-    setupButton.layer.borderWidth = 1.0f;
-    setupButton.layer.cornerRadius = 7.0f;
+    if (IPAD) {
+        setupButton.titleLabel.font = [UIFont fontWithName:FONT_NAME size:20];
+        setupButton.layer.borderWidth = 2.0f;
+        setupButton.layer.cornerRadius = 14.0f;
+    } else {
+        setupButton.titleLabel.font = [UIFont fontWithName:FONT_NAME size:12];
+        setupButton.layer.borderWidth = 1.0f;
+        setupButton.layer.cornerRadius = 7.0f;
+    }
     [self.view addSubview:setupButton];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-14-[setupButton(56)]" options:0 metrics:nil views:views]];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-58-[setupButton(32)]" options:0 metrics:nil views:views]];
+    if (IPAD) {
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-20-[setupButton(80)]" options:0 metrics:nil views:views]];
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-73-[setupButton(48)]" options:0 metrics:nil views:views]];
+    } else {
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-14-[setupButton(56)]" options:0 metrics:nil views:views]];
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-60-[setupButton(32)]" options:0 metrics:nil views:views]];
+    }
     
     // startStopButton
     //startStopButton.frame = CGRectMake(64, 48, 112, 53);
@@ -170,40 +213,81 @@
     [startStopButton setTitleColor:GREEN_COLOR forState:UIControlStateNormal];
     [startStopButton setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
     startStopButton.layer.borderColor = GREEN_COLOR.CGColor;
-    startStopButton.titleLabel.font = [UIFont fontWithName:FONT_NAME size:40];
-    startStopButton.layer.borderWidth = 1.0f;
-    startStopButton.layer.cornerRadius = 12.0f;
+    if (IPAD) {
+        startStopButton.titleLabel.font = [UIFont fontWithName:FONT_NAME size:60];
+        startStopButton.layer.borderWidth = 2.0f;
+        startStopButton.layer.cornerRadius = 20.0f;
+    } else {
+        startStopButton.titleLabel.font = [UIFont fontWithName:FONT_NAME size:40];
+        startStopButton.layer.borderWidth = 1.0f;
+        startStopButton.layer.cornerRadius = 12.0f;
+    }
     [startStopButton addTarget:self action:@selector(startStopButtonPressed) forControlEvents:UIControlEventTouchDown];
     startStopButton.showsTouchWhenHighlighted = NO;
     [self.view addSubview:startStopButton];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-90-[startStopButton]-20-|" options:0 metrics:nil views:views]];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-26-[startStopButton(64)]" options:0 metrics:nil views:views]];
+    if (IPAD) {
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-180-[startStopButton]-20-|" options:0 metrics:nil views:views]];
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-34-[startStopButton(86)]" options:0 metrics:nil views:views]];
+    } else {
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-90-[startStopButton]-20-|" options:0 metrics:nil views:views]];
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-28-[startStopButton(64)]" options:0 metrics:nil views:views]];
+    }
     [startStopButton release];
     
     // clearResetButton [a clear (transparent) button to make the time display a button to reset the watch]
-    //clearResetButton.frame = CGRectMake(40, 20, 270, 40);
     [clearResetButton setBackgroundColor:[UIColor clearColor]];
     
     [clearResetButton addTarget:self action:@selector(resetButtonPressed) forControlEvents:UIControlEventTouchDown];
     clearResetButton.showsTouchWhenHighlighted = NO;
-    clearResetButton.enabled = NO;
+    if (elapsedTime > 0 && !bTimerRunning) {
+        clearResetButton.enabled = YES;
+    } else {
+        clearResetButton.enabled = NO;
+    }
     [self.view addSubview:clearResetButton];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-90-[clearResetButton]-20-|" options:0 metrics:nil views:views]];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-26-[clearResetButton(64)]" options:0 metrics:nil views:views]];
+    if (IPAD) {
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-180-[clearResetButton]-20-|" options:0 metrics:nil views:views]];
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-34-[clearResetButton(86)]" options:0 metrics:nil views:views]];
+    } else {
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-90-[clearResetButton]-20-|" options:0 metrics:nil views:views]];
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-26-[clearResetButton(64)]" options:0 metrics:nil views:views]];
+    }
     [clearResetButton release];
     
-    // separator between top panel and the scrolling table view controller
-    UIImage *separatorImage = [UIImage imageNamed:@"separator.png"];
-    UIImageView *separatorImageView = [[UIImageView alloc] initWithImage:separatorImage];
-    separatorImageView.frame = CGRectMake(0, 101, 420, 1);
-    [self.view addSubview:separatorImageView];
-    [separatorImageView release];
+    // separator between status bar and top panel
+    [self.view addSubview:topSeparatorImageView];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[topSeparatorImageView]|" options:0 metrics:nil views:views]];
+    if (IPAD) {
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-22-[topSeparatorImageView(1)]" options:0 metrics:nil views:views]];
+    } else {
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-18-[topSeparatorImageView(1)]" options:0 metrics:nil views:views]];
+    }
+    [topSeparatorImageView release];
     
-    //multiStopwatchTableViewController.view.frame = CGRectMake(0, 82, 320, 378);
+    // separator between top panel and the scrolling table view controller
+    [self.view addSubview:bottomSeparatorImageView];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[bottomSeparatorImageView]|" options:0 metrics:nil views:views]];
+    if (IPAD) {
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-131-[bottomSeparatorImageView(1)]" options:0 metrics:nil views:views]];
+    } else {
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-101-[bottomSeparatorImageView(1)]" options:0 metrics:nil views:views]];
+    }
+    [bottomSeparatorImageView release];
+    
+    // multi stopwatch view
     [self.view addSubview:multiStopwatchTableViewController.view];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[multiStopwatchView]|" options:0 metrics:nil views:views]];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-102-[multiStopwatchView]-50-|" options:0 metrics:nil views:views]];
+    if (IPAD) {
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-132-[multiStopwatchView]-50-|" options:0 metrics:nil views:views]];
+    } else {
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-102-[multiStopwatchView]-50-|" options:0 metrics:nil views:views]];
+    }
     
+    // disable setup button if running
+    if (elapsedTime > 0 || bTimerRunning) {
+        appDelegate.multiStopwatchViewController.setupButton.enabled = NO;
+        appDelegate.multiStopwatchViewController.setupButton.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -269,8 +353,8 @@
     
     /*
      // for large time testing - will clip at 99:59:59.99
-     //startTime -= 359995;
-     */
+     //startTime -= 359695;
+    */
     
     timer = [NSTimer scheduledTimerWithTimeInterval: 0.03
                                              target: self

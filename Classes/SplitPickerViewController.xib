@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SplitPickerViewController">
@@ -160,10 +160,24 @@
                         <outlet property="delegate" destination="-1" id="TzF-Ep-P6l"/>
                     </connections>
                 </pickerView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="separator_dark_gray" translatesAutoresizingMaskIntoConstraints="NO" id="mEv-aP-ufl">
+                    <rect key="frame" x="0.0" y="139" width="320" height="1"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="PgG-0d-0D1"/>
+                    </constraints>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="separator_dark_gray" translatesAutoresizingMaskIntoConstraints="NO" id="7cH-j8-rrS">
+                    <rect key="frame" x="0.0" y="389" width="320" height="1"/>
+                    <constraints>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="1" id="f88-Mj-DKz"/>
+                        <constraint firstAttribute="height" constant="1" id="pxV-gJ-LKe"/>
+                    </constraints>
+                </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="sg3-vn-zWy" firstAttribute="top" secondItem="okF-jQ-U75" secondAttribute="bottom" id="34M-SA-bh8"/>
+                <constraint firstItem="7cH-j8-rrS" firstAttribute="top" secondItem="sg3-vn-zWy" secondAttribute="bottom" id="3pV-YE-Ny5"/>
                 <constraint firstAttribute="trailing" secondItem="wIu-PX-9Jr" secondAttribute="trailing" id="52x-v9-h1y"/>
                 <constraint firstAttribute="trailing" secondItem="hwi-LS-CCd" secondAttribute="trailing" id="5eh-sP-XrQ"/>
                 <constraint firstItem="fgx-mN-qdX" firstAttribute="leading" secondItem="mmG-zH-x45" secondAttribute="trailing" id="Aec-Fe-9yS"/>
@@ -175,6 +189,7 @@
                 <constraint firstItem="Ekq-FA-2HL" firstAttribute="width" secondItem="BiZ-d4-4SX" secondAttribute="width" id="N07-V0-NmQ"/>
                 <constraint firstItem="YVZ-7R-7F9" firstAttribute="top" secondItem="Dz7-Ig-pcs" secondAttribute="bottom" id="N66-ek-ptX"/>
                 <constraint firstItem="wIu-PX-9Jr" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="NaK-Qr-coo"/>
+                <constraint firstItem="7cH-j8-rrS" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="OAF-hx-YD9"/>
                 <constraint firstItem="okF-jQ-U75" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="P3V-TQ-tqY"/>
                 <constraint firstItem="YVZ-7R-7F9" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="QrU-2r-g24"/>
                 <constraint firstAttribute="trailing" secondItem="sg3-vn-zWy" secondAttribute="trailing" id="RFJ-2b-1gE"/>
@@ -191,11 +206,15 @@
                 <constraint firstItem="v85-xu-Prv" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="lsz-Eh-yFT"/>
                 <constraint firstItem="mmG-zH-x45" firstAttribute="top" secondItem="KuH-o1-vbA" secondAttribute="bottom" id="m8r-YH-Uuh"/>
                 <constraint firstItem="hwi-LS-CCd" firstAttribute="top" secondItem="v85-xu-Prv" secondAttribute="bottom" id="mGv-Iz-wLn"/>
+                <constraint firstItem="mEv-aP-ufl" firstAttribute="top" secondItem="fgx-mN-qdX" secondAttribute="bottom" id="nsy-SZ-5HM"/>
+                <constraint firstAttribute="trailing" secondItem="7cH-j8-rrS" secondAttribute="trailing" id="qyi-0k-Ry2"/>
                 <constraint firstItem="Ekq-FA-2HL" firstAttribute="width" secondItem="YVZ-7R-7F9" secondAttribute="width" id="rD0-wC-nRx"/>
                 <constraint firstItem="Dz7-Ig-pcs" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="tIg-RY-vIY"/>
                 <constraint firstItem="KuH-o1-vbA" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="tKg-XL-ihJ"/>
                 <constraint firstItem="Ekq-FA-2HL" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="txT-t8-oXk"/>
                 <constraint firstAttribute="trailing" secondItem="fgx-mN-qdX" secondAttribute="trailing" id="u7q-Kj-OGV"/>
+                <constraint firstAttribute="trailing" secondItem="mEv-aP-ufl" secondAttribute="trailing" id="u83-UR-oXW"/>
+                <constraint firstItem="mEv-aP-ufl" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="uvX-yG-obx"/>
                 <constraint firstItem="KuH-o1-vbA" firstAttribute="width" secondItem="Dz7-Ig-pcs" secondAttribute="width" id="v84-eR-TXs"/>
                 <constraint firstItem="fgx-mN-qdX" firstAttribute="leading" secondItem="BiZ-d4-4SX" secondAttribute="trailing" id="vta-3O-9wD"/>
                 <constraint firstItem="Ekq-FA-2HL" firstAttribute="width" secondItem="fgx-mN-qdX" secondAttribute="width" id="xS8-Ql-84t"/>
@@ -217,5 +236,12 @@
             </variation>
             <point key="canvasLocation" x="247" y="-93"/>
         </view>
+        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="A71-ja-xHO">
+            <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+        </imageView>
     </objects>
+    <resources>
+        <image name="separator_dark_gray" width="276" height="1"/>
+    </resources>
 </document>

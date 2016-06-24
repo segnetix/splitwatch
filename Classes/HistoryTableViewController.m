@@ -8,7 +8,6 @@
 //
 
 #import "HistoryTableViewController.h"
-//#import "EventDetailViewController.h"
 #import "Utilities.h"
 #import "HistoryCell.h"
 #import "StopwatchAppDelegate.h"
@@ -33,10 +32,10 @@
 		historyViewController = theHistoryVC;
 		settingsViewController = theSettingsVC;
 		
+        // set cell styles
 		self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
 		self.tableView.backgroundColor = [UIColor whiteColor];
 		self.tableView.indicatorStyle = UIScrollViewIndicatorStyleDefault;
-		//self.tableView.bounces = YES;
 		
 		// get the event database from the application delegate
 		appDelegate = (StopwatchAppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -45,8 +44,6 @@
 		filterSelection = 0;
 
 		historyViewController.navigationItem.rightBarButtonItem = self.editButtonItem;
-		
-		self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 	}
 	
     return self;
@@ -63,6 +60,8 @@
 
 - (void)viewDidLoad
 {
+    self.tableView.tableFooterView = [[[UIView alloc] init] autorelease];
+    
 	[super viewDidLoad];
 }
 
@@ -125,7 +124,11 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	return kHistoryTableViewCellHeight;
+    if (IPAD) {
+        return kiPadHistoryTableViewCellHeight;
+    } else {
+        return kiPhoneHistoryTableViewCellHeight;
+    }
 }
 
 // Customize the appearance of table view cells.
@@ -174,8 +177,13 @@
         // Group-level cell setup
         cell.backgroundColor = [UIColor whiteColor];
         cell.textLabel.textColor = [UIColor blackColor];
-        cell.textLabel.font = [UIFont fontWithName:FONT_NAME size:18];
-        cell.selectionStyle = UITableViewCellSelectionStyleGray;
+        if (IPAD) {
+            cell.textLabel.font = [UIFont fontWithName:FONT_NAME size:24];
+            cell.selectionStyle = UITableViewCellSelectionStyleGray;
+        } else {
+            cell.textLabel.font = [UIFont fontWithName:FONT_NAME size:18];
+            cell.selectionStyle = UITableViewCellSelectionStyleGray;
+        }
         
         cell.dateLabel.text  = @"";
         cell.eventLabel.text = @"";

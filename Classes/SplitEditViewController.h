@@ -10,6 +10,7 @@
 #import "SplitDetailViewController.h"
 #import "SplitPickerViewController.h"
 #import "StopwatchAppDelegate.h"
+#import "SplitHeaderView.h"
 #import "Event.h"
 #import <sqlite3.h>
 
@@ -31,7 +32,7 @@
     UILabel *splitUnitLabel;
     UILabel *kiloSplitLabel;
     UILabel *furlongLabel;
-    UILabel *splitViewHeader;
+    SplitHeaderView *splitViewHeader;
     
     UIView *splitEditLabelView;
 	
@@ -44,7 +45,7 @@
 @property (nonatomic, retain) IBOutlet UISegmentedControl *unitsControl;
 @property (nonatomic, retain) IBOutlet UISwitch *kiloControl;
 @property (nonatomic, retain) IBOutlet UISwitch *furlongDisplayControl;
-@property (nonatomic, assign) UILabel *splitViewHeader;
+@property (nonatomic, assign) SplitHeaderView *splitViewHeader;
 @property (nonatomic, retain) SplitDetailViewController *splitDetailViewController;
 @property (nonatomic, retain) SplitPickerViewController *pickerViewController;
 @property (nonatomic, retain) UIImageView *pickerTopImageView;

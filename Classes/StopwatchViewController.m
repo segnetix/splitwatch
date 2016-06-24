@@ -14,10 +14,6 @@
 
 @implementation StopwatchViewController
 
-//@synthesize stopButtonImage;
-//@synthesize startButtonImage;
-//@synthesize lapButtonImage;
-//@synthesize resetButtonImage;
 @synthesize backgroundView;
 @synthesize runningTimeLabel;
 @synthesize lapTimeLabel;
@@ -27,6 +23,8 @@
 @synthesize startStopButton;
 @synthesize lapResetButton;
 @synthesize clearToggleButton;
+@synthesize topSeparatorImageView;
+@synthesize bottomSeparatorImageView;
 @synthesize splitDetailViewController;
 @synthesize settingsViewController;
 @synthesize bTimerRunning;
@@ -79,7 +77,7 @@
         intervalDistanceLabel.translatesAutoresizingMaskIntoConstraints = NO;
         intervalDistanceLabel.tag = @"intervalDistanceLabel";
         
-        splitViewHeader = [[UILabel alloc] init];
+        splitViewHeader = [[SplitHeaderView alloc] init];
         splitViewHeader.translatesAutoresizingMaskIntoConstraints = NO;
         splitViewHeader.tag = @"splitViewHeader";
         
@@ -94,6 +92,12 @@
         clearToggleButton = [[UIButton buttonWithType:UIButtonTypeCustom] retain];
         clearToggleButton.translatesAutoresizingMaskIntoConstraints = NO;
         clearToggleButton.tag = @"clearToggleButton";
+        
+        UIImage *separatorImage = [UIImage imageNamed:@"separator_dark_gray.png"];
+        topSeparatorImageView = [[UIImageView alloc] initWithImage:separatorImage];
+        topSeparatorImageView.translatesAutoresizingMaskIntoConstraints = NO;
+        bottomSeparatorImageView = [[UIImageView alloc] initWithImage:separatorImage];
+        bottomSeparatorImageView.translatesAutoresizingMaskIntoConstraints = NO;
         
         splitDetailViewController = [[SplitDetailViewController alloc]
                                      initWithIntervalDistance:[settingsViewController getLapInterval]
@@ -138,7 +142,7 @@
     // AutoLayout setup
     UIView* splitDetailView = splitDetailViewController.view;
     splitDetailView.tag = @"splitDetailView";
-    NSDictionary *views = NSDictionaryOfVariableBindings(backgroundView, runningTimeLabel, clearToggleButton, lapTimeLabel, lapCountLabel, intervalDistanceLabel, startStopButton, lapResetButton, splitViewHeader, splitDetailView);
+    NSDictionary *views = NSDictionaryOfVariableBindings(backgroundView, runningTimeLabel, clearToggleButton, lapTimeLabel, lapCountLabel, intervalDistanceLabel, startStopButton, lapResetButton, topSeparatorImageView, bottomSeparatorImageView, splitViewHeader, splitDetailView);
     
     // backgroundImageView
     backgroundView.backgroundColor = [UIColor whiteColor];
@@ -148,15 +152,25 @@
     [backgroundView release];
     
     // runningTime
-    runningTimeLabel.font = [UIFont fontWithName:FONT_NAME size:48];
+    if (IPAD) {
+        runningTimeLabel.font = [UIFont fontWithName:FONT_NAME size:72];
+    } else {
+        runningTimeLabel.font = [UIFont fontWithName:FONT_NAME size:48];
+    }
     runningTimeLabel.text = [Utilities shortFormatTime:0 precision:2];
-    runningTimeLabel.textAlignment = NSTextAlignmentRight;
+    runningTimeLabel.textAlignment = NSTextAlignmentCenter;
+    runningTimeLabel.adjustsFontSizeToFitWidth = YES;
     runningTimeLabel.textColor = [UIColor blackColor];
     runningTimeLabel.backgroundColor = [UIColor clearColor];
     runningTimeLabel.userInteractionEnabled = YES;
     [self.view addSubview:runningTimeLabel];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-20-[runningTimeLabel]-20-|" options:0 metrics:nil views:views]];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-40-[runningTimeLabel(52)]" options:0 metrics:nil views:views]];
+    if (IPAD) {
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-216-[runningTimeLabel]-216-|" options:0 metrics:nil views:views]];
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-70-[runningTimeLabel(76)]" options:0 metrics:nil views:views]];
+    } else {
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-20-[runningTimeLabel]-20-|" options:0 metrics:nil views:views]];
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-40-[runningTimeLabel(52)]" options:0 metrics:nil views:views]];
+    }
     [runningTimeLabel release];
     
     // clear toggle button [a clear (transparent) button to make the time display a button to toggle main with the lap display]
@@ -164,30 +178,53 @@
     [clearToggleButton addTarget:self action:@selector(toggleButtonPressed) forControlEvents:UIControlEventTouchDown];
     clearToggleButton.showsTouchWhenHighlighted = NO;
     [self.view addSubview:clearToggleButton];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-20-[clearToggleButton]-20-|" options:0 metrics:nil views:views]];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-40-[clearToggleButton(52)]" options:0 metrics:nil views:views]];
+    if (IPAD) {
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-208-[clearToggleButton]-208-|" options:0 metrics:nil views:views]];
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-70-[clearToggleButton(76)]" options:0 metrics:nil views:views]];
+    } else {
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-20-[clearToggleButton]-20-|" options:0 metrics:nil views:views]];
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-40-[clearToggleButton(52)]" options:0 metrics:nil views:views]];
+    }
     [clearToggleButton release];
     
     // lapTime
-    lapTimeLabel.font = [UIFont fontWithName:FONT_NAME size:20];
+    if (IPAD) {
+        lapTimeLabel.font = [UIFont fontWithName:FONT_NAME size:30];
+    } else {
+        lapTimeLabel.font = [UIFont fontWithName:FONT_NAME size:20];
+    }
     lapTimeLabel.text = [Utilities shortFormatTime:0 precision:2];
     lapTimeLabel.textAlignment = NSTextAlignmentRight;
     lapTimeLabel.textColor = [UIColor blackColor];
     lapTimeLabel.backgroundColor = [UIColor clearColor];
     [self.view addSubview:lapTimeLabel];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[lapTimeLabel(115)]-5-|" options:0 metrics:nil views:views]];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-18-[lapTimeLabel(26)]" options:0 metrics:nil views:views]];
+    if (IPAD) {
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[lapTimeLabel(180)]-17-|" options:0 metrics:nil views:views]];
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-22-[lapTimeLabel(42)]" options:0 metrics:nil views:views]];
+    } else {
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[lapTimeLabel(115)]-5-|" options:0 metrics:nil views:views]];
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-18-[lapTimeLabel(26)]" options:0 metrics:nil views:views]];
+    }
     [lapTimeLabel release];
     
     // lapCount
-    lapCountLabel.font = [UIFont fontWithName:FONT_NAME size:20];
+    if (IPAD) {
+        lapCountLabel.font = [UIFont fontWithName:FONT_NAME size:30];
+    } else {
+        lapCountLabel.font = [UIFont fontWithName:FONT_NAME size:20];
+    }
     lapCountLabel.text = [Utilities formatLap:0];
     lapCountLabel.textAlignment = NSTextAlignmentCenter;
     lapCountLabel.textColor = [UIColor blackColor];
     lapCountLabel.backgroundColor = [UIColor clearColor];
     [self.view addSubview:lapCountLabel];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[lapCountLabel(52)]" options:0 metrics:nil views:views]];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-18-[lapCountLabel(26)]" options:0 metrics:nil views:views]];
+    if (IPAD) {
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[lapCountLabel(88)]" options:0 metrics:nil views:views]];
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-22-[lapCountLabel(42)]" options:0 metrics:nil views:views]];
+    } else {
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[lapCountLabel(52)]" options:0 metrics:nil views:views]];
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-18-[lapCountLabel(26)]" options:0 metrics:nil views:views]];
+    }
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:lapCountLabel
                                                           attribute:NSLayoutAttributeCenterX
                                                           relatedBy:NSLayoutRelationEqual
@@ -198,12 +235,25 @@
     [lapCountLabel release];
     
     // intervalDistanceLabel
-    intervalDistanceLabel.font = [UIFont fontWithName:FONT_NAME size:20];
+    if (IPAD) {
+        intervalDistanceLabel.font = [UIFont fontWithName:FONT_NAME size:30];
+        intervalDistanceLabel.textAlignment = NSTextAlignmentRight;
+    } else {
+        intervalDistanceLabel.font = [UIFont fontWithName:FONT_NAME size:20];
+        intervalDistanceLabel.textAlignment = NSTextAlignmentLeft;
+    }
+    
     intervalDistanceLabel.textColor = [UIColor blackColor];
     intervalDistanceLabel.backgroundColor = [UIColor clearColor];
+
     [self.view addSubview:intervalDistanceLabel];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-6-[intervalDistanceLabel(80)]" options:0 metrics:nil views:views]];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-18-[intervalDistanceLabel(26)]" options:0 metrics:nil views:views]];
+    if (IPAD) {
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-13-[intervalDistanceLabel(84)]" options:0 metrics:nil views:views]];
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-26-[intervalDistanceLabel(40)]" options:0 metrics:nil views:views]];
+    } else {
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-6-[intervalDistanceLabel(80)]" options:0 metrics:nil views:views]];
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-18-[intervalDistanceLabel(26)]" options:0 metrics:nil views:views]];
+    }
     [intervalDistanceLabel release];
     
     // startStopButton
@@ -223,14 +273,22 @@
     [startStopButton addTarget:self action:@selector(startStopButtonPressed) forControlEvents:UIControlEventTouchDown];
     [startStopButton setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
     [startStopButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateDisabled];
-    startStopButton.titleLabel.font = [UIFont fontWithName:FONT_NAME size:40];
-    startStopButton.layer.borderWidth = 1.0f;
-    startStopButton.layer.cornerRadius = 12.0f;
     startStopButton.showsTouchWhenHighlighted = NO;
     
     [self.view addSubview:startStopButton];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-20-[startStopButton(132)]" options:0 metrics:nil views:views]];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-90-[startStopButton(50)]" options:0 metrics:nil views:views]];
+    if (IPAD) {
+        startStopButton.titleLabel.font = [UIFont fontWithName:FONT_NAME size:56];
+        startStopButton.layer.borderWidth = 2.0f;
+        startStopButton.layer.cornerRadius = 20.0f;
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-20-[startStopButton(180)]" options:0 metrics:nil views:views]];
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-68-[startStopButton(76)]" options:0 metrics:nil views:views]];
+    } else {
+        startStopButton.titleLabel.font = [UIFont fontWithName:FONT_NAME size:36];
+        startStopButton.layer.borderWidth = 1.0f;
+        startStopButton.layer.cornerRadius = 12.0f;
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-20-[startStopButton(132)]" options:0 metrics:nil views:views]];
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-90-[startStopButton(50)]" options:0 metrics:nil views:views]];
+    }
     [startStopButton release];
     
     // lapResetButton
@@ -238,36 +296,72 @@
     [lapResetButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateHighlighted];
     [lapResetButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateDisabled];
     [lapResetButton setTitle:@"Lap" forState:UIControlStateNormal];
-    lapResetButton.titleLabel.font = [UIFont fontWithName:FONT_NAME size:40];
-    lapResetButton.layer.borderWidth = 1.0f;
     lapResetButton.layer.borderColor = [UIColor blackColor].CGColor;
-    lapResetButton.layer.cornerRadius = 12.0f;
     [lapResetButton addTarget:self action:@selector(lapResetButtonPressed) forControlEvents:UIControlEventTouchDown];
     lapResetButton.showsTouchWhenHighlighted = NO;
     [self.view addSubview:lapResetButton];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[lapResetButton(132)]-20-|" options:0 metrics:nil views:views]];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-90-[lapResetButton(50)]" options:0 metrics:nil views:views]];
+    if (IPAD) {
+        lapResetButton.titleLabel.font = [UIFont fontWithName:FONT_NAME size:56];
+        lapResetButton.layer.borderWidth = 2.0f;
+        lapResetButton.layer.cornerRadius = 20;
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[lapResetButton(180)]-20-|" options:0 metrics:nil views:views]];
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-68-[lapResetButton(76)]" options:0 metrics:nil views:views]];
+    } else {
+        lapResetButton.titleLabel.font = [UIFont fontWithName:FONT_NAME size:36];
+        lapResetButton.layer.cornerRadius = 12.0f;
+        lapResetButton.layer.borderWidth = 1.0f;
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[lapResetButton(132)]-20-|" options:0 metrics:nil views:views]];
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-90-[lapResetButton(50)]" options:0 metrics:nil views:views]];
+    }
     [lapResetButton release];
     
+    // separator lines
+    [self.view addSubview:topSeparatorImageView];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[topSeparatorImageView]|" options:0 metrics:nil views:views]];
+    if (IPAD) {
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-22-[topSeparatorImageView(1)]" options:0 metrics:nil views:views]];
+    } else {
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-18-[topSeparatorImageView(1)]" options:0 metrics:nil views:views]];
+    }
+    [topSeparatorImageView release];
+    
+    [self.view addSubview:bottomSeparatorImageView];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[bottomSeparatorImageView]|" options:0 metrics:nil views:views]];
+    if (IPAD) {
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-159-[bottomSeparatorImageView(1)]" options:0 metrics:nil views:views]];
+    } else {
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-149-[bottomSeparatorImageView(1)]" options:0 metrics:nil views:views]];
+    }
+    [bottomSeparatorImageView release];
+    
     // splitViewHeader
-    splitViewHeader.font = [UIFont fontWithName:FONT_NAME size:15];
-    splitViewHeader.textColor = [UIColor blackColor];
-    splitViewHeader.backgroundColor = [UIColor groupTableViewBackgroundColor];
-    splitViewHeader.text = [Utilities getSplitViewHeaderText:[settingsViewController getLapInterval]
-                                                       Units:[settingsViewController intervalUnits]
-                                                  KiloSplits:[settingsViewController isSetForKiloSplits]
-                                          FurlongDisplayMode:[settingsViewController isSetForFurlongDisplay]];
     [self.view addSubview:splitViewHeader];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[splitViewHeader]|" options:0 metrics:nil views:views]];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-150-[splitViewHeader(20)]" options:0 metrics:nil views:views]];
+    if (IPAD) {
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-160-[splitViewHeader(30)]" options:0 metrics:nil views:views]];
+    } else {
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-150-[splitViewHeader(20)]" options:0 metrics:nil views:views]];
+    }
     [splitViewHeader release];
     
     // splitDetailViewController
     [self.view addSubview:splitDetailView];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[splitDetailView]|" options:0 metrics:nil views:views]];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-170-[splitDetailView]-50-|" options:0 metrics:nil views:views]];
+    if (IPAD) {
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-190-[splitDetailView]-50-|" options:0 metrics:nil views:views]];
+    } else {
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-170-[splitDetailView]-50-|" options:0 metrics:nil views:views]];
+    }
     
     bTimerRunning = (startTime > 0);
+    
+    // finish setting up split view header
+    [splitViewHeader setup];
+    NSMutableArray *textArray = [Utilities getSplitViewHeaderArray:[settingsViewController getLapInterval]
+                                                       Units:[settingsViewController intervalUnits]
+                                                  KiloSplits:[settingsViewController isSetForKiloSplits]
+                                          FurlongDisplayMode:[settingsViewController isSetForFurlongDisplay]];
+    [splitViewHeader setTextWithArray:textArray];
     
     [self updateButtonState];
 }
@@ -473,7 +567,10 @@
 - (void)resetIntervalUnitsFromStateData
 {
     [splitDetailViewController resetLapInterval:intervalDistance Units:iUnits KiloSplits:bKiloSplits FurlongMode:bFurlongMode];
-    splitViewHeader.text = [Utilities getSplitViewHeaderText:intervalDistance Units:iUnits KiloSplits:bKiloSplits FurlongDisplayMode:bFurlongMode];
+    //splitViewHeader.text = [Utilities getSplitViewHeaderText:intervalDistance Units:iUnits KiloSplits:bKiloSplits FurlongDisplayMode:bFurlongMode];
+    
+    NSMutableArray *textArray = [Utilities getSplitViewHeaderArray:intervalDistance Units:iUnits KiloSplits:bKiloSplits FurlongDisplayMode:bFurlongMode];
+    [splitViewHeader setTextWithArray:textArray];
     
     if (iUnits == kMetric)
         intervalDistanceLabel.text = [NSString stringWithFormat:@"%ldm", (long)intervalDistance];
@@ -755,7 +852,6 @@
 - (void)flashBackground
 {
      // flash the background
-     //splitViewHeader.backgroundColor = [UIColor lightGrayColor];
      backgroundView.backgroundColor = [UIColor darkGrayColor];
     
      // set timer for unflash
@@ -772,8 +868,6 @@
 - (void)unflashBackground
 {	
     // unflash the background
-    //backgroundImageView.image = backgroundGradientImage;
-    //splitViewHeader.backgroundColor = [UIColor blackColor];
     backgroundView.backgroundColor = [UIColor whiteColor];
 }
 

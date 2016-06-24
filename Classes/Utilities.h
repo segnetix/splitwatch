@@ -35,6 +35,8 @@
 #define kSummaryLineCount           6                   // v1.2
 #define	FONT_NAME                   @"Avenir-Book"      // v2.0
 
+#define IPAD UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad
+
 #define SYSTEM_VERSION_EQUAL_TO(v)                  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedSame)
 #define SYSTEM_VERSION_GREATER_THAN(v)              ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending)
 #define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
@@ -52,7 +54,8 @@
 + (NSString *)formatDistance:(NSInteger)distance;
 + (NSString *)formatDate:(NSTimeInterval)dateTimeInterval;
 + (NSString *)formatDateTime:(NSTimeInterval)dateTimeInterval format:(NSString *)format;
-+ (NSString *)getSplitViewHeaderText:(NSInteger)lapDistance Units:(int)units KiloSplits:(BOOL)kiloSplits FurlongDisplayMode:(BOOL)furlongDisplayMode;
+//+ (NSString *)getSplitViewHeaderText:(NSInteger)lapDistance Units:(int)units KiloSplits:(BOOL)kiloSplits FurlongDisplayMode:(BOOL)furlongDisplayMode;
++ (NSMutableArray *)getSplitViewHeaderArray:(NSInteger)lapDistance Units:(int)units KiloSplits:(BOOL)kiloSplits FurlongDisplayMode:(BOOL)furlongDisplayMode;
 
 //+ (NSString *)sqlStringWithDate:(NSDate *)date;
 //+ (NSDate *)dateWithSQLString:(NSString *)string;

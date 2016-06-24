@@ -8,18 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
-#define kHistoryTableViewCellHeight	36
+#define kiPhoneHistoryTableViewCellHeight	40
+#define kiPadHistoryTableViewCellHeight     48
 
 @interface HistoryCell : UITableViewCell
 {
-	//UIImageView *backgroundImageView;
 	UILabel *dateLabel;
 	UILabel *eventLabel;
 	UILabel *nameLabel;
 	UILabel *timeLabel;
 }
 
-//@property (nonatomic, retain) UIImageView *backgroundImageView;
 @property (nonatomic, retain) IBOutlet UILabel *dateLabel;
 @property (nonatomic, retain) IBOutlet UILabel *eventLabel;
 @property (nonatomic, retain) IBOutlet UILabel *nameLabel;

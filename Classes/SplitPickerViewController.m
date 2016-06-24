@@ -30,6 +30,7 @@
 @synthesize editSplitLabel;
 @synthesize afterTimeLabel;
 @synthesize afterSplitLabel;
+@synthesize splitDetailViewController;
 
 - (id)initWithEvent:(Event *)theEvent andRow:(int)row
 {
@@ -115,16 +116,6 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 - (double)getTimePickerTime
 {
@@ -248,6 +239,7 @@
     {
         [event setSplit:split forIndex:pickerSplitIndex];
         [event updateSelfInDatabase];
+        [self.splitDetailViewController flashSplitCellsInRow:pickerSplitIndex];
         [self.navigationController popViewControllerAnimated:YES];
     }
     else
@@ -311,6 +303,7 @@
     
     [event insertSplit:split];
     [event updateSelfInDatabase];
+    [self.splitDetailViewController flashSplitCellsInRow:pickerSplitIndex + 1];
     [self.navigationController popViewControllerAnimated:YES];
 }
 

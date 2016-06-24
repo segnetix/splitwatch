@@ -53,6 +53,7 @@
 			athleteLabel.text = @"Athlete:";
 
 		// splitViewHeader
+        splitViewHeader = [[SplitHeaderView alloc] init];
         splitViewHeader.translatesAutoresizingMaskIntoConstraints = NO;
         splitViewHeader.tag = @"splitViewHeader";
         
@@ -81,26 +82,6 @@
         pickerToolbar.tag = @"pickerToolbar";
         
 		bEditing = NO;
-        
-        //editSplitsButton.UIImageRenderingModeAlwaysTemplate
-        //editSplitsButton = [editSplitsButton imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-
-        //UIImage *wrenchImage = [UIImage imageNamed:@"wrench06.png"];
-        //wrenchImage = [wrenchImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-        //[editSplitsButton setImage:wrenchImage forState:UIControlStateNormal];
-        //editSplitsButton.tintColor = self.view.tintColor;
-        //UIImage *image = [[UIImage imageNamed:@"image_name"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-        //[button setImage:image forState:UIControlStateNormal];
-        //button.tintColor = [UIColor redColor];
-        /*
-        editSplitsButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        UIImage *wrenchImage = [[UIImage imageNamed:@"wrench06.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-        [editSplitsButton setImage:wrenchImage forState:UIControlStateNormal];
-        editSplitsButton.tintColor = self.view.tintColor;
-        editSplitsButton.translatesAutoresizingMaskIntoConstraints = NO;
-        editSplitsButton.tag = @"editSplitsButton";
-        [self.view addSubview:editSplitsButton];
-         */
     }
 	
     return self;
@@ -118,16 +99,34 @@
     UIView* splitDetailView = splitDetailViewController.view;
     splitDetailView.tag = @"splitDetailView";
     
-    splitViewHeader.font = [UIFont fontWithName:FONT_NAME size:15];
-    splitViewHeader.textColor = [UIColor blackColor];
-    splitViewHeader.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    UIImage *separatorImage = [UIImage imageNamed:@"separator_dark_gray.png"];
+    UIImageView *separatorImageView = [[UIImageView alloc] initWithImage:separatorImage];
+    separatorImageView.translatesAutoresizingMaskIntoConstraints = NO;
     
-    NSDictionary *views = NSDictionaryOfVariableBindings(pickView, pickerToolbar, splitDetailView, splitViewHeader);
+    NSDictionary *views = NSDictionaryOfVariableBindings(pickView, pickerToolbar, splitDetailView, splitViewHeader, separatorImageView);
     
-    // splitDetailViewController
+    // separator line above split view header
+    [self.view addSubview:separatorImageView];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[separatorImageView]|" options:0 metrics:nil views:views]];
+    if (IPAD) {
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-215-[separatorImageView(1)]" options:0 metrics:nil views:views]];
+    } else {
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-195-[separatorImageView(1)]" options:0 metrics:nil views:views]];
+    }
+    [separatorImageView release];
+
+    
+    // splitViewHeader and splitDetailViewController
+    [self.view addSubview:splitViewHeader];
     [self.view addSubview:splitDetailView];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[splitViewHeader]|" options:0 metrics:nil views:views]];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[splitDetailView]|" options:0 metrics:nil views:views]];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[splitViewHeader][splitDetailView]-49-|" options:0 metrics:nil views:views]];
+    
+    if (IPAD) {
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-216-[splitViewHeader(30)][splitDetailView]-49-|" options:0 metrics:nil views:views]];
+    } else {
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-196-[splitViewHeader(20)][splitDetailView]-49-|" options:0 metrics:nil views:views]];
+    }
     
     // pickView and pickerToolbar setup
     [self.view addSubview:pickView];
@@ -173,6 +172,9 @@
     [pickAthleteButton addTarget:self action:@selector(setName:) forControlEvents:UIControlEventTouchUpInside];
     [pickEventButton   addTarget:self action:@selector(setName:) forControlEvents:UIControlEventTouchUpInside];
     
+    // now initialize the split view header
+    [splitViewHeader setup];
+    
 	[self setEventFields];
 }
 
@@ -198,11 +200,8 @@
 	else
 		distanceLabel.text = @"Distance:";
 		
-	NSString *headerString = [Utilities getSplitViewHeaderText:event.lapDistance
-														 Units:event.iEventType
-													KiloSplits:event.bKiloSplits
-											FurlongDisplayMode:event.bFurlongMode];
-	splitViewHeader.text = headerString;
+	NSMutableArray *headerArray = [Utilities getSplitViewHeaderArray:event.lapDistance Units:event.iEventType KiloSplits:event.bKiloSplits FurlongDisplayMode:event.bFurlongMode];
+    [splitViewHeader setTextWithArray:headerArray];
 	
 	[splitDetailViewController resetLapInterval:event.lapDistance Units:event.iEventType KiloSplits:event.bKiloSplits FurlongMode:event.bFurlongMode];
 	[splitDetailViewController refreshSplitView:NO];

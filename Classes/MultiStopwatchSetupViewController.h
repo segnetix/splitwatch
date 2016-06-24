@@ -30,6 +30,7 @@
     
 	UIToolbar *pickerToolbar;
 	UIPickerView *pickView;
+    UIImageView *pickerSeparatorImageView;
 	NSMutableArray *pickerDataArray;
     NSMutableArray *nameArray;
 	sqlite3 *database;
@@ -45,6 +46,7 @@
 @property (nonatomic, assign) MultiStopwatchViewController *mainViewController;
 @property (nonatomic, assign) UIPickerView *pickView;
 @property (nonatomic, assign) UIToolbar *pickerToolbar;
+@property (nonatomic, retain) UIImageView *pickerSeparatorImageView;
 @property (nonatomic, retain) IBOutlet UITextField *athleteField;
 @property (nonatomic, retain) IBOutlet UITextField *eventField;
 @property (nonatomic, retain) IBOutlet UILabel *athleteLabel;

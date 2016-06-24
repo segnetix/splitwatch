@@ -51,11 +51,7 @@
 		database = [appDelegate getEventDatabase];
 		
 		// splitViewHeader
-		splitViewHeader = [[UILabel alloc] init];
-		splitViewHeader.font = [UIFont fontWithName:FONT_NAME size:15];
-        splitViewHeader.textColor = [UIColor blackColor];
-		splitViewHeader.backgroundColor = [UIColor groupTableViewBackgroundColor];
-		splitViewHeader.text = [Utilities getSplitViewHeaderText:event.lapDistance Units:event.iEventType KiloSplits:event.bKiloSplits FurlongDisplayMode:event.bFurlongMode];
+		splitViewHeader = [[SplitHeaderView alloc] init];
         splitViewHeader.translatesAutoresizingMaskIntoConstraints = NO;
         splitViewHeader.tag = @"splitViewHeader";
     }
@@ -98,15 +94,30 @@
     splitDetailView.tag = @"splitDetailView";
     pickerView.tag      = @"pickerView";
     
-    NSDictionary *mainViews = NSDictionaryOfVariableBindings(splitViewHeader, splitDetailView);
+    UIImage *separatorImage = [UIImage imageNamed:@"separator_dark_gray.png"];
+    UIImageView *separatorImageView = [[UIImageView alloc] initWithImage:separatorImage];
+    separatorImageView.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    NSDictionary *views = NSDictionaryOfVariableBindings(splitViewHeader, splitDetailView, separatorImageView);
     
     [self.view addSubview:splitViewHeader];
     [self.view addSubview:splitDetailView];
+    [self.view addSubview:separatorImageView];
+    
+    // separator line above split view header
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[separatorImageView]|" options:0 metrics:nil views:views]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-215-[separatorImageView(1)]" options:0 metrics:nil views:views]];
+    [separatorImageView release];
     
     // splitViewHeader/splitDetailView
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[splitViewHeader]|" options:0 metrics:nil views:mainViews]];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[splitDetailView]|" options:0 metrics:nil views:mainViews]];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-216-[splitViewHeader(20)][splitDetailView]-50-|" options:0 metrics:nil views:mainViews]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[splitViewHeader]|" options:0 metrics:nil views:views]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[splitDetailView]|" options:0 metrics:nil views:views]];
+    
+    if (IPAD) {
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-216-[splitViewHeader(30)][splitDetailView]-50-|" options:0 metrics:nil views:views]];
+    } else {
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-216-[splitViewHeader(20)][splitDetailView]-50-|" options:0 metrics:nil views:views]];
+    }
     
 	// Uncomment the following line to display an Edit button in the navigation bar for this view controller.
 	//self.navigationItem.rightBarButtonItem = self.editButtonItem;
@@ -164,6 +175,10 @@
 	
 	bLoading = NO;
     
+    [splitViewHeader setup];
+    NSMutableArray *textArray = [Utilities getSplitViewHeaderArray:event.lapDistance Units:event.iEventType KiloSplits:event.bKiloSplits FurlongDisplayMode:event.bFurlongMode];
+    [splitViewHeader setTextWithArray:textArray];
+    
     [splitViewHeader release];
     [splitEditLabelView release];
 }
@@ -198,7 +213,7 @@
 	[splitDetailViewController resetLapInterval:event.lapDistance Units:event.iEventType KiloSplits:event.bKiloSplits FurlongMode:event.bFurlongMode];
 	[splitDetailViewController refreshSplitView:NO];
 	
-	[self scrollToTop];
+	//[self scrollToTop];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -273,7 +288,10 @@
 	if (!bLoading)
 	{
 		[self updateEventWithChanges];
-		splitViewHeader.text = [Utilities getSplitViewHeaderText:event.lapDistance Units:event.iEventType KiloSplits:event.bKiloSplits FurlongDisplayMode:event.bFurlongMode];
+        
+        NSMutableArray *textArray = [Utilities getSplitViewHeaderArray:event.lapDistance Units:event.iEventType KiloSplits:event.bKiloSplits FurlongDisplayMode:event.bFurlongMode];
+        [splitViewHeader setTextWithArray:textArray];
+        
 		[splitDetailViewController resetLapInterval:event.lapDistance Units:event.iEventType KiloSplits:event.bKiloSplits FurlongMode:event.bFurlongMode];
 		[splitDetailViewController refreshSplitView:NO];
 	}
@@ -417,6 +435,7 @@
 - (void)pushTimePicker:(int)row
 {
     pickerViewController = [[SplitPickerViewController alloc] initWithEvent:event andRow:row];
+    pickerViewController.splitDetailViewController = self.splitDetailViewController;
     [self.navigationController pushViewController:pickerViewController animated:YES];
     [pickerViewController release];
 }
