@@ -632,6 +632,7 @@
 				INFOPLIST_FILE = "Stopwatch-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				ONLY_ACTIVE_ARCH = NO;
+				"OTHER_CFLAGS[arch=*]" = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.segnetix.stopwatch;
 				PRODUCT_NAME = Splitwatch;
 				PROVISIONING_PROFILE = "";

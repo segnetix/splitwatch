@@ -19,7 +19,7 @@
 @synthesize lapTimeLabel;
 @synthesize lapCountLabel;
 @synthesize intervalDistanceLabel;
-@synthesize splitViewHeader;
+@synthesize splitHeader;
 @synthesize startStopButton;
 @synthesize lapResetButton;
 @synthesize clearToggleButton;
@@ -77,9 +77,9 @@
         intervalDistanceLabel.translatesAutoresizingMaskIntoConstraints = NO;
         intervalDistanceLabel.tag = @"intervalDistanceLabel";
         
-        splitViewHeader = [[SplitHeaderView alloc] init];
-        splitViewHeader.translatesAutoresizingMaskIntoConstraints = NO;
-        splitViewHeader.tag = @"splitViewHeader";
+        splitHeader = [[SplitHeaderView alloc] init];
+        splitHeader.translatesAutoresizingMaskIntoConstraints = NO;
+        splitHeader.tag = @"splitHeader";
         
         startStopButton = [[UIButton buttonWithType:UIButtonTypeCustom] retain];
         startStopButton.translatesAutoresizingMaskIntoConstraints = NO;
@@ -142,7 +142,7 @@
     // AutoLayout setup
     UIView* splitDetailView = splitDetailViewController.view;
     splitDetailView.tag = @"splitDetailView";
-    NSDictionary *views = NSDictionaryOfVariableBindings(backgroundView, runningTimeLabel, clearToggleButton, lapTimeLabel, lapCountLabel, intervalDistanceLabel, startStopButton, lapResetButton, topSeparatorImageView, bottomSeparatorImageView, splitViewHeader, splitDetailView);
+    NSDictionary *views = NSDictionaryOfVariableBindings(backgroundView, runningTimeLabel, clearToggleButton, lapTimeLabel, lapCountLabel, intervalDistanceLabel, startStopButton, lapResetButton, topSeparatorImageView, bottomSeparatorImageView, splitHeader, splitDetailView);
     
     // backgroundImageView
     backgroundView.backgroundColor = [UIColor whiteColor];
@@ -334,15 +334,15 @@
     }
     [bottomSeparatorImageView release];
     
-    // splitViewHeader
-    [self.view addSubview:splitViewHeader];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[splitViewHeader]|" options:0 metrics:nil views:views]];
+    // splitHeader
+    [self.view addSubview:splitHeader];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[splitHeader]|" options:0 metrics:nil views:views]];
     if (IPAD) {
-        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-160-[splitViewHeader(30)]" options:0 metrics:nil views:views]];
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-160-[splitHeader(30)]" options:0 metrics:nil views:views]];
     } else {
-        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-150-[splitViewHeader(20)]" options:0 metrics:nil views:views]];
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-150-[splitHeader(20)]" options:0 metrics:nil views:views]];
     }
-    [splitViewHeader release];
+    [splitHeader release];
     
     // splitDetailViewController
     [self.view addSubview:splitDetailView];
@@ -356,12 +356,12 @@
     bTimerRunning = (startTime > 0);
     
     // finish setting up split view header
-    [splitViewHeader setup];
+    [splitHeader setup];
     NSMutableArray *textArray = [Utilities getSplitViewHeaderArray:[settingsViewController getLapInterval]
                                                        Units:[settingsViewController intervalUnits]
                                                   KiloSplits:[settingsViewController isSetForKiloSplits]
                                           FurlongDisplayMode:[settingsViewController isSetForFurlongDisplay]];
-    [splitViewHeader setTextWithArray:textArray];
+    [splitHeader setTextWithArray:textArray];
     
     [self updateButtonState];
 }
@@ -570,7 +570,7 @@
     //splitViewHeader.text = [Utilities getSplitViewHeaderText:intervalDistance Units:iUnits KiloSplits:bKiloSplits FurlongDisplayMode:bFurlongMode];
     
     NSMutableArray *textArray = [Utilities getSplitViewHeaderArray:intervalDistance Units:iUnits KiloSplits:bKiloSplits FurlongDisplayMode:bFurlongMode];
-    [splitViewHeader setTextWithArray:textArray];
+    [splitHeader setTextWithArray:textArray];
     
     if (iUnits == kMetric)
         intervalDistanceLabel.text = [NSString stringWithFormat:@"%ldm", (long)intervalDistance];

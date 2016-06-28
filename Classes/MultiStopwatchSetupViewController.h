@@ -37,7 +37,14 @@
 	UITextField *currentEditField;
     UITapGestureRecognizer *tapGesture;
     
+    UIView *snapshot;
+    NSIndexPath *movingFromIndexPath;
+    NSIndexPath *sourceIndexPath;
+    CADisplayLink *displayLink;
+    UILongPressGestureRecognizer *longPressGestureRecognizer;
+
 	BOOL bCurrentlyEditing;
+    BOOL bLongPressActive;
     int keyboardHeight;
 	
 	StopwatchAppDelegate *appDelegate;
@@ -58,6 +65,13 @@
 @property (retain, nonatomic) IBOutlet UIButton *pickAthleteButton;
 @property (retain, nonatomic) NSMutableArray *nameArray;
 @property (retain, nonatomic) UITapGestureRecognizer *tapGesture;
+@property BOOL bLongPressActive;
+@property (nonatomic, retain) UIView *snapshot;
+@property (nonatomic, retain) NSIndexPath *movingFromIndexPath;
+@property (nonatomic, retain) NSIndexPath *sourceIndexPath;
+@property (nonatomic, retain) CADisplayLink *displayLink;
+@property (nonatomic, retain) UILongPressGestureRecognizer *longPressGestureRecognizer;
+
 @property int keyboardHeight;
 @property BOOL bCurrentlyEditing;
 

@@ -24,7 +24,7 @@
 	UILabel *lapTimeLabel;
 	UILabel	*lapCountLabel;
 	UILabel *intervalDistanceLabel;
-	SplitHeaderView *splitViewHeader;
+	SplitHeaderView *splitHeader;
 	UIButton *startStopButton;
 	UIButton *lapResetButton;
 	UIButton *clearToggleButton;
@@ -65,7 +65,7 @@
 @property (nonatomic, assign) UILabel	*lapTimeLabel;
 @property (nonatomic, assign) UILabel	*lapCountLabel;
 @property (nonatomic, assign) UILabel	*intervalDistanceLabel;
-@property (nonatomic, assign) SplitHeaderView	*splitViewHeader;
+@property (nonatomic, assign) SplitHeaderView	*splitHeader;
 @property (nonatomic, assign) UIButton	*startStopButton;
 @property (nonatomic, assign) UIButton	*lapResetButton;
 @property (nonatomic, retain) UIButton	*clearToggleButton;

@@ -32,7 +32,7 @@
     UILabel *splitUnitLabel;
     UILabel *kiloSplitLabel;
     UILabel *furlongLabel;
-    SplitHeaderView *splitViewHeader;
+    SplitHeaderView *splitHeader;
     
     UIView *splitEditLabelView;
 	
@@ -45,7 +45,7 @@
 @property (nonatomic, retain) IBOutlet UISegmentedControl *unitsControl;
 @property (nonatomic, retain) IBOutlet UISwitch *kiloControl;
 @property (nonatomic, retain) IBOutlet UISwitch *furlongDisplayControl;
-@property (nonatomic, assign) SplitHeaderView *splitViewHeader;
+@property (nonatomic, retain) SplitHeaderView *splitHeader;
 @property (nonatomic, retain) SplitDetailViewController *splitDetailViewController;
 @property (nonatomic, retain) SplitPickerViewController *pickerViewController;
 @property (nonatomic, retain) UIImageView *pickerTopImageView;

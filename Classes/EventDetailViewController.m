@@ -31,7 +31,7 @@
 @synthesize pickEventButton;
 @synthesize editSplitsButton;
 @synthesize athleteLabel;		// v1.2 - to be able to modify the "Athlete:" label for Furlong Mode ("Horse:")
-@synthesize splitViewHeader;
+@synthesize splitHeader;
 @synthesize appDelegate;
 @synthesize tapGesture;
 
@@ -52,10 +52,10 @@
 		else
 			athleteLabel.text = @"Athlete:";
 
-		// splitViewHeader
-        splitViewHeader = [[SplitHeaderView alloc] init];
-        splitViewHeader.translatesAutoresizingMaskIntoConstraints = NO;
-        splitViewHeader.tag = @"splitViewHeader";
+		// splitHeader
+        splitHeader = [[SplitHeaderView alloc] init];
+        splitHeader.translatesAutoresizingMaskIntoConstraints = NO;
+        splitHeader.tag = @"splitHeader";
         
         splitDetailViewController = [[SplitDetailViewController alloc]
          initWithIntervalDistance:event.lapDistance
@@ -103,7 +103,7 @@
     UIImageView *separatorImageView = [[UIImageView alloc] initWithImage:separatorImage];
     separatorImageView.translatesAutoresizingMaskIntoConstraints = NO;
     
-    NSDictionary *views = NSDictionaryOfVariableBindings(pickView, pickerToolbar, splitDetailView, splitViewHeader, separatorImageView);
+    NSDictionary *views = NSDictionaryOfVariableBindings(pickView, pickerToolbar, splitDetailView, splitHeader, separatorImageView);
     
     // separator line above split view header
     [self.view addSubview:separatorImageView];
@@ -116,16 +116,16 @@
     [separatorImageView release];
 
     
-    // splitViewHeader and splitDetailViewController
-    [self.view addSubview:splitViewHeader];
+    // splitHeader and splitDetailViewController
+    [self.view addSubview:splitHeader];
     [self.view addSubview:splitDetailView];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[splitViewHeader]|" options:0 metrics:nil views:views]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[splitHeader]|" options:0 metrics:nil views:views]];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[splitDetailView]|" options:0 metrics:nil views:views]];
     
     if (IPAD) {
-        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-216-[splitViewHeader(30)][splitDetailView]-49-|" options:0 metrics:nil views:views]];
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-216-[splitHeader(30)][splitDetailView]-49-|" options:0 metrics:nil views:views]];
     } else {
-        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-196-[splitViewHeader(20)][splitDetailView]-49-|" options:0 metrics:nil views:views]];
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-196-[splitHeader(20)][splitDetailView]-49-|" options:0 metrics:nil views:views]];
     }
     
     // pickView and pickerToolbar setup
@@ -173,7 +173,7 @@
     [pickEventButton   addTarget:self action:@selector(setName:) forControlEvents:UIControlEventTouchUpInside];
     
     // now initialize the split view header
-    [splitViewHeader setup];
+    [splitHeader setup];
     
 	[self setEventFields];
 }
@@ -201,7 +201,7 @@
 		distanceLabel.text = @"Distance:";
 		
 	NSMutableArray *headerArray = [Utilities getSplitViewHeaderArray:event.lapDistance Units:event.iEventType KiloSplits:event.bKiloSplits FurlongDisplayMode:event.bFurlongMode];
-    [splitViewHeader setTextWithArray:headerArray];
+    [splitHeader setTextWithArray:headerArray];
 	
 	[splitDetailViewController resetLapInterval:event.lapDistance Units:event.iEventType KiloSplits:event.bKiloSplits FurlongMode:event.bFurlongMode];
 	[splitDetailViewController refreshSplitView:NO];
@@ -209,9 +209,8 @@
 
 - (void)dealloc
 {
-	//[splitViewHeader release];
-	
-	//splitViewHeader = nil;
+	//[splitHeader release];
+	//splitHeader = nil;
 	
 	[splitDetailViewController release];
 	[runnerTextEdit release];
@@ -221,7 +220,7 @@
 	[time release];
 	[distanceLabel release];
 	[athleteLabel release];
-    [splitViewHeader release];
+    [splitHeader release];
 	[pickAthleteButton release];
 	[pickEventButton release];
 	[editSplitsButton release];
@@ -236,7 +235,7 @@
 	time = nil;
 	distanceLabel = nil;
 	athleteLabel = nil;
-    splitViewHeader = nil;
+    splitHeader = nil;
 	pickAthleteButton = nil;
 	pickEventButton = nil;
     editSplitsButton = nil;

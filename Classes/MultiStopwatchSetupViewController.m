@@ -36,6 +36,15 @@
 @synthesize keyboardHeight;
 @synthesize nameArray;
 @synthesize tapGesture;
+@synthesize bLongPressActive;
+@synthesize snapshot;
+@synthesize movingFromIndexPath;
+@synthesize sourceIndexPath;
+@synthesize displayLink;
+@synthesize longPressGestureRecognizer;
+
+static CGFloat kListViewScrollRate =  8.0;
+static CGFloat kScrollZoneHeight = 40.0;
 
 - (id)initWithMainViewController:(MultiStopwatchViewController *)mainVC
 {
@@ -74,9 +83,6 @@
 
 - (void)dealloc
 {
-    /*
-     */
-    
     [athleteField release];
     athleteField = nil;
     
@@ -188,6 +194,12 @@
     [nameTable setDelegate:self];
     [nameTable setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     
+    // set up long press gesture recognizer for the table cell move functionality
+    longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action: @selector(longPressAction:)];
+    [nameTable addGestureRecognizer:longPressGestureRecognizer];
+    
+    bLongPressActive = NO;
+    
     pickAthleteButton.enabled = YES;
     pickEventButton.enabled = YES;
     
@@ -201,13 +213,11 @@
 	// clear text fields
 	athleteField.text = @"";
 	
-    if (eventField.text.length > 0) {
+    if (eventField.text.length == 0) {
         eventField.text = [mainViewController getEventName];
     }
     
-    if (nameArray == nil || (nameArray != nil && nameArray.count == 0)) {
-        nameArray = [[mainViewController getNames] mutableCopy];
-    }
+    nameArray = [[mainViewController getNames] mutableCopy];
     
     pickView.hidden = YES;
     pickerToolbar.hidden = YES;
@@ -254,6 +264,274 @@
     [super didReceiveMemoryWarning];
 	
 	// Release any cached data, images, etc that aren't in use.
+}
+
+#pragma mark -
+#pragma mark Long Press Move Methods
+
+// handle cell move on long press
+- (void)longPressAction:(UILongPressGestureRecognizer*)gesture
+{
+    //let state: UIGestureRecognizerState = gesture.state
+    CGPoint location = [gesture locationInView:nameTable];
+    CGPoint touchLocationInWindow = [nameTable convertPoint:location toView:nameTable.window];
+    CGFloat touchLocationInFrameY = touchLocationInWindow.y - nameTable.frame.origin.y;
+    NSIndexPath *indexPath = [nameTable indexPathForRowAtPoint:location];
+    
+    // check if we need to end scrolling
+    if (location.y <= 0) {
+        // if we moved above the table view then set the destination to the top cell and end the long press
+        if (bLongPressActive) {
+            NSIndexPath *topCellIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+            [self longPressEnded:topCellIndexPath location:location];
+        }
+        return;
+    }
+    
+    // check if we need to scroll tableView
+    if (touchLocationInFrameY > nameTable.bounds.size.height - kScrollZoneHeight) {
+        // need to scroll down
+        if (displayLink == nil) {
+            displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(scrollDownLoop)];
+            displayLink.frameInterval = 1;
+            [displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
+            NSLog(@"displayLink started 1");
+        }
+    } else if (touchLocationInFrameY < kScrollZoneHeight) {
+        // need to scroll up
+        if (displayLink == nil) {
+            displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(scrollUpLoop)];
+            displayLink.frameInterval = 1;
+            [displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
+            NSLog(@"displayLink started 2");
+        }
+    } else if (displayLink != nil) {
+        // check if we need to cancel a current scroll update because the touch moved out of scroll area
+        if (touchLocationInFrameY <= (nameTable.bounds.size.height - kScrollZoneHeight)) {
+            [displayLink invalidate];
+            displayLink = nil;
+            NSLog(@"displayLink canceled 3");
+        } else if (touchLocationInFrameY >= kScrollZoneHeight) {
+            [displayLink invalidate];
+            displayLink = nil;
+            NSLog(@"displayLink canceled 4");
+        }
+    }
+    
+    // if indexPath is null then we took our dragged cell some direction off the table
+    if (indexPath == nil) {
+        if (gesture.state != UIGestureRecognizerStateCancelled) {
+            gesture.enabled = NO;
+            gesture.enabled = YES;
+            [self longPressEnded:movingFromIndexPath location:location];
+        }
+        return;
+    }
+    
+    // handle gesture states
+    switch (gesture.state) {
+        case UIGestureRecognizerStateBegan:
+            [self longPressBegan:indexPath location:location];
+            break;
+        case UIGestureRecognizerStateChanged:
+            [self longPressMoved:indexPath location:location];
+            break;
+        case UIGestureRecognizerStateEnded:
+            [self longPressEnded:indexPath location:location];
+            break;
+        default:
+            NSLog(@"move default");
+            break;
+    }
+}
+
+-(void)longPressBegan:(NSIndexPath*)indexPath location:(CGPoint)location
+{
+    NSLog(@"move began");
+    
+    bLongPressActive = YES;
+    
+    // create a snapshot of the moving cell
+    UITableViewCell *cell = [nameTable cellForRowAtIndexPath:indexPath];
+    self.snapshot = [self snapshotFromView:cell];
+    sourceIndexPath = [indexPath copy];
+    movingFromIndexPath = [indexPath copy];
+    
+    // create snapshot for long press cell moving
+    __block CGPoint center = cell.center;
+    snapshot.center = center;
+    snapshot.alpha = 0.0;
+    [nameTable addSubview:snapshot];
+    
+    // animate the snapshot cell
+    [UIView animateWithDuration:0.25 animations:^{
+        // code for animation
+        center.y = location.y;
+        self.snapshot.center = center;
+        self.snapshot.transform = CGAffineTransformMakeScale(1.05, 1.05);
+        self.snapshot.alpha = 0.7;
+        cell.alpha = 0.0;
+    } completion:^(BOOL finished) {
+        //code for completion
+        cell.hidden = YES;      // hides the real cell while moving
+        NSLog(@"%@ hidden", cell.textLabel.text);
+    }];
+}
+
+-(void)longPressMoved:(NSIndexPath*)indexPath location:(CGPoint)location
+{
+    if (indexPath == nil || movingFromIndexPath == nil || snapshot == nil || location.y <= 0) {
+        //NSLog(@"longPressMoved early return...");
+        return;
+    }
+    
+    CGPoint center = snapshot.center;
+    center.y = location.y;
+    snapshot.center = center;
+    
+    // check if destination is valid then move the cell in the tableView
+    if (movingFromIndexPath.row != indexPath.row) {
+        // ... move the rows
+        [nameTable moveRowAtIndexPath:movingFromIndexPath toIndexPath:indexPath];
+        
+        // ... and update movingFromIndexPath so it is in sync with UI changes
+        [movingFromIndexPath release];
+        movingFromIndexPath = [indexPath copy];
+    } else {
+        //NSLog(@"longPressMoved - from == to  %li", (long)indexPath.row);
+    }
+}
+
+-(void)longPressEnded:(NSIndexPath*)indexPath location:(CGPoint)location
+{
+    NSLog(@"move ended");
+    
+    bLongPressActive = NO;
+    
+    // cancel any scroll loop
+    [displayLink invalidate];
+    displayLink = nil;
+    NSLog(@"displayLink canceled 5");
+    
+    if (indexPath == nil || snapshot == nil || sourceIndexPath == nil) {
+        NSLog(@"******* early return in longPressEnded...");
+        return;
+    }
+    
+    // finalize list data with new location for srcIndexObj
+    CGPoint center = snapshot.center;
+    center.y = location.y;
+    snapshot.center = center;
+    
+    // check if destination is different from source and valid
+    if (indexPath != sourceIndexPath) {
+        // we are moving an item
+        [nameTable beginUpdates];
+        
+        // move the cell position in the data array
+        NSUInteger fromRow = [sourceIndexPath row];
+        NSUInteger toRow = [indexPath row];
+        
+        // update name array
+        id name = [[nameArray objectAtIndex:fromRow] retain];
+        [nameArray removeObject:name];
+        [nameArray insertObject:name atIndex:toRow];
+        [name release];
+        
+        [nameTable endUpdates];
+    }
+    
+    // clean up any snapshot views or displayLink scrolls
+    UITableViewCell *cell = [nameTable cellForRowAtIndexPath:indexPath];
+    
+    cell.alpha = 0.0;
+    
+    // animate the snapshot cell
+    [UIView animateWithDuration:0.25 animations:^{
+        // code for animation
+        if (cell != nil) {
+            self.snapshot.center = cell.center;
+        }
+        self.snapshot.transform = CGAffineTransformIdentity;
+        self.snapshot.alpha = 0.0;
+        
+        // undo fade out
+        cell.alpha = 1.0;
+    } completion:^(BOOL finished) {
+        //code for completion
+        cell.hidden = NO;
+        NSLog(@"%@ unhidden", cell.textLabel.text);
+        [sourceIndexPath release];
+        sourceIndexPath = nil;
+        [snapshot removeFromSuperview];
+        snapshot = nil;
+        [nameTable reloadData];
+    }];
+    
+    [movingFromIndexPath release];
+    movingFromIndexPath = nil;
+}
+
+- (UIView*)snapshotFromView:(UIView*)inputView
+{
+    // Make an image from the input view.
+    UIGraphicsBeginImageContextWithOptions(inputView.bounds.size, NO, 0);
+    [inputView drawViewHierarchyInRect:inputView.bounds afterScreenUpdates:YES];
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    UIView *snapshotView = [[[UIImageView alloc] initWithImage:image] autorelease];
+    snapshotView.layer.masksToBounds = NO;
+    snapshotView.layer.cornerRadius = 0.0;
+    snapshotView.layer.shadowOffset = CGSizeMake(-5.0, 0.0);
+    snapshotView.layer.shadowRadius = 5.0;
+    snapshotView.layer.shadowOpacity = 0.3;
+    snapshotView.layer.opacity = 0.6;
+    
+    return snapshotView;
+}
+
+- (void)scrollUpLoop
+{
+    //NSLog(@"scrollUpLoop...");
+    CGPoint currentOffset = nameTable.contentOffset;
+    
+    if (currentOffset.y <= 0.0) {
+        return;
+    }
+    
+    int newOffsetY = currentOffset.y - kListViewScrollRate;
+    CGPoint location = [longPressGestureRecognizer locationInView:nameTable];
+    NSIndexPath *indexPath = [nameTable indexPathForRowAtPoint:location];
+    
+    [nameTable setContentOffset:CGPointMake(currentOffset.x, newOffsetY) animated:NO];
+    
+    if (indexPath != nil) {
+        [self longPressMoved:indexPath location:location];
+        //prevLocation = location;
+    }
+}
+
+- (void)scrollDownLoop
+{
+    //NSLog(@"scrollDownLoop...");
+    CGFloat contentHeight = nameTable.contentSize.height;
+    CGFloat frameHeight = nameTable.frame.size.height;
+    CGPoint currentOffset = nameTable.contentOffset;
+    
+    if (currentOffset.y >= contentHeight - frameHeight) {
+        return;
+    }
+    
+    int newOffsetY = currentOffset.y + kListViewScrollRate;
+    CGPoint location = [longPressGestureRecognizer locationInView:nameTable];
+    NSIndexPath *indexPath = [nameTable indexPathForRowAtPoint:location];
+    
+    [nameTable setContentOffset:CGPointMake(currentOffset.x, newOffsetY) animated:NO];
+    
+    if (indexPath != nil) {
+        [self longPressMoved:indexPath location:location];
+    }
 }
 
 

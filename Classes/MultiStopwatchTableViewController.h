@@ -16,22 +16,32 @@
 	NSMutableArray *watches;
     NSMutableArray *multiWatchCells;
 	NSInteger intervalDistance;
-	//NSInteger nextWatchIndexForLapEvent;
 	MultiStopwatchViewController *multiStopwatchViewController;
-	
+    UIView *snapshot;
+    NSIndexPath *movingFromIndexPath;
+    NSIndexPath *sourceIndexPath;
+    CADisplayLink *displayLink;
+    UILongPressGestureRecognizer *longPressGestureRecognizer;
+    
 	int iEventType;
 	BOOL bKiloSplits;
 	BOOL bFurlongMode;
+    BOOL bLongPressActive;
 }
 
 @property (nonatomic, retain) NSMutableArray *watches;
 @property (nonatomic, retain) NSMutableArray *multiWatchCells;
 @property NSInteger intervalDistance;
-//@property NSInteger nextWatchIndexForLapEvent;
 @property (assign) MultiStopwatchViewController *multiStopwatchViewController;
 @property int iEventType;
 @property BOOL bKiloSplits;
 @property BOOL bFurlongMode;
+@property BOOL bLongPressActive;
+@property (nonatomic, retain) UIView *snapshot;
+@property (nonatomic, retain) NSIndexPath *movingFromIndexPath;
+@property (nonatomic, retain) NSIndexPath *sourceIndexPath;
+@property (nonatomic, retain) CADisplayLink *displayLink;
+@property (nonatomic, retain) UILongPressGestureRecognizer *longPressGestureRecognizer;
 
 - (id)initWithIntervalDistance:(NSInteger)distance
 				   eventType:(int)eventType
@@ -48,8 +58,9 @@
 - (void)stopAllWatches:(NSTimeInterval)time;
 - (void)resetAllWatches;
 - (void)setWatchButtonBehavior;
-//- (void)lapHitForNextWatch;
 - (BOOL)allWatchesReset;
+
+- (UIView*)snapshotFromView:(UIView*)inputView;
 
 - (void)aWatchStarted:(Stopwatch *)watch;
 - (void)aWatchStopped:(Stopwatch *)watch;

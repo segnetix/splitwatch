@@ -92,5 +92,21 @@
       <ContextState
          contextName = "-[SplitEditViewController viewDidLoad]:SplitEditViewController.m">
       </ContextState>
+      <ContextState
+         contextName = "-[MultiStopwatchTableViewController longPressMoved:location:]:MultiStopwatchTableViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "(*movingFromIndexPath).row">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[MultiStopwatchTableViewController longPressAction:]:MultiStopwatchTableViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.tableView.bounds.size.height">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
    </ContextStates>
 </VariablesViewState>

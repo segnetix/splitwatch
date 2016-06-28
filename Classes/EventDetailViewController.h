@@ -55,7 +55,7 @@
 @property (nonatomic, retain) IBOutlet UILabel *time;
 @property (nonatomic, retain) IBOutlet UILabel *distanceLabel;
 @property (nonatomic, retain) IBOutlet UILabel *athleteLabel;
-@property (nonatomic, retain) SplitHeaderView *splitViewHeader;
+@property (nonatomic, retain) SplitHeaderView *splitHeader;
 @property (nonatomic, retain) IBOutlet SplitDetailViewController *splitDetailViewController;
 @property (nonatomic, assign) SettingsViewController *settingsViewController;
 @property (nonatomic, retain) IBOutlet UIPickerView *pickView;

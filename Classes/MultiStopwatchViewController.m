@@ -613,7 +613,7 @@
 
 - (NSArray *)getNames
 {
-    NSMutableArray *names = [[[NSMutableArray alloc] initWithCapacity:5] autorelease];
+    NSMutableArray *names = [[[NSMutableArray alloc] initWithCapacity:12] autorelease];
     
     for (Stopwatch *watch in multiStopwatchTableViewController.watches)
     {

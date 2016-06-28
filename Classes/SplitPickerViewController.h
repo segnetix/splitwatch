@@ -44,7 +44,7 @@
 @property (nonatomic, retain) IBOutlet UILabel *beforeSplitLabel;
 @property (nonatomic, retain) IBOutlet UILabel *afterTimeLabel;
 @property (nonatomic, retain) IBOutlet UILabel *afterSplitLabel;
-@property (nonatomic, weak) SplitDetailViewController *splitDetailViewController;
+@property (assign)   SplitDetailViewController *splitDetailViewController;
 
 - (id)initWithEvent:(Event *)theEvent andRow:(int)row;
 

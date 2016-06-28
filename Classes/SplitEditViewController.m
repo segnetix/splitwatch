@@ -18,7 +18,7 @@
 @synthesize unitsControl;
 @synthesize kiloControl;
 @synthesize	furlongDisplayControl;
-@synthesize splitViewHeader;
+@synthesize splitHeader;
 @synthesize splitDetailViewController;
 @synthesize pickerViewController;
 @synthesize pickerTopImageView;
@@ -50,10 +50,10 @@
 		appDelegate = (StopwatchAppDelegate *)[[UIApplication sharedApplication] delegate];
 		database = [appDelegate getEventDatabase];
 		
-		// splitViewHeader
-		splitViewHeader = [[SplitHeaderView alloc] init];
-        splitViewHeader.translatesAutoresizingMaskIntoConstraints = NO;
-        splitViewHeader.tag = @"splitViewHeader";
+		// splitHeader
+		splitHeader = [[SplitHeaderView alloc] init];
+        splitHeader.translatesAutoresizingMaskIntoConstraints = NO;
+        splitHeader.tag = @"splitHeader";
     }
 	
     return self;
@@ -98,9 +98,9 @@
     UIImageView *separatorImageView = [[UIImageView alloc] initWithImage:separatorImage];
     separatorImageView.translatesAutoresizingMaskIntoConstraints = NO;
     
-    NSDictionary *views = NSDictionaryOfVariableBindings(splitViewHeader, splitDetailView, separatorImageView);
+    NSDictionary *views = NSDictionaryOfVariableBindings(splitHeader, splitDetailView, separatorImageView);
     
-    [self.view addSubview:splitViewHeader];
+    [self.view addSubview:splitHeader];
     [self.view addSubview:splitDetailView];
     [self.view addSubview:separatorImageView];
     
@@ -109,14 +109,14 @@
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-215-[separatorImageView(1)]" options:0 metrics:nil views:views]];
     [separatorImageView release];
     
-    // splitViewHeader/splitDetailView
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[splitViewHeader]|" options:0 metrics:nil views:views]];
+    // splitHeader/splitDetailView
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[splitHeader]|" options:0 metrics:nil views:views]];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[splitDetailView]|" options:0 metrics:nil views:views]];
     
     if (IPAD) {
-        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-216-[splitViewHeader(30)][splitDetailView]-50-|" options:0 metrics:nil views:views]];
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-216-[splitHeader(30)][splitDetailView]-50-|" options:0 metrics:nil views:views]];
     } else {
-        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-216-[splitViewHeader(20)][splitDetailView]-50-|" options:0 metrics:nil views:views]];
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-216-[splitHeader(20)][splitDetailView]-50-|" options:0 metrics:nil views:views]];
     }
     
 	// Uncomment the following line to display an Edit button in the navigation bar for this view controller.
@@ -175,11 +175,11 @@
 	
 	bLoading = NO;
     
-    [splitViewHeader setup];
+    [splitHeader setup];
     NSMutableArray *textArray = [Utilities getSplitViewHeaderArray:event.lapDistance Units:event.iEventType KiloSplits:event.bKiloSplits FurlongDisplayMode:event.bFurlongMode];
-    [splitViewHeader setTextWithArray:textArray];
+    [splitHeader setTextWithArray:textArray];
     
-    [splitViewHeader release];
+    [splitHeader release];
     [splitEditLabelView release];
 }
 
@@ -290,7 +290,7 @@
 		[self updateEventWithChanges];
         
         NSMutableArray *textArray = [Utilities getSplitViewHeaderArray:event.lapDistance Units:event.iEventType KiloSplits:event.bKiloSplits FurlongDisplayMode:event.bFurlongMode];
-        [splitViewHeader setTextWithArray:textArray];
+        [splitHeader setTextWithArray:textArray];
         
 		[splitDetailViewController resetLapInterval:event.lapDistance Units:event.iEventType KiloSplits:event.bKiloSplits FurlongMode:event.bFurlongMode];
 		[splitDetailViewController refreshSplitView:NO];
