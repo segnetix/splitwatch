@@ -8,6 +8,7 @@
 
 #import "EventDetailViewController.h"
 #import "SplitEditViewController.h"
+#import "ReportSelectorViewController.h"
 #import "StopwatchAppDelegate.h"
 #import "Utilities.h"
 
@@ -506,9 +507,27 @@
 
 - (void)composeEmail:(id)sender
 {
-	if (bEditing)
-		return;
+    if (bEditing)
+        return;
+    
+    ReportSelectorViewController *reportSelectorVC = [[ReportSelectorViewController alloc] init];
+    reportSelectorVC.athlete = event.runnerName;
+    reportSelectorVC.event = event.eventName;
+    reportSelectorVC.date = date.text = [Utilities formatDateTime:event.date format:@"YYYY-MM-dd"];
+    reportSelectorVC.distance = [Utilities stringFromDistance:event.distance
+                                                        Units:event.iEventType
+                                                    ShowMiles:YES
+                                                 ShowSplitTag:NO
+                                                     Interval:(int)event.lapDistance
+                                           FurlongDisplayMode:event.bFurlongMode];
+    
+    [self.navigationController pushViewController:reportSelectorVC animated:YES];
+    [reportSelectorVC release];
 	
+    return;
+    
+    /************************************************************/
+    
 	//[appDelegate playClickSound];
 	
 	if ([MFMailComposeViewController canSendMail])

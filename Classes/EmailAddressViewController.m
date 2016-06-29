@@ -212,7 +212,6 @@
 - (void)peoplePickerNavigationControllerDidCancel:
 (ABPeoplePickerNavigationController *)peoplePicker
 {
-    //[appDelegate playClickSound];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -229,12 +228,10 @@
 {
     ABMultiValueRef multi = ABRecordCopyValue(person, kABPersonEmailProperty);
     
-    if (multi != nil)
-    {
+    if (multi != nil) {
         NSString *email = (__bridge NSString *)ABMultiValueCopyValueAtIndex(multi, identifier);
         
-        if (email != nil)
-        {
+        if (email != nil) {
             NSLog(@"email: %@", email);
             [emailAddressItems addObject:email];
             [self.emailAddressTableViewController.tableView reloadData];

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ReportSelectorCell" id="KGk-i7-Jjw" customClass="ReportSelectorCell">
+            <rect key="frame" x="0.0" y="0.0" width="429" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="429" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Selector" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5fQ-3z-FaM" userLabel="Selector">
+                        <rect key="frame" x="15" y="9" width="129" height="26"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="26" id="vm5-nn-H4b"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="18"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Selection" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YRz-Yw-6fU" userLabel="Selection">
+                        <rect key="frame" x="152" y="9" width="269" height="26"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="26" id="DY6-ZP-eDd"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="18"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="5fQ-3z-FaM" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="BLm-j1-zOL"/>
+                    <constraint firstItem="YRz-Yw-6fU" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="FxC-db-4SD"/>
+                    <constraint firstItem="5fQ-3z-FaM" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.3" id="YSz-y7-GLO"/>
+                    <constraint firstItem="5fQ-3z-FaM" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="lVz-55-aeW"/>
+                    <constraint firstAttribute="trailing" secondItem="YRz-Yw-6fU" secondAttribute="trailing" constant="8" id="yTU-sH-rgf"/>
+                    <constraint firstItem="YRz-Yw-6fU" firstAttribute="leading" secondItem="5fQ-3z-FaM" secondAttribute="trailing" constant="8" symbolic="YES" id="zxV-9z-p4L"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="selectionLabel" destination="YRz-Yw-6fU" id="54l-86-NpS"/>
+                <outlet property="selectorLabel" destination="5fQ-3z-FaM" id="Nuo-z1-C0Y"/>
+            </connections>
+            <point key="canvasLocation" x="577.5" y="302"/>
+        </tableViewCell>
+    </objects>
+</document>
