@@ -295,15 +295,15 @@
 
 + (NSString *)formatDistance:(NSInteger)distance
 {
-	NSString *distStr = @"";
+	NSMutableString *distStr = [NSMutableString stringWithString:@""];
 	
 	if (distance < 10000)
-		distStr = [distStr stringByAppendingString:@" "];
+		[distStr appendString:@" "];
 	if (distance < 1000)
-		distStr = [distStr stringByAppendingString:@" "];
+		[distStr appendString:@" "];
 	if (distance < 100)
-		distStr = [distStr stringByAppendingString:@" "];
-	distStr = [distStr stringByAppendingString:[NSString stringWithFormat:@"%ld", (long)distance]];
+		[distStr appendString:@" "];
+	[distStr appendFormat:@"%ld", (long)distance];
 	
 	return distStr;
 }
@@ -631,6 +631,7 @@
 	return hundredths;
 }
 
+/*
 + (NSString *)lapTextForRow:(NSInteger)row
              forDisplayMode:(NSInteger)mode
             withSplitsCount:(int)splitsCount
@@ -681,6 +682,7 @@
     
     return lapText;
 }
+*/
 
 /*
 + (NSString *)timeTextForRow:(NSInteger)row forDisplayMode:(NSInteger)mode
@@ -738,5 +740,514 @@
     return cellText;
 }
 */
+
+#pragma mark -
+#pragma mark Cell Text Methods
+
++ (NSString *)lapTextForRow:(NSInteger)row forDisplayMode:(NSInteger)mode forSplits:(NSMutableArray*)splits forIntervalDistance:(NSInteger)intervalDistance forUnits:(int)iUnits forFurlongMode:(BOOL)bFurlongMode
+{
+    NSString *lapText = @"";
+    
+    if (splits.count > 0)
+    {
+        if (mode == kDisplayMode_Normal)
+        {
+            int totalDistance = (int)((row + 1) * intervalDistance);
+            
+            lapText = [Utilities stringFromDistance:totalDistance
+                                              Units:iUnits
+                                          ShowMiles:NO
+                                       ShowSplitTag:NO
+                                           Interval:(int)intervalDistance
+                                 FurlongDisplayMode:bFurlongMode];
+        }
+        else if (mode == kDisplayMode_Space)
+        {
+            lapText = @"";
+        }
+        else if (mode == kDisplayMode_Last_Header)			// v1.2
+        {
+            lapText = @"Last:";
+        }
+        else if (mode == kDisplayMode_Last_Split)			// v1.2
+        {
+            lapText = @"";
+        }
+        else if (mode == kDisplayMode_Avg_Split)			// v1.2
+        {
+            lapText = @"Avg:";
+        }
+        else if (mode == kDisplayMode_Min_Split)			// v1.2
+        {
+            lapText = @"Min:";
+        }
+        else if (mode == kDisplayMode_Max_Split)			// v1.2
+        {
+            lapText = @"Max:";
+        }
+    }
+    
+    return lapText;
+}
+
++ (NSString *)timeTextForRow:(NSInteger)row forDisplayMode:(NSInteger)mode forSplits:(NSMutableArray*)splits forIntervalDistance:(NSInteger)intervalDistance forUnits:(int)iUnits forFurlongMode:(BOOL)bFurlongMode
+{
+    NSString *cellText = @"";
+    
+    if (splits.count > 0)
+    {
+        if (mode == kDisplayMode_Normal)
+        {
+            // lap time
+            NSNumber *nSplit = [splits objectAtIndex:row];
+            NSTimeInterval split = [nSplit doubleValue];
+            
+            // if split > 1 hour, drop precision to 1
+            // if split > 10 hours, drop precision to 0 (no fractional seconds)
+            if (split < 3600)
+                cellText = [Utilities shortFormatTime:split precision:2];
+            else if (split < 36000)
+                cellText = [Utilities shortFormatTime:split precision:1];
+            else
+                cellText = [Utilities shortFormatTime:split precision:0];
+        }
+        else if (mode == kDisplayMode_Space /*&& iUnits < kLap*/)
+        {
+            cellText = @"";
+        }
+        else if (mode == kDisplayMode_Last_Header /*&& iUnits < kLap*/)			// v1.2
+        {
+            cellText = [Utilities stringFromDistance:intervalDistance
+                                               Units:iUnits
+                                           ShowMiles:NO
+                                        ShowSplitTag:NO
+                                            Interval:(int)intervalDistance
+                                  FurlongDisplayMode:bFurlongMode];
+        }
+        else if (mode == kDisplayMode_Last_Split /*&& iUnits < kLap*/)			// v1.2
+        {
+            cellText = [self lastSplitTextForColumn:0 forSplits:splits];
+        }
+        else if (mode == kDisplayMode_Avg_Split /*&& iUnits < kLap*/)			// v1.2
+        {
+            cellText = [Utilities avgSplit:splits forColumn:1];
+        }
+        else if (mode == kDisplayMode_Min_Split /*&& iUnits < kLap*/)			// v1.2
+        {
+            cellText = [Utilities minSplit:splits forColumn:1];
+        }
+        else if (mode == kDisplayMode_Max_Split /*&& iUnits < kLap*/)			// v1.2
+        {
+            cellText = [Utilities maxSplit:splits forColumn:1];
+        }
+    }
+    
+    return cellText;
+}
+
++ (NSString *)splitTextForRow:(NSInteger)row Column:(NSInteger)column forDisplayMode:(NSInteger)mode forSplits:(NSMutableArray*)splits forIntervalDistance:(NSInteger)intervalDistance forUnits:(int)iUnits forFurlongMode:(BOOL)bFurlongMode forKiloSplits:(BOOL)bKiloSplits
+{
+    NSString *cellText = @"";
+    NSInteger modValue;
+    
+    switch (column)
+    {
+        case 1: modValue = 1; break;
+        case 2: modValue = 2; break;
+        case 3: modValue = 4; break;
+        case 4: modValue = (bKiloSplits) ? 5 : 8; break;
+        default: modValue = 99; break;
+    }
+    
+    if (splits.count > 0)
+    {
+        if (mode == kDisplayMode_Normal)
+        {
+            if (iUnits == kLap && column >= 2)
+            {
+                return cellText;
+            }
+            
+            // lap count
+            int lapCount = (int)(row + 1);
+            
+            if (lapCount % modValue == 0)
+            {
+                // lap time
+                NSNumber *nSplit = [splits objectAtIndex:row];
+                NSTimeInterval split = [nSplit doubleValue];
+                
+                // interval time
+                NSTimeInterval intervaltime = split;
+                
+                if (lapCount > modValue)
+                {
+                    NSNumber *nPrevSplit = [splits objectAtIndex:row - modValue];
+                    intervaltime = split - [nPrevSplit doubleValue];
+                }
+                
+                // if split > 1 hour, drop precision to 1
+                // if split > 10 hours, drop precision to 0 (no fractional seconds)
+                if (intervaltime < 3600)
+                    cellText = [Utilities shortFormatTime:intervaltime precision:1];
+                else if (intervaltime < 36000)
+                    cellText = [Utilities shortFormatTime:intervaltime precision:1];
+                else
+                    cellText = [Utilities shortFormatTime:intervaltime precision:0];
+            }
+        }
+        else if (mode == kDisplayMode_Space)
+        {
+            cellText = @"";
+        }
+        else if (mode == kDisplayMode_Last_Header)
+        {
+            if (column < splits.count)
+                cellText = [Utilities stringFromDistance:((column + 1) * intervalDistance)
+                                                   Units:iUnits
+                                               ShowMiles:NO
+                                            ShowSplitTag:NO
+                                                Interval:(int)intervalDistance
+                                      FurlongDisplayMode:bFurlongMode];
+        }
+        else if (mode == kDisplayMode_Last_Split)
+        {
+            cellText = [self lastSplitTextForColumn:column forSplits:splits];
+        }
+        else if (mode == kDisplayMode_Avg_Split && splits.count - 1 > column)
+        {
+            cellText = [Utilities avgSplit:splits forColumn:column + 1];
+        }
+        else if (mode == kDisplayMode_Max_Split && splits.count - 1 > column)
+        {
+            cellText = [Utilities maxSplit:splits forColumn:column + 1];
+        }
+        else if (mode == kDisplayMode_Min_Split && splits.count - 1 > column)
+        {
+            cellText = [Utilities minSplit:splits forColumn:column + 1];
+        }
+        else
+        {
+            cellText = @"";
+        }
+    }
+    
+    return cellText;
+}
+
++ (NSString *)lastSplitTextForColumn:(NSInteger)column forSplits:(NSMutableArray*)splits
+{
+    NSString *cellText = @"";
+    
+    if (splits.count > column)
+    {
+        // bump column as we start with last split column 2 (last split 1 is handled in timeTextForRow:)
+        column++;
+        
+        int lastSplitIndex = (int)(splits.count - 1);
+        
+        // final time
+        NSNumber *lastSplit = [splits lastObject];
+        NSTimeInterval finalTime = [lastSplit doubleValue];
+        
+        // interval time
+        NSTimeInterval intervaltime = 0;
+        
+        if (column == splits.count)
+        {
+            intervaltime = finalTime;
+        }
+        else
+        {
+            NSNumber *prevSplit = [splits objectAtIndex:lastSplitIndex - column];
+            intervaltime = finalTime - [prevSplit doubleValue];
+        }
+        
+        // if split > 1 hour, drop precision to 1
+        // if split > 10 hours, drop precision to 0 (no fractional seconds)
+        if (intervaltime < 3600)
+            cellText = [Utilities shortFormatTime:intervaltime precision:1];
+        else if (intervaltime < 36000)
+            cellText = [Utilities shortFormatTime:intervaltime precision:1];
+        else
+            cellText = [Utilities shortFormatTime:intervaltime precision:0];
+    }
+    
+    return cellText;
+}
+
++ (NSString *)splitHTMLTextForRow:(NSInteger)row forSplits:(NSMutableArray*)splits forIntervalDistance:(NSInteger)intervalDistance forUnits:(int)iUnits forFurlongMode:(BOOL)bFurlongMode forKiloSplits:(BOOL)bKiloSplits
+{
+    NSMutableString *splitRowText = [NSMutableString stringWithString:@""];
+    
+    if (splits.count > 0)
+    {
+        [splitRowText appendString:@"<tr class='splitData' align='right'>"];
+        [splitRowText appendFormat:@"<td>%@</td>", [self lapTextForRow:row forDisplayMode:kDisplayMode_Normal forSplits:splits forIntervalDistance:intervalDistance forUnits:iUnits forFurlongMode:bFurlongMode]];
+        [splitRowText appendFormat:@"<td>%@</td>", [self timeTextForRow:row forDisplayMode:kDisplayMode_Normal forSplits:splits forIntervalDistance:intervalDistance forUnits:iUnits forFurlongMode:bFurlongMode]];
+        [splitRowText appendFormat:@"<td>%@</td>", [self splitTextForRow:row Column: 1 forDisplayMode:kDisplayMode_Normal forSplits:splits forIntervalDistance:intervalDistance forUnits:iUnits forFurlongMode:bFurlongMode forKiloSplits:bKiloSplits]];
+        [splitRowText appendFormat:@"<td>%@</td>", [self splitTextForRow:row Column: 2 forDisplayMode:kDisplayMode_Normal forSplits:splits forIntervalDistance:intervalDistance forUnits:iUnits forFurlongMode:bFurlongMode forKiloSplits:bKiloSplits]];
+        [splitRowText appendFormat:@"<td>%@</td>", [self splitTextForRow:row Column: 3 forDisplayMode:kDisplayMode_Normal forSplits:splits forIntervalDistance:intervalDistance forUnits:iUnits forFurlongMode:bFurlongMode forKiloSplits:bKiloSplits]];
+        [splitRowText appendFormat:@"<td>%@</td>", [self splitTextForRow:row Column: 4 forDisplayMode:kDisplayMode_Normal forSplits:splits forIntervalDistance:intervalDistance forUnits:iUnits forFurlongMode:bFurlongMode forKiloSplits:bKiloSplits]];
+        [splitRowText appendString:@"</tr>"];
+    }
+    
+    return splitRowText;
+}
+
+// v1.2 - added rowCount and handling for lap mode and furlong mode
++ (NSString *)lastSplitHeaderHTMLText:(int)rowCount forSplits:(NSMutableArray*)splits forUnits:(int)iUnits forIntervalDistance:(NSInteger)intervalDistance forFurlongMode:(BOOL)bFurlongMode
+{
+    //if (iUnits == kLap)
+    //	return @"";
+    
+    NSMutableString *lastSplitHeaderText = [NSMutableString stringWithString:@"<tr><td> </td></tr><tr class='lastSplitDataHeader' style='font-weight:bold;' align='right'>"];
+    
+    if (rowCount > 1)
+        [lastSplitHeaderText appendString:@"<td>Last:</td>"];
+    else
+        [lastSplitHeaderText appendString:@"<td> </td>"];
+    
+    // rolled up split header
+    if (iUnits == kMetric)
+    {
+        if (rowCount == 2)
+        {
+            switch (intervalDistance) {
+                case  25:	[lastSplitHeaderText appendFormat:@"<td>%u</td><td>%u</td>",  25,  50]; break;
+                case  50:	[lastSplitHeaderText appendFormat:@"<td>%u</td><td>%u</td>",  50, 100]; break;
+                case 100:	[lastSplitHeaderText appendFormat:@"<td>%u</td><td>%u</td>", 100, 200]; break;
+                case 200:	[lastSplitHeaderText appendFormat:@"<td>%u</td><td>%u</td>", 200, 400]; break;
+                case 400:	[lastSplitHeaderText appendFormat:@"<td>%u</td><td>%u</td>", 400, 800]; break;
+                default:	break;
+            }
+        }
+        else if (rowCount == 3)
+        {
+            switch (intervalDistance) {
+                case  25:	[lastSplitHeaderText appendFormat:@"<td>%u</td><td>%u</td><td>%u</td>",  25,  50,   75]; break;
+                case  50:	[lastSplitHeaderText appendFormat:@"<td>%u</td><td>%u</td><td>%u</td>",  50, 100,  150]; break;
+                case 100:	[lastSplitHeaderText appendFormat:@"<td>%u</td><td>%u</td><td>%u</td>", 100, 200,  300]; break;
+                case 200:	[lastSplitHeaderText appendFormat:@"<td>%u</td><td>%u</td><td>%u</td>", 200, 400,  600]; break;
+                case 400:	[lastSplitHeaderText appendFormat:@"<td>%u</td><td>%u</td><td>%u</td>", 400, 800, 1200]; break;
+                default:	break;
+            }
+        }
+        else if (rowCount == 4)
+        {
+            switch (intervalDistance) {
+                case  25:	[lastSplitHeaderText appendFormat:@"<td>%u</td><td>%u</td><td>%u</td><td>%u</td>",  25,  50,   75,  100]; break;
+                case  50:	[lastSplitHeaderText appendFormat:@"<td>%u</td><td>%u</td><td>%u</td><td>%u</td>",  50, 100,  150,  200]; break;
+                case 100:	[lastSplitHeaderText appendFormat:@"<td>%u</td><td>%u</td><td>%u</td><td>%u</td>", 100, 200,  300,  400]; break;
+                case 200:	[lastSplitHeaderText appendFormat:@"<td>%u</td><td>%u</td><td>%u</td><td>%u</td>", 200, 400,  600,  800]; break;
+                case 400:	[lastSplitHeaderText appendFormat:@"<td>%u</td><td>%u</td><td>%u</td><td>%u</td>", 400, 800, 1200, 1600]; break;
+                default:	break;
+            }
+        }
+        else
+        {
+            switch (intervalDistance) {
+                case  25:	[lastSplitHeaderText appendFormat:@"<td>%u</td><td>%u</td><td>%u</td><td>%u</td><td>%u</td>",  25,  50,   75,  100,  125]; break;
+                case  50:	[lastSplitHeaderText appendFormat:@"<td>%u</td><td>%u</td><td>%u</td><td>%u</td><td>%u</td>",  50, 100,  150,  200,  250]; break;
+                case 100:	[lastSplitHeaderText appendFormat:@"<td>%u</td><td>%u</td><td>%u</td><td>%u</td><td>%u</td>", 100, 200,  300,  400,  500]; break;
+                case 200:	[lastSplitHeaderText appendFormat:@"<td>%u</td><td>%u</td><td>%u</td><td>%u</td><td>%u</td>", 200, 400,  600,  800, 1000]; break;
+                case 400:	[lastSplitHeaderText appendFormat:@"<td>%u</td><td>%u</td><td>%u</td><td>%u</td><td>%u</td>", 400, 800, 1200, 1600, 2000]; break;
+                default:	break;
+            }
+        }
+    }
+    else if (iUnits == kEnglish)
+    {
+        if (bFurlongMode && (intervalDistance == 220 || intervalDistance == 440))
+        {
+            if (intervalDistance == 220)
+            {
+                if (rowCount == 3)
+                    [lastSplitHeaderText appendFormat:@"<td>%@</td><td>%@</td><td>%@</td>",  @"1/8", @"1/4", @"3/8"];
+                else if (rowCount == 4)
+                    [lastSplitHeaderText appendFormat:@"<td>%@</td><td>%@</td><td>%@</td><td>%@</td>",  @"1/8", @"1/4", @"3/8", @"1/2"];
+                else
+                    [lastSplitHeaderText appendFormat:@"<td>%@</td><td>%@</td><td>%@</td><td>%@</td><td>%@</td>",  @"1/8", @"1/4", @"3/8", @"1/2", @"5/8"];
+            }
+            else
+            {
+                if (rowCount == 3)
+                    [lastSplitHeaderText appendFormat:@"<td>%@</td><td>%@</td><td>%@</td>",  @"1/4", @"1/2", @"3/4"];
+                else if (rowCount == 4)
+                    [lastSplitHeaderText appendFormat:@"<td>%@</td><td>%@</td><td>%@</td><td>%@</td>",  @"1/4", @"1/2", @"3/4", @"Mile"];
+                else
+                    [lastSplitHeaderText appendFormat:@"<td>%@</td><td>%@</td><td>%@</td><td>%@</td><td>%@</td>",  @"1/4", @"1/2", @"3/4", @"Mile", @"1-1/4"];
+            }
+        }
+        else
+        {
+            if (rowCount == 3)
+            {
+                switch (intervalDistance) {
+                    case  25:	[lastSplitHeaderText appendFormat:@"<td>%u</td><td>%u</td><td>%u</td>",  25,  50,   75]; break;
+                    case  50:	[lastSplitHeaderText appendFormat:@"<td>%u</td><td>%u</td><td>%u</td>",  50, 100,  150]; break;
+                    case 110:	[lastSplitHeaderText appendFormat:@"<td>%u</td><td>%u</td><td>%u</td>", 110, 220,  330]; break;
+                    case 220:	[lastSplitHeaderText appendFormat:@"<td>%u</td><td>%u</td><td>%u</td>", 220, 440,  660]; break;
+                    case 440:	[lastSplitHeaderText appendFormat:@"<td>%u</td><td>%u</td><td>%u</td>", 440, 880, 1320]; break;
+                    default:	break;
+                }
+            }
+            else if (rowCount == 4)
+            {
+                switch (intervalDistance) {
+                    case  25:	[lastSplitHeaderText appendFormat:@"<td>%u</td><td>%u</td><td>%u</td><td>%u</td>",  25,  50,   75, 100]; break;
+                    case  50:	[lastSplitHeaderText appendFormat:@"<td>%u</td><td>%u</td><td>%u</td><td>%u</td>",  50, 100,  150, 200]; break;
+                    case 110:	[lastSplitHeaderText appendFormat:@"<td>%u</td><td>%u</td><td>%u</td><td>%u</td>", 110, 220,  330, 440]; break;
+                    case 220:	[lastSplitHeaderText appendFormat:@"<td>%u</td><td>%u</td><td>%u</td><td>%u</td>", 220, 440,  660, 880]; break;
+                    case 440:	[lastSplitHeaderText appendFormat:@"<td>%u</td><td>%u</td><td>%u</td><td>%@</td>", 440, 880, 1320, @"Mile"]; break;
+                    default:	break;
+                }
+            }
+            else
+            {
+                switch (intervalDistance) {
+                    case  25:	[lastSplitHeaderText appendFormat:@"<td>%u</td><td>%u</td><td>%u</td><td>%u</td><td>%u</td>",  25,  50,   75, 100,  125]; break;
+                    case  50:	[lastSplitHeaderText appendFormat:@"<td>%u</td><td>%u</td><td>%u</td><td>%u</td><td>%u</td>",  50, 100,  150, 200,  250]; break;
+                    case 110:	[lastSplitHeaderText appendFormat:@"<td>%u</td><td>%u</td><td>%u</td><td>%u</td><td>%u</td>", 110, 220,  330, 440,  550]; break;
+                    case 220:	[lastSplitHeaderText appendFormat:@"<td>%u</td><td>%u</td><td>%u</td><td>%u</td><td>%u</td>", 220, 440,  660, 880, 1100]; break;
+                    case 440:	[lastSplitHeaderText appendFormat:@"<td>%u</td><td>%u</td><td>%u</td><td>%@</td><td>%@</td>", 440, 880, 1320, @"Mile", @"Mile-1/4"]; break;
+                    default:	break;
+                }
+            }
+        }
+    }
+    else if (iUnits == kLap)
+    {
+        if (rowCount == 3) {
+            [lastSplitHeaderText appendFormat:@"<td>%u</td><td>%u</td><td>%u</td>", 1, 2, 3];
+        }
+        else if (rowCount == 4) {
+            [lastSplitHeaderText appendFormat:@"<td>%u</td><td>%u</td><td>%u</td><td>%u</td>", 1, 2, 3, 4];
+        }
+        else {
+            [lastSplitHeaderText appendFormat:@"<td>%u</td><td>%u</td><td>%u</td><td>%u</td><td>%u</td>", 1, 2, 3, 4, 5];
+        }
+    }
+    
+    [lastSplitHeaderText appendString:@"</tr>"];
+    
+    return lastSplitHeaderText;
+}
+
++ (NSString *)lastSplitHTMLText:(NSMutableArray*)splits
+{
+    //if (iUnits == kLap)
+    //	return @"";
+    
+    NSMutableString *lastSplitRowText = [NSMutableString stringWithString:@"<tr class='lastSplitData' align='right'>"];
+    
+    if (splits.count > 0)
+    {
+        [lastSplitRowText appendString:@"<td></td>"];
+        [lastSplitRowText appendFormat:@"<td>%@</td>", [Utilities lastSplitTextForColumn: 0 forSplits:splits]];
+        [lastSplitRowText appendFormat:@"<td>%@</td>", [Utilities lastSplitTextForColumn: 1 forSplits:splits]];
+        [lastSplitRowText appendFormat:@"<td>%@</td>", [Utilities lastSplitTextForColumn: 2 forSplits:splits]];
+        [lastSplitRowText appendFormat:@"<td>%@</td>", [Utilities lastSplitTextForColumn: 3 forSplits:splits]];
+        [lastSplitRowText appendFormat:@"<td>%@</td>", [Utilities lastSplitTextForColumn: 4 forSplits:splits]];
+        [lastSplitRowText appendString:@"</tr>"];
+    }
+    
+    return lastSplitRowText;
+}
+
++ (NSString *)getSplitHTMLDataString:(NSMutableArray*)splits forIntervalDistance:(NSInteger)intervalDistance forUnits:(int)iUnits forKiloSplits:(BOOL)bKiloSplits forFurlongMode:(BOOL)bFurlongMode
+{
+    NSMutableString *splitDataStr = [NSMutableString stringWithString:@""];
+    
+    [splitDataStr appendString:@"<table id='splitData' cellpadding='5'>"];
+    [splitDataStr appendString:@"<tr id='headers' style='font-weight:bold;' align='center'>"];
+    [splitDataStr appendString:@"<td align='right'>Split</td><td>Time</td>"];
+    
+    // rolled up split header
+    if (iUnits == kMetric)
+    {
+        if (bKiloSplits)
+        {
+            switch (intervalDistance) {
+                case  25:	[splitDataStr appendFormat:@"<td>%u</td><td>%u</td><td>%u</td><td>%u</td>",  25,  50,  100,  200]; break;
+                case  50:	[splitDataStr appendFormat:@"<td>%u</td><td>%u</td><td>%u</td><td>%u</td>",  50, 100,  200,  400]; break;
+                case 100:	[splitDataStr appendFormat:@"<td>%u</td><td>%u</td><td>%u</td><td>%u</td>", 100, 200,  400,  800]; break;
+                case 200:	[splitDataStr appendFormat:@"<td>%u</td><td>%u</td><td>%u</td><td>%u</td>", 200, 400,  800, 1000]; break;
+                case 400:	[splitDataStr appendFormat:@"<td>%u</td><td>%u</td><td>%u</td><td>%u</td>", 400, 800, 1000, 1600]; break;
+                default:	break;
+            }
+        }
+        else
+        {
+            switch (intervalDistance) {
+                case  25:	[splitDataStr appendFormat:@"<td>%u</td><td>%u</td><td>%u</td><td>%u</td>",  25,  50,  100,  200]; break;
+                case  50:	[splitDataStr appendFormat:@"<td>%u</td><td>%u</td><td>%u</td><td>%u</td>",  50, 100,  200,  400]; break;
+                case 100:	[splitDataStr appendFormat:@"<td>%u</td><td>%u</td><td>%u</td><td>%u</td>", 100, 200,  400,  800]; break;
+                case 200:	[splitDataStr appendFormat:@"<td>%u</td><td>%u</td><td>%u</td><td>%u</td>", 200, 400,  800, 1600]; break;
+                case 400:	[splitDataStr appendFormat:@"<td>%u</td><td>%u</td><td>%u</td><td>%u</td>", 400, 800, 1600, 3200]; break;
+                default:	break;
+            }
+        }
+    }
+    else if (iUnits == kEnglish)
+    {
+        if (bFurlongMode && (intervalDistance == 220 || intervalDistance == 440))
+        {
+            if (intervalDistance == 220)
+                [splitDataStr appendFormat:@"<td>%@</td><td>%@</td><td>%@</td><td>%@</td>",  @"1/8", @"1/4", @"1/2", @"Mile"];
+            else
+                [splitDataStr appendFormat:@"<td>%@</td><td>%@</td><td>%@</td><td>%@</td>",  @"1/4", @"1/2", @"Mile", @"2-Mile"];
+        }
+        else
+        {
+            switch (intervalDistance)
+            {
+                case  25:	[splitDataStr appendFormat:@"<td>%u</td><td>%u</td><td>%u</td><td>%u</td>",  25,  50, 100, 200]; break;
+                case  50:	[splitDataStr appendFormat:@"<td>%u</td><td>%u</td><td>%u</td><td>%u</td>",  50, 100, 200, 400]; break;
+                case 110:	[splitDataStr appendFormat:@"<td>%u</td><td>%u</td><td>%u</td><td>%u</td>", 110, 220, 440, 880]; break;
+                case 220:	[splitDataStr appendFormat:@"<td>%u</td><td>%u</td><td>%u</td><td>%@</td>", 220, 440, 880, @"Mile"]; break;
+                case 440:	[splitDataStr appendFormat:@"<td>%u</td><td>%u</td><td>%@</td><td>%@</td>", 440, 880, @"Mile", @"2-Mile"]; break;
+                default:	break;
+            }
+        }
+    }
+    else if (iUnits == kLap)
+    {
+        [splitDataStr appendFormat:@"<td>%@</td>",  @"Interval"];
+    }
+    
+    // rolled up split rows
+    for (int row = 0; row < splits.count; row++)
+    {
+        [splitDataStr appendString:[self splitHTMLTextForRow:row forSplits:splits forIntervalDistance:intervalDistance forUnits:iUnits forFurlongMode:bFurlongMode forKiloSplits:bKiloSplits]];
+    }
+    
+    // write last header and split rows
+    // v1.2 - write Min, Max, Avg split summary
+    // v2.0 - summaries for all distances
+    if (splits.count > 1)
+    {
+        [splitDataStr appendFormat:@"%@", [self lastSplitHeaderHTMLText:(int)splits.count forSplits:splits forUnits:iUnits forIntervalDistance:intervalDistance forFurlongMode:bFurlongMode]];
+        [splitDataStr appendFormat:@"%@", [self lastSplitHTMLText:splits]];
+        [splitDataStr appendString:@"<tr><td align='right'> </td></tr>"];
+        
+        [splitDataStr appendString:@"<td><b>Min:</b></td>"];
+        for (int column = 1; column <= splits.count && column <= 5; column++)
+            [splitDataStr appendFormat:@"<td align='right'>%@</td>", [Utilities minSplit:splits forColumn:column]];
+        
+        [splitDataStr appendString:@"<tr></tr><td><b>Max:</b></td>"];
+        for (int column = 1; column <= splits.count && column <= 5; column++)
+            [splitDataStr appendFormat:@"<td align='right'>%@</td>", [Utilities maxSplit:splits forColumn:column]];
+        
+        [splitDataStr appendString:@"<tr></tr><td><b>Avg:</b></td>"];
+        for (int column = 1; column <= splits.count && column <= 5; column++)
+            [splitDataStr appendFormat:@"<td align='right'>%@</td>", [Utilities avgSplit:splits forColumn:column]];
+    }
+    
+    // end table
+    [splitDataStr appendString:@"</table>"];
+    
+    return splitDataStr;
+}
 
 @end

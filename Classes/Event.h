@@ -64,6 +64,6 @@
 - (double)getSplit:(int)splitIndex;
 - (void)setSplit:(double)split forIndex:(int)splitIndex;
 - (BOOL)split:(double)split isValidForSplitIndex:(int)splitIndex;
-- (NSArray *)getSplitData;
+- (NSMutableArray *)getSplitData;
 
 @end

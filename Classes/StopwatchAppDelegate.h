@@ -60,6 +60,7 @@
 - (sqlite3 *)getEventDatabase;
 - (NSString *)getDatabaseVersion;
 - (NSArray *)getEventInfoArrayBasedOnSelection:(NSInteger)selection withFilter:(NSString *)filter;
+- (NSArray *)getEventInfoArrayBasedOnAthlete:(NSString *)athlete Event:(NSString *)event Date:(NSString *)date Distance:(NSString*)distance;
 - (BOOL)isSetForTouchUpStart;
 - (BOOL)isSetForTouchUpLap;
 

@@ -73,7 +73,6 @@
     lapResetButton.layer.borderColor = [UIColor blackColor].CGColor;
     [lapResetButton addTarget:self action:@selector(lapResetButtonPressed) forControlEvents:UIControlEventTouchDown];
     lapResetButton.showsTouchWhenHighlighted = NO;
-    
 }
 
 - (void)additionalSetup
@@ -119,20 +118,16 @@
 {	
 	[watch startStopButtonPressed];
 	
-	if (watch.bTimerRunning)
-	{
+	if (watch.bTimerRunning) {
 		// START BUTTON
 		[self flashBackground];
 		[self updateButtonState];
 		
-		if (sender == startStopButton)
-		{
+		if (sender == startStopButton) {
 			// play click sound
 			[appDelegate playClickSound];
 		}
-	}
-	else
-	{
+	} else {
 		// STOP BUTTON
 		[self flashBackground];
 		[self updateButtonState];
@@ -154,16 +149,14 @@
 
 - (IBAction)lapResetButtonPressed:(id)sender
 {	
-	if (sender == lapResetButton)
-	{
+	if (sender == lapResetButton) {
 		// play click sound
 		[appDelegate playClickSound];
 	}
 	
 	[watch lapResetButtonPressed];
 	
-	if (watch.bTimerRunning)
-	{
+	if (watch.bTimerRunning) {
 		// LAP BUTTON
 		lastLapButtonPressTime = [NSDate timeIntervalSinceReferenceDate];
 		
@@ -177,9 +170,7 @@
 		[self flashBackground];
 		[self freezeLapDisplay];
 		[self disableLapButton];	// if enabled
-	}
-	else
-	{
+	} else {
 		// RESET BUTTON
 		runningTimeLabel.text = [Utilities shortFormatTime:0 precision:2];
 		lapTimeLabel.text = @"";

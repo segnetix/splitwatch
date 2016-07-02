@@ -48,13 +48,4 @@
 - (void)flashSplitCellsInRow:(int)row;
 - (void)refreshSplitView:(BOOL)scrollToLastLine;
 
-- (NSString *)lapTextForRow:(NSInteger)row forDisplayMode:(NSInteger)mode;
-- (NSString *)timeTextForRow:(NSInteger)row forDisplayMode:(NSInteger)mode;
-- (NSString *)splitTextForRow:(NSInteger)row Column:(NSInteger)column forDisplayMode:(NSInteger)mode;
-- (NSString *)lastSplitTextForColumn:(NSInteger)column;
-- (NSString *)lastSplitHeaderHTMLText:(int)rowCount;
-- (NSString *)lastSplitHTMLText;
-- (NSString *)splitHTMLTextForRow:(NSInteger)row;
-- (NSString *)getSplitHTMLDataString;
-
 @end

@@ -159,20 +159,20 @@
     beforeLabel.text = @"---";
     afterLabel.text  = @"---";
     //editLabel.text   = [NSString stringWithFormat:@"Split %ld", (long)pickerSplitIndex+1];
-    editLabel.text = [Utilities lapTextForRow:pickerSplitIndex forDisplayMode:kDisplayMode_Normal withSplitsCount:(int)event.splitArray.count intervalDistance:(int)event.lapDistance units:event.iEventType furlongMode:event.bFurlongMode];
+    editLabel.text = [Utilities lapTextForRow:pickerSplitIndex forDisplayMode:kDisplayMode_Normal forSplits:event.splitArray forIntervalDistance:event.lapDistance forUnits:event.iEventType forFurlongMode:event.bFurlongMode];
     
     if (pickerSplitIndex-1 >= 0)
     {
         beforeTime = [event getSplit:pickerSplitIndex-1];
         //beforeLabel.text = [NSString stringWithFormat:@"Split %ld", (long)pickerSplitIndex];
-        beforeLabel.text = [Utilities lapTextForRow:pickerSplitIndex-1 forDisplayMode:kDisplayMode_Normal withSplitsCount:(int)event.splitArray.count intervalDistance:(int)event.lapDistance units:event.iEventType furlongMode:event.bFurlongMode];
+        beforeLabel.text = [Utilities lapTextForRow:pickerSplitIndex-1 forDisplayMode:kDisplayMode_Normal forSplits:event.splitArray forIntervalDistance:event.lapDistance forUnits:event.iEventType forFurlongMode:event.bFurlongMode];
     }
     
     if (pickerSplitIndex+1 < [event.splitArray count])
     {
         afterTime = [event getSplit:pickerSplitIndex+1];
         //afterLabel.text = [NSString stringWithFormat:@"Split %ld", (long)pickerSplitIndex+2];
-        afterLabel.text = [Utilities lapTextForRow:pickerSplitIndex+1 forDisplayMode:kDisplayMode_Normal withSplitsCount:(int)event.splitArray.count intervalDistance:(int)event.lapDistance units:event.iEventType furlongMode:event.bFurlongMode];
+        afterLabel.text = [Utilities lapTextForRow:pickerSplitIndex+1 forDisplayMode:kDisplayMode_Normal forSplits:event.splitArray forIntervalDistance:event.lapDistance forUnits:event.iEventType forFurlongMode:event.bFurlongMode];
     }
     
     editSplit = editTime - beforeTime;
@@ -347,12 +347,12 @@
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component;
 {
-    NSString *cellString = @"";
+    NSMutableString *cellString = [NSMutableString stringWithString:@""];
     
     if (row < 10)
-        cellString = [cellString stringByAppendingString:@"   0"];
+        [cellString appendString:@"   0"];
     else
-        cellString = [cellString stringByAppendingString:@"   "];
+        [cellString appendString:@"   "];
     
     
     switch (component)
@@ -360,13 +360,13 @@
         case kHours:
         case kMinutes:
         case kSeconds:
-            cellString = [cellString stringByAppendingFormat:@"%ld", (long)row];
+            [cellString appendFormat:@"%ld", (long)row];
             break;
         case kHundredths:
             if (row < 10)
-                cellString = [NSString stringWithFormat:@"  .0%ld", (long)row];
+                [cellString appendFormat:@"  .0%ld", (long)row];
             else
-                cellString = [NSString stringWithFormat:@"  .%ld",  (long)row];
+                [cellString appendFormat:@"  .%ld",  (long)row];
             break;
         default:		break;
     }

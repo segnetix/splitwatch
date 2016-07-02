@@ -73,12 +73,21 @@
 + (int)getSec:(double)split;
 + (int)getHundredths:(double)split;
 
-+ (NSString *)lapTextForRow:(NSInteger)row
+/*+ (NSString *)lapTextForRow:(NSInteger)row
              forDisplayMode:(NSInteger)mode
             withSplitsCount:(int)splitsCount
            intervalDistance:(int)intervalDistance
                       units:(int)units
-                furlongMode:(BOOL)furlongMode;
+                furlongMode:(BOOL)furlongMode;*/
 //+ (NSString *)timeTextForRow:(NSInteger)row forDisplayMode:(NSInteger)mode;
+
++ (NSString *)lapTextForRow:(NSInteger)row forDisplayMode:(NSInteger)mode forSplits:(NSMutableArray*)splits forIntervalDistance:(NSInteger)intervalDistance forUnits:(int)iUnits forFurlongMode:(BOOL)bFurlongMode;
++ (NSString *)timeTextForRow:(NSInteger)row forDisplayMode:(NSInteger)mode forSplits:(NSMutableArray*)splits forIntervalDistance:(NSInteger)intervalDistance forUnits:(int)iUnits forFurlongMode:(BOOL)bFurlongMode;
++ (NSString *)splitTextForRow:(NSInteger)row Column:(NSInteger)column forDisplayMode:(NSInteger)mode forSplits:(NSMutableArray*)splits forIntervalDistance:(NSInteger)intervalDistance forUnits:(int)iUnits forFurlongMode:(BOOL)bFurlongMode forKiloSplits:(BOOL)bKiloSplits;
++ (NSString *)lastSplitTextForColumn:(NSInteger)column forSplits:(NSMutableArray*)splits;
++ (NSString *)lastSplitHeaderHTMLText:(int)rowCount forSplits:(NSMutableArray*)splits forUnits:(int)iUnits forIntervalDistance:(NSInteger)intervalDistance forFurlongMode:(BOOL)bFurlongMode;
++ (NSString *)lastSplitHTMLText:(NSMutableArray*)splits;
++ (NSString *)splitHTMLTextForRow:(NSInteger)row forSplits:(NSMutableArray*)splits forIntervalDistance:(NSInteger)intervalDistance forUnits:(int)iUnits forFurlongMode:(BOOL)bFurlongMode forKiloSplits:(BOOL)bKiloSplits;
++ (NSString *)getSplitHTMLDataString:(NSMutableArray*)splits forIntervalDistance:(NSInteger)intervalDistance forUnits:(int)iUnits forKiloSplits:(BOOL)bKiloSplits forFurlongMode:(BOOL)bFurlongMode;
 
 @end

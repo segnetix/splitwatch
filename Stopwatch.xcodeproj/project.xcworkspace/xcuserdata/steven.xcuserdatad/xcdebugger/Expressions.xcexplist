@@ -3,12 +3,6 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "-[SplitEditViewController initWithEvent:]:SplitEditViewController.m">
-      </ContextState>
-      <ContextState
-         contextName = "-[Stopwatch startStopButtonPressed]:Stopwatch.m">
-      </ContextState>
-      <ContextState
          contextName = "-[MultiStopwatchTableViewController tableView:cellForRowAtIndexPath:]:MultiStopwatchTableViewController.m">
          <PersistentStrings>
             <PersistentString
@@ -16,6 +10,39 @@
             </PersistentString>
             <PersistentString
                value = "multiWatchCells">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[MultiStopwatchTableViewController longPressAction:]:MultiStopwatchTableViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.tableView.bounds.size.height">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[HistoryTableViewController tableView:didSelectRowAtIndexPath:]:HistoryTableViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[MultiStopwatchTableViewController tableView:numberOfRowsInSection:]:MultiStopwatchTableViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "watches">
+            </PersistentString>
+            <PersistentString
+               value = "watches.count">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[MultiStopwatchTableViewController resetAllWatches]:MultiStopwatchTableViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[ReportSelectorViewController generateEmailReport]:ReportSelectorViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "emailBody.length">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -31,20 +58,6 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[MultiStopwatchTableViewController tableView:numberOfRowsInSection:]:MultiStopwatchTableViewController.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "watches">
-            </PersistentString>
-            <PersistentString
-               value = "watches.count">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "-[MultiStopwatchViewController startStopButtonPressed]:MultiStopwatchViewController.m">
-      </ContextState>
-      <ContextState
          contextName = "-[HistoryViewController sortControlHit:]:HistoryViewController.m">
          <PersistentStrings>
             <PersistentString
@@ -56,16 +69,13 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[EventDetailViewController viewDidLoad]:EventDetailViewController.m">
-      </ContextState>
-      <ContextState
          contextName = "-[EventDetailViewController initWithEvent:settingsVC:]:EventDetailViewController.m">
       </ContextState>
       <ContextState
-         contextName = "-[MultiStopwatchTableViewController startAllWatches:]:MultiStopwatchTableViewController.m">
+         contextName = "-[MultiStopwatchTableViewController longPressMoved:location:]:MultiStopwatchTableViewController.m">
          <PersistentStrings>
             <PersistentString
-               value = "watch.bTimerRunning">
+               value = "(*movingFromIndexPath).row">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -81,30 +91,48 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[MultiStopwatchTableViewController resetAllWatches]:MultiStopwatchTableViewController.m">
+         contextName = "-[MultiStopwatchCell startStopButtonPressed:]:MultiStopwatchCell.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[EventDetailViewController viewDidLoad]:EventDetailViewController.m">
       </ContextState>
       <ContextState
          contextName = "-[MultiStopwatchCell lapResetButtonPressed:]:MultiStopwatchCell.m">
       </ContextState>
       <ContextState
-         contextName = "-[MultiStopwatchCell startStopButtonPressed:]:MultiStopwatchCell.m">
+         contextName = "-[Stopwatch startStopButtonPressed]:Stopwatch.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[MultiStopwatchTableViewController startAllWatches:]:MultiStopwatchTableViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "watch.bTimerRunning">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[SplitEditViewController initWithEvent:]:SplitEditViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[MultiStopwatchViewController startStopButtonPressed]:MultiStopwatchViewController.m">
       </ContextState>
       <ContextState
          contextName = "-[SplitEditViewController viewDidLoad]:SplitEditViewController.m">
       </ContextState>
       <ContextState
-         contextName = "-[MultiStopwatchTableViewController longPressMoved:location:]:MultiStopwatchTableViewController.m">
+         contextName = "-[ReportSelectorViewController getEventCount]:ReportSelectorViewController.m">
          <PersistentStrings>
             <PersistentString
-               value = "(*movingFromIndexPath).row">
+               value = "self.event">
             </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "-[MultiStopwatchTableViewController longPressAction:]:MultiStopwatchTableViewController.m">
-         <PersistentStrings>
             <PersistentString
-               value = "self.tableView.bounds.size.height">
+               value = "self.athlete">
+            </PersistentString>
+            <PersistentString
+               value = "self.distance">
+            </PersistentString>
+            <PersistentString
+               value = "self.date">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

@@ -384,7 +384,7 @@ static sqlite3_stmt *delete_split_statement = nil;
     return YES;
 }
 
-- (NSArray *)getSplitData
+- (NSMutableArray *)getSplitData
 {
 	return splitArray;
 }

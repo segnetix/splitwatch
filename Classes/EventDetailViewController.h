@@ -11,11 +11,9 @@
 #import "Event.h"
 #import "SettingsViewController.h"
 #import "SplitHeaderView.h"
-#import <MessageUI/MessageUI.h>
-#import <MessageUI/MFMailComposeViewController.h>
 #import <sqlite3.h>
 
-@interface EventDetailViewController : UIViewController <MFMailComposeViewControllerDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UIGestureRecognizerDelegate>
+@interface EventDetailViewController : UIViewController <UIPickerViewDelegate, UIPickerViewDataSource, UIGestureRecognizerDelegate>
 {
 	Event *event;
 	

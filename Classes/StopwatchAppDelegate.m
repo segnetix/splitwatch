@@ -247,7 +247,7 @@
 {
 	// can we release any extra memory?
 	
-	/*
+    /*
 	// TESTING - memory warning alert
 	UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"StopwatchAppDelegate received a memory warning."
 														message:@""
@@ -256,7 +256,7 @@
 											  otherButtonTitles:@"OK", nil];
 	[alertView show];
 	[alertView release];
-	 */
+     */
 }
 
 
@@ -614,6 +614,210 @@
 	sqlite3_finalize(statement);
 	
 	return eventInfoArray;
+}
+
+// returns event info based on multiple selection filters
+- (NSArray *)getEventInfoArrayBasedOnAthlete:(NSString *)athlete Event:(NSString *)event Date:(NSString *)date Distance:(NSString*)distance
+{
+    char sql[1000];
+    sqlite3_stmt *statement;
+    NSString *modifiedDistance = nil;
+    bool bHaveAthleteFilter = NO;
+    bool bHaveEventFilter = NO;
+    bool bHaveDateFilter = NO;
+    bool bHaveDistanceFilter = NO;
+    
+    // process the distance filter
+    if ([distance compare:@"All"] != NSOrderedSame) {
+        // strip any 'm' or 'y' at the end of the filterClause
+        modifiedDistance = [distance stringByReplacingOccurrencesOfString:@"m" withString:@""];
+        modifiedDistance = [modifiedDistance stringByReplacingOccurrencesOfString:@"y" withString:@""];
+        
+        // reset the filter - convert English miles and furlong fractions back to yards for the EventDistance WHERE clause
+        if ([distance rangeOfString:@"-Mile"].location != NSNotFound)
+        {
+            // strip out "-Mile" and reset as string with yards
+            modifiedDistance = [distance stringByReplacingOccurrencesOfString:@"-Mile" withString:@""];
+            modifiedDistance = [NSString stringWithFormat:@"%u", [modifiedDistance intValue] * 1760];
+        }
+        else if ([distance rangeOfString:@"/"].location != NSNotFound && [distance rangeOfString:@"-"].location == NSNotFound)			// v1.2 - Furlong modes  "1/4"
+        {
+            // extract mile integer and fractional portions
+            NSRange range = [distance rangeOfString:@"/"];
+            NSString *numeratorStr = [distance substringToIndex:range.location];
+            NSString *denominatorStr = [distance substringFromIndex:range.location + 1];
+            modifiedDistance = [NSString stringWithFormat:@"%u", ([numeratorStr intValue] * 1760) / [denominatorStr intValue]];
+        }
+        else if ([distance rangeOfString:@"-M"].location != NSNotFound && [distance rangeOfString:@"/"].location == NSNotFound)			// v1.2 - Furlong modes  "1-M"
+        {
+            // extract mile integer
+            NSRange range = [distance rangeOfString:@"-M"];
+            NSString *mileStr = [distance substringToIndex:range.location];
+            modifiedDistance = [NSString stringWithFormat:@"%u", [mileStr intValue] * 1760];
+        }
+        else if ([distance rangeOfString:@"/"].location != NSNotFound && [distance rangeOfString:@"-"].location != NSNotFound)			// v1.2 - Furlong modes  "1-1/4"
+        {
+            // extract mile integer and fractional portions
+            // mile portion
+            NSRange range = [distance rangeOfString:@"-"];
+            NSString *mileStr = [distance substringToIndex:range.location];
+            // fractional portion
+            modifiedDistance = [distance substringFromIndex:range.location + 1];
+            range = [modifiedDistance rangeOfString:@"/"];
+            NSString *numeratorStr = [modifiedDistance substringToIndex:range.location];
+            NSString *denominatorStr = [modifiedDistance substringFromIndex:range.location + 1];
+            modifiedDistance = [NSString stringWithFormat:@"%u", ([mileStr intValue] * 1760) + ([numeratorStr intValue] * 1760) / [denominatorStr intValue]];
+        }
+        else if ([distance rangeOfString:@"M"].location != NSNotFound)
+        {
+            // strip out "-M"
+            modifiedDistance = [distance stringByReplacingOccurrencesOfString:@"M" withString:@""];
+            // extract mile integer and fractional portions
+            NSRange range = [modifiedDistance rangeOfString:@" "];
+            NSString *mileStr = [modifiedDistance substringToIndex:range.location];
+            NSString *yardStr = [modifiedDistance substringFromIndex:range.location + 1];
+            // reset filter string
+            modifiedDistance = [NSString stringWithFormat:@"%u", ([mileStr intValue] * 1760) + [yardStr intValue]];
+        }
+    }
+    
+    // now prepare the sql select statement with multiple filters in the WHERE clause
+    strcpy(sql, "SELECT EventNum, date(EventDateTime), EventDistance, EventFinalTime, RunnerName, EventType, LapDistance, FurlongMode FROM Event");
+    
+    int paramCount = 0;
+    
+    // Athlete
+    if ([athlete compare:@"All"] != NSOrderedSame) {
+        strcat(sql," WHERE RunnerName=?");
+        paramCount++;
+        bHaveAthleteFilter = YES;
+    }
+    
+    // Event
+    if ([event compare:@"All"] != NSOrderedSame) {
+        if (paramCount == 0) {
+            strcat(sql," WHERE");
+        } else {
+            strcat(sql," AND");
+        }
+        strcat(sql," EventName=?");
+        paramCount++;
+        bHaveEventFilter = YES;
+    }
+    
+    // Date
+    if ([date compare:@"All"] != NSOrderedSame) {
+        if (paramCount == 0) {
+            strcat(sql," WHERE");
+        } else {
+            strcat(sql," AND");
+        }
+        strcat(sql," date(EventDateTime)=?");
+        paramCount++;
+        bHaveDateFilter = YES;
+    }
+    
+    // Distance
+    if ([distance compare:@"All"] != NSOrderedSame) {
+        if (paramCount == 0) {
+            strcat(sql," WHERE");
+        } else {
+            strcat(sql," AND");
+        }
+        
+        strcat(sql," EventDistance=?");
+        
+        // if 25 or 50 we need to determine if metric (m) or english (y) and select with MetricUnits
+        if ([distance rangeOfString:@"m"].location != NSNotFound)
+            strcat(sql, " AND EventType=0");
+        else if ([distance rangeOfString:@"y"].location != NSNotFound || [distance rangeOfString:@"-Mile"].location != NSNotFound)
+            strcat(sql, " AND EventType=1 AND FurlongMode=0");
+        else if ([distance rangeOfString:@"/"].location != NSNotFound || [distance rangeOfString:@"-M"].location != NSNotFound)
+            strcat(sql, " AND EventType=1 AND FurlongMode=1");
+        else
+            strcat(sql, " AND EventType=2");
+        
+        paramCount++;
+        bHaveDistanceFilter = YES;
+    }
+
+    strcat(sql, " ORDER BY EventDateTime, EventFinalTime");
+    
+    // third parameter is the length of the SQL string or -1 to read to the first null terminator
+    if (sqlite3_prepare_v2(database, sql, -1, &statement, NULL) != SQLITE_OK)
+    {
+        NSAssert1(0, @"Error: failed to prepare statement with message '%s'.", sqlite3_errmsg(database));
+        //NSLog(@"ERROR: Failed to prepare statement with message %@", sqlite3_errmsg(database));
+    }
+    
+    // bind the where clause to the statement
+    int clauseCount = 1;
+    
+    if (bHaveAthleteFilter) {
+        if (sqlite3_bind_text(statement, clauseCount++, [athlete UTF8String], -1, SQLITE_TRANSIENT) != SQLITE_OK) {
+            NSAssert1(0, @"Error: failed to bind statement with message '%s'.", sqlite3_errmsg(database));
+        }
+    }
+    
+    if (bHaveEventFilter) {
+        if (sqlite3_bind_text(statement, clauseCount++, [event UTF8String], -1, SQLITE_TRANSIENT) != SQLITE_OK) {
+            NSAssert1(0, @"Error: failed to bind statement with message '%s'.", sqlite3_errmsg(database));
+        }
+    }
+    
+    if (bHaveDateFilter) {
+        if (sqlite3_bind_text(statement, clauseCount++, [date UTF8String], -1, SQLITE_TRANSIENT) != SQLITE_OK) {
+            NSAssert1(0, @"Error: failed to bind statement with message '%s'.", sqlite3_errmsg(database));
+        }
+    }
+    
+    if (bHaveDistanceFilter) {
+        if (sqlite3_bind_text(statement, clauseCount++, [modifiedDistance UTF8String], -1, SQLITE_TRANSIENT) != SQLITE_OK) {
+            NSAssert1(0, @"Error: failed to bind statement with message '%s'.", sqlite3_errmsg(database));
+        }
+    }
+    
+    NSMutableArray *eventInfoArray = [[[NSMutableArray alloc] init] autorelease];
+    
+    // step through the result set rows (one per event)
+    while (sqlite3_step(statement) == SQLITE_ROW)
+    {
+        // temp array to hold event info which will be inserted into the tableItems array
+        NSMutableArray *eventInfo = [[NSMutableArray alloc] initWithCapacity:5];
+        
+        // pull event info from the query result and put into the tableItems array
+        NSNumber *eventNum = [NSNumber numberWithInt:sqlite3_column_int(statement, 0)];
+        NSString *dateStr = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
+        NSNumber *distanceNumber = [NSNumber numberWithInt:sqlite3_column_double(statement, 2)];
+        NSNumber *finalTimeNumber = [NSNumber numberWithDouble:sqlite3_column_double(statement, 3)];
+        NSString *runnerName = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 4)];
+        int eventType = (int)(sqlite3_column_int(statement, 5));
+        int lapDistance = (int)(sqlite3_column_int(statement, 6));
+        int furlongMode= (int)(sqlite3_column_int(statement, 7));
+        
+        // need to convert these values to display strings
+        NSString *distanceString = [Utilities stringFromDistance:[distanceNumber intValue]
+                                                           Units:eventType ShowMiles:YES
+                                                    ShowSplitTag:NO
+                                                        Interval:lapDistance
+                                              FurlongDisplayMode:furlongMode];
+        NSString *finalTimeString = [Utilities shortFormatTime:[finalTimeNumber doubleValue] precision:2];
+        
+        // add event info into the eventInfo array
+        [eventInfo addObject:eventNum];
+        [eventInfo addObject:dateStr];
+        [eventInfo addObject:distanceString];
+        [eventInfo addObject:finalTimeString];
+        [eventInfo addObject:runnerName];
+        
+        // add eventInfo to the tableItem array
+        [eventInfoArray addObject:eventInfo];
+        [eventInfo release];
+    }
+    
+    sqlite3_finalize(statement);
+    
+    return eventInfoArray;
 }
 
 @end

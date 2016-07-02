@@ -65,7 +65,7 @@
          FurlongMode:event.bFurlongMode
          Finished:YES
          EditMode:NO];
-         splitDetailViewController.splits = (NSMutableArray *)[event getSplitData];
+         splitDetailViewController.splits = [event getSplitData];
         splitDetailViewController.view.translatesAutoresizingMaskIntoConstraints = NO;
         
         // setup pickView
@@ -154,21 +154,21 @@
     tapGesture.delegate = self;
     [pickView addGestureRecognizer:tapGesture];
     
-    UIBarButtonItem *pickerCancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
+    UIBarButtonItem *pickerCancelButton = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
                                                                                         target:self
-                                                                                        action:@selector(pickerCancel)];
+                                                                                        action:@selector(pickerCancel)] autorelease];
     
-    UIBarButtonItem *pickerSetButton = [[UIBarButtonItem alloc] initWithTitle:@"Set"
+    UIBarButtonItem *pickerSetButton = [[[UIBarButtonItem alloc] initWithTitle:@"Set"
                                                                         style:UIBarButtonItemStylePlain
                                                                        target:self
-                                                                       action:@selector(pickerSet)];
+                                                                       action:@selector(pickerSet)] autorelease];
     
     UIBarButtonItem *flexibleSpace = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil] autorelease];
     
     NSArray *items = [[[NSArray alloc] initWithObjects: flexibleSpace, pickerCancelButton, flexibleSpace, pickerSetButton, flexibleSpace, nil] autorelease];
     
     [pickerToolbar setItems:items animated:YES];
-
+    
     // set other button target and actions
     [pickAthleteButton addTarget:self action:@selector(setName:) forControlEvents:UIControlEventTouchUpInside];
     [pickEventButton   addTarget:self action:@selector(setName:) forControlEvents:UIControlEventTouchUpInside];
@@ -511,8 +511,8 @@
         return;
     
     ReportSelectorViewController *reportSelectorVC = [[ReportSelectorViewController alloc] init];
-    reportSelectorVC.athlete = event.runnerName;
-    reportSelectorVC.event = event.eventName;
+    reportSelectorVC.runnerName = event.runnerName;
+    reportSelectorVC.eventName = event.eventName;
     reportSelectorVC.date = date.text = [Utilities formatDateTime:event.date format:@"YYYY-MM-dd"];
     reportSelectorVC.distance = [Utilities stringFromDistance:event.distance
                                                         Units:event.iEventType
@@ -521,160 +521,10 @@
                                                      Interval:(int)event.lapDistance
                                            FurlongDisplayMode:event.bFurlongMode];
     
+    reportSelectorVC.settingsViewController = settingsViewController;
+    
     [self.navigationController pushViewController:reportSelectorVC animated:YES];
     [reportSelectorVC release];
-	
-    return;
-    
-    /************************************************************/
-    
-	//[appDelegate playClickSound];
-	
-	if ([MFMailComposeViewController canSendMail])
-	{
-        // init mail view controller
-        MFMailComposeViewController *mailViewController = [[MFMailComposeViewController alloc] init];
-        mailViewController.mailComposeDelegate = self;
-        mailViewController.navigationBar.barStyle = UIBarStyleDefault;
-        
-		// subject and title string
-		NSString *subjectStr;
-		
-		// v1.2 - subject string doesn't have distance for lap mode events
-		if (event.iEventType != kLap)
-		{
-			subjectStr = [NSString stringWithFormat:@"%@  %@  %@",
-									event.runnerName,
-						  [Utilities stringFromDistance:(int)event.distance Units:event.iEventType ShowMiles:YES ShowSplitTag:YES Interval:(int)event.lapDistance FurlongDisplayMode:event.bFurlongMode],
-									[Utilities shortFormatTime:event.finalTime precision:2]];
-		}
-		else
-		{
-			subjectStr = [NSString stringWithFormat:@"%@  %@",
-						  event.runnerName,
-						  [Utilities shortFormatTime:event.finalTime precision:2]];
-		}
-		
-		[mailViewController setSubject:subjectStr];
-        
-		/*
-		// Set up recipients
-		NSArray *toRecipients = [NSArray arrayWithObject:@"first@example.com"]; 
-		NSArray *ccRecipients = [NSArray arrayWithObjects:@"second@example.com", @"third@example.com", nil];
-		NSArray *bccRecipients = [NSArray arrayWithObject:@"fourth@example.com"]; 
-		
-		[mailViewController setToRecipients:toRecipients];
-		[mailViewController setCcRecipients:ccRecipients];
-		[mailViewController setBccRecipients:bccRecipients];
-		*/
-				
-		[mailViewController setToRecipients:[settingsViewController getDefaultEmailAddresses]];
-		
-		// Attach an image to the email
-		//NSString *path = [[NSBundle mainBundle] pathForResource:@"rainy" ofType:@"png"];
-		//NSData *myData = [NSData dataWithContentsOfFile:path];
-		//[mailViewController addAttachmentData:myData mimeType:@"image/png" fileName:@"rainy"];
-		
-		/*
-		// TEXT version
-		// Fill out the email body text
-		NSString *emailBody = [NSString stringWithFormat:@"\nSplitwatch Report\n\nRunner: %@\nEvent Location: %@\nDate: %@\n Event: %@ Time: %@\n\n%@\n%@",
-							   event.runnerName,
-							   event.location,
-							   [TimerUtilities formatDate:event.date],
-							   [TimerUtilities formatDistance:event.distance],
-							   [TimerUtilities shortFormatTime:event.finalTime precision:2],
-							   [TimerUtilities getSplitViewHeaderText:event.lapDistance],
-							   [splitDetailViewController getSplitDataString:NO]];
-		*/
-		
-		// HTML version
-		NSString *emailBody = @"<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' ";
-		emailBody = [emailBody stringByAppendingString:@"'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'> "];
-		emailBody = [emailBody stringByAppendingString:@"<html xmlns='http://www.w3.org/1999/xhtml'>"];
-		emailBody = [emailBody stringByAppendingString:@"<head><title>Test</title><link rel='stylesheet' type='text/css' href='./style.css' /> </head>"];
-		emailBody = [emailBody stringByAppendingString:@"<body><div id='container' style='font-family:arial; font-size:14px;'>"];
-		emailBody = [emailBody stringByAppendingString:@"<div id='title' style='margin-bottom:15px; font-weight:bold;'>"];
-		emailBody = [emailBody stringByAppendingString:@"Split Report by <a href='http://www.segnetix.com'>SPLITWATCH</a></div>"];
-		emailBody = [emailBody stringByAppendingString:@"<div style='margin-bottom:30px;'>"];
-		emailBody = [emailBody stringByAppendingString:@"<table id='split data' cellpadding-right='3'>"];
-		
-		if (event.bFurlongMode)
-			emailBody = [emailBody stringByAppendingFormat:@"<tr><td>Horse:</td><td>&nbsp;</td><td>%@</td></tr>", event.runnerName];
-		else
-			emailBody = [emailBody stringByAppendingFormat:@"<tr><td>Athlete:</td><td>&nbsp;</td><td>%@</td></tr>", event.runnerName];
-
-		emailBody = [emailBody stringByAppendingFormat:@"<tr><td>Event Name:</td><td>&nbsp;</td><td>%@</td></tr>", event.eventName];
-		emailBody = [emailBody stringByAppendingFormat:@"<tr><td>Date:</td><td>&nbsp;</td><td>%@</td></tr>", [Utilities formatDate:event.date]];
-		
-		if (event.iEventType != kLap)
-			emailBody = [emailBody stringByAppendingFormat:@"<tr><td>Distance:</td><td>&nbsp;</td><td>%@</td></tr>", [Utilities stringFromDistance:event.distance Units:event.iEventType ShowMiles:YES ShowSplitTag:YES Interval:(int)event.lapDistance FurlongDisplayMode:event.bFurlongMode]];
-				
-		emailBody = [emailBody stringByAppendingFormat:@"<tr><td>Time:</td><td>&nbsp;</td><td>%@</td></tr>", [Utilities shortFormatTime:event.finalTime precision:2]];
-		emailBody = [emailBody stringByAppendingString:@"<tr style='height:10px;'/></table>"];
-		emailBody = [emailBody stringByAppendingString:[splitDetailViewController getSplitHTMLDataString]];
-		emailBody = [emailBody stringByAppendingString:@"</div></div></body></html>"];
-
-		[mailViewController setMessageBody:emailBody isHTML:YES];
-        
-        [self presentViewController:mailViewController animated:YES completion:nil];
-        
-		// undocumented feature --- DO NOT USE!!!
-		//[[[[mailViewController viewControllers] lastObject] navigationItem] setTitle:@"Send E-mail"];
-		
-		//[mailViewController release];
-    }
-	else
-	{
-		UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Can't Send Email!"
-															message:@"This device is not configured for sending email."
-														   delegate:nil
-												  cancelButtonTitle:@"OK"
-												  otherButtonTitles:nil];
-		[alertView show];
-		[alertView release];	
-	}
-}
-
-// Dismisses the email composition interface when users tap Cancel or Send. Proceeds to update the message field with the result of the operation.
-- (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error 
-{
-	//[appDelegate playClickSound];
-
-	NSString *message;
-	
-    // Notifies users about errors associated with the interface
-    switch (result)
-    {
-        case MFMailComposeResultCancelled:
-            message = @"Email Canceled";
-            break;
-        case MFMailComposeResultSaved:
-            message = @"Email Saved";
-            break;
-        case MFMailComposeResultSent:
-            message = @"Email Sent";
-            break;
-        case MFMailComposeResultFailed:
-            message = @"Email Failed";
-            break;
-        default:
-            message = @"Email Not Sent";
-            break;
-    }
-	
-	if (result != MFMailComposeResultCancelled)
-	{
-		UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:message
-															message:nil
-														   delegate:nil
-												  cancelButtonTitle:@"OK"
-												  otherButtonTitles:nil];
-		[alertView show];
-		[alertView release];
-	}
-    
-    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

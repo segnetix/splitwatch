@@ -44,7 +44,7 @@
 									 Finished:YES
 									 EditMode:YES];
 		
-		splitDetailViewController.splits = (NSMutableArray *)[event getSplitData];
+		splitDetailViewController.splits = [event getSplitData];
 		splitDetailViewController.splitEditViewController = self;
 		
 		appDelegate = (StopwatchAppDelegate *)[[UIApplication sharedApplication] delegate];

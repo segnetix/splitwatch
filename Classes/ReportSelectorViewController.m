@@ -10,16 +10,18 @@
 #import "ReportSelectorCell.h"
 #import "ReportSelectionListTableViewController.h"
 #import "StopwatchAppDelegate.h"
+#import "Utilities.h"
 
 @implementation ReportSelectorViewController
 
 @synthesize reportSelectorTableViewController;
-@synthesize athlete;
-@synthesize event;
+@synthesize runnerName;
+@synthesize eventName;
 @synthesize date;
 @synthesize distance;
 @synthesize generateButton;
 @synthesize appDelegate;
+@synthesize settingsViewController;
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
@@ -38,19 +40,28 @@
     
     // Generate button
     generateButton = [[UIButton buttonWithType:UIButtonTypeRoundedRect] retain];      // autorelease button
-    [generateButton addTarget:self action:@selector(generate) forControlEvents:UIControlEventTouchUpInside];
-    [generateButton setTitle:@"Generate" forState:UIControlStateNormal];
+    [generateButton addTarget:self action:@selector(generateEmailReport) forControlEvents:UIControlEventTouchUpInside];
+    [generateButton setTitle:@"Generate Report" forState:UIControlStateNormal];
+    [generateButton.titleLabel setFont: [generateButton.titleLabel.font fontWithSize: 18]];
     [generateButton setTintColor:self.view.tintColor];
     generateButton.translatesAutoresizingMaskIntoConstraints = NO;
     [self.view addSubview:generateButton];
     
-    // constraints
-    NSDictionary *views = NSDictionaryOfVariableBindings(reportSelectorTableView, generateButton);
+    // separator
+    UIImage *separatorImage = [UIImage imageNamed:@"separator_dark_gray.png"];
+    UIImageView *separatorImageView = [[UIImageView alloc] initWithImage:separatorImage];
+    separatorImageView.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.view addSubview:separatorImageView];
+    [separatorImageView release];
     
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(>=50)-[generateButton(120)]-(>=50)-|" options:0 metrics:nil views:views]];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[generateButton(36)]-64-|" options:0 metrics:nil views:views]];
+    // constraints
+    NSDictionary *views = NSDictionaryOfVariableBindings(reportSelectorTableView, generateButton, separatorImageView);
+    
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(>=40)-[generateButton(160)]-(>=40)-|" options:0 metrics:nil views:views]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[separatorImageView]|" options:0 metrics:nil views:views]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[generateButton(36)]-72-|" options:0 metrics:nil views:views]];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[reportSelectorTableView]|" options:0 metrics:nil views:views]];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-20-[reportSelectorTableView(290)]" options:0 metrics:nil views:views]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-30-[reportSelectorTableView(310)][separatorImageView(1)]" options:0 metrics:nil views:views]];
     
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:generateButton
                                  attribute:NSLayoutAttributeCenterX
@@ -106,15 +117,14 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 2;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     int rows = 0;
-    switch (section) {
-        case 0: rows = 0; break;
-        case 1: rows = 4; break;
+    if (section == 1) {
+        rows = 4;
     }
     return rows;
 }
@@ -123,6 +133,8 @@
 {
     if (section == 1) {
         return @"Select events for report:";
+    } else if (section == 2) {
+        return [NSString stringWithFormat:@"Selected event count: %lu", [self getEventCount]];
     }
     return @"";
 }
@@ -130,6 +142,14 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 50;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    if (section == 0)
+        return 30;
+    else
+        return 20;
 }
 
 // Customize the appearance of table view cells.
@@ -156,11 +176,11 @@
     {
         case 0:
             cell.selectorLabel.text = @"Athlete";
-            cell.selectionLabel.text = self.athlete;
+            cell.selectionLabel.text = self.runnerName;
             break;
         case 1:
             cell.selectorLabel.text = @"Event";
-            cell.selectionLabel.text = self.event;
+            cell.selectionLabel.text = self.eventName;
             break;
         case 2:
             cell.selectorLabel.text = @"Date";
@@ -197,10 +217,10 @@
 {
     switch (selector) {
         case kAthleteSelectorMode:
-            self.athlete = value;
+            self.runnerName = value;
             break;
         case kEventSelectorMode:
-            self.event = value;
+            self.eventName = value;
             break;
         case kDateSelectorMode:
             self.date = value;
@@ -217,10 +237,10 @@
 {
     switch (selector) {
         case kAthleteSelectorMode:
-            return self.athlete;
+            return self.runnerName;
             break;
         case kEventSelectorMode:
-            return self.event;
+            return self.eventName;
             break;
         case kDateSelectorMode:
             return self.date;
@@ -233,10 +253,173 @@
     return @"";
 }
 
-- (void)generate
+- (long)getEventCount
 {
-    NSLog(@"generate report for %@ %@ %@ %@", self.athlete, self.event, self.date, self.distance);
+    NSArray *eventInfoArray = [appDelegate getEventInfoArrayBasedOnAthlete:self.runnerName Event:self.eventName Date:self.date Distance:self.distance];
     
+    return eventInfoArray.count;
+}
+
+- (void)generateEmailReport
+{
+    //NSLog(@"generate report for %@ %@ %@ %@", self.runnerName, self.eventName, self.date, self.distance);
+    
+    NSArray *eventInfoArray = [appDelegate getEventInfoArrayBasedOnAthlete:self.runnerName Event:self.eventName Date:self.date Distance:self.distance];
+    
+    if (eventInfoArray.count == 0) {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Empty Report"
+                                                            message:@"There are no events that match all of your selections."
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+        [alertView show];
+        [alertView release];
+        
+        return;
+    }
+    
+    if ([MFMailComposeViewController canSendMail])
+    {
+        // init mail view controller
+        MFMailComposeViewController *mailViewController = [[MFMailComposeViewController alloc] init];
+        mailViewController.mailComposeDelegate = self;
+        mailViewController.navigationBar.barStyle = UIBarStyleDefault;
+        
+        // subject and title string
+        NSString *subjectStr;
+        
+        if (eventInfoArray.count == 1) {
+            NSNumber *eventNum = [eventInfoArray[0] objectAtIndex:0];
+            
+            // create an Event using the EventNum
+            Event *event = [[[Event alloc] initWithEventNum:[eventNum intValue]] autorelease];
+            
+            if (event.iEventType != kLap) {
+                subjectStr = [NSString stringWithFormat:@"%@  %@  %@",
+                              event.runnerName,
+                              [Utilities stringFromDistance:(int)event.distance Units:event.iEventType ShowMiles:YES ShowSplitTag:YES Interval:(int)event.lapDistance FurlongDisplayMode:event.bFurlongMode],
+                              [Utilities shortFormatTime:event.finalTime precision:2]];
+            }
+            else
+            {
+                subjectStr = [NSString stringWithFormat:@"%@  %@",
+                              event.runnerName,
+                              [Utilities shortFormatTime:event.finalTime precision:2]];
+            }
+        } else {
+            subjectStr = @"Splitwatch Report";
+        }
+        
+        [mailViewController setSubject:subjectStr];
+        [mailViewController setToRecipients:[settingsViewController getDefaultEmailAddresses]];
+        
+        // Attach an image to the email
+        //NSString *path = [[NSBundle mainBundle] pathForResource:@"rainy" ofType:@"png"];
+        //NSData *myData = [NSData dataWithContentsOfFile:path];
+        //[mailViewController addAttachmentData:myData mimeType:@"image/png" fileName:@"rainy"];
+        
+        // HTML version
+        NSMutableString *emailBody = [NSMutableString stringWithString:@"<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' "];
+        [emailBody appendString:@"'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'> "];
+        [emailBody appendString:@"<html xmlns='http://www.w3.org/1999/xhtml'>"];
+        [emailBody appendString:@"<head><title>Report</title><link rel='stylesheet' type='text/css' href='./style.css' /> </head>"];
+        [emailBody appendString:@"<body><div id='container' style='font-family:arial; font-size:14px;'>"];
+        [emailBody appendString:@"<div id='title' style='margin-bottom:15px; font-weight:bold;'>"];
+        [emailBody appendString:@"Split Report by <a href='http://www.segnetix.com/splitwatch'>SPLITWATCH</a></div>"];
+        [emailBody appendString:@"<div style='margin-bottom:30px;'>"];
+        
+        // cycle each event
+        for (NSArray *eventArray in eventInfoArray)
+        {
+            NSNumber *eventNum = [eventArray objectAtIndex:0];
+            
+            // create an Event using the EventNum
+            Event *event = [[[Event alloc] initWithEventNum:[eventNum intValue]] autorelease];
+            NSMutableArray *splits = [event getSplitData];
+            
+            [emailBody appendString:@"<table id='split data' cellpadding-right='3'>"];
+            
+            if (event.bFurlongMode)
+                [emailBody appendFormat:@"<tr><td>Horse:</td><td>&nbsp;</td><td>%@</td></tr>", event.runnerName];
+            else
+                [emailBody appendFormat:@"<tr><td>Athlete:</td><td>&nbsp;</td><td>%@</td></tr>", event.runnerName];
+            
+            [emailBody appendFormat:@"<tr><td>Event Name:</td><td>&nbsp;</td><td>%@</td></tr>", event.eventName];
+            [emailBody appendFormat:@"<tr><td>Date:</td><td>&nbsp;</td><td>%@</td></tr>", [Utilities formatDate:event.date]];
+            
+            if (event.iEventType != kLap)
+                [emailBody appendFormat:@"<tr><td>Distance:</td><td>&nbsp;</td><td>%@</td></tr>", [Utilities stringFromDistance:event.distance Units:event.iEventType ShowMiles:YES ShowSplitTag:YES Interval:(int)event.lapDistance FurlongDisplayMode:event.bFurlongMode]];
+            [emailBody appendFormat:@"<tr><td>Distance:</td><td>&nbsp;</td><td>%@</td></tr>", [Utilities stringFromDistance:(int)event.distance Units:event.iEventType ShowMiles:YES ShowSplitTag:YES Interval:(int)event.lapDistance FurlongDisplayMode:event.bFurlongMode]];
+            [emailBody appendFormat:@"<tr><td>Time:</td><td>&nbsp;</td><td>%@</td></tr>", [Utilities shortFormatTime:event.finalTime precision:2]];
+            [emailBody appendString:@"<tr style='height:10px;'/></table>"];
+            [emailBody appendString:[Utilities getSplitHTMLDataString:splits forIntervalDistance:event.lapDistance forUnits:event.iEventType  forKiloSplits:event.bKiloSplits forFurlongMode:event.bFurlongMode]];
+            [emailBody appendString:@"---------------------------------------------------------------------<p></p>"];
+        }
+        
+        [emailBody appendString:@"</div></div></body></html>"];
+        
+        [mailViewController setMessageBody:emailBody isHTML:YES];
+        
+        [self presentViewController:mailViewController animated:YES completion:nil];
+        
+        // undocumented feature --- DO NOT USE!!!
+        //[[[[mailViewController viewControllers] lastObject] navigationItem] setTitle:@"Send E-mail"];
+        
+        //[mailViewController release];
+    }
+    else
+    {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Can't Send Email!"
+                                                            message:@"This device is not configured for sending email."
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+        [alertView show];
+        [alertView release];	
+    }
+
+}
+
+
+// Dismisses the email composition interface when users tap Cancel or Send. Proceeds to update the message field with the result of the operation.
+- (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error
+{
+    //[appDelegate playClickSound];
+    
+    NSString *message;
+    
+    // Notifies users about errors associated with the interface
+    switch (result)
+    {
+        case MFMailComposeResultCancelled:
+            message = @"Email Canceled";
+            break;
+        case MFMailComposeResultSaved:
+            message = @"Email Saved";
+            break;
+        case MFMailComposeResultSent:
+            message = @"Email Sent";
+            break;
+        case MFMailComposeResultFailed:
+            message = @"Email Failed";
+            break;
+        default:
+            message = @"Email Not Sent";
+            break;
+    }
+    
+    if (result != MFMailComposeResultCancelled)
+    {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:message
+                                                            message:nil
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+        [alertView show];
+        [alertView release];
+    }
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end
