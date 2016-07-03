@@ -20,6 +20,7 @@
     NSString *eventName;
     NSString *date;
     NSString *distance;
+    BOOL bEventCountZero;
     
     UITableViewController *reportSelectorTableViewController;
     SettingsViewController *settingsViewController;

@@ -23,6 +23,8 @@
 @synthesize appDelegate;
 @synthesize settingsViewController;
 
+#define kSelectPrompt   @"Select events for report:"
+
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
@@ -42,7 +44,11 @@
     generateButton = [[UIButton buttonWithType:UIButtonTypeRoundedRect] retain];      // autorelease button
     [generateButton addTarget:self action:@selector(generateEmailReport) forControlEvents:UIControlEventTouchUpInside];
     [generateButton setTitle:@"Generate Report" forState:UIControlStateNormal];
-    [generateButton.titleLabel setFont: [generateButton.titleLabel.font fontWithSize: 18]];
+    if (IPAD) {
+        [generateButton.titleLabel setFont: [generateButton.titleLabel.font fontWithSize: 24]];
+    } else {
+        [generateButton.titleLabel setFont: [generateButton.titleLabel.font fontWithSize: 18]];
+    }
     [generateButton setTintColor:self.view.tintColor];
     generateButton.translatesAutoresizingMaskIntoConstraints = NO;
     [self.view addSubview:generateButton];
@@ -57,11 +63,17 @@
     // constraints
     NSDictionary *views = NSDictionaryOfVariableBindings(reportSelectorTableView, generateButton, separatorImageView);
     
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(>=40)-[generateButton(160)]-(>=40)-|" options:0 metrics:nil views:views]];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[separatorImageView]|" options:0 metrics:nil views:views]];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[generateButton(36)]-72-|" options:0 metrics:nil views:views]];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[reportSelectorTableView]|" options:0 metrics:nil views:views]];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-30-[reportSelectorTableView(310)][separatorImageView(1)]" options:0 metrics:nil views:views]];
+    if (IPAD) {
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(>=40)-[generateButton(220)]-(>=40)-|" options:0 metrics:nil views:views]];
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[separatorImageView]|" options:0 metrics:nil views:views]];
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[reportSelectorTableView]|" options:0 metrics:nil views:views]];
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-30-[reportSelectorTableView(440)][separatorImageView(1)]-64-[generateButton(36)]" options:0 metrics:nil views:views]];
+    } else {
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(>=40)-[generateButton(160)]-(>=40)-|" options:0 metrics:nil views:views]];
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[separatorImageView]|" options:0 metrics:nil views:views]];
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[reportSelectorTableView]|" options:0 metrics:nil views:views]];
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-30-[reportSelectorTableView(310)][separatorImageView(1)]-48-[generateButton(36)]" options:0 metrics:nil views:views]];
+    }
     
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:generateButton
                                  attribute:NSLayoutAttributeCenterX
@@ -132,24 +144,56 @@
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
     if (section == 1) {
-        return @"Select events for report:";
+        return kSelectPrompt;
     } else if (section == 2) {
-        return [NSString stringWithFormat:@"Selected event count: %lu", [self getEventCount]];
+        return [NSString stringWithFormat:@"Selected event count:  %lu", [self getEventCount]];
     }
     return @"";
 }
 
+- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section
+{
+    UITableViewHeaderFooterView *header = (UITableViewHeaderFooterView *)view;
+    //header.textLabel.textColor = self.view.tintColor;
+    
+    if (bEventCountZero && [header.textLabel.text caseInsensitiveCompare:kSelectPrompt] != NSOrderedSame) {
+        header.textLabel.textColor = [UIColor redColor];
+    } else  {
+        header.textLabel.textColor = [UIColor darkGrayColor];
+    }
+    
+    if (IPAD) {
+        header.textLabel.font = [UIFont fontWithName:@"Avenir Book" size:21];
+    } else {
+        header.textLabel.font = [UIFont fontWithName:@"Avenir Book" size:15];
+    }
+    CGRect headerFrame = header.frame;
+    header.textLabel.frame = headerFrame;
+    header.textLabel.textAlignment = NSTextAlignmentLeft;
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 50;
+    if (IPAD) {
+        return 72;
+    } else {
+        return 50;
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    if (section == 0)
-        return 30;
-    else
-        return 20;
+    if (IPAD) {
+        if (section == 0)
+            return 40;
+        else
+            return 32;
+    } else {
+        if (section == 0)
+            return 30;
+        else
+            return 20;
+    }
 }
 
 // Customize the appearance of table view cells.
@@ -257,6 +301,14 @@
 {
     NSArray *eventInfoArray = [appDelegate getEventInfoArrayBasedOnAthlete:self.runnerName Event:self.eventName Date:self.date Distance:self.distance];
     
+    if (eventInfoArray.count == 0) {
+        generateButton.enabled = NO;
+        bEventCountZero = YES;
+    } else {
+        generateButton.enabled = YES;
+        bEventCountZero = NO;
+    }
+    
     return eventInfoArray.count;
 }
 
@@ -353,7 +405,7 @@
             [emailBody appendFormat:@"<tr><td>Time:</td><td>&nbsp;</td><td>%@</td></tr>", [Utilities shortFormatTime:event.finalTime precision:2]];
             [emailBody appendString:@"<tr style='height:10px;'/></table>"];
             [emailBody appendString:[Utilities getSplitHTMLDataString:splits forIntervalDistance:event.lapDistance forUnits:event.iEventType  forKiloSplits:event.bKiloSplits forFurlongMode:event.bFurlongMode]];
-            [emailBody appendString:@"---------------------------------------------------------------------<p></p>"];
+            [emailBody appendString:@"--------------------------------------------------------------------<p></p>"];
         }
         
         [emailBody appendString:@"</div></div></body></html>"];
