@@ -34,20 +34,20 @@
                     </constraints>
                 </imageView>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="version" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="5">
-                    <rect key="frame" x="242" y="89" width="45" height="20"/>
+                    <rect key="frame" x="242" y="89" width="77" height="20"/>
                     <color key="backgroundColor" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="0.0" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="20" id="5qC-k9-JK4">
                             <variation key="widthClass=regular" constant="30"/>
                         </constraint>
-                        <constraint firstAttribute="width" constant="45" id="uv5-8h-A6T">
-                            <variation key="widthClass=regular" constant="80"/>
+                        <constraint firstAttribute="width" constant="77" id="uv5-8h-A6T">
+                            <variation key="widthClass=regular" constant="105"/>
                         </constraint>
                     </constraints>
-                    <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
+                    <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="18"/>
                     <nil key="highlightedColor"/>
                     <variation key="widthClass=regular">
-                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="21"/>
+                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="24"/>
                     </variation>
                 </label>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="from" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="8">
@@ -301,10 +301,11 @@
                             <variation key="widthClass=regular" constant="124"/>
                         </constraint>
                     </constraints>
-                    <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="18"/>
+                    <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                     <variation key="widthClass=regular">
+                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="18"/>
                         <mask key="constraints">
                             <exclude reference="1wG-d0-UbS"/>
                             <exclude reference="2VF-tJ-owG"/>
