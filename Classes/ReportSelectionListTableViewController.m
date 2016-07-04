@@ -103,7 +103,14 @@
     }
     
     cell.textLabel.text = [selections objectAtIndex:indexPath.row];
-    
+    /*
+    // this doesn't seem to affect the cell text
+    if (IPAD) {
+        cell.textLabel.font = [UIFont fontWithName:@"Avenir Roman" size:26];
+    } else {
+        cell.textLabel.font = [UIFont fontWithName:@"Avenir Roman" size:17];
+    }
+    */
     if ([cell.textLabel.text isEqualToString:self.selection]) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
     } else {
@@ -141,8 +148,7 @@
     }
     
     // third parameter is the length of the SQL string or -1 to read to the first null terminator
-    if (sqlite3_prepare_v2(database, sql, -1, &statement, NULL) != SQLITE_OK)
-    {
+    if (sqlite3_prepare_v2(database, sql, -1, &statement, NULL) != SQLITE_OK) {
         NSAssert1(0, @"Error: failed to prepare statement with message '%s'.", sqlite3_errmsg(database));
         //NSLog(@"ERROR: Failed to prepare statement with message %@", sqlite3_errmsg(database));
     }
@@ -150,28 +156,23 @@
     int tempcount = 0;
     
     // step through the result set rows (one per event)
-    while (sqlite3_step(statement) == SQLITE_ROW)
-    {
+    while (sqlite3_step(statement) == SQLITE_ROW) {
         // we are displaying groups so query for groups and populate group array
         NSString *cellText;
         
-        if (selectorMode == kDistanceSelectorMode)
-        {
+        if (selectorMode == kDistanceSelectorMode) {
             int eventDistance = sqlite3_column_int(statement, 0);
             int eventType = sqlite3_column_int(statement, 1);
             int furlongMode = sqlite3_column_int(statement, 2);
             
-            if (furlongMode == YES)
-            {
+            if (furlongMode == YES) {
                 cellText = [Utilities stringFromDistance:eventDistance
                                                    Units:eventType
                                                ShowMiles:YES
                                             ShowSplitTag:NO
                                                 Interval:220
                                       FurlongDisplayMode:YES];
-            }
-            else
-            {
+            } else {
                 cellText = [Utilities stringFromDistance:eventDistance
                                                    Units:eventType
                                                ShowMiles:YES
@@ -181,9 +182,7 @@
             }
             
             tempcount++;
-        }
-        else
-        {
+        } else {
             cellText = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
         }
         

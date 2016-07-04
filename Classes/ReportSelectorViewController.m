@@ -45,7 +45,7 @@
     [generateButton addTarget:self action:@selector(generateEmailReport) forControlEvents:UIControlEventTouchUpInside];
     [generateButton setTitle:@"Generate Report" forState:UIControlStateNormal];
     if (IPAD) {
-        [generateButton.titleLabel setFont: [generateButton.titleLabel.font fontWithSize: 24]];
+        [generateButton.titleLabel setFont: [generateButton.titleLabel.font fontWithSize: 26]];
     } else {
         [generateButton.titleLabel setFont: [generateButton.titleLabel.font fontWithSize: 18]];
     }
@@ -86,6 +86,7 @@
     reportSelectorTableViewController.tableView.delegate = self;
     reportSelectorTableViewController.tableView.dataSource = self;
     reportSelectorTableViewController.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    //reportSelectorTableViewController.tableView.separatorInset = UIEdgeInsetsMake(0, 20, 0, 0);
     reportSelectorTableViewController.tableView.scrollEnabled = NO;
     reportSelectorTableViewController.tableView.allowsSelection = YES;
     
@@ -109,7 +110,7 @@
  // Return YES for supported orientations
  return (interfaceOrientation == UIInterfaceOrientationPortrait);
  }
- */
+*/
 
 - (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.
