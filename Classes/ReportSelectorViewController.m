@@ -319,6 +319,8 @@
     NSArray *eventInfoArray = [appDelegate getEventInfoArrayBasedOnAthlete:self.runnerName Event:self.eventName Date:self.date Distance:self.distance];
     
     if (eventInfoArray.count == 0) {
+        // shouldn't get here as we disable the Generate button in this case
+        /*
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Empty Report"
                                                             message:@"There are no events that match all of your selections."
                                                            delegate:nil
@@ -326,7 +328,7 @@
                                                   otherButtonTitles:nil];
         [alertView show];
         [alertView release];
-        
+        */
         return;
     }
     

@@ -19,6 +19,7 @@
 {
 	UITextField *emailTextField;
 	EmailAddressTableViewController *emailAddressTableViewController;
+    //ABPeoplePickerNavigationController *peoplePickerController ;
 	NSMutableArray *emailAddressItems;
 	StopwatchAppDelegate *appDelegate;
     
@@ -28,6 +29,7 @@
 
 @property (nonatomic, retain) UITextField *emailTextField;
 @property (nonatomic, assign) EmailAddressTableViewController *emailAddressTableViewController;
+//@property (nonatomic, retain) ABPeoplePickerNavigationController *peoplePickerController;
 @property (assign) NSMutableArray *emailAddressItems;
 @property (nonatomic, assign) StopwatchAppDelegate *appDelegate;
 @property (nonatomic, retain) UILabel *label;
