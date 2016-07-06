@@ -83,9 +83,23 @@
     if (IPAD) {
         [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[accImageView(12)]-1-|" options:0 metrics:nil views:views]];
         [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-14-[accImageView(14)]" options:0 metrics:nil views:views]];
+        
+        lapColumn.font = [UIFont fontWithName:FONT_NAME size:22];
+        timeColumn.font = [UIFont fontWithName:FONT_NAME size:22];
+        splitColumn1.font = [UIFont fontWithName:FONT_NAME size:22];
+        splitColumn2.font = [UIFont fontWithName:FONT_NAME size:22];
+        splitColumn3.font = [UIFont fontWithName:FONT_NAME size:22];
+        splitColumn4.font = [UIFont fontWithName:FONT_NAME size:22];
     } else {
         [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[accImageView(12)]-1-|" options:0 metrics:nil views:views]];
         [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-8-[accImageView(14)]" options:0 metrics:nil views:views]];
+        
+        lapColumn.font = [UIFont fontWithName:FONT_NAME size:14];
+        timeColumn.font = [UIFont fontWithName:FONT_NAME size:14];
+        splitColumn1.font = [UIFont fontWithName:FONT_NAME size:14];
+        splitColumn2.font = [UIFont fontWithName:FONT_NAME size:14];
+        splitColumn3.font = [UIFont fontWithName:FONT_NAME size:14];
+        splitColumn4.font = [UIFont fontWithName:FONT_NAME size:14];
     }
     
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[separatorImageView]-12-|" options:0 metrics:nil views:views]];

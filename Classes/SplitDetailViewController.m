@@ -308,28 +308,48 @@
 // scroll to and flash the modified/inserted splits
 - (void)flashSplitCellsInRow:(int)row
 {
+    [self.tableView reloadData];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:0];
     SplitDetailCell *cell = (SplitDetailCell *)[self.tableView cellForRowAtIndexPath:indexPath];
     
+    if (cell != NULL) {
     [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionMiddle animated:NO];
-    
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.35 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-        cell.lapColumn.textColor = [UIColor redColor];
-        cell.timeColumn.textColor = [UIColor redColor];
-        cell.splitColumn1.textColor = [UIColor redColor];
-        cell.splitColumn2.textColor = [UIColor redColor];
-        cell.splitColumn3.textColor = [UIColor redColor];
-        cell.splitColumn4.textColor = [UIColor redColor];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.33 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+            cell.lapColumn.textColor = [UIColor redColor];
+            cell.timeColumn.textColor = [UIColor redColor];
+            cell.splitColumn1.textColor = [UIColor redColor];
+            cell.splitColumn2.textColor = [UIColor redColor];
+            cell.splitColumn3.textColor = [UIColor redColor];
+            cell.splitColumn4.textColor = [UIColor redColor];
 
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-            cell.lapColumn.textColor = [UIColor blackColor];
-            cell.timeColumn.textColor = [UIColor blackColor];
-            cell.splitColumn1.textColor = [UIColor blackColor];
-            cell.splitColumn2.textColor = [UIColor blackColor];
-            cell.splitColumn3.textColor = [UIColor blackColor];
-            cell.splitColumn4.textColor = [UIColor blackColor];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.22 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+                cell.lapColumn.textColor = [UIColor blackColor];
+                cell.timeColumn.textColor = [UIColor blackColor];
+                cell.splitColumn1.textColor = [UIColor blackColor];
+                cell.splitColumn2.textColor = [UIColor blackColor];
+                cell.splitColumn3.textColor = [UIColor blackColor];
+                cell.splitColumn4.textColor = [UIColor blackColor];
+                
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.11 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+                    cell.lapColumn.textColor = [UIColor redColor];
+                    cell.timeColumn.textColor = [UIColor redColor];
+                    cell.splitColumn1.textColor = [UIColor redColor];
+                    cell.splitColumn2.textColor = [UIColor redColor];
+                    cell.splitColumn3.textColor = [UIColor redColor];
+                    cell.splitColumn4.textColor = [UIColor redColor];
+                    
+                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.22 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+                        cell.lapColumn.textColor = [UIColor blackColor];
+                        cell.timeColumn.textColor = [UIColor blackColor];
+                        cell.splitColumn1.textColor = [UIColor blackColor];
+                        cell.splitColumn2.textColor = [UIColor blackColor];
+                        cell.splitColumn3.textColor = [UIColor blackColor];
+                        cell.splitColumn4.textColor = [UIColor blackColor];
+                    });
+                });
+            });
         });
-    });
+    }
 }
 
 @end

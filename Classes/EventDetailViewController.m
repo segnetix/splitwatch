@@ -325,9 +325,14 @@
 	//	return NO;
 	bEditing = YES;
 	
+    pickView.hidden = YES;
+    pickerToolbar.hidden = YES;
+    
 	pickAthleteButton.enabled = NO;
 	pickEventButton.enabled = NO;
 	editSplitsButton.enabled = NO;
+    
+    
     
 	//[appDelegate playClickSound];
 	

@@ -349,11 +349,12 @@
 {
     NSMutableString *cellString = [NSMutableString stringWithString:@""];
     
-    if (row < 10)
-        [cellString appendString:@"   0"];
-    else
-        [cellString appendString:@"   "];
-    
+    if (component < kHundredths) {
+        if (row < 10)
+            [cellString appendString:@"   0"];
+        else
+            [cellString appendString:@"   "];
+    }
     
     switch (component)
     {
