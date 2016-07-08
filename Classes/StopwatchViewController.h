@@ -29,6 +29,7 @@
 	UIButton *lapResetButton;
 	UIButton *clearToggleButton;
     UIImageView *topSeparatorImageView;
+    UIImageView *middleSeparatorImageView;
     UIImageView *bottomSeparatorImageView;
 	SplitDetailViewController *splitDetailViewController;
 	SettingsViewController *settingsViewController;
@@ -70,6 +71,7 @@
 @property (nonatomic, assign) UIButton	*lapResetButton;
 @property (nonatomic, retain) UIButton	*clearToggleButton;
 @property (nonatomic, retain) UIImageView *topSeparatorImageView;
+@property (nonatomic, retain) UIImageView *middleSeparatorImageView;
 @property (nonatomic, retain) UIImageView *bottomSeparatorImageView;
 @property (nonatomic, assign) SplitDetailViewController *splitDetailViewController;
 @property (nonatomic, assign) SettingsViewController *settingsViewController;

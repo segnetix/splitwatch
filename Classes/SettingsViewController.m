@@ -135,6 +135,18 @@
 {
     [super viewDidLoad];
 	
+    UIImage *separatorImage = [UIImage imageNamed:@"separator_dark_gray.png"];
+    UIImageView *bottomSeparatorImageView = [[UIImageView alloc] initWithImage:separatorImage];
+    bottomSeparatorImageView.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    NSDictionary *views = NSDictionaryOfVariableBindings(bottomSeparatorImageView);
+    
+    // separator line between the settings view and the tab bar
+    [self.view addSubview:bottomSeparatorImageView];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[bottomSeparatorImageView]|" options:0 metrics:nil views:views]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[bottomSeparatorImageView(1)]-49-|" options:0 metrics:nil views:views]];
+    [bottomSeparatorImageView release];
+    
 	if (!bLoaded)
 	{
 		unitsControl.selectedSegmentIndex = unitsState;

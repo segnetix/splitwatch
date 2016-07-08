@@ -53,10 +53,33 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.view.backgroundColor = [UIColor colorWithRed:0.9 green:0.9 blue:0.9 alpha:1.0];
+    self.pickView.backgroundColor = [UIColor whiteColor];
+    
     // Do any additional setup after loading the view from its nib.
     self.navigationItem.title = @"Split Edit";
     
+    UIImage *separatorImage = [UIImage imageNamed:@"separator_dark_gray.png"];
+    UIImageView *topSeparatorImageView = [[UIImageView alloc] initWithImage:separatorImage];
+    UIImageView *bottomSeparatorImageView = [[UIImageView alloc] initWithImage:separatorImage];
+    topSeparatorImageView.translatesAutoresizingMaskIntoConstraints = NO;
+    bottomSeparatorImageView.translatesAutoresizingMaskIntoConstraints = NO;
     
+    NSDictionary *views = NSDictionaryOfVariableBindings(topSeparatorImageView, bottomSeparatorImageView);
+    
+    [self.view addSubview:topSeparatorImageView];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[topSeparatorImageView]|" options:0 metrics:nil views:views]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[topSeparatorImageView(1)]-49-|" options:0 metrics:nil views:views]];
+    [topSeparatorImageView release];
+    
+    [self.view addSubview:bottomSeparatorImageView];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[bottomSeparatorImageView]|" options:0 metrics:nil views:views]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-300-[bottomSeparatorImageView(1)]" options:0 metrics:nil views:views]];
+    [bottomSeparatorImageView release];
+    
+    [beforeLabel setTextColor: [UIColor darkGrayColor]];
+    [afterLabel setTextColor: [UIColor darkGrayColor]];
     
     [self setSplitTimeLabelsFromEvent];
 }

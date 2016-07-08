@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MultiwatchCell"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MultiwatchCell" rowHeight="110" id="KGk-i7-Jjw" customClass="MultiwatchCell">
+            <rect key="frame" x="0.0" y="0.0" width="624" height="76"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="784" height="109"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aZw-Xu-ToU">
+                        <rect key="frame" x="8" y="8" width="172" height="93"/>
+                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="21"/>
+                        <state key="normal" title="StartStop"/>
+                        <variation key="widthClass=regular">
+                            <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="28"/>
+                        </variation>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gu4-Uz-hnF">
+                        <rect key="frame" x="604" y="8" width="172" height="93"/>
+                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="21"/>
+                        <state key="normal" title="LapReset"/>
+                        <variation key="widthClass=regular">
+                            <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="28"/>
+                        </variation>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RunnerName" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="awo-tA-z7L">
+                        <rect key="frame" x="188" y="2" width="408" height="33"/>
+                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                        <variation key="widthClass=regular">
+                            <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="24"/>
+                        </variation>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="completedDistance" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="ylT-uS-X7C">
+                        <rect key="frame" x="188" y="37" width="52" height="33"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="52" id="QA9-Yu-WEp">
+                                <variation key="widthClass=regular" constant="76"/>
+                            </constraint>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                        <variation key="widthClass=regular">
+                            <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="24"/>
+                        </variation>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LapTime" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="O1K-93-IkD">
+                        <rect key="frame" x="248" y="37" width="348" height="33"/>
+                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                        <variation key="widthClass=regular">
+                            <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="24"/>
+                        </variation>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RunningTime" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="rqh-i5-oE0">
+                        <rect key="frame" x="248" y="72" width="348" height="33"/>
+                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                        <variation key="widthClass=regular">
+                            <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="24"/>
+                        </variation>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="separator_gray" translatesAutoresizingMaskIntoConstraints="NO" id="iwk-iH-om2">
+                        <rect key="frame" x="0.0" y="108" width="784" height="1"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="LbV-1f-8aE"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="completedDistanceTime" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="JHl-8t-FxX">
+                        <rect key="frame" x="188" y="72" width="52" height="33"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="52" id="IMn-5l-Hek">
+                                <variation key="widthClass=regular" constant="76"/>
+                            </constraint>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="52" id="wuG-bA-prj"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="wuG-bA-prj"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=regular">
+                            <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="24"/>
+                            <mask key="constraints">
+                                <exclude reference="wuG-bA-prj"/>
+                            </mask>
+                        </variation>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="JHl-8t-FxX" firstAttribute="top" secondItem="ylT-uS-X7C" secondAttribute="bottom" constant="2" id="0kV-eT-yen"/>
+                    <constraint firstItem="gu4-Uz-hnF" firstAttribute="leading" secondItem="rqh-i5-oE0" secondAttribute="trailing" constant="8" id="1gY-Vr-63P">
+                        <variation key="widthClass=regular" constant="16"/>
+                    </constraint>
+                    <constraint firstItem="ylT-uS-X7C" firstAttribute="top" secondItem="awo-tA-z7L" secondAttribute="bottom" constant="2" id="1tl-Yg-Uyg"/>
+                    <constraint firstItem="iwk-iH-om2" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="5uu-51-XGp"/>
+                    <constraint firstItem="gu4-Uz-hnF" firstAttribute="leading" secondItem="O1K-93-IkD" secondAttribute="trailing" constant="8" id="89b-Yi-PvO">
+                        <variation key="widthClass=regular" constant="16"/>
+                    </constraint>
+                    <constraint firstItem="rqh-i5-oE0" firstAttribute="width" secondItem="O1K-93-IkD" secondAttribute="width" id="Fj9-3P-QCH"/>
+                    <constraint firstItem="gu4-Uz-hnF" firstAttribute="leading" secondItem="awo-tA-z7L" secondAttribute="trailing" constant="8" id="Iab-jc-TOf">
+                        <variation key="widthClass=regular" constant="16"/>
+                    </constraint>
+                    <constraint firstItem="aZw-Xu-ToU" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.22" id="JJl-i7-GVM"/>
+                    <constraint firstItem="rqh-i5-oE0" firstAttribute="top" secondItem="O1K-93-IkD" secondAttribute="bottom" constant="2" id="KUx-Vq-Qg9"/>
+                    <constraint firstAttribute="bottom" secondItem="iwk-iH-om2" secondAttribute="bottom" id="Qpp-JD-ocq"/>
+                    <constraint firstItem="aZw-Xu-ToU" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="Tj6-2O-1wi">
+                        <variation key="widthClass=regular" constant="12"/>
+                    </constraint>
+                    <constraint firstItem="rqh-i5-oE0" firstAttribute="leading" secondItem="JHl-8t-FxX" secondAttribute="trailing" constant="8" id="W8h-qt-AQy"/>
+                    <constraint firstItem="O1K-93-IkD" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Wdx-4X-MWj"/>
+                    <constraint firstItem="O1K-93-IkD" firstAttribute="leading" secondItem="ylT-uS-X7C" secondAttribute="trailing" constant="8" id="XL0-6G-rAb"/>
+                    <constraint firstItem="awo-tA-z7L" firstAttribute="leading" secondItem="aZw-Xu-ToU" secondAttribute="trailing" constant="8" id="Ymc-Ad-qIG">
+                        <variation key="widthClass=regular" constant="16"/>
+                    </constraint>
+                    <constraint firstItem="JHl-8t-FxX" firstAttribute="leading" secondItem="aZw-Xu-ToU" secondAttribute="trailing" constant="8" id="Yzx-tS-Jzc">
+                        <variation key="widthClass=regular" constant="16"/>
+                    </constraint>
+                    <constraint firstItem="ylT-uS-X7C" firstAttribute="leading" secondItem="aZw-Xu-ToU" secondAttribute="trailing" constant="8" id="bXm-6B-a2v">
+                        <variation key="widthClass=regular" constant="16"/>
+                    </constraint>
+                    <constraint firstItem="gu4-Uz-hnF" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="bva-eP-IT2">
+                        <variation key="widthClass=regular" constant="12"/>
+                    </constraint>
+                    <constraint firstAttribute="bottom" secondItem="aZw-Xu-ToU" secondAttribute="bottom" constant="8" id="eRM-zY-bpm">
+                        <variation key="widthClass=regular" constant="12"/>
+                    </constraint>
+                    <constraint firstAttribute="bottom" secondItem="gu4-Uz-hnF" secondAttribute="bottom" constant="8" id="gos-ck-VmH">
+                        <variation key="widthClass=regular" constant="12"/>
+                    </constraint>
+                    <constraint firstAttribute="trailing" secondItem="gu4-Uz-hnF" secondAttribute="trailing" constant="8" id="mE8-ha-E0L">
+                        <variation key="widthClass=regular" constant="16"/>
+                    </constraint>
+                    <constraint firstAttribute="trailing" secondItem="iwk-iH-om2" secondAttribute="trailing" id="mQi-MF-69w"/>
+                    <constraint firstItem="JHl-8t-FxX" firstAttribute="top" secondItem="awo-tA-z7L" secondAttribute="bottom" constant="2" id="nfD-AB-II9"/>
+                    <constraint firstItem="ylT-uS-X7C" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="2" id="rug-73-xYR"/>
+                    <constraint firstItem="aZw-Xu-ToU" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="uWR-lJ-k8Z">
+                        <variation key="widthClass=regular" constant="12"/>
+                    </constraint>
+                    <constraint firstItem="awo-tA-z7L" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="2" id="wna-3f-j48"/>
+                    <constraint firstItem="O1K-93-IkD" firstAttribute="top" secondItem="awo-tA-z7L" secondAttribute="bottom" constant="2" id="y1t-Bx-CAm"/>
+                </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="rug-73-xYR"/>
+                        <exclude reference="nfD-AB-II9"/>
+                        <exclude reference="Wdx-4X-MWj"/>
+                    </mask>
+                </variation>
+            </tableViewCellContentView>
+            <constraints>
+                <constraint firstItem="ylT-uS-X7C" firstAttribute="height" secondItem="KGk-i7-Jjw" secondAttribute="height" multiplier="0.3" id="0Uz-fW-PXf"/>
+                <constraint firstItem="O1K-93-IkD" firstAttribute="height" secondItem="KGk-i7-Jjw" secondAttribute="height" multiplier="0.3" id="Ann-Vs-yqq"/>
+                <constraint firstItem="JHl-8t-FxX" firstAttribute="height" secondItem="KGk-i7-Jjw" secondAttribute="height" multiplier="0.3" id="GIH-OG-ZqX"/>
+                <constraint firstItem="gu4-Uz-hnF" firstAttribute="width" secondItem="KGk-i7-Jjw" secondAttribute="width" multiplier="0.22" id="afC-mT-zZN"/>
+                <constraint firstItem="awo-tA-z7L" firstAttribute="height" secondItem="KGk-i7-Jjw" secondAttribute="height" multiplier="0.3" id="isF-bg-d6Q"/>
+                <constraint firstItem="rqh-i5-oE0" firstAttribute="height" secondItem="KGk-i7-Jjw" secondAttribute="height" multiplier="0.3" id="uy5-xq-6CE"/>
+                <constraint firstItem="rqh-i5-oE0" firstAttribute="height" secondItem="KGk-i7-Jjw" secondAttribute="height" multiplier="0.3" id="z4v-x7-HeN"/>
+            </constraints>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="z4v-x7-HeN"/>
+                </mask>
+            </variation>
+            <variation key="widthClass=regular">
+                <mask key="constraints">
+                    <exclude reference="z4v-x7-HeN"/>
+                </mask>
+            </variation>
+            <connections>
+                <outlet property="backgroundView" destination="H2p-sc-9uM" id="brw-NT-s2J"/>
+                <outlet property="completedDistanceLabel" destination="ylT-uS-X7C" id="BYC-cS-lti"/>
+                <outlet property="completedDistanceTime" destination="JHl-8t-FxX" id="P4J-vC-9Vk"/>
+                <outlet property="lapResetButton" destination="gu4-Uz-hnF" id="r6v-vi-ITr"/>
+                <outlet property="lapTimeLabel" destination="O1K-93-IkD" id="KUG-ff-QQn"/>
+                <outlet property="runnersNameLabel" destination="awo-tA-z7L" id="Rco-qn-vPo"/>
+                <outlet property="runningTimeLabel" destination="rqh-i5-oE0" id="yrQ-rw-VvH"/>
+                <outlet property="startStopButton" destination="aZw-Xu-ToU" id="Fqv-3S-Tui"/>
+            </connections>
+            <point key="canvasLocation" x="353" y="370"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="separator_gray" width="276" height="1"/>
+    </resources>
+</document>

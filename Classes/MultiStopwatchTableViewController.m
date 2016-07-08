@@ -8,7 +8,7 @@
 
 #import "MultiStopwatchTableViewController.h"
 #import "MultiStopwatchViewController.h"
-#import "MultiStopwatchCell.h"
+#import "MultiwatchCell.h"
 #import "Utilities.h"
 #import "Stopwatch.h"
 #include <math.h>
@@ -99,7 +99,7 @@ static CGFloat kScrollZoneHeight = 44.0;
 	for (NSString *name in namesArray)
 	{
 		Stopwatch *watch = [[Stopwatch alloc] initWithMultiStopwatchTableViewController:self eventType:iEventType kiloSplits:bKiloSplits furlongMode:bFurlongMode];
-        MultiStopwatchCell *cell = nil;
+        MultiwatchCell *cell = nil;
         
 		// trim any long strings
 		if (name.length > 50)
@@ -118,20 +118,17 @@ static CGFloat kScrollZoneHeight = 44.0;
 		[watch release];
         
         // create multiwatch cell and add to the array
-        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"MultiStopwatchCell" owner:self options:nil];
+        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"MultiwatchCell" owner:self options:nil];
         
-        for (id obj in nib)
-        {
-            if ([obj isKindOfClass:[MultiStopwatchCell class]])
-            {
-                cell = (MultiStopwatchCell *)obj;
+        for (id obj in nib) {
+            if ([obj isKindOfClass:[MultiwatchCell class]]) {
+                cell = (MultiwatchCell *)obj;
                 [cell initialize];
             }
         }
         
         // link the watch and cell
-        if (cell != nil)
-        {
+        if (cell != nil) {
             watch.stopwatchCell = cell;
             cell.watch = watch;
             cell.runnersNameLabel.text = watch.runnerName;
@@ -214,15 +211,17 @@ static CGFloat kScrollZoneHeight = 44.0;
 		watch.lapCount = [lapCount intValue];
 		watch.intervalDistance = [intervalDist intValue];
 		
-		for (NSNumber *split in splitData)
-		{
+        // TESTING ONLY!!!
+        //watch.lapTime -= 3600.0 * 10.0;
+        //watch.startTime -= 3600.0 * 10.0;
+        
+		for (NSNumber *split in splitData) {
 			[watch addSplit:[split doubleValue]];
 		}
 		
 		watch.bTimerRunning = (watch.startTime > 0 && watch.stopTime == 0);
 		
-		if (watch.bTimerRunning)
-		{
+		if (watch.bTimerRunning) {
 			[watch startRunningTimer];
 		}
 		
@@ -230,21 +229,18 @@ static CGFloat kScrollZoneHeight = 44.0;
 		[watch release];
         
         // create multiwatch cell and add to the array
-        MultiStopwatchCell *cell = nil;
-        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"MultiStopwatchCell" owner:self options:nil];
+        MultiwatchCell *cell = nil;
+        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"MultiwatchCell" owner:self options:nil];
         
-        for (id obj in nib)
-        {
-            if ([obj isKindOfClass:[MultiStopwatchCell class]])
-            {
-                cell = (MultiStopwatchCell *)obj;
+        for (id obj in nib) {
+            if ([obj isKindOfClass:[MultiwatchCell class]]) {
+                cell = (MultiwatchCell *)obj;
                 [cell initialize];
             }
         }
         
         // link the watch and cell
-        if (cell != nil)
-        {
+        if (cell != nil) {
             watch.stopwatchCell = cell;
             cell.watch = watch;
             cell.runnersNameLabel.text = watch.runnerName;
@@ -322,7 +318,7 @@ static CGFloat kScrollZoneHeight = 44.0;
     NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:location];
     
     // check that press is within the central drag area (and not in start/stop/lap/reset button area)
-    MultiStopwatchCell *cell = (MultiStopwatchCell *)[multiWatchCells objectAtIndex:indexPath.row];
+    MultiwatchCell *cell = (MultiwatchCell *)[multiWatchCells objectAtIndex:indexPath.row];
     int startStopButtonRightLimit = cell.startStopButton.frame.size.width + cell.startStopButton.frame.origin.x;
     int lapResetButtonLeftLimit = cell.lapResetButton.frame.origin.x;
     
@@ -349,7 +345,7 @@ static CGFloat kScrollZoneHeight = 44.0;
             displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(scrollDownLoop)];
             displayLink.frameInterval = 1;
             [displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
-            NSLog(@"displayLink started 1");
+            //NSLog(@"displayLink started 1");
         }
     } else if (touchLocationInFrameY < kScrollZoneHeight) {
         // need to scroll up
@@ -357,18 +353,18 @@ static CGFloat kScrollZoneHeight = 44.0;
             displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(scrollUpLoop)];
             displayLink.frameInterval = 1;
             [displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
-            NSLog(@"displayLink started 2");
+            //NSLog(@"displayLink started 2");
         }
     } else if (displayLink != nil) {
         // check if we need to cancel a current scroll update because the touch moved out of scroll area
         if (touchLocationInFrameY <= (self.tableView.bounds.size.height - kScrollZoneHeight)) {
             [displayLink invalidate];
             displayLink = nil;
-            NSLog(@"displayLink canceled 3");
+            //NSLog(@"displayLink canceled 3");
         } else if (touchLocationInFrameY >= kScrollZoneHeight) {
             [displayLink invalidate];
             displayLink = nil;
-            NSLog(@"displayLink canceled 4");
+            //NSLog(@"displayLink canceled 4");
         }
     }
     
@@ -394,19 +390,19 @@ static CGFloat kScrollZoneHeight = 44.0;
             [self longPressEnded:indexPath location:location];
             break;
         default:
-            NSLog(@"move default");
+            //NSLog(@"move default");
             break;
     }
 }
 
 -(void)longPressBegan:(NSIndexPath*)indexPath location:(CGPoint)location
 {
-    NSLog(@"move began");
+    //NSLog(@"move began");
     
     bLongPressActive = YES;
     
     // create a snapshot of the moving cell
-    MultiStopwatchCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+    MultiwatchCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
     self.snapshot = [self snapshotFromView:cell];
     sourceIndexPath = [indexPath copy];
     movingFromIndexPath = [indexPath copy];
@@ -428,7 +424,7 @@ static CGFloat kScrollZoneHeight = 44.0;
     } completion:^(BOOL finished) {
         //code for completion
         cell.hidden = YES;      // hides the real cell while moving
-        NSLog(@"%@ hidden", cell.runnersNameLabel.text);
+        //NSLog(@"%@ hidden", cell.runnersNameLabel.text);
     }];
 }
 
@@ -458,17 +454,17 @@ static CGFloat kScrollZoneHeight = 44.0;
 
 -(void)longPressEnded:(NSIndexPath*)indexPath location:(CGPoint)location
 {
-    NSLog(@"move ended");
+    //NSLog(@"move ended");
     
     bLongPressActive = NO;
     
     // cancel any scroll loop
     [displayLink invalidate];
     displayLink = nil;
-    NSLog(@"displayLink canceled 5");
+    //NSLog(@"displayLink canceled 5");
     
     if (indexPath == nil || snapshot == nil || sourceIndexPath == nil) {
-        NSLog(@"******* early return in longPressEnded...");
+        //NSLog(@"******* early return in longPressEnded...");
         return;
     }
     
@@ -502,7 +498,7 @@ static CGFloat kScrollZoneHeight = 44.0;
     }
     
     // clean up any snapshot views or displayLink scrolls
-    MultiStopwatchCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+    MultiwatchCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
     
     cell.alpha = 0.0;
     
@@ -520,7 +516,7 @@ static CGFloat kScrollZoneHeight = 44.0;
     } completion:^(BOOL finished) {
         //code for completion
         cell.hidden = NO;
-        NSLog(@"%@ unhidden", cell.runnersNameLabel.text);
+        //NSLog(@"%@ unhidden", cell.runnersNameLabel.text);
         [sourceIndexPath release];
         sourceIndexPath = nil;
         [snapshot removeFromSuperview];
@@ -795,31 +791,10 @@ static CGFloat kScrollZoneHeight = 44.0;
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    /*
-    // OLD dequeue cell code from v1.2 and earlier...
-    static NSString *CellIdentifier = @"MultiStopwatchCellIdentifier";
-    
-    MultiStopwatchCell *cell = (MultiStopwatchCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-	
-    if (cell == nil)
-	{
-		NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"MultiStopwatchCell" owner:self options:nil];
-		
-		for (id obj in nib)
-		{
-			if ([obj isKindOfClass:[MultiStopwatchCell class]])
-			{
-				cell = (MultiStopwatchCell *)obj;
-				[cell initialize];
-			}
-		}
-    }
-	*/
-    
-    MultiStopwatchCell *cell = nil;
+    MultiwatchCell *cell = nil;
     
     // just return the cell from the multiWatchCells array
-    cell = (MultiStopwatchCell *)[multiWatchCells objectAtIndex:indexPath.row];
+    cell = (MultiwatchCell *)[multiWatchCells objectAtIndex:indexPath.row];
     
     return cell;
 }

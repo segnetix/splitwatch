@@ -24,6 +24,7 @@
 @synthesize setupButton;
 @synthesize settingsViewController;
 @synthesize topSeparatorImageView;
+@synthesize middleSeparatorImageView;
 @synthesize bottomSeparatorImageView;
 @synthesize multiStopwatchTableViewController;
 @synthesize appDelegate;
@@ -71,6 +72,7 @@
         runningTimeLabel = [[UILabel alloc] init];
         runningTimeLabel.translatesAutoresizingMaskIntoConstraints = NO;
         runningTimeLabel.tag = @"runningTimeLabel";
+        runningTimeLabel.adjustsFontSizeToFitWidth = YES;
         
         intervalDistanceLabel = [[UILabel alloc] init];
         intervalDistanceLabel.translatesAutoresizingMaskIntoConstraints = NO;
@@ -83,6 +85,9 @@
         UIImage *separatorImage = [UIImage imageNamed:@"separator_dark_gray.png"];
         topSeparatorImageView = [[UIImageView alloc] initWithImage:separatorImage];
         topSeparatorImageView.translatesAutoresizingMaskIntoConstraints = NO;
+        
+        middleSeparatorImageView = [[UIImageView alloc] initWithImage:separatorImage];
+        middleSeparatorImageView.translatesAutoresizingMaskIntoConstraints = NO;
         
         bottomSeparatorImageView = [[UIImageView alloc] initWithImage:separatorImage];
         bottomSeparatorImageView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -125,13 +130,12 @@
     UIView* multiStopwatchView = multiStopwatchTableViewController.view;
     multiStopwatchView.tag = @"multiStopwatchView";
     
-    NSDictionary *views = NSDictionaryOfVariableBindings(topSeparatorImageView, bottomSeparatorImageView, startStopButton, clearResetButton, setupButton, runningTimeLabel, intervalDistanceLabel, multiStopwatchView);
+    NSDictionary *views = NSDictionaryOfVariableBindings(topSeparatorImageView, middleSeparatorImageView, bottomSeparatorImageView, startStopButton, clearResetButton, setupButton, runningTimeLabel, intervalDistanceLabel, multiStopwatchView);
 
     [self.view addSubview:runningTimeLabel];
     runningTimeLabel.hidden = YES;
     
     // runningTime
-    //runningTimeLabel.frame = CGRectMake(40, 20, 270, 40);
     if (IPAD) {
         runningTimeLabel.font = [UIFont fontWithName:FONT_NAME size:72];
     } else {
@@ -158,7 +162,6 @@
     [runningTimeLabel release];
     
     // intervalDistance label
-    //intervalDistanceLabel.frame = CGRectMake(6, 12, 60, 26);
     if (IPAD) {
         intervalDistanceLabel.font = [UIFont fontWithName:FONT_NAME size:30];
     } else {
@@ -166,7 +169,6 @@
     }
     intervalDistanceLabel.textColor = [UIColor blackColor];
     intervalDistanceLabel.backgroundColor = [UIColor clearColor];
-    //intervalDistanceLabel.text = [Utilities shortFormatTime:0 precision:2];
     intervalDistanceLabel.textAlignment = NSTextAlignmentRight;
     if (!bTimerRunning)
         [self resetIntervalUnitsFromCurrentSettings];
@@ -181,7 +183,6 @@
     [intervalDistanceLabel release];
     
     // setupButton
-    //setupButton.frame = CGRectMake(24, 58, 48, 28);
     [setupButton addTarget:self action:@selector(setupButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     [setupButton setTitle:@"Setup" forState:UIControlStateNormal];
     [setupButton setTitleColor:self.view.tintColor forState:UIControlStateNormal];
@@ -207,8 +208,6 @@
     }
     
     // startStopButton
-    //startStopButton.frame = CGRectMake(64, 48, 112, 53);
-    //startStopButton.frame = CGRectMake(130, 8, 182, 64);
     [startStopButton setTitle:@"Start" forState:UIControlStateNormal];
     [startStopButton setTitleColor:GREEN_COLOR forState:UIControlStateNormal];
     [startStopButton setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
@@ -234,7 +233,7 @@
     }
     [startStopButton release];
     
-    // clearResetButton [a clear (transparent) button to make the time display a button to reset the watch]
+    // clearResetButton (a transparent button to make the time display a button to reset the watch)
     [clearResetButton setBackgroundColor:[UIColor clearColor]];
     
     [clearResetButton addTarget:self action:@selector(resetButtonPressed) forControlEvents:UIControlEventTouchDown];
@@ -265,13 +264,19 @@
     [topSeparatorImageView release];
     
     // separator between top panel and the scrolling table view controller
+    [self.view addSubview:middleSeparatorImageView];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[middleSeparatorImageView]|" options:0 metrics:nil views:views]];
+    if (IPAD) {
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-131-[middleSeparatorImageView(1)]" options:0 metrics:nil views:views]];
+    } else {
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-101-[middleSeparatorImageView(1)]" options:0 metrics:nil views:views]];
+    }
+    [middleSeparatorImageView release];
+    
+    // separator between scrolling table view controller and tab bar
     [self.view addSubview:bottomSeparatorImageView];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[bottomSeparatorImageView]|" options:0 metrics:nil views:views]];
-    if (IPAD) {
-        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-131-[bottomSeparatorImageView(1)]" options:0 metrics:nil views:views]];
-    } else {
-        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-101-[bottomSeparatorImageView(1)]" options:0 metrics:nil views:views]];
-    }
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[bottomSeparatorImageView(1)]-49-|" options:0 metrics:nil views:views]];
     [bottomSeparatorImageView release];
     
     // multi stopwatch view

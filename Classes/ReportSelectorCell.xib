@@ -42,6 +42,12 @@
                             <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="26"/>
                         </variation>
                     </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="separator_dark_gray" translatesAutoresizingMaskIntoConstraints="NO" id="Pvg-jg-1Dz">
+                        <rect key="frame" x="0.0" y="42" width="429" height="1"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="amf-td-if7"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="5fQ-3z-FaM" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="BLm-j1-zOL"/>
@@ -55,8 +61,11 @@
                     <constraint firstItem="YRz-Yw-6fU" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Qj1-bc-s9Y"/>
                     <constraint firstItem="5fQ-3z-FaM" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.3" id="YSz-y7-GLO"/>
                     <constraint firstItem="5fQ-3z-FaM" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="YUf-Jz-enq"/>
+                    <constraint firstAttribute="bottom" secondItem="Pvg-jg-1Dz" secondAttribute="bottom" id="hTc-x9-o1b"/>
+                    <constraint firstItem="Pvg-jg-1Dz" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="ird-Eh-g2c"/>
                     <constraint firstItem="5fQ-3z-FaM" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="lVz-55-aeW"/>
                     <constraint firstAttribute="trailing" secondItem="YRz-Yw-6fU" secondAttribute="trailing" constant="8" id="yTU-sH-rgf"/>
+                    <constraint firstAttribute="trailing" secondItem="Pvg-jg-1Dz" secondAttribute="trailing" id="zgH-pm-aEp"/>
                     <constraint firstItem="YRz-Yw-6fU" firstAttribute="leading" secondItem="5fQ-3z-FaM" secondAttribute="trailing" constant="8" symbolic="YES" id="zxV-9z-p4L"/>
                 </constraints>
                 <variation key="default">
@@ -76,4 +85,7 @@
             <point key="canvasLocation" x="577.5" y="302"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="separator_dark_gray" width="276" height="1"/>
+    </resources>
 </document>

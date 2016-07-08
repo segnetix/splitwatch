@@ -23,6 +23,8 @@
 		B021DA0F1D24566E008335DF /* ReportSelectionListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B021DA0D1D24566E008335DF /* ReportSelectionListTableViewController.m */; };
 		B021DA101D24566E008335DF /* ReportSelectionListTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B021DA0E1D24566E008335DF /* ReportSelectionListTableViewController.xib */; };
 		B0228C231A7AB278007B4F46 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0228C221A7AB278007B4F46 /* QuartzCore.framework */; };
+		B02360D41D2EE08600C6C4F8 /* MultiwatchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B02360D21D2EE08600C6C4F8 /* MultiwatchCell.m */; };
+		B02360D51D2EE08600C6C4F8 /* MultiwatchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B02360D31D2EE08600C6C4F8 /* MultiwatchCell.xib */; };
 		B025ECD61139F887000EE205 /* Help_History.html in Resources */ = {isa = PBXBuildFile; fileRef = B025ECD21139F887000EE205 /* Help_History.html */; };
 		B025ECD71139F887000EE205 /* Help_Multiwatch.html in Resources */ = {isa = PBXBuildFile; fileRef = B025ECD31139F887000EE205 /* Help_Multiwatch.html */; };
 		B025ECD81139F887000EE205 /* Help_Settings.html in Resources */ = {isa = PBXBuildFile; fileRef = B025ECD41139F887000EE205 /* Help_Settings.html */; };
@@ -94,8 +96,6 @@
 		B084FABF1136B13F008C4B00 /* splitwatch.png in Resources */ = {isa = PBXBuildFile; fileRef = B084FABD1136B13F008C4B00 /* splitwatch.png */; };
 		B084FD4911383A41008C4B00 /* AboutView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B084FD4711383A41008C4B00 /* AboutView.xib */; };
 		B08EE48210B0ADBC00CAE9FB /* MultiStopwatchTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B08EE48110B0ADBC00CAE9FB /* MultiStopwatchTableViewController.m */; };
-		B08EE71510B1134E00CAE9FB /* MultiStopwatchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B08EE71410B1134E00CAE9FB /* MultiStopwatchCell.m */; };
-		B08EE71E10B1140600CAE9FB /* MultiStopwatchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B08EE71D10B1140600CAE9FB /* MultiStopwatchCell.xib */; };
 		B093FC2F10B4001300535F70 /* Stopwatch.m in Sources */ = {isa = PBXBuildFile; fileRef = B093FC2E10B4001300535F70 /* Stopwatch.m */; };
 		B097C90A11225FE900C478BC /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B097C90911225FE900C478BC /* libsqlite3.0.dylib */; };
 		B099086B1A76D63100ACF6D7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B099086A1A76D63100ACF6D7 /* Images.xcassets */; };
@@ -143,6 +143,9 @@
 		B021DA0D1D24566E008335DF /* ReportSelectionListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReportSelectionListTableViewController.m; sourceTree = "<group>"; };
 		B021DA0E1D24566E008335DF /* ReportSelectionListTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ReportSelectionListTableViewController.xib; path = Classes/ReportSelectionListTableViewController.xib; sourceTree = "<group>"; };
 		B0228C221A7AB278007B4F46 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		B02360D11D2EE08600C6C4F8 /* MultiwatchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MultiwatchCell.h; path = ../MultiwatchCell.h; sourceTree = "<group>"; };
+		B02360D21D2EE08600C6C4F8 /* MultiwatchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MultiwatchCell.m; path = ../MultiwatchCell.m; sourceTree = "<group>"; };
+		B02360D31D2EE08600C6C4F8 /* MultiwatchCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MultiwatchCell.xib; sourceTree = "<group>"; };
 		B025ECD21139F887000EE205 /* Help_History.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Help_History.html; sourceTree = "<group>"; };
 		B025ECD31139F887000EE205 /* Help_Multiwatch.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Help_Multiwatch.html; sourceTree = "<group>"; };
 		B025ECD41139F887000EE205 /* Help_Settings.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Help_Settings.html; sourceTree = "<group>"; };
@@ -227,9 +230,6 @@
 		B084FE2811386D9B008C4B00 /* Splitwatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Splitwatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B08EE48010B0ADBC00CAE9FB /* MultiStopwatchTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiStopwatchTableViewController.h; sourceTree = "<group>"; };
 		B08EE48110B0ADBC00CAE9FB /* MultiStopwatchTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultiStopwatchTableViewController.m; sourceTree = "<group>"; };
-		B08EE71310B1134E00CAE9FB /* MultiStopwatchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MultiStopwatchCell.h; path = ../MultiStopwatchCell.h; sourceTree = "<group>"; };
-		B08EE71410B1134E00CAE9FB /* MultiStopwatchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MultiStopwatchCell.m; path = ../MultiStopwatchCell.m; sourceTree = "<group>"; };
-		B08EE71D10B1140600CAE9FB /* MultiStopwatchCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MultiStopwatchCell.xib; sourceTree = "<group>"; };
 		B093FC2D10B4001300535F70 /* Stopwatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Stopwatch.h; sourceTree = "<group>"; };
 		B093FC2E10B4001300535F70 /* Stopwatch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Stopwatch.m; sourceTree = "<group>"; };
 		B097C90911225FE900C478BC /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
@@ -306,8 +306,8 @@
 				B08EE48110B0ADBC00CAE9FB /* MultiStopwatchTableViewController.m */,
 				B0804F3D10B61ABA00F840EE /* MultiStopwatchSetupViewController.h */,
 				B0804F3E10B61ABA00F840EE /* MultiStopwatchSetupViewController.m */,
-				B08EE71310B1134E00CAE9FB /* MultiStopwatchCell.h */,
-				B08EE71410B1134E00CAE9FB /* MultiStopwatchCell.m */,
+				B02360D11D2EE08600C6C4F8 /* MultiwatchCell.h */,
+				B02360D21D2EE08600C6C4F8 /* MultiwatchCell.m */,
 				B02A948D10A0FDC400DB5E7E /* HistoryViewController.h */,
 				B02A948E10A0FDC400DB5E7E /* HistoryViewController.m */,
 				B0F8EB5011272A2100740C3D /* HistoryTableViewController.h */,
@@ -453,10 +453,10 @@
 				B076FC3810A5DAE600E60196 /* EventDetail.xib */,
 				9828E0A110B9C756001CB672 /* HistoryCell.xib */,
 				B0F8EB5211272A2100740C3D /* HistoryTableViewController.xib */,
+				B02360D31D2EE08600C6C4F8 /* MultiwatchCell.xib */,
 				B021DA091D244362008335DF /* ReportSelectorCell.xib */,
 				B021DA0E1D24566E008335DF /* ReportSelectionListTableViewController.xib */,
 				28AD73870D9D96C1002E5188 /* MainWindow.xib */,
-				B08EE71D10B1140600CAE9FB /* MultiStopwatchCell.xib */,
 				B019A4511A8026CC0032405A /* MultiStopwatchSetupViewController.xib */,
 				B07602D710A8F5E200E60196 /* SplitDetailCell.xib */,
 				B0BFC9D612DBF9DC00EDCA76 /* SplitEditViewController.xib */,
@@ -544,7 +544,6 @@
 				B05D502E1AA8AF59006AEFA4 /* Icon_3_40.png in Resources */,
 				B0A2CDEF1AACA657005A7F1D /* AccDisclosure@2x.png in Resources */,
 				B07602D810A8F5E200E60196 /* SplitDetailCell.xib in Resources */,
-				B08EE71E10B1140600CAE9FB /* MultiStopwatchCell.xib in Resources */,
 				B05D4FB41AA67FE4006AEFA4 /* history03.png in Resources */,
 				B05D50191AA8123A006AEFA4 /* HelpImage_SettingsEmailSetup.png in Resources */,
 				B05D503D1AA8AF59006AEFA4 /* Icon_3_256.png in Resources */,
@@ -563,6 +562,7 @@
 				B0CE7E731131DB3600B5A30E /* AccDisclosure.png in Resources */,
 				B077DEB41AA376E700C57164 /* SplitPickerViewController.xib in Resources */,
 				B0CE7EEB1131E5BE00B5A30E /* separator.png in Resources */,
+				B02360D51D2EE08600C6C4F8 /* MultiwatchCell.xib in Resources */,
 				B05D50091AA7F0E3006AEFA4 /* HelpImage_HistoryOverview.png in Resources */,
 				B084FABE1136B13F008C4B00 /* multiwatch.png in Resources */,
 				B05D500F1AA7F5DC006AEFA4 /* HelpImage_SplitDetailView.png in Resources */,
@@ -633,7 +633,6 @@
 				B0FACF1C10AF3B7A004FEBC1 /* AboutViewController.m in Sources */,
 				B0FACF2110AF3B8B004FEBC1 /* HelpViewController.m in Sources */,
 				B08EE48210B0ADBC00CAE9FB /* MultiStopwatchTableViewController.m in Sources */,
-				B08EE71510B1134E00CAE9FB /* MultiStopwatchCell.m in Sources */,
 				B077DEB31AA376E700C57164 /* SplitPickerViewController.m in Sources */,
 				B093FC2F10B4001300535F70 /* Stopwatch.m in Sources */,
 				B0804F4010B61ABA00F840EE /* MultiStopwatchSetupViewController.m in Sources */,
@@ -642,6 +641,7 @@
 				B0F8EB5311272A2100740C3D /* HistoryTableViewController.m in Sources */,
 				B082A709112D5E91007D6758 /* EmailAddressTableViewController.m in Sources */,
 				B084F87011336D8C008C4B00 /* HelpDetailViewController.m in Sources */,
+				B02360D41D2EE08600C6C4F8 /* MultiwatchCell.m in Sources */,
 				B0BFC9D712DBF9DC00EDCA76 /* SplitEditViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -693,8 +693,8 @@
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.segnetix.stopwatch;
 				PRODUCT_NAME = Splitwatch;
-				PROVISIONING_PROFILE = "81174d60-e4d4-4e08-9cf9-c2ca2145efd0";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "81174d60-e4d4-4e08-9cf9-c2ca2145efd0";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -708,7 +708,7 @@
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -731,7 +731,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.segnetix.stopwatch;
 				PRODUCT_NAME = Splitwatch;
-				PROVISIONING_PROFILE = "81174d60-e4d4-4e08-9cf9-c2ca2145efd0";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -745,7 +745,7 @@
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
@@ -758,7 +758,7 @@
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 			};

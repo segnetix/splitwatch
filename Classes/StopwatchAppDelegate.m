@@ -175,7 +175,7 @@
 // v1.2 - 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
-	NSLog(@"applicationDidEnterBackground");
+	//NSLog(@"applicationDidEnterBackground");
 	
 	NSString *rootFilePath = [self documentDirectoryFilePath];
 	
@@ -593,7 +593,7 @@
 		
 		// need to convert these values to display strings
 		NSString *distanceString = [Utilities stringFromDistance:[distanceNumber intValue]
-														   Units:eventType ShowMiles:YES
+														   Units:eventType
 													ShowSplitTag:NO
 														Interval:lapDistance
 											  FurlongDisplayMode:furlongMode];
@@ -797,7 +797,7 @@
         
         // need to convert these values to display strings
         NSString *distanceString = [Utilities stringFromDistance:[distanceNumber intValue]
-                                                           Units:eventType ShowMiles:YES
+                                                           Units:eventType
                                                     ShowSplitTag:NO
                                                         Interval:lapDistance
                                               FurlongDisplayMode:furlongMode];

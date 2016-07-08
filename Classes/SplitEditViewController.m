@@ -95,19 +95,27 @@
     pickerView.tag      = @"pickerView";
     
     UIImage *separatorImage = [UIImage imageNamed:@"separator_dark_gray.png"];
-    UIImageView *separatorImageView = [[UIImageView alloc] initWithImage:separatorImage];
-    separatorImageView.translatesAutoresizingMaskIntoConstraints = NO;
+    UIImageView *topSeparatorImageView = [[UIImageView alloc] initWithImage:separatorImage];
+    UIImageView *bottomSeparatorImageView = [[UIImageView alloc] initWithImage:separatorImage];
+    topSeparatorImageView.translatesAutoresizingMaskIntoConstraints = NO;
+    bottomSeparatorImageView.translatesAutoresizingMaskIntoConstraints = NO;
     
-    NSDictionary *views = NSDictionaryOfVariableBindings(splitHeader, splitDetailView, separatorImageView);
+    NSDictionary *views = NSDictionaryOfVariableBindings(splitHeader, splitDetailView, topSeparatorImageView, bottomSeparatorImageView);
     
     [self.view addSubview:splitHeader];
     [self.view addSubview:splitDetailView];
-    [self.view addSubview:separatorImageView];
+    [self.view addSubview:topSeparatorImageView];
+    [self.view addSubview:bottomSeparatorImageView];
     
     // separator line above split view header
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[separatorImageView]|" options:0 metrics:nil views:views]];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-215-[separatorImageView(1)]" options:0 metrics:nil views:views]];
-    [separatorImageView release];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[topSeparatorImageView]|" options:0 metrics:nil views:views]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-215-[topSeparatorImageView(1)]" options:0 metrics:nil views:views]];
+    [topSeparatorImageView release];
+    
+    // separator line between split detail view and tab bar
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[bottomSeparatorImageView]|" options:0 metrics:nil views:views]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[bottomSeparatorImageView(1)]-49-|" options:0 metrics:nil views:views]];
+    [bottomSeparatorImageView release];
     
     // splitHeader/splitDetailView
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[splitHeader]|" options:0 metrics:nil views:views]];

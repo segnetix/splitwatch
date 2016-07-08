@@ -390,7 +390,7 @@
 // v1.2 changes - added Lap mode with ShowSplitTag
 //				  added special handling for 25 and 50 yard split distances
 //				  added Furlong mode string handling
-+ (NSString *)stringFromDistance:(NSInteger)distance Units:(int)units ShowMiles:(BOOL)showMiles ShowSplitTag:(BOOL)showSplitTag Interval:(int)interval FurlongDisplayMode:(BOOL)furlongDisplayMode
++ (NSString *)stringFromDistance:(NSInteger)distance Units:(int)units ShowSplitTag:(BOOL)showSplitTag Interval:(int)interval FurlongDisplayMode:(BOOL)furlongDisplayMode
 {
 	NSString *distanceString = @"";
 	
@@ -443,18 +443,6 @@
 		else
 		{
 			distanceString = [NSString stringWithFormat:@"%ldy", (long)distance];
-			
-			/*
-			if (showMiles && mileUnit > 0)
-			{
-				if (mileUnit > 1)
-					distanceString = [NSString stringWithFormat:@"%uM %uy", mileUnit, fractionUnit];
-				else
-					distanceString = [NSString stringWithFormat:@"%uM %uy", mileUnit, fractionUnit];
-			}
-			else
-				distanceString = [NSString stringWithFormat:@"%uy", distance];
-			*/
 		}
 	}
 	else if (units == kLap)
@@ -483,7 +471,7 @@
    
     double totalTime = [[splits lastObject] doubleValue];
     double avgSplit = totalTime / [splits count] * column;
-    
+  
     if (avgSplit < 3600)
         avgStr = [Utilities shortFormatTime:avgSplit precision:1];
     else if (avgSplit < 36000)
@@ -756,7 +744,6 @@
             
             lapText = [Utilities stringFromDistance:totalDistance
                                               Units:iUnits
-                                          ShowMiles:NO
                                        ShowSplitTag:NO
                                            Interval:(int)intervalDistance
                                  FurlongDisplayMode:bFurlongMode];
@@ -819,7 +806,6 @@
         {
             cellText = [Utilities stringFromDistance:intervalDistance
                                                Units:iUnits
-                                           ShowMiles:NO
                                         ShowSplitTag:NO
                                             Interval:(int)intervalDistance
                                   FurlongDisplayMode:bFurlongMode];
@@ -905,7 +891,6 @@
             if (column < splits.count)
                 cellText = [Utilities stringFromDistance:((column + 1) * intervalDistance)
                                                    Units:iUnits
-                                               ShowMiles:NO
                                             ShowSplitTag:NO
                                                 Interval:(int)intervalDistance
                                       FurlongDisplayMode:bFurlongMode];

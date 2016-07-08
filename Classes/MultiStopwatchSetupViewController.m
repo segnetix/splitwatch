@@ -65,7 +65,7 @@ static CGFloat kScrollZoneHeight = 40.0;
         UIBarButtonItem *doneBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStylePlain target:nil action:NULL];
         self.navigationItem.rightBarButtonItem = doneBarButton;
         
-        // picker separator
+        // separators
         UIImage *separatorImage = [UIImage imageNamed:@"separator_dark_gray.png"];
         pickerSeparatorImageView = [[UIImageView alloc] initWithImage:separatorImage];
         pickerSeparatorImageView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -128,6 +128,8 @@ static CGFloat kScrollZoneHeight = 40.0;
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
+    [super viewDidLoad];
+    
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
 	pickerDataArray = [[NSMutableArray alloc] init];
     
@@ -168,12 +170,17 @@ static CGFloat kScrollZoneHeight = 40.0;
     
     [pickerToolbar setItems:items animated:YES];
     
+    // toolbar separator
+    UIImage *separatorImage = [UIImage imageNamed:@"separator_dark_gray.png"];
+    UIImageView *bottomSeparatorImageView = [[UIImageView alloc] initWithImage:separatorImage];
+    bottomSeparatorImageView.translatesAutoresizingMaskIntoConstraints = NO;
+
     // set other button target and actions
     [pickAthleteButton addTarget:self action:@selector(openPicker:) forControlEvents:UIControlEventTouchUpInside];
     [pickEventButton   addTarget:self action:@selector(openPicker:) forControlEvents:UIControlEventTouchUpInside];
     [clearAllButton   addTarget:self action:@selector(clearAll:) forControlEvents:UIControlEventTouchUpInside];
     
-    NSDictionary *views = NSDictionaryOfVariableBindings(pickView, pickerToolbar, pickerSeparatorImageView);
+    NSDictionary *views = NSDictionaryOfVariableBindings(pickView, pickerToolbar, pickerSeparatorImageView, bottomSeparatorImageView);
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[pickView]|" options:0 metrics:nil views:views]];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[pickerToolbar]|" options:0 metrics:nil views:views]];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[pickerSeparatorImageView]|" options:0 metrics:nil views:views]];
@@ -182,6 +189,12 @@ static CGFloat kScrollZoneHeight = 40.0;
     } else {
         [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-193-[pickView(162)][pickerToolbar][pickerSeparatorImageView(1)]" options:0 metrics:nil views:views]];
     }
+    
+    // separator line between the multiwatches and the tab bar
+    [self.view addSubview:bottomSeparatorImageView];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[bottomSeparatorImageView]|" options:0 metrics:nil views:views]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[bottomSeparatorImageView(1)]-49-|" options:0 metrics:nil views:views]];
+    [bottomSeparatorImageView release];
     
     tapGesture =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(pickerDoubleTap)];
     tapGesture.numberOfTapsRequired = 2;
@@ -202,8 +215,6 @@ static CGFloat kScrollZoneHeight = 40.0;
     
     pickAthleteButton.enabled = YES;
     pickEventButton.enabled = YES;
-    
-    [super viewDidLoad];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -295,7 +306,7 @@ static CGFloat kScrollZoneHeight = 40.0;
             displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(scrollDownLoop)];
             displayLink.frameInterval = 1;
             [displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
-            NSLog(@"displayLink started 1");
+            //NSLog(@"displayLink started 1");
         }
     } else if (touchLocationInFrameY < kScrollZoneHeight) {
         // need to scroll up
@@ -303,18 +314,18 @@ static CGFloat kScrollZoneHeight = 40.0;
             displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(scrollUpLoop)];
             displayLink.frameInterval = 1;
             [displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
-            NSLog(@"displayLink started 2");
+            //NSLog(@"displayLink started 2");
         }
     } else if (displayLink != nil) {
         // check if we need to cancel a current scroll update because the touch moved out of scroll area
         if (touchLocationInFrameY <= (nameTable.bounds.size.height - kScrollZoneHeight)) {
             [displayLink invalidate];
             displayLink = nil;
-            NSLog(@"displayLink canceled 3");
+            //NSLog(@"displayLink canceled 3");
         } else if (touchLocationInFrameY >= kScrollZoneHeight) {
             [displayLink invalidate];
             displayLink = nil;
-            NSLog(@"displayLink canceled 4");
+            //NSLog(@"displayLink canceled 4");
         }
     }
     
@@ -340,14 +351,14 @@ static CGFloat kScrollZoneHeight = 40.0;
             [self longPressEnded:indexPath location:location];
             break;
         default:
-            NSLog(@"move default");
+            //NSLog(@"move default");
             break;
     }
 }
 
 -(void)longPressBegan:(NSIndexPath*)indexPath location:(CGPoint)location
 {
-    NSLog(@"move began");
+    //NSLog(@"move began");
     
     bLongPressActive = YES;
     
@@ -374,7 +385,7 @@ static CGFloat kScrollZoneHeight = 40.0;
     } completion:^(BOOL finished) {
         //code for completion
         cell.hidden = YES;      // hides the real cell while moving
-        NSLog(@"%@ hidden", cell.textLabel.text);
+        //NSLog(@"%@ hidden", cell.textLabel.text);
     }];
 }
 
@@ -404,17 +415,17 @@ static CGFloat kScrollZoneHeight = 40.0;
 
 -(void)longPressEnded:(NSIndexPath*)indexPath location:(CGPoint)location
 {
-    NSLog(@"move ended");
+    //NSLog(@"move ended");
     
     bLongPressActive = NO;
     
     // cancel any scroll loop
     [displayLink invalidate];
     displayLink = nil;
-    NSLog(@"displayLink canceled 5");
+    //NSLog(@"displayLink canceled 5");
     
     if (indexPath == nil || snapshot == nil || sourceIndexPath == nil) {
-        NSLog(@"******* early return in longPressEnded...");
+        //NSLog(@"******* early return in longPressEnded...");
         return;
     }
     
@@ -460,7 +471,7 @@ static CGFloat kScrollZoneHeight = 40.0;
     } completion:^(BOOL finished) {
         //code for completion
         cell.hidden = NO;
-        NSLog(@"%@ unhidden", cell.textLabel.text);
+        //NSLog(@"%@ unhidden", cell.textLabel.text);
         [sourceIndexPath release];
         sourceIndexPath = nil;
         [snapshot removeFromSuperview];
@@ -554,6 +565,11 @@ static CGFloat kScrollZoneHeight = 40.0;
 	
 	bCurrentlyEditing = YES;
     currentEditField = textField;
+    
+    pickView.hidden = YES;
+    pickerToolbar.hidden = YES;
+    pickerSeparatorImageView.hidden = YES;
+    nameTable.hidden = NO;
     
 	pickAthleteButton.enabled = NO;
 	pickEventButton.enabled = NO;

@@ -42,7 +42,11 @@
     webView.translatesAutoresizingMaskIntoConstraints = NO;
     webView.tag = @"webView";
 
-    NSDictionary *views = NSDictionaryOfVariableBindings(webView);
+    UIImage *separatorImage = [UIImage imageNamed:@"separator_dark_gray.png"];
+    UIImageView *bottomSeparatorImageView = [[UIImageView alloc] initWithImage:separatorImage];
+    bottomSeparatorImageView.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    NSDictionary *views = NSDictionaryOfVariableBindings(webView, bottomSeparatorImageView);
     
 	NSString *filePath = nil;
 	
@@ -85,6 +89,12 @@
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[webView]|" options:0 metrics:nil views:views]];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[webView]|" options:0 metrics:nil views:views]];
 	[webView release];
+    
+    // tab control separator
+    [self.view addSubview:bottomSeparatorImageView];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[bottomSeparatorImageView]|" options:0 metrics:nil views:views]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[bottomSeparatorImageView(1)]-49-|" options:0 metrics:nil views:views]];
+    [bottomSeparatorImageView release];
 }
 
 /*

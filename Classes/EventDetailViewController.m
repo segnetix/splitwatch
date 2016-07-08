@@ -101,21 +101,28 @@
     splitDetailView.tag = @"splitDetailView";
     
     UIImage *separatorImage = [UIImage imageNamed:@"separator_dark_gray.png"];
-    UIImageView *separatorImageView = [[UIImageView alloc] initWithImage:separatorImage];
-    separatorImageView.translatesAutoresizingMaskIntoConstraints = NO;
+    UIImageView *topSeparatorImageView = [[UIImageView alloc] initWithImage:separatorImage];
+    UIImageView *bottomSeparatorImageView = [[UIImageView alloc] initWithImage:separatorImage];
+    topSeparatorImageView.translatesAutoresizingMaskIntoConstraints = NO;
+    bottomSeparatorImageView.translatesAutoresizingMaskIntoConstraints = NO;
     
-    NSDictionary *views = NSDictionaryOfVariableBindings(pickView, pickerToolbar, splitDetailView, splitHeader, separatorImageView);
+    NSDictionary *views = NSDictionaryOfVariableBindings(pickView, pickerToolbar, splitDetailView, splitHeader, topSeparatorImageView, bottomSeparatorImageView);
     
     // separator line above split view header
-    [self.view addSubview:separatorImageView];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[separatorImageView]|" options:0 metrics:nil views:views]];
+    [self.view addSubview:topSeparatorImageView];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[topSeparatorImageView]|" options:0 metrics:nil views:views]];
     if (IPAD) {
-        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-215-[separatorImageView(1)]" options:0 metrics:nil views:views]];
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-215-[topSeparatorImageView(1)]" options:0 metrics:nil views:views]];
     } else {
-        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-195-[separatorImageView(1)]" options:0 metrics:nil views:views]];
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-195-[topSeparatorImageView(1)]" options:0 metrics:nil views:views]];
     }
-    [separatorImageView release];
+    [topSeparatorImageView release];
 
+    // separator line between split detail and tab bar
+    [self.view addSubview:bottomSeparatorImageView];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[bottomSeparatorImageView]|" options:0 metrics:nil views:views]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[bottomSeparatorImageView(1)]-49-|" options:0 metrics:nil views:views]];
+    [bottomSeparatorImageView release];
     
     // splitHeader and splitDetailViewController
     [self.view addSubview:splitHeader];
@@ -124,9 +131,9 @@
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[splitDetailView]|" options:0 metrics:nil views:views]];
     
     if (IPAD) {
-        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-216-[splitHeader(30)][splitDetailView]-49-|" options:0 metrics:nil views:views]];
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-216-[splitHeader(30)][splitDetailView]-50-|" options:0 metrics:nil views:views]];
     } else {
-        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-196-[splitHeader(20)][splitDetailView]-49-|" options:0 metrics:nil views:views]];
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-196-[splitHeader(20)][splitDetailView]-50-|" options:0 metrics:nil views:views]];
     }
     
     // pickView and pickerToolbar setup
@@ -185,7 +192,6 @@
 {
 	distance.text = [Utilities stringFromDistance:event.distance
 											Units:event.iEventType
-										ShowMiles:YES
 									 ShowSplitTag:NO
 										 Interval:(int)event.lapDistance
 							   FurlongDisplayMode:event.bFurlongMode];
@@ -523,7 +529,6 @@
     reportSelectorVC.date = date.text = [Utilities formatDateTime:event.date format:@"YYYY-MM-dd"];
     reportSelectorVC.distance = [Utilities stringFromDistance:event.distance
                                                         Units:event.iEventType
-                                                    ShowMiles:YES
                                                  ShowSplitTag:NO
                                                      Interval:(int)event.lapDistance
                                            FurlongDisplayMode:event.bFurlongMode];

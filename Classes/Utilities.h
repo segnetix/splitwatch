@@ -62,7 +62,7 @@
 + (NSString *)sqlStringWithIimeInterval:(NSTimeInterval)timeInterval;
 + (NSTimeInterval)timeIntervalWithSQLString:(NSString *)string;
 
-+ (NSString *)stringFromDistance:(NSInteger)distance Units:(int)units ShowMiles:(BOOL)showMiles ShowSplitTag:(BOOL)showSplitTag Interval:(int)interval FurlongDisplayMode:(BOOL)furlongDisplayMode;
++ (NSString *)stringFromDistance:(NSInteger)distance Units:(int)units ShowSplitTag:(BOOL)showSplitTag Interval:(int)interval FurlongDisplayMode:(BOOL)furlongDisplayMode;
 
 + (NSString *)avgSplit:(NSMutableArray *)splits forColumn:(NSInteger)column;
 + (NSString *)minSplit:(NSMutableArray *)splits forColumn:(NSInteger)column;

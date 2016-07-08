@@ -24,6 +24,7 @@
 @synthesize lapResetButton;
 @synthesize clearToggleButton;
 @synthesize topSeparatorImageView;
+@synthesize middleSeparatorImageView;
 @synthesize bottomSeparatorImageView;
 @synthesize splitDetailViewController;
 @synthesize settingsViewController;
@@ -96,6 +97,8 @@
         UIImage *separatorImage = [UIImage imageNamed:@"separator_dark_gray.png"];
         topSeparatorImageView = [[UIImageView alloc] initWithImage:separatorImage];
         topSeparatorImageView.translatesAutoresizingMaskIntoConstraints = NO;
+        middleSeparatorImageView = [[UIImageView alloc] initWithImage:separatorImage];
+        middleSeparatorImageView.translatesAutoresizingMaskIntoConstraints = NO;
         bottomSeparatorImageView = [[UIImageView alloc] initWithImage:separatorImage];
         bottomSeparatorImageView.translatesAutoresizingMaskIntoConstraints = NO;
         
@@ -142,7 +145,7 @@
     // AutoLayout setup
     UIView* splitDetailView = splitDetailViewController.view;
     splitDetailView.tag = @"splitDetailView";
-    NSDictionary *views = NSDictionaryOfVariableBindings(backgroundView, runningTimeLabel, clearToggleButton, lapTimeLabel, lapCountLabel, intervalDistanceLabel, startStopButton, lapResetButton, topSeparatorImageView, bottomSeparatorImageView, splitHeader, splitDetailView);
+    NSDictionary *views = NSDictionaryOfVariableBindings(backgroundView, runningTimeLabel, clearToggleButton, lapTimeLabel, lapCountLabel, intervalDistanceLabel, startStopButton, lapResetButton, topSeparatorImageView, middleSeparatorImageView, bottomSeparatorImageView, splitHeader, splitDetailView);
     
     // backgroundImageView
     backgroundView.backgroundColor = [UIColor whiteColor];
@@ -213,16 +216,17 @@
     } else {
         lapCountLabel.font = [UIFont fontWithName:FONT_NAME size:20];
     }
-    lapCountLabel.text = [Utilities formatLap:0];
+    //lapCountLabel.text = [Utilities formatLap:0];
+    lapCountLabel.text = @"";
     lapCountLabel.textAlignment = NSTextAlignmentCenter;
     lapCountLabel.textColor = [UIColor blackColor];
     lapCountLabel.backgroundColor = [UIColor clearColor];
     [self.view addSubview:lapCountLabel];
     if (IPAD) {
-        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[lapCountLabel(88)]" options:0 metrics:nil views:views]];
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[lapCountLabel(160)]" options:0 metrics:nil views:views]];
         [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-22-[lapCountLabel(42)]" options:0 metrics:nil views:views]];
     } else {
-        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[lapCountLabel(52)]" options:0 metrics:nil views:views]];
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[lapCountLabel(120)]" options:0 metrics:nil views:views]];
         [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-18-[lapCountLabel(26)]" options:0 metrics:nil views:views]];
     }
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:lapCountLabel
@@ -249,7 +253,7 @@
     [self.view addSubview:intervalDistanceLabel];
     if (IPAD) {
         [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-13-[intervalDistanceLabel(84)]" options:0 metrics:nil views:views]];
-        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-26-[intervalDistanceLabel(40)]" options:0 metrics:nil views:views]];
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-22-[intervalDistanceLabel(42)]" options:0 metrics:nil views:views]];
     } else {
         [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-6-[intervalDistanceLabel(80)]" options:0 metrics:nil views:views]];
         [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-18-[intervalDistanceLabel(26)]" options:0 metrics:nil views:views]];
@@ -325,13 +329,18 @@
     }
     [topSeparatorImageView release];
     
+    [self.view addSubview:middleSeparatorImageView];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[middleSeparatorImageView]|" options:0 metrics:nil views:views]];
+    if (IPAD) {
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-159-[middleSeparatorImageView(1)]" options:0 metrics:nil views:views]];
+    } else {
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-149-[middleSeparatorImageView(1)]" options:0 metrics:nil views:views]];
+    }
+    [middleSeparatorImageView release];
+    
     [self.view addSubview:bottomSeparatorImageView];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[bottomSeparatorImageView]|" options:0 metrics:nil views:views]];
-    if (IPAD) {
-        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-159-[bottomSeparatorImageView(1)]" options:0 metrics:nil views:views]];
-    } else {
-        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-149-[bottomSeparatorImageView(1)]" options:0 metrics:nil views:views]];
-    }
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[bottomSeparatorImageView(1)]-49-|" options:0 metrics:nil views:views]];
     [bottomSeparatorImageView release];
     
     // splitHeader
@@ -471,6 +480,13 @@
         [self stopTimer];
     }
     
+    // v2.2 change - show completed distance instead of lap count
+    if (lapCount > 0) {
+        lapCountLabel.text = [Utilities stringFromDistance:lapCount*intervalDistance Units:(int)iUnits ShowSplitTag:NO Interval:(int)intervalDistance FurlongDisplayMode:bFurlongMode];
+    } else {
+        lapCountLabel.text = @"";
+    }
+    
     [self flashBackground];
     [appDelegate playClickSound];
 }
@@ -492,6 +508,14 @@
         [self disableLapButton];		// 2.0
         [self freezeLapDisplay];		// 5.0
         [self addSplitWithDelay];		// 0.15
+        
+        //lapCountLabel.text = [Utilities formatLap:lapCount];
+        //lapCountLabel.text = [Utilities formatLap:watch.lapCount];
+        if (lapCount > 0) {
+            lapCountLabel.text = [Utilities stringFromDistance:lapCount*intervalDistance Units:(int)iUnits ShowSplitTag:NO Interval:(int)intervalDistance FurlongDisplayMode:bFurlongMode];
+        } else {
+            lapCountLabel.text = @"";
+        }
     }
     else
     {
@@ -507,7 +531,8 @@
         // RESET BUTTON
         mainTimeDisplay.text = [Utilities shortFormatTime:0 precision:2];
         secondaryTimeDisplay.text = [Utilities shortFormatTime:0 precision:2];
-        lapCountLabel.text = [Utilities formatLap:0];
+        //lapCountLabel.text = [Utilities formatLap:0];
+        lapCountLabel.text = @"";
         [splitDetailViewController clearSplits];
         
         // enable the start button
@@ -617,13 +642,19 @@
             secondaryTimeDisplay.text = [Utilities shortFormatTime:currentLapTime precision:2];
         }
         
-        lapCountLabel.text = [Utilities formatLap:lapCount];
+        //lapCountLabel.text = [Utilities formatLap:lapCount];
+        //lapCountLabel.text = [Utilities formatLap:watch.lapCount];
+        //if (lapCount > 0) {
+        //    lapCountLabel.text = [Utilities stringFromDistance:lapCount*intervalDistance Units:(int)iUnits //ShowSplitTag:NO Interval:(int)intervalDistance FurlongDisplayMode:bFurlongMode];
+        ////} else {
+        //    lapCountLabel.text = @"";
+        //}
     }
     else
     {
         mainTimeDisplay.text = [Utilities shortFormatTime:elapsedTime precision:2];
         secondaryTimeDisplay.text = [Utilities shortFormatTime:(lapTime - previousLapTime) precision:2];
-        lapCountLabel.text = [Utilities formatLap:lapCount];
+        //lapCountLabel.text = [Utilities formatLap:lapCount];
     }
 }
 
@@ -779,6 +810,15 @@
             previousLapTime = [stopwatchPreviousLapTime doubleValue];
             lapCount = [stopwatchLapCount intValue];
             [self setSplitData:stopwatchSplits];
+            
+            // update the lapCountLabel
+            // v2.2 change - show completed distance instead of lap count
+            if (lapCount > 0) {
+                lapCountLabel.text = [Utilities stringFromDistance:lapCount*intervalDistance Units:iUnits ShowSplitTag:NO Interval:(int)intervalDistance FurlongDisplayMode:bFurlongMode];
+            } else {
+                lapCountLabel.text = @"";
+            }
+
         }
         
         [self updateButtonState];

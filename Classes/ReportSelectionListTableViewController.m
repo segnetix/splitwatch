@@ -168,14 +168,12 @@
             if (furlongMode == YES) {
                 cellText = [Utilities stringFromDistance:eventDistance
                                                    Units:eventType
-                                               ShowMiles:YES
                                             ShowSplitTag:NO
                                                 Interval:220
                                       FurlongDisplayMode:YES];
             } else {
                 cellText = [Utilities stringFromDistance:eventDistance
                                                    Units:eventType
-                                               ShowMiles:YES
                                             ShowSplitTag:NO
                                                 Interval:0
                                       FurlongDisplayMode:NO];

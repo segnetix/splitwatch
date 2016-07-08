@@ -7,7 +7,7 @@
 //
 
 #import "Stopwatch.h"
-#import "MultiStopwatchCell.h"
+#import "MultiwatchCell.h"
 #import "Event.h"
 
 @implementation Stopwatch

@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "MultiStopwatchTableViewController.h"
 
-@class MultiStopwatchCell;
+@class MultiwatchCell;
 
 @interface Stopwatch : NSObject
 {
@@ -34,7 +34,7 @@
 	BOOL bFurlongMode;
 	
 	MultiStopwatchTableViewController *multiStopwatchTableViewController;
-	MultiStopwatchCell *stopwatchCell;
+	MultiwatchCell *stopwatchCell;
 }
 
 @property (nonatomic, retain) NSTimer	*timer;
@@ -55,7 +55,7 @@
 @property BOOL bFurlongMode;
 @property (nonatomic, retain) NSMutableArray *splits;
 @property (assign) MultiStopwatchTableViewController *multiStopwatchTableViewController;
-@property (assign) MultiStopwatchCell *stopwatchCell;
+@property (assign) MultiwatchCell *stopwatchCell;
 
 - (id)initWithMultiStopwatchTableViewController:(MultiStopwatchTableViewController *)theMultiStopwatchTableVC
 									eventType:(int)eventType

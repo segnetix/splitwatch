@@ -230,7 +230,7 @@
 			appDelegate = (StopwatchAppDelegate *)[[UIApplication sharedApplication] delegate];
 			NSArray *eventInfoArray = [appDelegate getEventInfoArrayBasedOnSelection:filterSelection withFilter:filterClause];
 			
-			// clear and refil tableItems with selected events
+			// clear and refill tableItems with selected events
 			[tableItems removeAllObjects];
 			[tableItems addObjectsFromArray:eventInfoArray];
 			
@@ -341,7 +341,7 @@
 			bDisplayEvents = NO;
 			break;
 		default:
-			NSLog(@"ERROR: Filter selection out of range.");
+			//NSLog(@"ERROR: Filter selection out of range.");
 			return;
 			break;
 	}
@@ -373,7 +373,7 @@
 			int furlongMode = (int)(sqlite3_column_int(statement, 7));
 			
 			// need to convert these values
-			NSString *distanceString = [Utilities stringFromDistance:[distanceNumber intValue] Units:eventType ShowMiles:YES ShowSplitTag:NO Interval:lapDistance FurlongDisplayMode:furlongMode];
+			NSString *distanceString = [Utilities stringFromDistance:[distanceNumber intValue] Units:eventType ShowSplitTag:NO Interval:lapDistance FurlongDisplayMode:furlongMode];
 			NSString *finalTimeString = [Utilities shortFormatTime:[finalTimeNumber doubleValue] precision:2];
 			
 			[eventInfo addObject:eventNum];
@@ -401,7 +401,6 @@
 				{
 					cellText = [Utilities stringFromDistance:eventDistance
 													   Units:eventType
-												   ShowMiles:YES
 												ShowSplitTag:NO
 													Interval:220
 										  FurlongDisplayMode:YES];
@@ -410,7 +409,6 @@
 				{
 					cellText = [Utilities stringFromDistance:eventDistance
 													   Units:eventType
-												   ShowMiles:YES
 												ShowSplitTag:NO
 													Interval:0
 										  FurlongDisplayMode:NO];

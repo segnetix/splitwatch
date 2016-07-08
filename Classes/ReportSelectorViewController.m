@@ -85,8 +85,7 @@
     
     reportSelectorTableViewController.tableView.delegate = self;
     reportSelectorTableViewController.tableView.dataSource = self;
-    reportSelectorTableViewController.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-    //reportSelectorTableViewController.tableView.separatorInset = UIEdgeInsetsMake(0, 20, 0, 0);
+    reportSelectorTableViewController.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     reportSelectorTableViewController.tableView.scrollEnabled = NO;
     reportSelectorTableViewController.tableView.allowsSelection = YES;
     
@@ -254,6 +253,9 @@
     // push the help detail view controller
     ReportSelectionListTableViewController *rsltvc = [[ReportSelectionListTableViewController alloc] initWithMode:indexPath.row+1 selection:selectedValue ReportSelectorViewController:self];
     
+    // don't leave the selected row highlighted on return
+    [tableView deselectRowAtIndexPath:indexPath animated: YES];
+    
     [self.navigationController pushViewController:rsltvc animated:YES];
     [rsltvc release];
 }
@@ -352,7 +354,7 @@
             if (event.iEventType != kLap) {
                 subjectStr = [NSString stringWithFormat:@"%@  %@  %@",
                               event.runnerName,
-                              [Utilities stringFromDistance:(int)event.distance Units:event.iEventType ShowMiles:YES ShowSplitTag:YES Interval:(int)event.lapDistance FurlongDisplayMode:event.bFurlongMode],
+                              [Utilities stringFromDistance:(int)event.distance Units:event.iEventType ShowSplitTag:YES Interval:(int)event.lapDistance FurlongDisplayMode:event.bFurlongMode],
                               [Utilities shortFormatTime:event.finalTime precision:2]];
             }
             else
@@ -403,8 +405,8 @@
             [emailBody appendFormat:@"<tr><td>Date:</td><td>&nbsp;</td><td>%@</td></tr>", [Utilities formatDate:event.date]];
             
             if (event.iEventType != kLap)
-                [emailBody appendFormat:@"<tr><td>Distance:</td><td>&nbsp;</td><td>%@</td></tr>", [Utilities stringFromDistance:event.distance Units:event.iEventType ShowMiles:YES ShowSplitTag:YES Interval:(int)event.lapDistance FurlongDisplayMode:event.bFurlongMode]];
-            [emailBody appendFormat:@"<tr><td>Distance:</td><td>&nbsp;</td><td>%@</td></tr>", [Utilities stringFromDistance:(int)event.distance Units:event.iEventType ShowMiles:YES ShowSplitTag:YES Interval:(int)event.lapDistance FurlongDisplayMode:event.bFurlongMode]];
+                [emailBody appendFormat:@"<tr><td>Distance:</td><td>&nbsp;</td><td>%@</td></tr>", [Utilities stringFromDistance:event.distance Units:event.iEventType ShowSplitTag:YES Interval:(int)event.lapDistance FurlongDisplayMode:event.bFurlongMode]];
+            [emailBody appendFormat:@"<tr><td>Distance:</td><td>&nbsp;</td><td>%@</td></tr>", [Utilities stringFromDistance:(int)event.distance Units:event.iEventType ShowSplitTag:YES Interval:(int)event.lapDistance FurlongDisplayMode:event.bFurlongMode]];
             [emailBody appendFormat:@"<tr><td>Time:</td><td>&nbsp;</td><td>%@</td></tr>", [Utilities shortFormatTime:event.finalTime precision:2]];
             [emailBody appendString:@"<tr style='height:10px;'/></table>"];
             [emailBody appendString:[Utilities getSplitHTMLDataString:splits forIntervalDistance:event.lapDistance forUnits:event.iEventType  forKiloSplits:event.bKiloSplits forFurlongMode:event.bFurlongMode]];

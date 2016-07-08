@@ -22,6 +22,7 @@
     UIButton *clearResetButton;
     UIButton *setupButton;
     UIImageView *topSeparatorImageView;
+    UIImageView *middleSeparatorImageView;
     UIImageView *bottomSeparatorImageView;
     
     MultiStopwatchSetupViewController *setupViewController;
@@ -51,6 +52,7 @@
 @property (nonatomic, retain) UIButton	*clearResetButton;
 @property (nonatomic, retain) UIButton  *setupButton;
 @property (nonatomic, retain) UIImageView *topSeparatorImageView;
+@property (nonatomic, retain) UIImageView *middleSeparatorImageView;
 @property (nonatomic, retain) UIImageView *bottomSeparatorImageView;
 @property (nonatomic, assign) IBOutlet MultiStopwatchSetupViewController *setupViewController;
 @property (nonatomic, assign) StopwatchAppDelegate *appDelegate;
