@@ -434,7 +434,6 @@
     // lock manual split view scrolling (?)
     // v2.0 - left scrolling enabled at all times
     splitDetailViewController.tableView.scrollEnabled = YES;
-    splitDetailViewController.tableView.bounces = NO;
 }
 
 - (void)stopTimer
@@ -799,6 +798,9 @@
         if (bTimerRunning)
         {
             [self startTimerWithStartTime:[stopwatchStartTime doubleValue]];
+            splitDetailViewController.bFinished = NO;
+        } else {
+            splitDetailViewController.bFinished = YES;
         }
         
         if (stopwatchLapCount > 0)
@@ -846,8 +848,6 @@
                                          FurlongMode:bFurlongMode];
     
     [event release];
-    
-    splitDetailViewController.tableView.bounces = YES;
     
     /*
     // enable manual split view scrolling if we have more splits than can be held at one time

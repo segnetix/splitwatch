@@ -38,10 +38,6 @@
 {	
 	//self.view.backgroundColor = [UIColor colorWithRed:.5 green:.6 blue:.7 alpha:.4];
 	self.view.backgroundColor = [UIColor clearColor];
-	
-    UIImage *separatorImage = [UIImage imageNamed:@"separator_dark_gray.png"];
-    UIImageView *bottomSeparatorImageView = [[UIImageView alloc] initWithImage:separatorImage];
-    bottomSeparatorImageView.translatesAutoresizingMaskIntoConstraints = NO;
     
 	[super viewDidLoad];
 }

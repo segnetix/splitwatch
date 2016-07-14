@@ -97,23 +97,24 @@
     emailAddressTable.tag = @"emailAddressTable";
 
     UIImage *separatorImage = [UIImage imageNamed:@"separator_dark_gray.png"];
+    UIImageView *topSeparatorImageView = [[UIImageView alloc] initWithImage:separatorImage];
     UIImageView *bottomSeparatorImageView = [[UIImageView alloc] initWithImage:separatorImage];
+    topSeparatorImageView.translatesAutoresizingMaskIntoConstraints = NO;
     bottomSeparatorImageView.translatesAutoresizingMaskIntoConstraints = NO;
     
-    NSDictionary *views = NSDictionaryOfVariableBindings(label, button, emailTextField, emailAddressTable, bottomSeparatorImageView);
+    NSDictionary *views = NSDictionaryOfVariableBindings(label, button, emailTextField, emailAddressTable, topSeparatorImageView, bottomSeparatorImageView);
     
-    //label = [[UILabel alloc] initWithFrame:CGRectMake(20, 18, 226, 24)];
-    //button.frame = CGRectMake(274, 16, 29, 29);
-    //emailTextField = [[UITextField alloc] initWithFrame:CGRectMake(20, 62, 280, 31)];
-    //emailAddressTableViewController.view.frame = CGRectMake(20, 102, 280, 340);
+    [self.view addSubview:topSeparatorImageView];
+    [topSeparatorImageView release];
     
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-20-[label][button(29)]-|" options:0 metrics:nil views:views]];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[emailTextField]-|" options:0 metrics:nil views:views]];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[emailAddressTable]-|" options:0 metrics:nil views:views]];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-72-[label(24)]-[emailTextField(31)]-[emailAddressTable]-50-|" options:0 metrics:nil views:views]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[topSeparatorImageView]|" options:0 metrics:nil views:views]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[emailAddressTable]|" options:0 metrics:nil views:views]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-72-[label(24)]-[emailTextField(31)]-16-[topSeparatorImageView(1)][emailAddressTable]-50-|" options:0 metrics:nil views:views]];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-72-[button]" options:0 metrics:nil views:views]];
     
-    // separator
+    // tab bar separator
     [self.view addSubview:bottomSeparatorImageView];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[bottomSeparatorImageView]|" options:0 metrics:nil views:views]];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[bottomSeparatorImageView(1)]-49-|" options:0 metrics:nil views:views]];
