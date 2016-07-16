@@ -79,11 +79,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Classes/StopwatchViewController.m"
-            timestampString = "490128687.938613"
+            timestampString = "490302047.374782"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "706"
-            endingLineNumber = "706"
+            startingLineNumber = "707"
+            endingLineNumber = "707"
             landmarkName = "-setSplitData:"
             landmarkType = "5">
          </BreakpointContent>
@@ -110,22 +110,6 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Classes/StopwatchViewController.m"
-            timestampString = "490128944.828422"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "835"
-            endingLineNumber = "835"
-            landmarkName = "-cleanUpOnStop"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "Classes/SplitDetailViewController.m"
             timestampString = "490128600.851751"
             startingColumnNumber = "9223372036854775807"
@@ -142,13 +126,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Classes/SplitDetailViewController.m"
-            timestampString = "490128708.525594"
+            filePath = "Classes/StopwatchViewController.m"
+            timestampString = "490302047.374782"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "41"
-            endingLineNumber = "41"
-            landmarkName = "-initWithIntervalDistance:Units:KiloSplits:FurlongMode:Finished:EditMode:"
+            startingLineNumber = "500"
+            endingLineNumber = "500"
+            landmarkName = "-lapResetButtonPressed"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

@@ -55,24 +55,38 @@
     
     // separator
     UIImage *separatorImage = [UIImage imageNamed:@"separator_dark_gray.png"];
-    UIImageView *separatorImageView = [[UIImageView alloc] initWithImage:separatorImage];
-    separatorImageView.translatesAutoresizingMaskIntoConstraints = NO;
-    [self.view addSubview:separatorImageView];
-    [separatorImageView release];
+    UIImageView *topSeparatorImageView = [[UIImageView alloc] initWithImage:separatorImage];
+    UIImageView *bottomSeparatorImageView = [[UIImageView alloc] initWithImage:separatorImage];
+    topSeparatorImageView.translatesAutoresizingMaskIntoConstraints = NO;
+    bottomSeparatorImageView.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.view addSubview:topSeparatorImageView];
+    [self.view addSubview:bottomSeparatorImageView];
+    [topSeparatorImageView release];
+    [bottomSeparatorImageView release];
     
     // constraints
-    NSDictionary *views = NSDictionaryOfVariableBindings(reportSelectorTableView, generateButton, separatorImageView);
+    NSDictionary *views = NSDictionaryOfVariableBindings(reportSelectorTableView, generateButton, topSeparatorImageView, bottomSeparatorImageView);
     
     if (IPAD) {
         [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(>=40)-[generateButton(220)]-(>=40)-|" options:0 metrics:nil views:views]];
-        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[separatorImageView]|" options:0 metrics:nil views:views]];
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[topSeparatorImageView]|" options:0 metrics:nil views:views]];
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[bottomSeparatorImageView]|" options:0 metrics:nil views:views]];
         [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[reportSelectorTableView]|" options:0 metrics:nil views:views]];
-        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-30-[reportSelectorTableView(440)][separatorImageView(1)]-64-[generateButton(36)]" options:0 metrics:nil views:views]];
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-30-[reportSelectorTableView(440)][topSeparatorImageView(1)]-64-[generateButton(36)]" options:0 metrics:nil views:views]];
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[bottomSeparatorImageView(1)]-49-|" options:0 metrics:nil views:views]];
     } else {
         [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(>=40)-[generateButton(160)]-(>=40)-|" options:0 metrics:nil views:views]];
-        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[separatorImageView]|" options:0 metrics:nil views:views]];
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[topSeparatorImageView]|" options:0 metrics:nil views:views]];
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[bottomSeparatorImageView]|" options:0 metrics:nil views:views]];
         [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[reportSelectorTableView]|" options:0 metrics:nil views:views]];
-        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-30-[reportSelectorTableView(310)][separatorImageView(1)]-48-[generateButton(36)]" options:0 metrics:nil views:views]];
+        
+        if (self.view.frame.size.height < 500) {
+            [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-30-[reportSelectorTableView(310)][topSeparatorImageView(1)]-24-[generateButton(36)]" options:0 metrics:nil views:views]];
+        } else {
+            [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-30-[reportSelectorTableView(310)][topSeparatorImageView(1)]-48-[generateButton(36)]" options:0 metrics:nil views:views]];
+        }
+        
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[bottomSeparatorImageView(1)]-49-|" options:0 metrics:nil views:views]];
     }
     
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:generateButton

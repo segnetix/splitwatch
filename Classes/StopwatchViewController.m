@@ -472,11 +472,13 @@
     {
         // START BUTTON
         [self startTimerWithStartTime:[NSDate timeIntervalSinceReferenceDate] - elapsedTime];
+        splitDetailViewController.bFinished = NO;
     }
     else
     {
         // STOP BUTTON
         [self stopTimer];
+        splitDetailViewController.bFinished = YES;
     }
     
     // v2.2 change - show completed distance instead of lap count
@@ -551,7 +553,6 @@
         previousLapTime = 0;
         
         [self resetIntervalUnitsFromCurrentSettings];
-        splitDetailViewController.bFinished = NO;
     }
 }
 
@@ -849,18 +850,8 @@
     
     [event release];
     
-    /*
-    // enable manual split view scrolling if we have more splits than can be held at one time
-    if (lapCount > 6)
-    {
-        splitDetailViewController.tableView.scrollEnabled = YES;
-    }
-    */
-    
-    splitDetailViewController.bFinished = YES;
-    
+    // reload split detail view and scroll to the last line
     [splitDetailViewController.tableView reloadData];
-    
     [splitDetailViewController scrollToLastLine];
 }
 

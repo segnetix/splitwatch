@@ -290,15 +290,15 @@
                     </variation>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Icons by Icons8" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cfu-Gb-hpf">
-                    <rect key="frame" x="308" y="116" width="106" height="21"/>
+                    <rect key="frame" x="302" y="116" width="112" height="21"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="106" id="1wG-d0-UbS"/>
+                        <constraint firstAttribute="width" constant="112" id="1wG-d0-UbS"/>
                         <constraint firstAttribute="height" constant="21" id="2VF-tJ-owG"/>
                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="gJL-qv-10T">
                             <variation key="widthClass=regular" constant="30"/>
                         </constraint>
-                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="106" id="xEt-SD-qwT">
-                            <variation key="widthClass=regular" constant="124"/>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="112" id="xEt-SD-qwT">
+                            <variation key="widthClass=regular" constant="112"/>
                         </constraint>
                     </constraints>
                     <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
