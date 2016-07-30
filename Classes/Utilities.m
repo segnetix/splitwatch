@@ -556,12 +556,71 @@
 	return maxStr;
 }
 
+// returns the initial row of the min split for the given column
++ (NSInteger)minSplitRow:(NSMutableArray *)splits forColumn:(NSInteger)column
+{
+    NSInteger minRow = -1;
+    
+    double minSplit = 99999999;
+    
+    for (long x = column - 1; x < [splits count]; x++)
+    {
+        NSNumber *nSplit = [splits objectAtIndex:x];
+        NSTimeInterval split = [nSplit doubleValue];
+        
+        // interval time
+        NSTimeInterval intervaltime = split;
+        
+        if (x > column - 1)
+        {
+            NSNumber *nPrevSplit = [splits objectAtIndex:x - column];
+            intervaltime = split - [nPrevSplit doubleValue];
+        }
+        
+        if (intervaltime < minSplit) {
+            minSplit = intervaltime;
+            minRow = x - column;
+        }
+    }
+    
+    return minRow + 1;
+}
+
+// returns the initial row of the max split for the given column
++ (NSInteger)maxSplitRow:(NSMutableArray *)splits forColumn:(NSInteger)column
+{
+    NSInteger maxRow = -1;
+    
+    double maxSplit = 0;
+    
+    for (long x = column - 1; x < [splits count]; x++)
+    {
+        NSNumber *nSplit = [splits objectAtIndex:x];
+        NSTimeInterval split = [nSplit doubleValue];
+        
+        // interval time
+        NSTimeInterval intervaltime = split;
+        
+        if (x > column - 1)
+        {
+            NSNumber *nPrevSplit = [splits objectAtIndex:x - column];
+            intervaltime = split - [nPrevSplit doubleValue];
+        }
+        
+        if (intervaltime > maxSplit) {
+            maxSplit = intervaltime;
+            maxRow = x - column;
+        }
+    }
+    
+    return maxRow + 1;
+}
+
 + (int)getHrs:(double)split
 {
 	int hrs = 0;
 	
-	if (split > 3600)
-	{
+	if (split > 3600) {
 		hrs = (int)(split / 3600);
 	}
 	
@@ -572,8 +631,7 @@
 {
 	int min = 0;
 	
-	if (split > 60)
-	{
+	if (split > 60) {
 		min = (int)(split / 60) % 60;
 	}
 	
@@ -587,15 +645,11 @@
     int seconds = (int)split % 60;
     int miliseconds = (split - (seconds + (minutes * 60) + (hours * 3600))) * 1000;
     int hundredths = (miliseconds + 5) / 10;
-    //int tenths = (hundredths + 5) / 10;
     
-    if (hundredths >= 100)
-    {
-        //hundredths = 0;
+    if (hundredths >= 100) {
         seconds++;
         
-        if (seconds >= 60)
-        {
+        if (seconds >= 60) {
             seconds = 0;
             minutes++;
         }
@@ -611,123 +665,12 @@
 	int seconds = (int)split % 60;
 	int miliseconds = (split - (seconds + (minutes * 60) + (hours * 3600))) * 1000;
 	int hundredths = (miliseconds + 5) / 10;
-	//int tenths = (hundredths + 5) / 10;
 	
     if (hundredths >= 100)
         hundredths = 0;
     
 	return hundredths;
 }
-
-/*
-+ (NSString *)lapTextForRow:(NSInteger)row
-             forDisplayMode:(NSInteger)mode
-            withSplitsCount:(int)splitsCount
-           intervalDistance:(int)intervalDistance
-                      units:(int)units
-                furlongMode:(BOOL)furlongMode
-{
-    NSString *lapText = @"";
-    
-    if (splitsCount > 0)
-    {
-        if (mode == kDisplayMode_Normal)
-        {
-            int totalDistance = (int)((row + 1) * intervalDistance);
-            
-            lapText = [Utilities stringFromDistance:totalDistance
-                                              Units:units
-                                          ShowMiles:NO
-                                       ShowSplitTag:NO
-                                           Interval:(int)intervalDistance
-                                 FurlongDisplayMode:furlongMode];
-        }
-        else if (mode == kDisplayMode_Space)
-        {
-            lapText = @"";
-        }
-        else if (mode == kDisplayMode_Last_Header)			// v1.2
-        {
-            lapText = @"Last:";
-        }
-        else if (mode == kDisplayMode_Last_Split)			// v1.2
-        {
-            lapText = @"";
-        }
-        else if (mode == kDisplayMode_Avg_Split)			// v1.2
-        {
-            lapText = @"Avg:";
-        }
-        else if (mode == kDisplayMode_Min_Split)			// v1.2
-        {
-            lapText = @"Min:";
-        }
-        else if (mode == kDisplayMode_Max_Split)			// v1.2
-        {
-            lapText = @"Max:";
-        }
-    }
-    
-    return lapText;
-}
-*/
-
-/*
-+ (NSString *)timeTextForRow:(NSInteger)row forDisplayMode:(NSInteger)mode
-{
-    NSString *cellText = @"";
-    
-    if (splits.count > 0)
-    {
-        if (mode == kDisplayMode_Normal)
-        {
-            // lap time
-            NSNumber *nSplit = [splits objectAtIndex:row];
-            NSTimeInterval split = [nSplit doubleValue];
-            
-            // if split > 1 hour, drop precision to 1
-            // if split > 10 hours, drop precision to 0 (no fractional seconds)
-            if (split < 3600)
-                cellText = [Utilities shortFormatTime:split precision:2];
-            else if (split < 36000)
-                cellText = [Utilities shortFormatTime:split precision:1];
-            else
-                cellText = [Utilities shortFormatTime:split precision:0];
-        }
-        else if (mode == kDisplayMode_Space)
-        {
-            cellText = @"";
-        }
-        else if (mode == kDisplayMode_Last_Header)			// v1.2
-        {
-            cellText = [Utilities stringFromDistance:intervalDistance
-                                               Units:iUnits
-                                           ShowMiles:NO
-                                        ShowSplitTag:NO
-                                            Interval:(int)intervalDistance
-                                  FurlongDisplayMode:bFurlongMode];
-        }
-        else if (mode == kDisplayMode_Last_Split)			// v1.2
-        {
-            cellText = [self lastSplitTextForColumn:0];
-        }
-        else if (mode == kDisplayMode_Avg_Split)			// v1.2
-        {
-            cellText = [Utilities avgSplit:splits forColumn:1];
-        }
-        else if (mode == kDisplayMode_Min_Split)			// v1.2
-        {
-            cellText = [Utilities minSplit:splits forColumn:1];
-        }
-        else if (mode == kDisplayMode_Max_Split)			// v1.2
-        {
-            cellText = [Utilities maxSplit:splits forColumn:1];
-        }
-    }
-    
-    return cellText;
-}
-*/
 
 #pragma mark -
 #pragma mark Cell Text Methods

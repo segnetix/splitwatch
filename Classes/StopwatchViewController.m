@@ -473,12 +473,14 @@
         // START BUTTON
         [self startTimerWithStartTime:[NSDate timeIntervalSinceReferenceDate] - elapsedTime];
         splitDetailViewController.bFinished = NO;
+        splitDetailViewController.tableView.allowsSelection = NO;
     }
     else
     {
         // STOP BUTTON
         [self stopTimer];
         splitDetailViewController.bFinished = YES;
+        splitDetailViewController.tableView.allowsSelection = YES;
     }
     
     // v2.2 change - show completed distance instead of lap count
@@ -800,8 +802,10 @@
         {
             [self startTimerWithStartTime:[stopwatchStartTime doubleValue]];
             splitDetailViewController.bFinished = NO;
+            splitDetailViewController.tableView.allowsSelection = NO;
         } else {
             splitDetailViewController.bFinished = YES;
+            splitDetailViewController.tableView.allowsSelection = YES;
         }
         
         if (stopwatchLapCount > 0)

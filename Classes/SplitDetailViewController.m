@@ -8,7 +8,6 @@
 
 #import "SplitDetailViewController.h"
 #import "Utilities.h"
-#import "SplitDetailCell.h"
 #import "SplitEditViewController.h"
 #import "StopwatchAppDelegate.h"
 
@@ -20,6 +19,8 @@
 @synthesize splitEditViewController;
 @synthesize appDelegate;
 @synthesize bWideDisplay;
+@synthesize summarySelection;
+@synthesize initialHighlightRow;
 
 #pragma mark -
 
@@ -32,7 +33,10 @@
 		self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 		self.tableView.backgroundColor = [UIColor whiteColor];
 		self.tableView.indicatorStyle = UIScrollViewIndicatorStyleBlack;
-		
+        self.summarySelection = kNone;
+        self.initialHighlightRow = -1;
+        [self addObserver:self forKeyPath:@"summarySelection" options:NSKeyValueObservingOptionNew context:nil];
+        
 		splitEditViewController = nil;
         
 		iUnits = units;
@@ -41,6 +45,11 @@
 		bFinished = finished;
 		bEditMode = editMode;
 		
+        if (bFinished)
+            self.tableView.allowsSelection = YES;
+        else
+            self.tableView.allowsSelection = NO;
+        
 		appDelegate = (StopwatchAppDelegate *)[[UIApplication sharedApplication] delegate];
 		
 		if (bEditMode)
@@ -55,6 +64,13 @@
     self.tableView.clearsContextBeforeDrawing = YES;
     
     return self;
+}
+
+// KVO for summarySelection
+- (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    if ([keyPath isEqual:@"summarySelection"]) {
+        [self summarySelectionDidChange];
+    }
 }
 
 - (void)dealloc
@@ -91,6 +107,8 @@
     }
     
     [super viewWillDisappear:animated];
+    
+    [self removeObserver:self forKeyPath:@"summarySelection"];
 }
 
 - (void)addSplit:(NSTimeInterval)split
@@ -173,6 +191,29 @@
 	bFurlongMode = furlongMode;
 }
 
+- (void)summarySelectionDidChange
+{
+    //NSLog(@"summarySelection changed to %i", summarySelection);
+    
+    if (summarySelection == kNone) {
+        initialHighlightRow = -1;
+    } else {
+        NSInteger column = 0;
+        
+        if      (summarySelection == kTimeColumnMin   || summarySelection == kTimeColumnMax  )  column = 1;
+        else if (summarySelection == kSplitColumn1Min || summarySelection == kSplitColumn1Max)  column = 2;
+        else if (summarySelection == kSplitColumn2Min || summarySelection == kSplitColumn2Max)  column = 3;
+        else if (summarySelection == kSplitColumn3Min || summarySelection == kSplitColumn3Max)  column = 4;
+        else if (summarySelection == kSplitColumn4Min || summarySelection == kSplitColumn4Max)  column = 5;
+        
+        if (summarySelection <= kSplitColumn4Min) {
+            initialHighlightRow = [Utilities minSplitRow:self.splits forColumn:column];
+        } else {
+            initialHighlightRow = [Utilities maxSplitRow:self.splits forColumn:column];
+        }
+    }
+}
+
 - (void)didReceiveMemoryWarning
 {
 	// Releases the view if it doesn't have a superview.
@@ -215,18 +256,14 @@
             return 20.0;
         }
     }
-    
 }
 
-// Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {    
     static NSString *CellIdentifier = @"SplitDetailCellIdentifier";
-    
     SplitDetailCell *cell = (SplitDetailCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 	
-    if (cell == nil)
-    {
+    if (cell == nil) {
 		NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"SplitDetailCell" owner:self options:nil];
 		
 		for (id obj in nib) {
@@ -234,36 +271,99 @@
 				cell = (SplitDetailCell *)obj;
 				
 				if (bEditMode) {
-					[cell additionalSetup];
+                    [cell additionalSetup];
 				}
 			}
 		}
     }
 	
-	// populate the cell text based on current display mode
-	NSInteger displayMode = kDisplayMode_Normal;
-	cell.backgroundColor = [UIColor whiteColor];
+    // edit mode cells don't need to message the splitDetailViewController
+    if (bEditMode) {
+        cell.splitDetailViewController = nil;
+    } else {
+        cell.splitDetailViewController = self;
+    }
     
-    if (bFinished)
-    {
-        if (indexPath.row == splits.count)
+    // default background colors
+    cell.backgroundColor = [UIColor whiteColor];
+    cell.lapColumn.backgroundColor = [UIColor clearColor];
+    cell.timeColumn.backgroundColor = [UIColor clearColor];
+    cell.splitColumn1.backgroundColor = [UIColor clearColor];
+    cell.splitColumn2.backgroundColor = [UIColor clearColor];
+    cell.splitColumn3.backgroundColor = [UIColor clearColor];
+    cell.splitColumn4.backgroundColor = [UIColor clearColor];
+    
+	// populate the cell text and background based on current display mode
+	NSInteger displayMode = kDisplayMode_Normal;
+    
+    // write summary rows if timer is finished
+    if (bFinished) {
+        UIColor *HILIGHT_COLOR = [UIColor colorWithRed:0.0 green:.475 blue:1.0 alpha:0.35];
+        
+        if (indexPath.row == splits.count) {
             displayMode = kDisplayMode_Space;
-        else if (indexPath.row == (splits.count + 1))
-        {
+        }
+        else if (indexPath.row == (splits.count + 1)) {
             displayMode = kDisplayMode_Last_Header;
             cell.backgroundColor = [UIColor groupTableViewBackgroundColor];
         }
-        else if (indexPath.row == (splits.count + 2))
-        {
+        else if (indexPath.row == (splits.count + 2)) {
             displayMode = kDisplayMode_Last_Split;
             cell.backgroundColor = [UIColor groupTableViewBackgroundColor];
         }
-        else if (indexPath.row == (splits.count + 3))
+        else if (indexPath.row == (splits.count + 3)) {
             displayMode = kDisplayMode_Min_Split;
-        else if (indexPath.row == (splits.count + 4))
+        }
+        else if (indexPath.row == (splits.count + 4)) {
             displayMode = kDisplayMode_Max_Split;
-        else if (indexPath.row == (splits.count + 5))
+        }
+        else if (indexPath.row == (splits.count + 5)) {
             displayMode = kDisplayMode_Avg_Split;
+        }
+        
+        // handle the min/max interval hilights
+        if (summarySelection > kNone && displayMode == kDisplayMode_Normal && initialHighlightRow >= 0) {
+            NSInteger finalHighlightRow = initialHighlightRow;
+            
+            switch (summarySelection) {
+                case kSplitColumn1Min: finalHighlightRow += 1; break;
+                case kSplitColumn1Max: finalHighlightRow += 1; break;
+                case kSplitColumn2Min: finalHighlightRow += 2; break;
+                case kSplitColumn2Max: finalHighlightRow += 2; break;
+                case kSplitColumn3Min: finalHighlightRow += 3; break;
+                case kSplitColumn3Max: finalHighlightRow += 3; break;
+                case kSplitColumn4Min: finalHighlightRow += 4; break;
+                case kSplitColumn4Max: finalHighlightRow += 4; break;
+                default: break;
+            }
+            
+            if (indexPath.row >= initialHighlightRow &&
+                indexPath.row <= finalHighlightRow)
+            {
+                cell.lapColumn.backgroundColor = HILIGHT_COLOR;
+            }
+        }
+        
+        // handle the min/max summary label selections
+        if (displayMode == kDisplayMode_Min_Split || displayMode == kDisplayMode_Max_Split) {
+            // highlight a selected summary label
+            if (summarySelection > kNone) {
+                if ((displayMode == kDisplayMode_Min_Split && self.summarySelection <= kSplitColumn4Min) ||
+                    (displayMode == kDisplayMode_Max_Split && self.summarySelection >= kTimeColumnMax))
+                {
+                    if (self.summarySelection == kTimeColumnMin || self.summarySelection == kTimeColumnMax)
+                        cell.timeColumn.backgroundColor = HILIGHT_COLOR;
+                    else if (self.summarySelection == kSplitColumn1Min || self.summarySelection == kSplitColumn1Max)
+                        cell.splitColumn1.backgroundColor = HILIGHT_COLOR;
+                    else if (self.summarySelection == kSplitColumn2Min || self.summarySelection == kSplitColumn2Max)
+                        cell.splitColumn2.backgroundColor = HILIGHT_COLOR;
+                    else if (self.summarySelection == kSplitColumn3Min || self.summarySelection == kSplitColumn3Max)
+                        cell.splitColumn3.backgroundColor = HILIGHT_COLOR;
+                    else if (self.summarySelection == kSplitColumn4Min || self.summarySelection == kSplitColumn4Max)
+                        cell.splitColumn4.backgroundColor = HILIGHT_COLOR;
+                }
+            }
+        }
     }
     
 	cell.lapColumn.text = [Utilities lapTextForRow:indexPath.row forDisplayMode:displayMode forSplits:splits forIntervalDistance:intervalDistance forUnits:iUnits forFurlongMode:bFurlongMode];
@@ -276,37 +376,13 @@
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)processRowSelection:(NSInteger)displayMode withDistance:(NSString *)distance
 {
-    // Navigation logic may go here. Create and push another view controller.
-	// AnotherViewController *anotherViewController = [[AnotherViewController alloc] initWithNibName:@"AnotherView" bundle:nil];
-	// [self.navigationController pushViewController:anotherViewController];
-	// [anotherViewController release];
-	
-	if (bEditMode)
-	{
-		//[appDelegate playClickSound];
-		
-		// push the split time picker
-		[splitEditViewController pushTimePicker:(int)indexPath.row];
-	}
+    NSLog(@"processRowSelection: %lu withDistance: %@", (long)displayMode, distance);
 }
-
-/*
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    //if (indexPath.row == 0 || indexPath.row % 2 == 0)
-	if (indexPath.row == (splits.count + 1) && splits.count > 0)
-    {
-        //UIColor *altCellColor = [UIColor colorWithWhite:0.7 alpha:0.1];
-        //cell.backgroundColor = altCellColor;
-        //cell.backgroundColor = [UIColor groupTableViewBackgroundColor];
-    }
-}
-*/
 
 // scroll to and flash the modified/inserted splits
-- (void)flashSplitCellsInRow:(int)row
+- (void)flashSplitCellsInRow:(long)row
 {
     [self.tableView reloadData];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:0];

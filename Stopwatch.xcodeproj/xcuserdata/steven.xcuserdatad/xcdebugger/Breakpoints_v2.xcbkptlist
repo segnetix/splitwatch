@@ -79,11 +79,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Classes/StopwatchViewController.m"
-            timestampString = "490302047.374782"
+            timestampString = "491595808.000905"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "707"
-            endingLineNumber = "707"
+            startingLineNumber = "709"
+            endingLineNumber = "709"
             landmarkName = "-setSplitData:"
             landmarkType = "5">
          </BreakpointContent>
@@ -110,13 +110,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Classes/SplitDetailViewController.m"
-            timestampString = "490128600.851751"
+            filePath = "Classes/StopwatchViewController.m"
+            timestampString = "491595808.000905"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "247"
-            endingLineNumber = "247"
-            landmarkName = "-tableView:cellForRowAtIndexPath:"
+            startingLineNumber = "502"
+            endingLineNumber = "502"
+            landmarkName = "-lapResetButtonPressed"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -126,13 +126,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Classes/StopwatchViewController.m"
-            timestampString = "490302047.374782"
+            filePath = "Classes/SplitDetailViewController.m"
+            timestampString = "491607321.679111"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "500"
-            endingLineNumber = "500"
-            landmarkName = "-lapResetButtonPressed"
+            startingLineNumber = "328"
+            endingLineNumber = "328"
+            landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

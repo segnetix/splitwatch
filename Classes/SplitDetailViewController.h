@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Event.h"
+#import "SplitDetailCell.h"
 
 @class SplitEditViewController;
 @class StopwatchAppDelegate;
@@ -23,7 +24,9 @@
 	BOOL bFinished;
 	BOOL bEditMode;
     BOOL bWideDisplay;
-	
+	SummarySelectionType summarySelection;
+    NSInteger initialHighlightRow;
+    
 	SplitEditViewController *splitEditViewController;
 	StopwatchAppDelegate *appDelegate;
 }
@@ -35,6 +38,8 @@
 @property (nonatomic, assign) SplitEditViewController *splitEditViewController;
 @property (nonatomic, assign) StopwatchAppDelegate *appDelegate;
 @property (nonatomic, retain) Event *event;
+@property (nonatomic) SummarySelectionType summarySelection;
+@property (nonatomic) NSInteger initialHighlightRow;
 
 - (id)initWithIntervalDistance:(NSInteger)distance Units:(int)units KiloSplits:(BOOL)kiloSplits FurlongMode:(BOOL)furlongMode Finished:(BOOL)finished EditMode:(BOOL)editMode;
 - (void)addSplit:(NSTimeInterval)split;
@@ -42,10 +47,12 @@
 - (void)clearSplits;
 - (NSTimeInterval)getFinalTime;
 - (NSInteger)getFinalDistance;
+- (void)summarySelectionDidChange;
 - (void)resetLapInterval:(NSInteger)distance Units:(int)units KiloSplits:(BOOL)kiloSplits FurlongMode:(BOOL)furlongMode;
 - (void)scrollToLastLine;
 - (void)scrollToTop;
-- (void)flashSplitCellsInRow:(int)row;
+- (void)processRowSelection:(NSInteger)displayMode withDistance:(NSString *)distance;
+- (void)flashSplitCellsInRow:(long)row;
 - (void)refreshSplitView:(BOOL)scrollToLastLine;
 
 @end

@@ -8,6 +8,21 @@
 
 #import <UIKit/UIKit.h>
 
+@class SplitDetailViewController;
+
+typedef enum {
+    kNone,
+    kTimeColumnMin,
+    kSplitColumn1Min,
+    kSplitColumn2Min,
+    kSplitColumn3Min,
+    kSplitColumn4Min,
+    kTimeColumnMax,
+    kSplitColumn1Max,
+    kSplitColumn2Max,
+    kSplitColumn3Max,
+    kSplitColumn4Max
+} SummarySelectionType;
 
 @interface SplitDetailCell : UITableViewCell
 {
@@ -22,6 +37,8 @@
 	UIImageView *accImageView;
 	UIImage *separatorImage;
 	UIImageView *separatorImageView;
+    
+    SplitDetailViewController *splitDetailViewController;
 }
 
 @property (nonatomic, retain) IBOutlet UILabel *lapColumn;
@@ -34,7 +51,9 @@
 @property (nonatomic, retain) UIImageView *accImageView;
 @property (nonatomic, retain) UIImage *separatorImage;
 @property (nonatomic, retain) UIImageView *separatorImageView;
+@property (nonatomic, assign) SplitDetailViewController *splitDetailViewController;
 
 - (void)additionalSetup;
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event;
 
 @end

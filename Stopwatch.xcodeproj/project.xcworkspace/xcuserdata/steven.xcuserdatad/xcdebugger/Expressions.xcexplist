@@ -39,6 +39,14 @@
          contextName = "-[MultiStopwatchTableViewController resetAllWatches]:MultiStopwatchTableViewController.m">
       </ContextState>
       <ContextState
+         contextName = "-[SplitDetailCell setSelected:animated:]:SplitDetailCell.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "lapColumn.text">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "-[ReportSelectorViewController generateEmailReport]:ReportSelectorViewController.m">
          <PersistentStrings>
             <PersistentString
@@ -129,10 +137,10 @@
                value = "self.athlete">
             </PersistentString>
             <PersistentString
-               value = "self.distance">
+               value = "self.date">
             </PersistentString>
             <PersistentString
-               value = "self.date">
+               value = "self.distance">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

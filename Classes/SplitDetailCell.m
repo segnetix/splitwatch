@@ -7,6 +7,7 @@
 //
 
 #import "SplitDetailCell.h"
+#import "SplitDetailViewController.h"
 #import "Utilities.h"
 
 @implementation SplitDetailCell
@@ -21,6 +22,7 @@
 @synthesize accImageView;
 @synthesize separatorImage;
 @synthesize separatorImageView;
+@synthesize splitDetailViewController;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -28,15 +30,8 @@
 	{
 		// initialization
     }
-	
+    
     return self;
-}
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
 }
 
 - (void)dealloc
@@ -63,18 +58,16 @@
 }
 
 - (void)additionalSetup
-{	
+{
 	accDisclosureImage = [UIImage imageNamed:@"AccDisclosure.png"];
 	accImageView = [[UIImageView alloc] initWithImage:accDisclosureImage];
     accImageView.translatesAutoresizingMaskIntoConstraints = NO;
-	//accImageView.frame = CGRectMake(308, 2, 12, 14);
 	[self addSubview:accImageView];
 	[accImageView release];
 	
 	separatorImage = [UIImage imageNamed:@"separator.png"];
 	separatorImageView = [[UIImageView alloc] initWithImage:separatorImage];
     separatorImageView.translatesAutoresizingMaskIntoConstraints = NO;
-	//separatorImageView.frame = CGRectMake(1, 18, 308, 1);
 	[self addSubview:separatorImageView];
 	[separatorImageView release];
     
@@ -105,6 +98,58 @@
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[separatorImageView]-12-|" options:0 metrics:nil views:views]];
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[separatorImageView(1)]|" options:0 metrics:nil views:views]];
     
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    if (self.splitDetailViewController == nil ||
+        event.type != UIEventTypeTouches) {
+        return;
+    }
+    
+    // store current sel type for comparison later
+    SummarySelectionType prevSelType = self.splitDetailViewController.summarySelection;
+    
+    [super touchesBegan:touches withEvent:event];
+    UITouch *touch = [touches anyObject];
+    CGPoint tappedLocation = [touch locationInView:touch.view];
+    
+    if ([lapColumn.text isEqualToString:@"Min:"]) {
+        if (CGRectContainsPoint(lapColumn.frame, tappedLocation)) {
+            self.splitDetailViewController.summarySelection = kNone;
+        } else if (CGRectContainsPoint(timeColumn.frame, tappedLocation)) {
+            self.splitDetailViewController.summarySelection = kTimeColumnMin;
+        } else if (CGRectContainsPoint(splitColumn1.frame, tappedLocation)) {
+            self.splitDetailViewController.summarySelection = kSplitColumn1Min;
+        } else if (CGRectContainsPoint(splitColumn2.frame, tappedLocation)) {
+            self.splitDetailViewController.summarySelection = kSplitColumn2Min;
+        } else if (CGRectContainsPoint(splitColumn3.frame, tappedLocation)) {
+            self.splitDetailViewController.summarySelection = kSplitColumn3Min;
+        } else if (CGRectContainsPoint(splitColumn4.frame, tappedLocation)) {
+            self.splitDetailViewController.summarySelection = kSplitColumn4Min;
+        }
+    } else if ([lapColumn.text isEqualToString:@"Max:"]) {
+        if (CGRectContainsPoint(lapColumn.frame, tappedLocation)) {
+            self.splitDetailViewController.summarySelection = kNone;
+        } else if (CGRectContainsPoint(timeColumn.frame, tappedLocation)) {
+            self.splitDetailViewController.summarySelection = kTimeColumnMax;
+        } else if (CGRectContainsPoint(splitColumn1.frame, tappedLocation)) {
+            self.splitDetailViewController.summarySelection = kSplitColumn1Max;
+        } else if (CGRectContainsPoint(splitColumn2.frame, tappedLocation)) {
+            self.splitDetailViewController.summarySelection = kSplitColumn2Max;
+        } else if (CGRectContainsPoint(splitColumn3.frame, tappedLocation)) {
+            self.splitDetailViewController.summarySelection = kSplitColumn3Max;
+        } else if (CGRectContainsPoint(splitColumn4.frame, tappedLocation)) {
+            self.splitDetailViewController.summarySelection = kSplitColumn4Max;
+        }
+    } else {
+        self.splitDetailViewController.summarySelection = kNone;
+    }
+    
+    // if sel type has changed then reload table view
+    if (self.splitDetailViewController.summarySelection != prevSelType) {
+        [self.splitDetailViewController.tableView reloadData];
+    }
 }
 
 @end

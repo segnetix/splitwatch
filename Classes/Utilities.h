@@ -68,6 +68,9 @@
 + (NSString *)minSplit:(NSMutableArray *)splits forColumn:(NSInteger)column;
 + (NSString *)maxSplit:(NSMutableArray *)splits forColumn:(NSInteger)column;
 
++ (NSInteger)minSplitRow:(NSMutableArray *)splits forColumn:(NSInteger)column;
++ (NSInteger)maxSplitRow:(NSMutableArray *)splits forColumn:(NSInteger)column;
+
 + (int)getHrs:(double)split;
 + (int)getMin:(double)split;
 + (int)getSec:(double)split;
