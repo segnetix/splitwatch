@@ -45,29 +45,24 @@
 		bFinished = finished;
 		bEditMode = editMode;
 		
-        if (bFinished)
+        if (bFinished || bEditMode)
             self.tableView.allowsSelection = YES;
         else
             self.tableView.allowsSelection = NO;
         
 		appDelegate = (StopwatchAppDelegate *)[[UIApplication sharedApplication] delegate];
-		
-		if (bEditMode)
-		{
-			// edit mode setup
-			self.tableView.allowsSelection = YES;
-		}
         
 		[self resetLapInterval:distance Units:iUnits KiloSplits:bKiloSplits FurlongMode:bFurlongMode];
+        
+        self.tableView.clearsContextBeforeDrawing = YES;
     }
-    
-    self.tableView.clearsContextBeforeDrawing = YES;
     
     return self;
 }
 
 // KVO for summarySelection
-- (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+- (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
     if ([keyPath isEqual:@"summarySelection"]) {
         [self summarySelectionDidChange];
     }
@@ -76,8 +71,9 @@
 - (void)dealloc
 {
 	[splits release];
-	
 	splits = nil;
+    
+    [self removeObserver:self forKeyPath:@"summarySelection"];
 	
     [super dealloc];
 }
@@ -107,8 +103,6 @@
     }
     
     [super viewWillDisappear:animated];
-    
-    [self removeObserver:self forKeyPath:@"summarySelection"];
 }
 
 - (void)addSplit:(NSTimeInterval)split
