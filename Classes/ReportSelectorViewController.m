@@ -19,11 +19,13 @@
 @synthesize eventName;
 @synthesize date;
 @synthesize distance;
-@synthesize generateButton;
+@synthesize emailButton;
+@synthesize printButton;
 @synthesize appDelegate;
 @synthesize settingsViewController;
 
 #define kSelectPrompt   @"Select events for report:"
+#define POINTS_PER_INCH 72
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
@@ -40,18 +42,45 @@
     reportSelectorTableView.translatesAutoresizingMaskIntoConstraints = NO;
     [self.view addSubview:reportSelectorTableViewController.tableView];
     
-    // Generate button
-    generateButton = [[UIButton buttonWithType:UIButtonTypeRoundedRect] retain];      // autorelease button
-    [generateButton addTarget:self action:@selector(generateEmailReport) forControlEvents:UIControlEventTouchUpInside];
-    [generateButton setTitle:@"Generate Report" forState:UIControlStateNormal];
+    // button images (with tint)
+    UIImage *emailImage = [UIImage imageNamed:@"email.png"];
+    UIImage *printImage = [UIImage imageNamed:@"print"];
+    
+    emailImage = [emailImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    printImage = [printImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    
+    // Email button
+    emailButton = [[UIButton buttonWithType:UIButtonTypeCustom] retain];      // autorelease button
+    emailButton.contentMode = UIViewContentModeScaleToFill;
+    emailButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentFill;
+    emailButton.contentVerticalAlignment = UIControlContentVerticalAlignmentFill;
+    [emailButton setImage:emailImage forState:UIControlStateNormal];
+    [emailButton addTarget:self action:@selector(generateEmailReport) forControlEvents:UIControlEventTouchUpInside];
     if (IPAD) {
-        [generateButton.titleLabel setFont: [generateButton.titleLabel.font fontWithSize: 26]];
+        [emailButton.titleLabel setFont: [emailButton.titleLabel.font fontWithSize: 26]];
     } else {
-        [generateButton.titleLabel setFont: [generateButton.titleLabel.font fontWithSize: 18]];
+        [emailButton.titleLabel setFont: [emailButton.titleLabel.font fontWithSize: 18]];
     }
-    [generateButton setTintColor:self.view.tintColor];
-    generateButton.translatesAutoresizingMaskIntoConstraints = NO;
-    [self.view addSubview:generateButton];
+    [emailButton setTintColor:self.view.tintColor];
+    emailButton.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.view addSubview:emailButton];
+    
+    // Print button
+    printButton = [[UIButton buttonWithType:UIButtonTypeCustom] retain];      // autorelease button
+    printButton.contentMode = UIViewContentModeScaleToFill;
+    printButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentFill;
+    printButton.contentVerticalAlignment = UIControlContentVerticalAlignmentFill;
+    [printButton setImage:printImage forState:UIControlStateNormal];
+    [printButton addTarget:self action:@selector(printReport) forControlEvents:UIControlEventTouchUpInside];
+    if (IPAD) {
+        [printButton.titleLabel setFont: [printButton.titleLabel.font fontWithSize: 26]];
+    } else {
+        [printButton.titleLabel setFont: [printButton.titleLabel.font fontWithSize: 18]];
+    }
+    [printButton setTintColor:self.view.tintColor];
+    printButton.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.view addSubview:printButton];
+
     
     // separator
     UIImage *separatorImage = [UIImage imageNamed:@"separator_dark_gray.png"];
@@ -65,30 +94,48 @@
     [bottomSeparatorImageView release];
     
     // constraints
-    NSDictionary *views = NSDictionaryOfVariableBindings(reportSelectorTableView, generateButton, topSeparatorImageView, bottomSeparatorImageView);
+    NSDictionary *views = NSDictionaryOfVariableBindings(reportSelectorTableView, emailButton, printButton, topSeparatorImageView, bottomSeparatorImageView);
     
     if (IPAD) {
-        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(>=40)-[generateButton(220)]-(>=40)-|" options:0 metrics:nil views:views]];
+        //[self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(>=40)-[generateButton(100)]-(>=40)-|" options:0 metrics:nil views:views]];
+        //[self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(>=40)-[printButton(100)]-(>=40)-|" options:0 metrics:nil views:views]];
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-200-[emailButton(52)]" options:0 metrics:nil views:views]];
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[printButton(52)]-200-|" options:0 metrics:nil views:views]];
         [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[topSeparatorImageView]|" options:0 metrics:nil views:views]];
         [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[bottomSeparatorImageView]|" options:0 metrics:nil views:views]];
         [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[reportSelectorTableView]|" options:0 metrics:nil views:views]];
-        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-30-[reportSelectorTableView(440)][topSeparatorImageView(1)]-64-[generateButton(36)]" options:0 metrics:nil views:views]];
-        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[bottomSeparatorImageView(1)]-49-|" options:0 metrics:nil views:views]];
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-30-[reportSelectorTableView(440)][topSeparatorImageView(1)]-60-[emailButton(52)]" options:0 metrics:nil views:views]];
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[printButton(52)]" options:0 metrics:nil views:views]];
     } else {
-        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(>=40)-[generateButton(160)]-(>=40)-|" options:0 metrics:nil views:views]];
-        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[topSeparatorImageView]|" options:0 metrics:nil views:views]];
-        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[bottomSeparatorImageView]|" options:0 metrics:nil views:views]];
-        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[reportSelectorTableView]|" options:0 metrics:nil views:views]];
+        //[self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(>=40)-[emailButton(80)]-(>=40)-|" options:0 metrics:nil views:views]];
+        //[self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(>=40)-[printButton(80)]-(>=40)-|" options:0 metrics:nil views:views]];
         
-        if (self.view.frame.size.height < 500) {
-            [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-30-[reportSelectorTableView(310)][topSeparatorImageView(1)]-24-[generateButton(36)]" options:0 metrics:nil views:views]];
+        if (self.view.frame.size.height <= 568) {
+            [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-60-[emailButton(44)]" options:0 metrics:nil views:views]];
+            [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[printButton(44)]-60-|" options:0 metrics:nil views:views]];
+            [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[topSeparatorImageView]|" options:0 metrics:nil views:views]];
+            [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[bottomSeparatorImageView]|" options:0 metrics:nil views:views]];
+            [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[reportSelectorTableView]|" options:0 metrics:nil views:views]];
+            if (self.view.frame.size.height < 500) {
+                [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-30-[reportSelectorTableView(310)][topSeparatorImageView(1)]-20-[emailButton(44)]" options:0 metrics:nil views:views]];
+            } else {
+                [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-30-[reportSelectorTableView(310)][topSeparatorImageView(1)]-60-[emailButton(44)]" options:0 metrics:nil views:views]];
+            }
+            [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[printButton(44)]" options:0 metrics:nil views:views]];
         } else {
-            [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-30-[reportSelectorTableView(310)][topSeparatorImageView(1)]-48-[generateButton(36)]" options:0 metrics:nil views:views]];
+            [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-80-[emailButton(52)]" options:0 metrics:nil views:views]];
+            [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[printButton(52)]-80-|" options:0 metrics:nil views:views]];
+            [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[topSeparatorImageView]|" options:0 metrics:nil views:views]];
+            [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[bottomSeparatorImageView]|" options:0 metrics:nil views:views]];
+            [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[reportSelectorTableView]|" options:0 metrics:nil views:views]];
+            [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-30-[reportSelectorTableView(310)][topSeparatorImageView(1)]-48-[emailButton(52)]" options:0 metrics:nil views:views]];
+            [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[printButton(52)]" options:0 metrics:nil views:views]];
         }
-        
-        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[bottomSeparatorImageView(1)]-49-|" options:0 metrics:nil views:views]];
     }
     
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[bottomSeparatorImageView(1)]-49-|" options:0 metrics:nil views:views]];
+    
+    /*
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:generateButton
                                  attribute:NSLayoutAttributeCenterX
                                  relatedBy:NSLayoutRelationEqual
@@ -96,6 +143,20 @@
                                  attribute:NSLayoutAttributeCenterX
                                 multiplier:1.f constant:0.f]];
 
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:printButton
+                                                          attribute:NSLayoutAttributeCenterX
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:self.view
+                                                          attribute:NSLayoutAttributeCenterX
+                                                         multiplier:1.f constant:0.f]];
+     */
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:emailButton
+                                                          attribute:NSLayoutAttributeCenterY
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:printButton
+                                                          attribute:NSLayoutAttributeCenterY
+                                                         multiplier:1.f constant:0.f]];
     
     reportSelectorTableViewController.tableView.delegate = self;
     reportSelectorTableViewController.tableView.dataSource = self;
@@ -103,16 +164,18 @@
     reportSelectorTableViewController.tableView.scrollEnabled = NO;
     reportSelectorTableViewController.tableView.allowsSelection = YES;
     
-    self.navigationItem.title = @"Email Report";
+    self.navigationItem.title = @"Report";
 }
 
 - (void)dealloc
 {
     [reportSelectorTableViewController release];
-    [generateButton release];
+    [emailButton release];
+    [printButton release];
     
     reportSelectorTableViewController = nil;
-    generateButton = nil;
+    emailButton = nil;
+    printButton = nil;
     
     [super dealloc];
 }
@@ -319,14 +382,65 @@
     NSArray *eventInfoArray = [appDelegate getEventInfoArrayBasedOnAthlete:self.runnerName Event:self.eventName Date:self.date Distance:self.distance];
     
     if (eventInfoArray.count == 0) {
-        generateButton.enabled = NO;
+        emailButton.enabled = NO;
+        printButton.enabled = NO;
         bEventCountZero = YES;
     } else {
-        generateButton.enabled = YES;
+        emailButton.enabled = YES;
+        printButton.enabled = YES;
         bEventCountZero = NO;
     }
     
     return eventInfoArray.count;
+}
+
+- (NSString*)getReportHTML
+{
+    // HTML version
+   // NSMutableString *reportHTML = [NSMutableString stringWithString:@"<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' "];
+    //[reportHTML appendString:@"'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'> "];
+    //[reportHTML appendString:@"<html xmlns='http://www.w3.org/1999/xhtml'>"];
+    //[reportHTML appendString:@"<head><title>Report</title><link rel='stylesheet' type='text/css' href='./style.css' /> </head>"];
+    //NSMutableString *reportHTML = [NSMutableString stringWithString:@"<!DOCTYPE html><html><head><meta charset='UTF-8'><title>Report</title></head><body>"];
+      NSMutableString *reportHTML = [NSMutableString stringWithString:@"<!DOCTYPE html><style></style><html><head><meta charset='UTF-8'><title>Title</title></head>"];
+    [reportHTML appendString:@"<div id='container' style='font-family:arial; font-size:14px;'>"];
+    [reportHTML appendString:@"<div id='title' style='margin-bottom:15px; font-weight:bold;'>"];
+    [reportHTML appendString:@"Split Report by <a href='http://www.segnetix.com/splitwatch'>SPLITWATCH</a></div>"];
+    [reportHTML appendString:@"<div style='margin-bottom:30px;'>"];
+    
+    // cycle each event
+    NSArray *eventInfoArray = [appDelegate getEventInfoArrayBasedOnAthlete:self.runnerName Event:self.eventName Date:self.date Distance:self.distance];
+
+    for (NSArray *eventArray in eventInfoArray)
+    {
+        NSNumber *eventNum = [eventArray objectAtIndex:0];
+        
+        // create an Event using the EventNum
+        Event *event = [[[Event alloc] initWithEventNum:[eventNum intValue]] autorelease];
+        NSMutableArray *splits = [event getSplitData];
+        
+        [reportHTML appendString:@"<table id='split data' cellpadding-right='3'>"];
+        
+        if (event.bFurlongMode)
+            [reportHTML appendFormat:@"<tr><td>Horse:</td><td>&nbsp;</td><td>%@</td></tr>", event.runnerName];
+        else
+            [reportHTML appendFormat:@"<tr><td>Athlete:</td><td>&nbsp;</td><td>%@</td></tr>", event.runnerName];
+        
+        [reportHTML appendFormat:@"<tr><td>Event Name:</td><td>&nbsp;</td><td>%@</td></tr>", event.eventName];
+        [reportHTML appendFormat:@"<tr><td>Date:</td><td>&nbsp;</td><td>%@</td></tr>", [Utilities formatDate:event.date]];
+        
+        if (event.iEventType != kLap)
+            [reportHTML appendFormat:@"<tr><td>Distance:</td><td>&nbsp;</td><td>%@</td></tr>", [Utilities stringFromDistance:event.distance Units:event.iEventType ShowSplitTag:YES Interval:(int)event.lapDistance FurlongDisplayMode:event.bFurlongMode]];
+        [reportHTML appendFormat:@"<tr><td>Distance:</td><td>&nbsp;</td><td>%@</td></tr>", [Utilities stringFromDistance:(int)event.distance Units:event.iEventType ShowSplitTag:YES Interval:(int)event.lapDistance FurlongDisplayMode:event.bFurlongMode]];
+        [reportHTML appendFormat:@"<tr><td>Time:</td><td>&nbsp;</td><td>%@</td></tr>", [Utilities shortFormatTime:event.finalTime precision:2]];
+        [reportHTML appendString:@"<tr style='height:10px;'/></table>"];
+        [reportHTML appendString:[Utilities getSplitHTMLDataString:splits forIntervalDistance:event.lapDistance forUnits:event.iEventType  forKiloSplits:event.bKiloSplits forFurlongMode:event.bFurlongMode]];
+        [reportHTML appendString:@"--------------------------------------------------------------------<p></p>"];
+    }
+    
+    [reportHTML appendString:@"</div></div></body></html>"];
+    
+    return reportHTML;
 }
 
 - (void)generateEmailReport
@@ -349,8 +463,7 @@
         return;
     }
     
-    if ([MFMailComposeViewController canSendMail])
-    {
+    if ([MFMailComposeViewController canSendMail]) {
         // init mail view controller
         MFMailComposeViewController *mailViewController = [[MFMailComposeViewController alloc] init];
         mailViewController.mailComposeDelegate = self;
@@ -384,62 +497,14 @@
         [mailViewController setSubject:subjectStr];
         [mailViewController setToRecipients:[settingsViewController getDefaultEmailAddresses]];
         
-        // Attach an image to the email
-        //NSString *path = [[NSBundle mainBundle] pathForResource:@"rainy" ofType:@"png"];
-        //NSData *myData = [NSData dataWithContentsOfFile:path];
-        //[mailViewController addAttachmentData:myData mimeType:@"image/png" fileName:@"rainy"];
-        
         // HTML version
-        NSMutableString *emailBody = [NSMutableString stringWithString:@"<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' "];
-        [emailBody appendString:@"'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'> "];
-        [emailBody appendString:@"<html xmlns='http://www.w3.org/1999/xhtml'>"];
-        [emailBody appendString:@"<head><title>Report</title><link rel='stylesheet' type='text/css' href='./style.css' /> </head>"];
-        [emailBody appendString:@"<body><div id='container' style='font-family:arial; font-size:14px;'>"];
-        [emailBody appendString:@"<div id='title' style='margin-bottom:15px; font-weight:bold;'>"];
-        [emailBody appendString:@"Split Report by <a href='http://www.segnetix.com/splitwatch'>SPLITWATCH</a></div>"];
-        [emailBody appendString:@"<div style='margin-bottom:30px;'>"];
-        
-        // cycle each event
-        for (NSArray *eventArray in eventInfoArray)
-        {
-            NSNumber *eventNum = [eventArray objectAtIndex:0];
-            
-            // create an Event using the EventNum
-            Event *event = [[[Event alloc] initWithEventNum:[eventNum intValue]] autorelease];
-            NSMutableArray *splits = [event getSplitData];
-            
-            [emailBody appendString:@"<table id='split data' cellpadding-right='3'>"];
-            
-            if (event.bFurlongMode)
-                [emailBody appendFormat:@"<tr><td>Horse:</td><td>&nbsp;</td><td>%@</td></tr>", event.runnerName];
-            else
-                [emailBody appendFormat:@"<tr><td>Athlete:</td><td>&nbsp;</td><td>%@</td></tr>", event.runnerName];
-            
-            [emailBody appendFormat:@"<tr><td>Event Name:</td><td>&nbsp;</td><td>%@</td></tr>", event.eventName];
-            [emailBody appendFormat:@"<tr><td>Date:</td><td>&nbsp;</td><td>%@</td></tr>", [Utilities formatDate:event.date]];
-            
-            if (event.iEventType != kLap)
-                [emailBody appendFormat:@"<tr><td>Distance:</td><td>&nbsp;</td><td>%@</td></tr>", [Utilities stringFromDistance:event.distance Units:event.iEventType ShowSplitTag:YES Interval:(int)event.lapDistance FurlongDisplayMode:event.bFurlongMode]];
-            [emailBody appendFormat:@"<tr><td>Distance:</td><td>&nbsp;</td><td>%@</td></tr>", [Utilities stringFromDistance:(int)event.distance Units:event.iEventType ShowSplitTag:YES Interval:(int)event.lapDistance FurlongDisplayMode:event.bFurlongMode]];
-            [emailBody appendFormat:@"<tr><td>Time:</td><td>&nbsp;</td><td>%@</td></tr>", [Utilities shortFormatTime:event.finalTime precision:2]];
-            [emailBody appendString:@"<tr style='height:10px;'/></table>"];
-            [emailBody appendString:[Utilities getSplitHTMLDataString:splits forIntervalDistance:event.lapDistance forUnits:event.iEventType  forKiloSplits:event.bKiloSplits forFurlongMode:event.bFurlongMode]];
-            [emailBody appendString:@"--------------------------------------------------------------------<p></p>"];
-        }
-        
-        [emailBody appendString:@"</div></div></body></html>"];
+        NSString* emailBody = [self getReportHTML];
         
         [mailViewController setMessageBody:emailBody isHTML:YES];
         
         [self presentViewController:mailViewController animated:YES completion:nil];
         
-        // undocumented feature --- DO NOT USE!!!
-        //[[[[mailViewController viewControllers] lastObject] navigationItem] setTitle:@"Send E-mail"];
-        
-        //[mailViewController release];
-    }
-    else
-    {
+    } else {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Can't Send Email!"
                                                             message:@"This device is not configured for sending email."
                                                            delegate:nil
@@ -451,6 +516,50 @@
 
 }
 
+- (void)printReport
+{
+    NSLog(@"printReport");
+    
+    if ([UIPrintInteractionController isPrintingAvailable]) {
+        UIPrintInteractionController* printController = [UIPrintInteractionController sharedPrintController];
+        
+        if (printController == nil) {
+            return;
+        }
+        
+        NSString* report = [self getReportHTML];
+        
+        UIMarkupTextPrintFormatter *htmlFormatter = [[[UIMarkupTextPrintFormatter alloc] initWithMarkupText:report] autorelease];
+        htmlFormatter.perPageContentInsets = UIEdgeInsetsMake(POINTS_PER_INCH * 0.75f,  // 3/4 inch top margin
+                                                              POINTS_PER_INCH * 0.75f,  // 3/4 inch left margin
+                                                              POINTS_PER_INCH * 0.75f,  // 3/4 inch bottom margin
+                                                              POINTS_PER_INCH * 0.75f); // 3/4 inch right margin
+        
+        printController.printFormatter = htmlFormatter;
+        UIPrintInfo *printInfo = [UIPrintInfo printInfo];
+        printInfo.outputType = UIPrintInfoOutputGeneral;
+        printInfo.jobName    = @"Split Report";
+        printController.printInfo = printInfo;
+        printController.delegate = self;
+        
+        void (^completionHandler)(UIPrintInteractionController *, BOOL, NSError *) = ^(UIPrintInteractionController *printController, BOOL completed, NSError *error) {
+            if (!completed && error) {
+                NSLog(@"Print Failure! due to error in domain %@ with error code %ld", error.domain, (long)error.code);
+                NSLog(@"Desc: %@", error.description);
+            }
+        };
+        
+        [printController presentAnimated:YES completionHandler:completionHandler];
+    } else {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Can't Print Report!"
+                                                            message:@"This device is not configured for printing."
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+        [alertView show];
+        [alertView release];
+    }
+}
 
 // Dismisses the email composition interface when users tap Cancel or Send. Proceeds to update the message field with the result of the operation.
 - (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error

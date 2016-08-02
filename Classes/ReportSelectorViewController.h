@@ -14,7 +14,7 @@
 
 @class StopwatchAppDelegate;
 
-@interface ReportSelectorViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, MFMailComposeViewControllerDelegate>
+@interface ReportSelectorViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, MFMailComposeViewControllerDelegate, UIPrintInteractionControllerDelegate>
 {
     NSString *runnerName;
     NSString *eventName;
@@ -24,7 +24,8 @@
     
     UITableViewController *reportSelectorTableViewController;
     SettingsViewController *settingsViewController;
-    UIButton *generateButton;
+    UIButton *emailButton;
+    UIButton *printButton;
     
     sqlite3 *database;
     
@@ -37,12 +38,15 @@
 @property (nonatomic, retain) NSString *distance;
 @property (nonatomic, retain) UITableViewController *reportSelectorTableViewController;
 @property (nonatomic, assign) SettingsViewController *settingsViewController;
-@property (nonatomic, retain) UIButton *generateButton;
+@property (nonatomic, retain) UIButton *emailButton;
+@property (nonatomic, retain) UIButton *printButton;
 @property (nonatomic, assign) StopwatchAppDelegate *appDelegate;
 
 - (void)setValue:(NSString*)value forSelector:(int)selector;
 - (NSString*)getValueForSelector:(int)selector;
+- (NSString*)getReportHTML;
 - (void)generateEmailReport;
+- (void)printReport;
 
 @end
 

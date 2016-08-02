@@ -87,21 +87,33 @@
                         </subviews>
                         <constraints>
                             <constraint firstItem="5" firstAttribute="width" secondItem="3" secondAttribute="width" multiplier="0.19" id="24S-Fq-l7b"/>
-                            <constraint firstAttribute="bottom" secondItem="5" secondAttribute="bottom" constant="-1" id="6Ym-Nx-MxW"/>
-                            <constraint firstAttribute="bottom" secondItem="11" secondAttribute="bottom" constant="-1" id="CgY-9r-cHe"/>
+                            <constraint firstAttribute="bottom" secondItem="5" secondAttribute="bottom" constant="-1" id="6Ym-Nx-MxW">
+                                <variation key="widthClass=regular" constant="-1"/>
+                            </constraint>
+                            <constraint firstAttribute="bottom" secondItem="11" secondAttribute="bottom" constant="-1" id="CgY-9r-cHe">
+                                <variation key="widthClass=regular" constant="-1"/>
+                            </constraint>
                             <constraint firstItem="10" firstAttribute="width" secondItem="3" secondAttribute="width" multiplier="0.16" id="DFL-mV-KUm"/>
                             <constraint firstItem="10" firstAttribute="top" secondItem="3" secondAttribute="top" id="IKG-cb-tKo"/>
                             <constraint firstItem="9" firstAttribute="width" secondItem="3" secondAttribute="width" multiplier="0.14" id="JyU-pM-na3"/>
                             <constraint firstItem="4" firstAttribute="width" secondItem="3" secondAttribute="width" multiplier="0.12" id="MyQ-U0-OMm"/>
                             <constraint firstItem="11" firstAttribute="width" secondItem="3" secondAttribute="width" multiplier="0.16" id="OFx-lr-m4A"/>
                             <constraint firstItem="12" firstAttribute="width" secondItem="3" secondAttribute="width" multiplier="0.16" id="QQU-9S-D6e"/>
-                            <constraint firstAttribute="bottom" secondItem="9" secondAttribute="bottom" constant="-1" id="Sy7-bi-a78"/>
+                            <constraint firstAttribute="bottom" secondItem="9" secondAttribute="bottom" constant="-1" id="Sy7-bi-a78">
+                                <variation key="widthClass=regular" constant="-1"/>
+                            </constraint>
                             <constraint firstItem="11" firstAttribute="leading" secondItem="10" secondAttribute="trailing" constant="2" id="T7i-pK-W3b"/>
                             <constraint firstItem="5" firstAttribute="leading" secondItem="4" secondAttribute="trailing" constant="2" id="a3R-qG-Jbl"/>
-                            <constraint firstAttribute="bottom" secondItem="10" secondAttribute="bottom" constant="-1" id="anc-mg-3qT"/>
+                            <constraint firstAttribute="bottom" secondItem="10" secondAttribute="bottom" constant="-1" id="anc-mg-3qT">
+                                <variation key="widthClass=regular" constant="-1"/>
+                            </constraint>
                             <constraint firstItem="12" firstAttribute="top" secondItem="3" secondAttribute="top" id="gwB-sF-AtP"/>
-                            <constraint firstAttribute="bottom" secondItem="4" secondAttribute="bottom" constant="-1" id="hdB-6x-hoL"/>
-                            <constraint firstAttribute="bottom" secondItem="12" secondAttribute="bottom" constant="-1" id="hky-0V-fnh"/>
+                            <constraint firstAttribute="bottom" secondItem="4" secondAttribute="bottom" constant="-1" id="hdB-6x-hoL">
+                                <variation key="widthClass=regular" constant="-1"/>
+                            </constraint>
+                            <constraint firstAttribute="bottom" secondItem="12" secondAttribute="bottom" constant="-1" id="hky-0V-fnh">
+                                <variation key="widthClass=regular" constant="-1"/>
+                            </constraint>
                             <constraint firstItem="4" firstAttribute="top" secondItem="3" secondAttribute="top" id="jCn-bP-rAq"/>
                             <constraint firstItem="12" firstAttribute="leading" secondItem="11" secondAttribute="trailing" constant="2" id="kQT-gP-oQV"/>
                             <constraint firstItem="11" firstAttribute="top" secondItem="3" secondAttribute="top" id="p03-zb-VVF"/>

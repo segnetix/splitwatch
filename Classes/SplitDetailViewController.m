@@ -173,6 +173,8 @@
 
 - (void)clearSplits
 {
+    self.summarySelection = kNone;
+    
 	[splits removeAllObjects];
 	[self.tableView reloadData];
 }
