@@ -51,7 +51,7 @@
 - (void)resetLapInterval:(NSInteger)distance Units:(int)units KiloSplits:(BOOL)kiloSplits FurlongMode:(BOOL)furlongMode;
 - (void)scrollToLastLine;
 - (void)scrollToTop;
-- (void)processRowSelection:(NSInteger)displayMode withDistance:(NSString *)distance;
+//- (void)processRowSelection:(NSInteger)displayMode withDistance:(NSString *)distance;
 - (void)flashSplitCellsInRow:(long)row;
 - (void)refreshSplitView:(BOOL)scrollToLastLine;
 

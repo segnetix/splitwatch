@@ -26,7 +26,6 @@
 @synthesize kiloSplitLabel;
 @synthesize furlongLabel;
 @synthesize splitEditLabelView;
-
 @synthesize appDelegate;
 
 - (id)initWithEvent:(Event *)theEvent
@@ -46,6 +45,7 @@
 		
 		splitDetailViewController.splits = [event getSplitData];
 		splitDetailViewController.splitEditViewController = self;
+        splitDetailViewController.tableView.allowsSelection = YES;
 		
 		appDelegate = (StopwatchAppDelegate *)[[UIApplication sharedApplication] delegate];
 		database = [appDelegate getEventDatabase];

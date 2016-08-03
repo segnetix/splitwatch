@@ -87,7 +87,7 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated
-{	
+{
 	[historyTableViewController groupEventsBySelection:kKeepCurrentSelection];
 	[historyTableViewController scrollToTop];
 	
@@ -112,6 +112,7 @@
 	//[appDelegate playClickSound];
 	
 	// redraw the HistoryTableViewController with selection
+    [historyTableViewController clearEventInfoArray];
 	[historyTableViewController groupEventsBySelection:sortSegmentedControl.selectedSegmentIndex];
 	[historyTableViewController scrollToTop];
     

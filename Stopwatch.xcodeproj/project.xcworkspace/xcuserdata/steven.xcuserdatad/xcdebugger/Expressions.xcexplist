@@ -23,6 +23,11 @@
       </ContextState>
       <ContextState
          contextName = "-[HistoryTableViewController tableView:didSelectRowAtIndexPath:]:HistoryTableViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.eventGroupSelection">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "-[MultiStopwatchTableViewController tableView:numberOfRowsInSection:]:MultiStopwatchTableViewController.m">
@@ -88,6 +93,20 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "-[HistoryTableViewController groupEventsBySelection:]:HistoryTableViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "eventGroupSelection">
+            </PersistentString>
+            <PersistentString
+               value = "selection">
+            </PersistentString>
+            <PersistentString
+               value = "filterSelection">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "-[HistoryTableViewController viewWillLayoutSubviews]:HistoryTableViewController.m">
          <PersistentStrings>
             <PersistentString
@@ -115,6 +134,14 @@
          <PersistentStrings>
             <PersistentString
                value = "watch.bTimerRunning">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[HistoryViewController viewWillAppear:]:HistoryViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "historyTableViewController.eventGroupSelection">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

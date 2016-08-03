@@ -76,14 +76,6 @@
 + (int)getSec:(double)split;
 + (int)getHundredths:(double)split;
 
-/*+ (NSString *)lapTextForRow:(NSInteger)row
-             forDisplayMode:(NSInteger)mode
-            withSplitsCount:(int)splitsCount
-           intervalDistance:(int)intervalDistance
-                      units:(int)units
-                furlongMode:(BOOL)furlongMode;*/
-//+ (NSString *)timeTextForRow:(NSInteger)row forDisplayMode:(NSInteger)mode;
-
 + (NSString *)lapTextForRow:(NSInteger)row forDisplayMode:(NSInteger)mode forSplits:(NSMutableArray*)splits forIntervalDistance:(NSInteger)intervalDistance forUnits:(int)iUnits forFurlongMode:(BOOL)bFurlongMode;
 + (NSString *)timeTextForRow:(NSInteger)row forDisplayMode:(NSInteger)mode forSplits:(NSMutableArray*)splits forIntervalDistance:(NSInteger)intervalDistance forUnits:(int)iUnits forFurlongMode:(BOOL)bFurlongMode;
 + (NSString *)splitTextForRow:(NSInteger)row Column:(NSInteger)column forDisplayMode:(NSInteger)mode forSplits:(NSMutableArray*)splits forIntervalDistance:(NSInteger)intervalDistance forUnits:(int)iUnits forFurlongMode:(BOOL)bFurlongMode forKiloSplits:(BOOL)bKiloSplits;

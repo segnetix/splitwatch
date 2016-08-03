@@ -102,6 +102,8 @@
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    [super touchesBegan:touches withEvent:event];
+    
     if (self.splitDetailViewController == nil ||
         event.type != UIEventTypeTouches) {
         return;

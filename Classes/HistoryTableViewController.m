@@ -17,6 +17,7 @@
 @implementation HistoryTableViewController
 
 @synthesize tableItems;
+@synthesize eventInfoArray;
 @synthesize historyViewController;
 @synthesize settingsViewController;
 @synthesize bDisplayEvents;
@@ -28,7 +29,8 @@
     if (self = [super initWithStyle:UITableViewStylePlain])
 	{
 		tableItems = [[NSMutableArray alloc] initWithCapacity:100];
-
+        eventInfoArray = nil;
+        
 		historyViewController = theHistoryVC;
 		settingsViewController = theSettingsVC;
 		
@@ -52,8 +54,10 @@
 - (void)dealloc
 {
 	[tableItems release];
+    [eventInfoArray release];
 	
 	tableItems = nil;
+    eventInfoArray = nil;
 	
 	[super dealloc];
 }
@@ -220,7 +224,7 @@
 		if (filterSelection > 0 && filterSelection < 5)
 		{
 			// clear sortSegmentedControl selection
-			historyViewController.sortSegmentedControl.selectedSegmentIndex = -1;
+			//historyViewController.sortSegmentedControl.selectedSegmentIndex = -1;
 			
 			// get filter where clause from the tableItems array then clear the array
 			NSString *filterClause = [[tableItems objectAtIndex:indexPath.row] retain];
@@ -228,7 +232,9 @@
 			
 			// returns event info based on the given selection filter
 			appDelegate = (StopwatchAppDelegate *)[[UIApplication sharedApplication] delegate];
-			NSArray *eventInfoArray = [appDelegate getEventInfoArrayBasedOnSelection:filterSelection withFilter:filterClause];
+            
+            [eventInfoArray release];
+			eventInfoArray = [appDelegate getEventInfoArrayBasedOnSelection:filterSelection withFilter:filterClause];
 			
 			// clear and refill tableItems with selected events
 			[tableItems removeAllObjects];
@@ -261,8 +267,7 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	// delete associated event(s)
-	if (bDisplayEvents)
-	{
+	if (bDisplayEvents) {
 		// delete the selected event
 		// get the EventNum for this selection
 		NSArray *eventInfo = [tableItems objectAtIndex:indexPath.row];
@@ -273,17 +278,16 @@
 		
 		[event deleteSelfFromDatabase];
 		[event release];
-	}
-	else
-	{
+	} else {
 		// delete the selected group of events
 		appDelegate = (StopwatchAppDelegate *)[[UIApplication sharedApplication] delegate];
 		
 		NSString *filter = [tableItems objectAtIndex:indexPath.row];
-		NSArray *eventInfoArray = [appDelegate getEventInfoArrayBasedOnSelection:filterSelection withFilter:filter];
+        
+        [eventInfoArray release];
+		eventInfoArray = [appDelegate getEventInfoArrayBasedOnSelection:filterSelection withFilter:filter];
 		
-		for (NSArray *eventInfo in eventInfoArray)
-		{
+		for (NSArray *eventInfo in eventInfoArray) {
 			// get the EventNum for this selection
 			NSNumber *evntNum = [eventInfo objectAtIndex:0];
 			
@@ -300,9 +304,28 @@
 	[tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
 }
 
+- (void)clearEventInfoArray
+{
+    [eventInfoArray release];
+    eventInfoArray = nil;
+}
+
 // populate tableItems with objects from the given selection
 - (void)groupEventsBySelection:(NSInteger)selection
-{	
+{
+    if (eventInfoArray != nil) {
+        NSLog(@"Loading a previous selection...");
+        // we have a prior selection so show it
+        [tableItems removeAllObjects];
+        
+        for (int i = 0; i < eventInfoArray.count; i++) {
+            [tableItems addObject:[eventInfoArray objectAtIndex:i]];
+        }
+        return;
+    } else {
+        NSLog(@"Loading a new selection...");
+    }
+    
 	// don't process if just clearing the sortSegmentedControl selection (set to -1)
 	if (selection < 0)
 		return;
@@ -357,9 +380,8 @@
 	
 	// step through the result set rows (one per event)
 	while (sqlite3_step(statement) == SQLITE_ROW)
-	{
-		if (bDisplayEvents)
-		{
+    {
+		if (bDisplayEvents) {
 			NSMutableArray *eventInfo = [[NSMutableArray alloc] initWithCapacity:5];
 			
 			// we are displaying a single event, so pull event info from the query result and put into the tableItems array
@@ -385,39 +407,30 @@
 			// add eventInfo to the tableItem array
 			[tableItems addObject:eventInfo];
 			[eventInfo release];
-		}
-		else
-		{
+		} else {
 			// we are displaying groups so query for groups and populate group array
 			NSString *cellText;
 			
-			if (filterSelection == kDistance)
-			{
+			if (filterSelection == kDistance) {
 				int eventDistance = sqlite3_column_int(statement, 0);
 				int eventType = sqlite3_column_int(statement, 1);
 				int furlongMode = sqlite3_column_int(statement, 2);
 
-				if (furlongMode == YES)
-				{
+				if (furlongMode == YES) {
 					cellText = [Utilities stringFromDistance:eventDistance
 													   Units:eventType
 												ShowSplitTag:NO
 													Interval:220
 										  FurlongDisplayMode:YES];
-				}
-				else
-				{
+				} else {
 					cellText = [Utilities stringFromDistance:eventDistance
 													   Units:eventType
 												ShowSplitTag:NO
 													Interval:0
 										  FurlongDisplayMode:NO];
 				}
-				
 				tempcount++;
-			}
-			else
-			{
+			} else {
 				cellText = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
 			}
 			

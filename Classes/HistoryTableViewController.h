@@ -25,12 +25,14 @@
 	
 	BOOL bDisplayEvents;
 	NSInteger filterSelection;
+    NSArray *eventInfoArray;
 }
 
 @property (nonatomic, retain) NSMutableArray *tableItems;
 @property (nonatomic, assign) HistoryViewController *historyViewController;
 @property (nonatomic, assign) SettingsViewController *settingsViewController;
 @property (nonatomic, assign) StopwatchAppDelegate *appDelegate;
+@property (nonatomic, assign) NSArray *eventInfoArray;
 @property BOOL bDisplayEvents;
 @property NSInteger filterSelection;
 
@@ -38,5 +40,6 @@
 - (void)addEvent:(Event *)event atFront:(BOOL)front reloadData:(BOOL)reload;
 - (void)scrollToTop;
 - (void)groupEventsBySelection:(NSInteger)selection;
+- (void)clearEventInfoArray;
 
 @end

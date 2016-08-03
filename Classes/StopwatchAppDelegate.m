@@ -573,7 +573,7 @@
 		NSAssert1(0, @"Error: failed to bind statement with message '%s'.", sqlite3_errmsg(database));
 	}
 	
-	NSMutableArray *eventInfoArray = [[[NSMutableArray alloc] init] autorelease];
+	NSMutableArray *eventInfoArray = [[NSMutableArray alloc] init];
 	
 	// step through the result set rows (one per event)
 	while (sqlite3_step(statement) == SQLITE_ROW)

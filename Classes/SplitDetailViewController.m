@@ -372,9 +372,27 @@
     return cell;
 }
 
+/*
 - (void)processRowSelection:(NSInteger)displayMode withDistance:(NSString *)distance
 {
     NSLog(@"processRowSelection: %lu withDistance: %@", (long)displayMode, distance);
+}
+*/
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // Navigation logic may go here. Create and push another view controller.
+    // AnotherViewController *anotherViewController = [[AnotherViewController alloc] initWithNibName:@"AnotherView" bundle:nil];
+    // [self.navigationController pushViewController:anotherViewController];
+    // [anotherViewController release];
+    
+    if (bEditMode)
+    {
+        //[appDelegate playClickSound];
+        
+        // push the split time picker
+        [splitEditViewController pushTimePicker:(int)indexPath.row];
+    }
 }
 
 // scroll to and flash the modified/inserted splits
