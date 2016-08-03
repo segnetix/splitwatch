@@ -314,7 +314,6 @@
 - (void)groupEventsBySelection:(NSInteger)selection
 {
     if (eventInfoArray != nil) {
-        NSLog(@"Loading a previous selection...");
         // we have a prior selection so show it
         [tableItems removeAllObjects];
         
@@ -322,8 +321,6 @@
             [tableItems addObject:[eventInfoArray objectAtIndex:i]];
         }
         return;
-    } else {
-        NSLog(@"Loading a new selection...");
     }
     
 	// don't process if just clearing the sortSegmentedControl selection (set to -1)

@@ -41,15 +41,10 @@
 		B05D4FF31AA77D86006AEFA4 /* launch_640_1136.png in Resources */ = {isa = PBXBuildFile; fileRef = B05D4FF21AA77D86006AEFA4 /* launch_640_1136.png */; };
 		B05D4FF51AA77EFC006AEFA4 /* launch_750_1334.png in Resources */ = {isa = PBXBuildFile; fileRef = B05D4FF41AA77EFC006AEFA4 /* launch_750_1334.png */; };
 		B05D4FF71AA77FA3006AEFA4 /* launch_1242_2208.png in Resources */ = {isa = PBXBuildFile; fileRef = B05D4FF61AA77FA3006AEFA4 /* launch_1242_2208.png */; };
-		B05D4FFD1AA7D9AF006AEFA4 /* HelpImage_SplitwatchTop.png in Resources */ = {isa = PBXBuildFile; fileRef = B05D4FFC1AA7D9AF006AEFA4 /* HelpImage_SplitwatchTop.png */; };
-		B05D4FFF1AA7DBAB006AEFA4 /* HelpImage_SplitwatchBottom.png in Resources */ = {isa = PBXBuildFile; fileRef = B05D4FFE1AA7DBAB006AEFA4 /* HelpImage_SplitwatchBottom.png */; };
-		B05D50011AA7E2D3006AEFA4 /* HelpImage_MultiwatchTop.png in Resources */ = {isa = PBXBuildFile; fileRef = B05D50001AA7E2D3006AEFA4 /* HelpImage_MultiwatchTop.png */; };
-		B05D50031AA7E765006AEFA4 /* HelpImage_MultiwatchCell.png in Resources */ = {isa = PBXBuildFile; fileRef = B05D50021AA7E765006AEFA4 /* HelpImage_MultiwatchCell.png */; };
 		B05D50051AA7E99F006AEFA4 /* HelpImage_SetupButton.png in Resources */ = {isa = PBXBuildFile; fileRef = B05D50041AA7E99F006AEFA4 /* HelpImage_SetupButton.png */; };
 		B05D50071AA7EDD9006AEFA4 /* HelpImage_MultiwatchSetup.png in Resources */ = {isa = PBXBuildFile; fileRef = B05D50061AA7EDD9006AEFA4 /* HelpImage_MultiwatchSetup.png */; };
 		B05D50091AA7F0E3006AEFA4 /* HelpImage_HistoryOverview.png in Resources */ = {isa = PBXBuildFile; fileRef = B05D50081AA7F0E3006AEFA4 /* HelpImage_HistoryOverview.png */; };
 		B05D500D1AA7F2A9006AEFA4 /* HelpImage_HistoryFilterTabBar.png in Resources */ = {isa = PBXBuildFile; fileRef = B05D500C1AA7F2A9006AEFA4 /* HelpImage_HistoryFilterTabBar.png */; };
-		B05D500F1AA7F5DC006AEFA4 /* HelpImage_SplitDetailView.png in Resources */ = {isa = PBXBuildFile; fileRef = B05D500E1AA7F5DC006AEFA4 /* HelpImage_SplitDetailView.png */; };
 		B05D50111AA7F7C9006AEFA4 /* HelpImage_EmailComposer.png in Resources */ = {isa = PBXBuildFile; fileRef = B05D50101AA7F7C9006AEFA4 /* HelpImage_EmailComposer.png */; };
 		B05D50131AA80A8A006AEFA4 /* HelpImage_SplitEditView.png in Resources */ = {isa = PBXBuildFile; fileRef = B05D50121AA80A8A006AEFA4 /* HelpImage_SplitEditView.png */; };
 		B05D50151AA80DA4006AEFA4 /* HelpImage_SplitEditView2.png in Resources */ = {isa = PBXBuildFile; fileRef = B05D50141AA80DA4006AEFA4 /* HelpImage_SplitEditView2.png */; };
@@ -96,6 +91,12 @@
 		B084FABF1136B13F008C4B00 /* splitwatch.png in Resources */ = {isa = PBXBuildFile; fileRef = B084FABD1136B13F008C4B00 /* splitwatch.png */; };
 		B084FD4911383A41008C4B00 /* AboutView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B084FD4711383A41008C4B00 /* AboutView.xib */; };
 		B08EE48210B0ADBC00CAE9FB /* MultiStopwatchTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B08EE48110B0ADBC00CAE9FB /* MultiStopwatchTableViewController.m */; };
+		B090500E1D528B1100D7BAD6 /* HelpImage_SplitDetailView_2.3.png in Resources */ = {isa = PBXBuildFile; fileRef = B090500D1D528B1100D7BAD6 /* HelpImage_SplitDetailView_2.3.png */; };
+		B09050101D528F0B00D7BAD6 /* HelpImage_ReportSetup_2.3.png in Resources */ = {isa = PBXBuildFile; fileRef = B090500F1D528F0B00D7BAD6 /* HelpImage_ReportSetup_2.3.png */; };
+		B09050121D529A6900D7BAD6 /* HelpImage_SplitwatchTop_2.3.png in Resources */ = {isa = PBXBuildFile; fileRef = B09050111D529A6900D7BAD6 /* HelpImage_SplitwatchTop_2.3.png */; };
+		B09050141D52A2DA00D7BAD6 /* HelpImage_SplitwatchBottom_2.3.png in Resources */ = {isa = PBXBuildFile; fileRef = B09050131D52A2DA00D7BAD6 /* HelpImage_SplitwatchBottom_2.3.png */; };
+		B09050161D52A78B00D7BAD6 /* HelpImage_MultiwatchTop_2.3.png in Resources */ = {isa = PBXBuildFile; fileRef = B09050151D52A78B00D7BAD6 /* HelpImage_MultiwatchTop_2.3.png */; };
+		B09050181D52AE9E00D7BAD6 /* HelpImage_MultiwatchCell_2.3.png in Resources */ = {isa = PBXBuildFile; fileRef = B09050171D52AE9E00D7BAD6 /* HelpImage_MultiwatchCell_2.3.png */; };
 		B093FC2F10B4001300535F70 /* Stopwatch.m in Sources */ = {isa = PBXBuildFile; fileRef = B093FC2E10B4001300535F70 /* Stopwatch.m */; };
 		B097C90A11225FE900C478BC /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B097C90911225FE900C478BC /* libsqlite3.0.dylib */; };
 		B099086B1A76D63100ACF6D7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B099086A1A76D63100ACF6D7 /* Images.xcassets */; };
@@ -167,15 +168,10 @@
 		B05D4FF21AA77D86006AEFA4 /* launch_640_1136.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launch_640_1136.png; sourceTree = "<group>"; };
 		B05D4FF41AA77EFC006AEFA4 /* launch_750_1334.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launch_750_1334.png; sourceTree = "<group>"; };
 		B05D4FF61AA77FA3006AEFA4 /* launch_1242_2208.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launch_1242_2208.png; sourceTree = "<group>"; };
-		B05D4FFC1AA7D9AF006AEFA4 /* HelpImage_SplitwatchTop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HelpImage_SplitwatchTop.png; sourceTree = "<group>"; };
-		B05D4FFE1AA7DBAB006AEFA4 /* HelpImage_SplitwatchBottom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HelpImage_SplitwatchBottom.png; sourceTree = "<group>"; };
-		B05D50001AA7E2D3006AEFA4 /* HelpImage_MultiwatchTop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HelpImage_MultiwatchTop.png; sourceTree = "<group>"; };
-		B05D50021AA7E765006AEFA4 /* HelpImage_MultiwatchCell.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HelpImage_MultiwatchCell.png; sourceTree = "<group>"; };
 		B05D50041AA7E99F006AEFA4 /* HelpImage_SetupButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HelpImage_SetupButton.png; sourceTree = "<group>"; };
 		B05D50061AA7EDD9006AEFA4 /* HelpImage_MultiwatchSetup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HelpImage_MultiwatchSetup.png; sourceTree = "<group>"; };
 		B05D50081AA7F0E3006AEFA4 /* HelpImage_HistoryOverview.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HelpImage_HistoryOverview.png; sourceTree = "<group>"; };
 		B05D500C1AA7F2A9006AEFA4 /* HelpImage_HistoryFilterTabBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HelpImage_HistoryFilterTabBar.png; sourceTree = "<group>"; };
-		B05D500E1AA7F5DC006AEFA4 /* HelpImage_SplitDetailView.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HelpImage_SplitDetailView.png; sourceTree = "<group>"; };
 		B05D50101AA7F7C9006AEFA4 /* HelpImage_EmailComposer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HelpImage_EmailComposer.png; sourceTree = "<group>"; };
 		B05D50121AA80A8A006AEFA4 /* HelpImage_SplitEditView.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HelpImage_SplitEditView.png; sourceTree = "<group>"; };
 		B05D50141AA80DA4006AEFA4 /* HelpImage_SplitEditView2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HelpImage_SplitEditView2.png; sourceTree = "<group>"; };
@@ -230,6 +226,12 @@
 		B084FE2811386D9B008C4B00 /* Splitwatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Splitwatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B08EE48010B0ADBC00CAE9FB /* MultiStopwatchTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiStopwatchTableViewController.h; sourceTree = "<group>"; };
 		B08EE48110B0ADBC00CAE9FB /* MultiStopwatchTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultiStopwatchTableViewController.m; sourceTree = "<group>"; };
+		B090500D1D528B1100D7BAD6 /* HelpImage_SplitDetailView_2.3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HelpImage_SplitDetailView_2.3.png; sourceTree = "<group>"; };
+		B090500F1D528F0B00D7BAD6 /* HelpImage_ReportSetup_2.3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HelpImage_ReportSetup_2.3.png; sourceTree = "<group>"; };
+		B09050111D529A6900D7BAD6 /* HelpImage_SplitwatchTop_2.3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HelpImage_SplitwatchTop_2.3.png; sourceTree = "<group>"; };
+		B09050131D52A2DA00D7BAD6 /* HelpImage_SplitwatchBottom_2.3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HelpImage_SplitwatchBottom_2.3.png; sourceTree = "<group>"; };
+		B09050151D52A78B00D7BAD6 /* HelpImage_MultiwatchTop_2.3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HelpImage_MultiwatchTop_2.3.png; sourceTree = "<group>"; };
+		B09050171D52AE9E00D7BAD6 /* HelpImage_MultiwatchCell_2.3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HelpImage_MultiwatchCell_2.3.png; sourceTree = "<group>"; };
 		B093FC2D10B4001300535F70 /* Stopwatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Stopwatch.h; sourceTree = "<group>"; };
 		B093FC2E10B4001300535F70 /* Stopwatch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Stopwatch.m; sourceTree = "<group>"; };
 		B097C90911225FE900C478BC /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
@@ -393,15 +395,16 @@
 				B05D50141AA80DA4006AEFA4 /* HelpImage_SplitEditView2.png */,
 				B05D50121AA80A8A006AEFA4 /* HelpImage_SplitEditView.png */,
 				B05D50101AA7F7C9006AEFA4 /* HelpImage_EmailComposer.png */,
-				B05D500E1AA7F5DC006AEFA4 /* HelpImage_SplitDetailView.png */,
+				B090500D1D528B1100D7BAD6 /* HelpImage_SplitDetailView_2.3.png */,
+				B090500F1D528F0B00D7BAD6 /* HelpImage_ReportSetup_2.3.png */,
 				B05D500C1AA7F2A9006AEFA4 /* HelpImage_HistoryFilterTabBar.png */,
 				B05D50081AA7F0E3006AEFA4 /* HelpImage_HistoryOverview.png */,
 				B05D50061AA7EDD9006AEFA4 /* HelpImage_MultiwatchSetup.png */,
 				B05D50041AA7E99F006AEFA4 /* HelpImage_SetupButton.png */,
-				B05D50021AA7E765006AEFA4 /* HelpImage_MultiwatchCell.png */,
-				B05D50001AA7E2D3006AEFA4 /* HelpImage_MultiwatchTop.png */,
-				B05D4FFE1AA7DBAB006AEFA4 /* HelpImage_SplitwatchBottom.png */,
-				B05D4FFC1AA7D9AF006AEFA4 /* HelpImage_SplitwatchTop.png */,
+				B09050171D52AE9E00D7BAD6 /* HelpImage_MultiwatchCell_2.3.png */,
+				B09050151D52A78B00D7BAD6 /* HelpImage_MultiwatchTop_2.3.png */,
+				B09050131D52A2DA00D7BAD6 /* HelpImage_SplitwatchBottom_2.3.png */,
+				B09050111D529A6900D7BAD6 /* HelpImage_SplitwatchTop_2.3.png */,
 				B05D4FF61AA77FA3006AEFA4 /* launch_1242_2208.png */,
 				B05D4FF41AA77EFC006AEFA4 /* launch_750_1334.png */,
 				B05D4FF21AA77D86006AEFA4 /* launch_640_1136.png */,
@@ -533,12 +536,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B090500E1D528B1100D7BAD6 /* HelpImage_SplitDetailView_2.3.png in Resources */,
 				B0A2CDEB1AAC9AE5005A7F1D /* multiwatch@2x.png in Resources */,
+				B09050181D52AE9E00D7BAD6 /* HelpImage_MultiwatchCell_2.3.png in Resources */,
 				28AD73880D9D96C1002E5188 /* MainWindow.xib in Resources */,
 				B099086B1A76D63100ACF6D7 /* Images.xcassets in Resources */,
 				B05D4FF51AA77EFC006AEFA4 /* launch_750_1334.png in Resources */,
-				B05D4FFF1AA7DBAB006AEFA4 /* HelpImage_SplitwatchBottom.png in Resources */,
 				B076FC3910A5DAE600E60196 /* EventDetail.xib in Resources */,
+				B09050121D529A6900D7BAD6 /* HelpImage_SplitwatchTop_2.3.png in Resources */,
 				B05D4FB21AA67C9B006AEFA4 /* settings02.png in Resources */,
 				B077DEC21AA64F7C00C57164 /* wrench13.png in Resources */,
 				B05D502E1AA8AF59006AEFA4 /* Icon_3_40.png in Resources */,
@@ -552,6 +557,7 @@
 				B05D50381AA8AF59006AEFA4 /* Icon_3_114.png in Resources */,
 				B05D4FF71AA77FA3006AEFA4 /* launch_1242_2208.png in Resources */,
 				9828E0A210B9C756001CB672 /* HistoryCell.xib in Resources */,
+				B09050161D52A78B00D7BAD6 /* HelpImage_MultiwatchTop_2.3.png in Resources */,
 				B05D503A1AA8AF59006AEFA4 /* Icon_3_144.png in Resources */,
 				B05D50051AA7E99F006AEFA4 /* HelpImage_SetupButton.png in Resources */,
 				B05D50151AA80DA4006AEFA4 /* HelpImage_SplitEditView2.png in Resources */,
@@ -565,19 +571,18 @@
 				B02360D51D2EE08600C6C4F8 /* MultiwatchCell.xib in Resources */,
 				B05D50091AA7F0E3006AEFA4 /* HelpImage_HistoryOverview.png in Resources */,
 				B084FABE1136B13F008C4B00 /* multiwatch.png in Resources */,
-				B05D500F1AA7F5DC006AEFA4 /* HelpImage_SplitDetailView.png in Resources */,
 				B05D502D1AA8AF59006AEFA4 /* Icon_3_29.png in Resources */,
 				B084FABF1136B13F008C4B00 /* splitwatch.png in Resources */,
 				B05D503C1AA8AF59006AEFA4 /* Icon_3_180.png in Resources */,
 				B0D23BE21D15CA0C00FADC30 /* logo_black_hires6.png in Resources */,
 				B05D500D1AA7F2A9006AEFA4 /* HelpImage_HistoryFilterTabBar.png in Resources */,
 				B05D50351AA8AF59006AEFA4 /* Icon_3_80.png in Resources */,
+				B09050101D528F0B00D7BAD6 /* HelpImage_ReportSetup_2.3.png in Resources */,
 				B021DA0B1D244362008335DF /* ReportSelectorCell.xib in Resources */,
 				B084FD4911383A41008C4B00 /* AboutView.xib in Resources */,
 				B05D4FF11AA77C42006AEFA4 /* launch_640_960.png in Resources */,
 				B05D50071AA7EDD9006AEFA4 /* HelpImage_MultiwatchSetup.png in Resources */,
 				B05D50371AA8AF59006AEFA4 /* Icon_3_100.png in Resources */,
-				B05D50031AA7E765006AEFA4 /* HelpImage_MultiwatchCell.png in Resources */,
 				B025ECD61139F887000EE205 /* Help_History.html in Resources */,
 				B025ECD71139F887000EE205 /* Help_Multiwatch.html in Resources */,
 				B05D50361AA8AF59006AEFA4 /* Icon_3_87.png in Resources */,
@@ -591,7 +596,7 @@
 				B025ECD91139F887000EE205 /* Help_Splitwatch.html in Resources */,
 				B05D503E1AA8AF59006AEFA4 /* Icon_3_512.png in Resources */,
 				B05D50331AA8AF59006AEFA4 /* Icon_3_72.png in Resources */,
-				B05D50011AA7E2D3006AEFA4 /* HelpImage_MultiwatchTop.png in Resources */,
+				B09050141D52A2DA00D7BAD6 /* HelpImage_SplitwatchBottom_2.3.png in Resources */,
 				B05D50131AA80A8A006AEFA4 /* HelpImage_SplitEditView.png in Resources */,
 				B05D503B1AA8AF59006AEFA4 /* Icon_3_152.png in Resources */,
 				B019A4521A8026CC0032405A /* MultiStopwatchSetupViewController.xib in Resources */,
@@ -604,7 +609,6 @@
 				B05D50321AA8AF59006AEFA4 /* Icon_3_60.png in Resources */,
 				B05D50171AA80F48006AEFA4 /* HelpImage_SettingsOverview_2.png in Resources */,
 				B05D502F1AA8AF59006AEFA4 /* Icon_3_50.png in Resources */,
-				B05D4FFD1AA7D9AF006AEFA4 /* HelpImage_SplitwatchTop.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
