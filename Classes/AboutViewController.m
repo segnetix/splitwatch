@@ -42,7 +42,7 @@ static sqlite3_stmt *delete_statement = nil;
     [bottomSeparatorImageView release];
     
 	// display version
-	versionLabel.text = [NSString stringWithFormat:@"v%@",[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"]];
+	versionLabel.text = [NSString stringWithFormat:@"v%@",[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"]];
 }
 
 - (void)dealloc
