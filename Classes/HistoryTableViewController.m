@@ -234,7 +234,7 @@
 			appDelegate = (StopwatchAppDelegate *)[[UIApplication sharedApplication] delegate];
             
             [eventInfoArray release];
-			eventInfoArray = [appDelegate getEventInfoArrayBasedOnSelection:filterSelection withFilter:filterClause];
+			eventInfoArray = [[appDelegate getEventInfoArrayBasedOnSelection:filterSelection withFilter:filterClause] retain];
 			
 			// clear and refill tableItems with selected events
 			[tableItems removeAllObjects];
@@ -285,7 +285,7 @@
 		NSString *filter = [tableItems objectAtIndex:indexPath.row];
         
         [eventInfoArray release];
-		eventInfoArray = [appDelegate getEventInfoArrayBasedOnSelection:filterSelection withFilter:filter];
+		eventInfoArray = [[appDelegate getEventInfoArrayBasedOnSelection:filterSelection withFilter:filter] retain];
 		
 		for (NSArray *eventInfo in eventInfoArray) {
 			// get the EventNum for this selection
