@@ -146,7 +146,7 @@
     [pickerToolbar release];
     
     // set the update compose button
-    UIBarButtonItem *emailButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"export.png"] style:UIBarButtonItemStylePlain target:self action:@selector(composeEmail:)];
+    UIBarButtonItem *emailButtonItem = [[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"export.png"] style:UIBarButtonItemStylePlain target:self action:@selector(composeEmail:)] autorelease];
     
     //UIBarButtonItem *emailButtonItem = [[[UIBarButtonItem alloc]
     //                                    initWithBarButtonSystemItem:UIBarButtonSystemItemCompose
