@@ -109,8 +109,7 @@
     [window makeKeyAndVisible];
     
 	// load click sound data
-	CFBundleRef mainBundle;
-	mainBundle = CFBundleGetMainBundle ();
+	CFBundleRef mainBundle = CFBundleGetMainBundle();
 	clickSoundFileURLRef = CFBundleCopyResourceURL(mainBundle, CFSTR("Tink"), CFSTR("wav"), NULL);
 	AudioServicesCreateSystemSoundID(clickSoundFileURLRef, &clickSoundID);
 	
