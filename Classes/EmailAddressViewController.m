@@ -35,7 +35,6 @@
 		label.backgroundColor = [UIColor clearColor];
 		label.textColor = [UIColor blackColor];
         label.translatesAutoresizingMaskIntoConstraints = NO;
-        //label.tag = @"label";
 		
 		// Add contact button
 		button = [[UIButton buttonWithType:UIButtonTypeContactAdd] retain];
@@ -44,7 +43,6 @@
 		button.backgroundColor = [UIColor clearColor];
 		[button addTarget:self action:@selector(addContact:) forControlEvents:UIControlEventTouchUpInside];
         button.translatesAutoresizingMaskIntoConstraints = NO;
-        //button.tag = @"button";
 		
 		// emailTextField
 		//emailTextField = [[UITextField alloc] initWithFrame:CGRectMake(20, 62, 280, 31)];
@@ -59,7 +57,6 @@
 		emailTextField.clearsOnBeginEditing = YES;
 		emailTextField.clearButtonMode = UITextFieldViewModeAlways;
         emailTextField.translatesAutoresizingMaskIntoConstraints = NO;
-        //emailTextField.tag = @"emailTextField";
 		
         // emailAddressTableViewController
 		emailAddressTableViewController = [[EmailAddressTableViewController alloc] initWithEmailAddressViewController:self];
@@ -134,16 +131,8 @@
 
 - (void)dealloc
 {
-	//[emailAddressTableViewController release];
-    /*
-    [emailTextField release];
-    [button release];
-    [label release];
-    
-    emailTextField = nil;
-    button = nil;
-    label = nil;
-     */
+	[emailAddressTableViewController release];
+    emailAddressTableViewController = nil;
     
     [super dealloc];
 }

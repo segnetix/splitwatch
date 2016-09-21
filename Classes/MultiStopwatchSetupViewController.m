@@ -116,6 +116,9 @@ static CGFloat kScrollZoneHeight = 40.0;
     [displayLink release];
     displayLink = nil;
     
+    [longPressGestureRecognizer release];
+    longPressGestureRecognizer = nil;
+    
     //[pickView release];
     pickView = nil;
     
@@ -160,13 +163,13 @@ static CGFloat kScrollZoneHeight = 40.0;
     pickerSeparatorImageView.hidden = YES;
     [pickerSeparatorImageView release];
     
-    UIBarButtonItem *pickerCancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
+    UIBarButtonItem *pickerCancelButton = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
                                                                                         target:self
-                                                                                        action:@selector(pickerCancel)];
+                                                                                        action:@selector(pickerCancel)] autorelease];
     
-    UIBarButtonItem *pickerAddButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
+    UIBarButtonItem *pickerAddButton = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
                                                                                      target:self
-                                                                                     action:@selector(pickerAdd)];
+                                                                                     action:@selector(pickerAdd)] autorelease];
     UIBarButtonItem *flexibleSpace = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil] autorelease];
     
     NSArray *items = [[[NSArray alloc] initWithObjects: flexibleSpace, pickerCancelButton, flexibleSpace, pickerAddButton, flexibleSpace, nil] autorelease];

@@ -56,7 +56,7 @@
 @property (nonatomic, retain) SplitHeaderView *splitHeader;
 @property (nonatomic, retain) IBOutlet SplitDetailViewController *splitDetailViewController;
 @property (nonatomic, assign) SettingsViewController *settingsViewController;
-@property (nonatomic, retain) IBOutlet UIPickerView *pickView;
+@property (nonatomic, assign) IBOutlet UIPickerView *pickView;
 @property (nonatomic, retain) IBOutlet UIToolbar *pickerToolbar;
 @property (nonatomic, retain) IBOutlet UIButton *pickAthleteButton;
 @property (nonatomic, retain) IBOutlet UIButton *pickEventButton;
