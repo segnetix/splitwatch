@@ -30,6 +30,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "-[SplitDetailCell setSelected:animated:]:SplitDetailCell.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "lapColumn.text">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "-[MultiStopwatchTableViewController tableView:numberOfRowsInSection:]:MultiStopwatchTableViewController.m">
          <PersistentStrings>
             <PersistentString
@@ -42,14 +50,6 @@
       </ContextState>
       <ContextState
          contextName = "-[MultiStopwatchTableViewController resetAllWatches]:MultiStopwatchTableViewController.m">
-      </ContextState>
-      <ContextState
-         contextName = "-[SplitDetailCell setSelected:animated:]:SplitDetailCell.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "lapColumn.text">
-            </PersistentString>
-         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "-[ReportSelectorViewController generateEmailReport]:ReportSelectorViewController.m">
@@ -96,13 +96,13 @@
          contextName = "-[HistoryTableViewController groupEventsBySelection:]:HistoryTableViewController.m">
          <PersistentStrings>
             <PersistentString
+               value = "filterSelection">
+            </PersistentString>
+            <PersistentString
                value = "eventGroupSelection">
             </PersistentString>
             <PersistentString
                value = "selection">
-            </PersistentString>
-            <PersistentString
-               value = "filterSelection">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -155,6 +155,29 @@
          contextName = "-[SplitEditViewController viewDidLoad]:SplitEditViewController.m">
       </ContextState>
       <ContextState
+         contextName = "-[EventDetailViewController dealloc]:EventDetailViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "splitHeader.retainCount">
+            </PersistentString>
+            <PersistentString
+               value = "runnerTextEdit.retainCount">
+            </PersistentString>
+            <PersistentString
+               value = "event.retainCount">
+            </PersistentString>
+            <PersistentString
+               value = "pickerDataArray.retainCount">
+            </PersistentString>
+            <PersistentString
+               value = "pickerToolbar.retainCount">
+            </PersistentString>
+            <PersistentString
+               value = "pickView.retainCount">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "-[ReportSelectorViewController getEventCount]:ReportSelectorViewController.m">
          <PersistentStrings>
             <PersistentString
@@ -164,10 +187,10 @@
                value = "self.athlete">
             </PersistentString>
             <PersistentString
-               value = "self.date">
+               value = "self.distance">
             </PersistentString>
             <PersistentString
-               value = "self.distance">
+               value = "self.date">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

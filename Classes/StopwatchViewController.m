@@ -60,39 +60,39 @@
         // init interface elements
         backgroundView = [[UIView alloc] initWithFrame:CGRectZero];
         backgroundView.translatesAutoresizingMaskIntoConstraints = NO;
-        backgroundView.tag = @"backgroundView";
+        //backgroundView.tag = @"backgroundView";
         
         runningTimeLabel = [[UILabel alloc] init];
         runningTimeLabel.translatesAutoresizingMaskIntoConstraints = NO;
-        runningTimeLabel.tag = @"runningTimeLabel";
+        //runningTimeLabel.tag = @"runningTimeLabel";
         
         lapTimeLabel = [[UILabel alloc] init];
         lapTimeLabel.translatesAutoresizingMaskIntoConstraints = NO;
-        lapTimeLabel.tag = @"lapTimeLabel";
+        //lapTimeLabel.tag = @"lapTimeLabel";
         
         lapCountLabel = [[UILabel alloc] init];
         lapCountLabel.translatesAutoresizingMaskIntoConstraints = NO;
-        lapCountLabel.tag = @"lapCountLabel";
+        //lapCountLabel.tag = @"lapCountLabel";
         
         intervalDistanceLabel = [[UILabel alloc] init];
         intervalDistanceLabel.translatesAutoresizingMaskIntoConstraints = NO;
-        intervalDistanceLabel.tag = @"intervalDistanceLabel";
+        //intervalDistanceLabel.tag = @"intervalDistanceLabel";
         
         splitHeader = [[SplitHeaderView alloc] init];
         splitHeader.translatesAutoresizingMaskIntoConstraints = NO;
-        splitHeader.tag = @"splitHeader";
+        //splitHeader.tag = @"splitHeader";
         
         startStopButton = [[UIButton buttonWithType:UIButtonTypeCustom] retain];
         startStopButton.translatesAutoresizingMaskIntoConstraints = NO;
-        startStopButton.tag = @"startStopButton";
+        //startStopButton.tag = @"startStopButton";
         
         lapResetButton = [[UIButton buttonWithType:UIButtonTypeCustom] retain];
         lapResetButton.translatesAutoresizingMaskIntoConstraints = NO;
-        lapResetButton.tag = @"lapResetButton";
+        //lapResetButton.tag = @"lapResetButton";
         
         clearToggleButton = [[UIButton buttonWithType:UIButtonTypeCustom] retain];
         clearToggleButton.translatesAutoresizingMaskIntoConstraints = NO;
-        clearToggleButton.tag = @"clearToggleButton";
+        //clearToggleButton.tag = @"clearToggleButton";
         
         UIImage *separatorImage = [UIImage imageNamed:@"separator_dark_gray.png"];
         topSeparatorImageView = [[UIImageView alloc] initWithImage:separatorImage];
@@ -133,7 +133,22 @@
 - (void)dealloc
 {
     [backgroundView release];
+    [topSeparatorImageView release];
+    [clearToggleButton release];
+    [middleSeparatorImageView release];
+    [bottomSeparatorImageView release];
+    [lapFreezeTimer release];
     [GREEN_COLOR release];
+    [RED_COLOR release];
+    
+    backgroundView = nil;
+    topSeparatorImageView = nil;
+    clearToggleButton = nil;
+    middleSeparatorImageView = nil;
+    bottomSeparatorImageView = nil;
+    lapFreezeTimer = nil;
+    GREEN_COLOR = nil;
+    RED_COLOR = nil;
     
     [super dealloc];
 }
@@ -144,7 +159,7 @@
     
     // AutoLayout setup
     UIView* splitDetailView = splitDetailViewController.view;
-    splitDetailView.tag = @"splitDetailView";
+    //splitDetailView.tag = @"splitDetailView";
     NSDictionary *views = NSDictionaryOfVariableBindings(backgroundView, runningTimeLabel, clearToggleButton, lapTimeLabel, lapCountLabel, intervalDistanceLabel, startStopButton, lapResetButton, topSeparatorImageView, middleSeparatorImageView, bottomSeparatorImageView, splitHeader, splitDetailView);
     
     // backgroundImageView
@@ -263,13 +278,13 @@
     // startStopButton
     if (bTimerRunning)
     {
-        [startStopButton setTitle:@"Stop" forState:UIControlStateNormal];
+        [startStopButton setTitle:NSLocalizedString(@"Stop", nil) forState:UIControlStateNormal];
         [startStopButton setTitleColor:RED_COLOR forState:UIControlStateNormal];
         startStopButton.layer.borderColor = RED_COLOR.CGColor;
     }
     else
     {
-        [startStopButton setTitle:@"Start" forState:UIControlStateNormal];
+        [startStopButton setTitle:NSLocalizedString(@"Start", nil) forState:UIControlStateNormal];
         [startStopButton setTitleColor:GREEN_COLOR forState:UIControlStateNormal];
         startStopButton.layer.borderColor = GREEN_COLOR.CGColor;
     }
@@ -299,7 +314,7 @@
     [lapResetButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [lapResetButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateHighlighted];
     [lapResetButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateDisabled];
-    [lapResetButton setTitle:@"Lap" forState:UIControlStateNormal];
+    [lapResetButton setTitle:NSLocalizedString(@"Lap", nil) forState:UIControlStateNormal];
     lapResetButton.layer.borderColor = [UIColor blackColor].CGColor;
     [lapResetButton addTarget:self action:@selector(lapResetButtonPressed) forControlEvents:UIControlEventTouchDown];
     lapResetButton.showsTouchWhenHighlighted = NO;
@@ -427,7 +442,7 @@
     
     // update button states
     //[startStopButton setBackgroundImage:stopButtonImage forState:UIControlStateNormal];
-    [startStopButton setTitle:@"Stop" forState:UIControlStateNormal];
+    [startStopButton setTitle:NSLocalizedString(@"Stop", nil) forState:UIControlStateNormal];
     [startStopButton setTitleColor:RED_COLOR forState:UIControlStateNormal];
     startStopButton.layer.borderColor = RED_COLOR.CGColor;
     
@@ -540,14 +555,14 @@
         
         // enable the start button
         //[startStopButton setBackgroundImage:startButtonImage forState:UIControlStateNormal];
-        [startStopButton setTitle:@"Start" forState:UIControlStateNormal];
+        [startStopButton setTitle:NSLocalizedString(@"Start", nil) forState:UIControlStateNormal];
         [startStopButton setTitleColor:GREEN_COLOR forState:UIControlStateNormal];
         startStopButton.layer.borderColor = GREEN_COLOR.CGColor;
         [startStopButton setEnabled:YES];
         
         // set the lap button state
         //[lapResetButton setBackgroundImage:lapButtonImage forState:UIControlStateNormal];
-        [lapResetButton setTitle:@"Lap" forState:UIControlStateNormal];
+        [lapResetButton setTitle:NSLocalizedString(@"Lap", nil) forState:UIControlStateNormal];
         
         lapCount = 0;
         lapTime = 0;
@@ -605,15 +620,15 @@
     {
         switch (intervalDistance)
         {
-            case 220:	intervalDistanceLabel.text = @"1/8";	break;
-            case 440:	intervalDistanceLabel.text = @"1/4";	break;
+            case 220:	intervalDistanceLabel.text = NSLocalizedString(@"1/8", nil);	break;
+            case 440:	intervalDistanceLabel.text = NSLocalizedString(@"1/4", nil);	break;
             default:	break;
         }
     }
     else if (iUnits == kEnglish)
         intervalDistanceLabel.text = [NSString stringWithFormat:@"%ldy", (long)intervalDistance];
     else if (iUnits == kLap)
-        intervalDistanceLabel.text = @"Lap";
+        intervalDistanceLabel.text = NSLocalizedString(@"Lap", nil);
 }
 
 - (void)updateTimeDisplays
@@ -666,30 +681,30 @@
     if (bTimerRunning)
     {
         [startStopButton setEnabled:YES];
-        [startStopButton setTitle:@"Stop" forState:UIControlStateNormal];
+        [startStopButton setTitle:NSLocalizedString(@"Stop", nil) forState:UIControlStateNormal];
         [startStopButton setTitleColor:RED_COLOR forState:UIControlStateNormal];
         startStopButton.layer.borderColor = RED_COLOR.CGColor;
-        [lapResetButton setTitle:@"Lap" forState:UIControlStateNormal];
+        [lapResetButton setTitle:NSLocalizedString(@"Lap", nil) forState:UIControlStateNormal];
     }
     else
     {
         if (lapCount > 0)
         {
             [startStopButton setEnabled:NO];
-            [startStopButton setTitle:@"Stop" forState:UIControlStateNormal];
+            [startStopButton setTitle:NSLocalizedString(@"Stop", nil) forState:UIControlStateNormal];
             [startStopButton setTitleColor:RED_COLOR forState:UIControlStateNormal];
             startStopButton.layer.borderColor = [UIColor lightGrayColor].CGColor;
             
             [lapResetButton setEnabled:YES];
-            [lapResetButton setTitle:@"Reset" forState:UIControlStateNormal];
+            [lapResetButton setTitle:NSLocalizedString(@"Reset", nil) forState:UIControlStateNormal];
         }
         else
         {
             [startStopButton setEnabled:YES];
-            [startStopButton setTitle:@"Start" forState:UIControlStateNormal];
+            [startStopButton setTitle:NSLocalizedString(@"Start", nil) forState:UIControlStateNormal];
             [startStopButton setTitleColor:GREEN_COLOR forState:UIControlStateNormal];
             startStopButton.layer.borderColor = GREEN_COLOR.CGColor;
-            [lapResetButton setTitle:@"Lap" forState:UIControlStateNormal];
+            [lapResetButton setTitle:NSLocalizedString(@"Lap", nil) forState:UIControlStateNormal];
         }
         
         [lapResetButton setEnabled:YES];

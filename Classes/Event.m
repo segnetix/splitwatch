@@ -216,7 +216,7 @@ static sqlite3_stmt *delete_split_statement = nil;
 	
 	if (success != SQLITE_ERROR)
 	{
-		eventNum = sqlite3_last_insert_rowid(database);
+		eventNum = (int)sqlite3_last_insert_rowid(database);
 	}
 	else
 	{

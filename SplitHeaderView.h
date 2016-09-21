@@ -18,12 +18,12 @@
     UILabel *splitColumn4;
 }
 
-@property (nonatomic, retain) IBOutlet UILabel *lapColumn;
-@property (nonatomic, retain) IBOutlet UILabel *timeColumn;
-@property (nonatomic, retain) IBOutlet UILabel *splitColumn1;
-@property (nonatomic, retain) IBOutlet UILabel *splitColumn2;
-@property (nonatomic, retain) IBOutlet UILabel *splitColumn3;
-@property (nonatomic, retain) IBOutlet UILabel *splitColumn4;
+@property (nonatomic, assign) IBOutlet UILabel *lapColumn;
+@property (nonatomic, assign) IBOutlet UILabel *timeColumn;
+@property (nonatomic, assign) IBOutlet UILabel *splitColumn1;
+@property (nonatomic, assign) IBOutlet UILabel *splitColumn2;
+@property (nonatomic, assign) IBOutlet UILabel *splitColumn3;
+@property (nonatomic, assign) IBOutlet UILabel *splitColumn4;
 
 - (void)setup;
 - (void)setTextWithArray:(NSMutableArray*)textArray;

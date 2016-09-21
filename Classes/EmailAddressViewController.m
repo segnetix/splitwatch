@@ -31,11 +31,11 @@
 		// label
 		//label = [[UILabel alloc] initWithFrame:CGRectMake(20, 18, 226, 24)];
         label = [[UILabel alloc] initWithFrame:CGRectZero];
-		label.text = @"Add contacts to email list:";
+		label.text = NSLocalizedString(@"Add contacts to email list:", nil);
 		label.backgroundColor = [UIColor clearColor];
 		label.textColor = [UIColor blackColor];
         label.translatesAutoresizingMaskIntoConstraints = NO;
-        label.tag = @"label";
+        //label.tag = @"label";
 		
 		// Add contact button
 		button = [[UIButton buttonWithType:UIButtonTypeContactAdd] retain];
@@ -44,7 +44,7 @@
 		button.backgroundColor = [UIColor clearColor];
 		[button addTarget:self action:@selector(addContact:) forControlEvents:UIControlEventTouchUpInside];
         button.translatesAutoresizingMaskIntoConstraints = NO;
-        button.tag = @"button";
+        //button.tag = @"button";
 		
 		// emailTextField
 		//emailTextField = [[UITextField alloc] initWithFrame:CGRectMake(20, 62, 280, 31)];
@@ -59,7 +59,7 @@
 		emailTextField.clearsOnBeginEditing = YES;
 		emailTextField.clearButtonMode = UITextFieldViewModeAlways;
         emailTextField.translatesAutoresizingMaskIntoConstraints = NO;
-        emailTextField.tag = @"emailTextField";
+        //emailTextField.tag = @"emailTextField";
 		
         // emailAddressTableViewController
 		emailAddressTableViewController = [[EmailAddressTableViewController alloc] initWithEmailAddressViewController:self];
@@ -67,7 +67,7 @@
         emailAddressTableViewController.view.backgroundColor = [UIColor clearColor];
         emailAddressTableViewController.view.translatesAutoresizingMaskIntoConstraints = NO;
 
-		self.navigationItem.title = @"Email Setup";
+		self.navigationItem.title = NSLocalizedString(@"Email Setup", nil);
     }
 	
     return self;
@@ -94,7 +94,7 @@
     [self.view addSubview:emailAddressTableViewController.view];
     
     UIView* emailAddressTable = emailAddressTableViewController.view;
-    emailAddressTable.tag = @"emailAddressTable";
+    //emailAddressTable.tag = @"emailAddressTable";
 
     UIImage *separatorImage = [UIImage imageNamed:@"separator_dark_gray.png"];
     UIImageView *topSeparatorImageView = [[UIImageView alloc] initWithImage:separatorImage];
@@ -134,7 +134,16 @@
 
 - (void)dealloc
 {
-	[emailAddressTableViewController release];
+	//[emailAddressTableViewController release];
+    /*
+    [emailTextField release];
+    [button release];
+    [label release];
+    
+    emailTextField = nil;
+    button = nil;
+    label = nil;
+     */
     
     [super dealloc];
 }

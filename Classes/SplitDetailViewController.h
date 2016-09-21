@@ -17,6 +17,7 @@
 {
 	NSMutableArray *splits;
 	NSInteger intervalDistance;
+    Event *event;
 
 	int  iUnits;
 	BOOL bKiloSplits;

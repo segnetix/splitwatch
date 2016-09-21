@@ -28,7 +28,7 @@
 }
 
 @property (nonatomic, retain) UITextField *emailTextField;
-@property (nonatomic, assign) EmailAddressTableViewController *emailAddressTableViewController;
+@property (nonatomic, retain) EmailAddressTableViewController *emailAddressTableViewController;
 //@property (nonatomic, retain) ABPeoplePickerNavigationController *peoplePickerController;
 @property (assign) NSMutableArray *emailAddressItems;
 @property (nonatomic, assign) StopwatchAppDelegate *appDelegate;

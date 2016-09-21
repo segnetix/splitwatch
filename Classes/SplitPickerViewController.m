@@ -58,7 +58,7 @@
     self.pickView.backgroundColor = [UIColor whiteColor];
     
     // Do any additional setup after loading the view from its nib.
-    self.navigationItem.title = @"Split Edit";
+    self.navigationItem.title = NSLocalizedString(@"Split Edit", nil);
     
     UIImage *separatorImage = [UIImage imageNamed:@"separator_dark_gray.png"];
     UIImageView *topSeparatorImageView = [[UIImageView alloc] initWithImage:separatorImage];
@@ -179,8 +179,8 @@
     double beforeTime = 0.0;
     double afterTime = 0.0;
     
-    beforeLabel.text = @"---";
-    afterLabel.text  = @"---";
+    beforeLabel.text = NSLocalizedString(@"---", nil);
+    afterLabel.text  = NSLocalizedString(@"---", nil);
     //editLabel.text   = [NSString stringWithFormat:@"Split %ld", (long)pickerSplitIndex+1];
     editLabel.text = [Utilities lapTextForRow:pickerSplitIndex forDisplayMode:kDisplayMode_Normal forSplits:event.splitArray forIntervalDistance:event.lapDistance forUnits:event.iEventType forFurlongMode:event.bFurlongMode];
     
@@ -215,8 +215,8 @@
     }
     else
     {
-        beforeSplitLabel.text = @"---";
-        beforeTimeLabel.text  = @"---";
+        beforeSplitLabel.text = NSLocalizedString(@"---", nil);
+        beforeTimeLabel.text  = NSLocalizedString(@"---", nil);
     }
     
     if (afterSplit > 0)
@@ -226,14 +226,14 @@
     }
     else
     {
-        afterSplitLabel.text = @"---";
-        afterTimeLabel.text  = @"---";
+        afterSplitLabel.text = NSLocalizedString(@"---", nil);
+        afterTimeLabel.text  = NSLocalizedString(@"---", nil);
     }
     
     if (editSplit > 0)
         editSplitLabel.text = [Utilities shortFormatTime:editSplit precision:2];
     else
-        editSplitLabel.text = @"---";
+        editSplitLabel.text = NSLocalizedString(@"---", nil);
     
     editTimeLabel.text = [Utilities shortFormatTime:editTime precision:2];
 }
@@ -275,7 +275,7 @@
             message = @"The new split time is greater than the next split.  Use 'Insert Split' to create a new split outside this range.";
         
         // split time is not valid
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Split time is not valid!"
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Split time is not valid!", nil)
                                                             message:message
                                                            delegate:self
                                                   cancelButtonTitle:@"OK"
@@ -294,7 +294,7 @@
     //[appDelegate playClickSound];
     
     // are you sure you want to delete?
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Delete the selected split?"
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Delete the selected split?", nil)
                                                         message:@""
                                                        delegate:self
                                               cancelButtonTitle:@"Cancel"
@@ -403,6 +403,17 @@
     [pickView release];
     [pickerToolbar1 release];
     [pickerToolbar2 release];
+    [afterSplitLabel release];
+    [editLabel release];
+    [afterLabel release];
+    
+    pickView = nil;
+    pickerToolbar1 = nil;
+    pickerToolbar2 = nil;
+    afterSplitLabel = nil;
+    editLabel = nil;
+    afterLabel = nil;
+    
     [super dealloc];
 }
 @end

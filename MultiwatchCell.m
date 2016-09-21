@@ -42,7 +42,7 @@
     completedDistanceTime.text = @"";
     
     // startStop button
-    [startStopButton setTitle:@"Start" forState:UIControlStateNormal];
+    [startStopButton setTitle:NSLocalizedString(@"Start", nil) forState:UIControlStateNormal];
     [startStopButton setTitleColor:GREEN_COLOR forState:UIControlStateNormal];
     [startStopButton setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
     [startStopButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateDisabled];
@@ -63,7 +63,7 @@
     [lapResetButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [lapResetButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateHighlighted];
     [lapResetButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateDisabled];
-    [lapResetButton setTitle:@"Lap" forState:UIControlStateNormal];
+    [lapResetButton setTitle:NSLocalizedString(@"Lap", nil) forState:UIControlStateNormal];
     if (IPAD) {
         lapResetButton.titleLabel.font = [UIFont fontWithName:FONT_NAME size:32];
         lapResetButton.layer.borderWidth = 2.0f;
@@ -132,6 +132,11 @@
     [completedDistanceTime release];
     [backgroundView release];
     
+    [RED_COLOR release];
+    [GREEN_COLOR release];
+    [lapFreezeTimer release];
+    [watch release];
+    
     startStopButton = nil;
     lapResetButton = nil;
     runnersNameLabel = nil;
@@ -140,6 +145,10 @@
     completedDistanceLabel = nil;
     completedDistanceTime = nil;
     backgroundView = nil;
+    lapFreezeTimer = nil;
+    watch = nil;
+    RED_COLOR = nil;
+    GREEN_COLOR = nil;
     
     //[self removeObserver:self forKeyPath:@"lapCountLabel.frame"];
     [super dealloc];
@@ -278,30 +287,30 @@
     {
         [startStopButton setEnabled:YES];
         [lapResetButton setEnabled:YES];
-        [startStopButton setTitle:@"Stop" forState:UIControlStateNormal];
+        [startStopButton setTitle:NSLocalizedString(@"Stop", nil) forState:UIControlStateNormal];
         [startStopButton setTitleColor:RED_COLOR forState:UIControlStateNormal];
         startStopButton.layer.borderColor = RED_COLOR.CGColor;
-        [lapResetButton setTitle:@"Lap" forState:UIControlStateNormal];
+        [lapResetButton setTitle:NSLocalizedString(@"Lap", nil) forState:UIControlStateNormal];
     }
     else
     {
         if (watch.lapCount > 0)
         {
             [startStopButton setEnabled:NO];
-            [startStopButton setTitle:@"Stop" forState:UIControlStateNormal];
+            [startStopButton setTitle:NSLocalizedString(@"Stop", nil) forState:UIControlStateNormal];
             [startStopButton setTitleColor:RED_COLOR forState:UIControlStateNormal];
             startStopButton.layer.borderColor = [UIColor lightGrayColor].CGColor;
             
             [lapResetButton setEnabled:YES];
-            [lapResetButton setTitle:@"Reset" forState:UIControlStateNormal];
+            [lapResetButton setTitle:NSLocalizedString(@"Reset", nil) forState:UIControlStateNormal];
         }
         else
         {
             [startStopButton setEnabled:YES];
-            [startStopButton setTitle:@"Start" forState:UIControlStateNormal];
+            [startStopButton setTitle:NSLocalizedString(@"Start", nil) forState:UIControlStateNormal];
             [startStopButton setTitleColor:GREEN_COLOR forState:UIControlStateNormal];
             startStopButton.layer.borderColor = GREEN_COLOR.CGColor;
-            [lapResetButton setTitle:@"Lap" forState:UIControlStateNormal];
+            [lapResetButton setTitle:NSLocalizedString(@"Lap", nil) forState:UIControlStateNormal];
         }
         
         [lapResetButton setEnabled:YES];

@@ -35,11 +35,11 @@
 	
 	// Tab 4 - SettingsViewController (set up first so other view controllers can access settings on init)
 	UINavigationController *settingsNavigationController = [[UINavigationController alloc] init];
-	settingsNavigationController.title = @"Settings";
+	settingsNavigationController.title = NSLocalizedString(@"Settings", nil);
 	settingsNavigationController.navigationBar.barStyle = UIBarStyleBlack;
 	
 	settingsViewController = [[SettingsViewController alloc] init];
-    settingsViewController.title = @"Settings";
+    settingsViewController.title = NSLocalizedString(@"Settings", nil);
     settingsViewController.tabBarItem.image = [UIImage imageNamed:@"settings02.png"];
 	
 	// push on stack and release
@@ -47,14 +47,14 @@
 	
 	// Tab 3 - HistoryNavController
 	UINavigationController *historyNavigationController = [[UINavigationController alloc] init];
-	historyNavigationController.title = @"History";
+	historyNavigationController.title = NSLocalizedString(@"History", nil);
 	historyNavigationController.navigationBar.barStyle = UIBarStyleBlack;
 	
 	// push the HistoryViewController on the History Nav Controller stack
     HistoryViewController *historyViewController = [[HistoryViewController alloc]
                                                     initWithSettingsViewController:settingsViewController];
 	
-    historyViewController.title = @"History";
+    historyViewController.title = NSLocalizedString(@"History", nil);
     historyViewController.tabBarItem.image = [UIImage imageNamed:@"history03.png"];
 	
 	// this hides the "Root Level" back button in the historyViewController
@@ -67,7 +67,7 @@
 	stopwatchViewController = [[StopwatchViewController alloc]
 							   initWithSettingsViewController:settingsViewController];
 	
-	stopwatchViewController.title = @"Splitwatch";
+	stopwatchViewController.title = NSLocalizedString(@"Splitwatch", nil);
     stopwatchViewController.tabBarItem.image = [UIImage imageNamed:@"splitwatch.png"];
 	
 	// Tab 2 - MultiStopwatchViewController
@@ -75,7 +75,7 @@
     multiStopwatchViewController = [[MultiStopwatchViewController alloc]
                                     initWithSettingsViewController:settingsViewController];
     
-	multiStopwatchViewController.title = @"Multiwatch";
+	multiStopwatchViewController.title = NSLocalizedString(@"Multiwatch", nil);
     multiStopwatchNavigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
     multiStopwatchViewController.tabBarItem.image = [UIImage imageNamed:@"multiwatch.png"];
 	[multiStopwatchNavigationController pushViewController:multiStopwatchViewController animated:NO];
@@ -125,9 +125,17 @@
 {
     [tabBarController release];
     [window release];
+    [stopwatchViewController release];
+    [multiStopwatchViewController release];
+    [settingsViewController release];
+    [dbPath release];
 
 	AudioServicesDisposeSystemSoundID(self.clickSoundID);
     CFRelease(clickSoundFileURLRef);
+    stopwatchViewController = nil;
+    multiStopwatchViewController = nil;
+    settingsViewController = nil;
+    dbPath = nil;
 	
     [super dealloc];
 }

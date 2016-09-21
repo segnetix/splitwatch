@@ -60,16 +60,14 @@
 - (void)additionalSetup
 {
 	accDisclosureImage = [UIImage imageNamed:@"AccDisclosure.png"];
-	accImageView = [[UIImageView alloc] initWithImage:accDisclosureImage];
+	accImageView = [[[UIImageView alloc] initWithImage:accDisclosureImage] autorelease];
     accImageView.translatesAutoresizingMaskIntoConstraints = NO;
 	[self addSubview:accImageView];
-	[accImageView release];
 	
 	separatorImage = [UIImage imageNamed:@"separator.png"];
-	separatorImageView = [[UIImageView alloc] initWithImage:separatorImage];
+	separatorImageView = [[[UIImageView alloc] initWithImage:separatorImage] autorelease];
     separatorImageView.translatesAutoresizingMaskIntoConstraints = NO;
 	[self addSubview:separatorImageView];
-	[separatorImageView release];
     
     NSDictionary *views = NSDictionaryOfVariableBindings(accImageView, separatorImageView);
     

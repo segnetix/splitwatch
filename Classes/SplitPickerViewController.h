@@ -54,7 +54,6 @@
 - (void)setSplitTimeLabels:(double)editTime;
 - (void)setSplitTimeLabelsFromEvent;
 - (void)setSplitTimeLabelsFromPicker;
-- (void)setSplitTimeLabels:(double)editTime;
 - (IBAction)changeSplit:(id)sender;
 - (IBAction)deleteSplit:(id)sender;
 - (IBAction)insertSplit:(id)sender;

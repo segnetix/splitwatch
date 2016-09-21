@@ -64,17 +64,42 @@
 }
 
 - (void)dealloc
-{	
-	lapIntervalControl = nil;
-	unitsControl = nil;
-	kiloControl = nil;
+{
+    [emailAddressItems release];
+    [rootDataFilePath release];
+    [emailSetButton release];
+    [backgroundImageView release];
+    [touchUpStartControl release];
+    [aboutViewController release];
+    [lapIntervalControl release];
+    [furlongDisplayControl release];
+    [helpButton release];
+    [soundControl release];
+    [aboutButton release];
+    [lapDelayControl release];
+    [emailAddressViewController release];
+    [kiloControl release];
+    [touchUpLapControl release];
+    [unitsControl release];
+    [helpViewController release];
+    
+    emailAddressItems = nil;
+    rootDataFilePath = nil;
+    emailSetButton = nil;
+    backgroundImageView = nil;
+    touchUpStartControl = nil;
+    aboutViewController = nil;
+    lapIntervalControl = nil;
 	furlongDisplayControl = nil;
-	soundControl = nil;
-	lapDelayControl = nil;
-	touchUpStartControl = nil;
-	touchUpLapControl = nil;
-	
-	[emailAddressItems release];
+    helpButton = nil;
+    soundControl = nil;
+    aboutButton = nil;
+    lapDelayControl = nil;
+    emailAddressViewController = nil;
+    kiloControl = nil;
+    touchUpLapControl = nil;
+    unitsControl = nil;
+    helpViewController = nil;
 	
     [super dealloc];
 }
@@ -218,11 +243,11 @@
 	
 	if ([self isSetForMetricUnits])
 	{
-		[lapIntervalControl setTitle:@"25m" forSegmentAtIndex:k25mLapInterval];
-		[lapIntervalControl setTitle:@"50m" forSegmentAtIndex:k50mLapInterval];
-		[lapIntervalControl setTitle:@"100m" forSegmentAtIndex:k100mLapInterval];
-		[lapIntervalControl setTitle:@"200m" forSegmentAtIndex:k200mLapInterval];
-		[lapIntervalControl setTitle:@"400m" forSegmentAtIndex:k400mLapInterval];
+		[lapIntervalControl setTitle:NSLocalizedString(@"25m",  nil) forSegmentAtIndex:k25mLapInterval];
+		[lapIntervalControl setTitle:NSLocalizedString(@"50m",  nil) forSegmentAtIndex:k50mLapInterval];
+		[lapIntervalControl setTitle:NSLocalizedString(@"100m", nil) forSegmentAtIndex:k100mLapInterval];
+		[lapIntervalControl setTitle:NSLocalizedString(@"200m", nil) forSegmentAtIndex:k200mLapInterval];
+		[lapIntervalControl setTitle:NSLocalizedString(@"400m", nil) forSegmentAtIndex:k400mLapInterval];
 		
 		lapIntervalControl.enabled = YES;
 		
@@ -251,11 +276,11 @@
 	}
 	else if ([self isSetForEnglishUnits])
 	{
-		[lapIntervalControl setTitle:@"25y" forSegmentAtIndex:k25yLapInterval];
-		[lapIntervalControl setTitle:@"50y" forSegmentAtIndex:k50yLapInterval];
-		[lapIntervalControl setTitle:@"110y" forSegmentAtIndex:k110yLapInterval];
-		[lapIntervalControl setTitle:@"220y" forSegmentAtIndex:k220yLapInterval];
-		[lapIntervalControl setTitle:@"440y" forSegmentAtIndex:k440yLapInterval];
+		[lapIntervalControl setTitle:NSLocalizedString(@"25y",  nil) forSegmentAtIndex:k25yLapInterval];
+		[lapIntervalControl setTitle:NSLocalizedString(@"50y",  nil) forSegmentAtIndex:k50yLapInterval];
+		[lapIntervalControl setTitle:NSLocalizedString(@"110y", nil) forSegmentAtIndex:k110yLapInterval];
+		[lapIntervalControl setTitle:NSLocalizedString(@"220y", nil) forSegmentAtIndex:k220yLapInterval];
+		[lapIntervalControl setTitle:NSLocalizedString(@"440y", nil) forSegmentAtIndex:k440yLapInterval];
 		
 		lapIntervalControl.enabled = YES;
 		kiloControl.enabled = NO;
@@ -379,7 +404,7 @@
 {
 	//[appDelegate playClickSound];
 	aboutViewController = [[AboutViewController alloc] initWithNibName:@"AboutView" bundle:nil];
-	aboutViewController.navigationItem.title = @"About";					   
+	aboutViewController.navigationItem.title = NSLocalizedString(@"About", nil);
 	
 	[self.navigationController pushViewController:aboutViewController animated:YES];
 	[aboutViewController release];

@@ -20,7 +20,7 @@
 - (void)additionalSetup
 {
 	UIImageView *accImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"AccDisclosure.png"]];
-    accImageView.tag = @"accImageView";
+    //accImageView.tag = @"accImageView";
     accImageView.translatesAutoresizingMaskIntoConstraints = NO;
 	[self addSubview:accImageView];
 	[accImageView release];

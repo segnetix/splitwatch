@@ -140,7 +140,7 @@ static sqlite3_stmt *delete_statement = nil;
 - (IBAction)clearTimingData:(id)sender
 {
     // are you sure you want to delete?
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Are you sure you want to delete all Splitwatch timing data?"
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Are you sure you want to delete all Splitwatch timing data?", nil)
                                                         message:@""
                                                        delegate:self
                                               cancelButtonTitle:@"Cancel"

@@ -47,10 +47,10 @@ typedef enum {
 @property (nonatomic, retain) IBOutlet UILabel *splitColumn2;
 @property (nonatomic, retain) IBOutlet UILabel *splitColumn3;
 @property (nonatomic, retain) IBOutlet UILabel *splitColumn4;
-@property (nonatomic, retain) UIImage *accDisclosureImage;
-@property (nonatomic, retain) UIImageView *accImageView;
-@property (nonatomic, retain) UIImage *separatorImage;
-@property (nonatomic, retain) UIImageView *separatorImageView;
+@property (nonatomic, assign) UIImage *accDisclosureImage;
+@property (nonatomic, assign) UIImageView *accImageView;
+@property (nonatomic, assign) UIImage *separatorImage;
+@property (nonatomic, assign) UIImageView *separatorImageView;
 @property (nonatomic, assign) SplitDetailViewController *splitDetailViewController;
 
 - (void)additionalSetup;

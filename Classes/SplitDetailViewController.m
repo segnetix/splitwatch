@@ -14,6 +14,7 @@
 @implementation SplitDetailViewController
 
 @synthesize splits;
+@synthesize event;
 @synthesize bFinished;
 @synthesize bEditMode;
 @synthesize splitEditViewController;
@@ -71,7 +72,10 @@
 - (void)dealloc
 {
 	[splits release];
+    [event release];
+    
 	splits = nil;
+    event = nil;
     
     [self removeObserver:self forKeyPath:@"summarySelection"];
 	
@@ -272,7 +276,7 @@
 			}
 		}
     }
-	
+    
     // edit mode cells don't need to message the splitDetailViewController
     if (bEditMode) {
         cell.splitDetailViewController = nil;

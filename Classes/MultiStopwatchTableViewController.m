@@ -70,9 +70,19 @@ static CGFloat kScrollZoneHeight = 44.0;
 {
 	[watches release];
     [multiWatchCells release];
+    [longPressGestureRecognizer release];
+    [sourceIndexPath release];
+    [movingFromIndexPath release];
+    [snapshot release];
+    [displayLink release];
     
 	watches = nil;
     multiWatchCells = nil;
+    longPressGestureRecognizer = nil;
+    sourceIndexPath = nil;
+    movingFromIndexPath = nil;
+    snapshot = nil;
+    displayLink = nil;
     
     [super dealloc];
 }

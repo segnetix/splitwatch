@@ -16,7 +16,7 @@
             startingLineNumber = "109"
             endingLineNumber = "109"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -26,13 +26,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Classes/MultiStopwatchTableViewController.m"
-            timestampString = "489621027.639155"
+            timestampString = "496169515.1363"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "233"
-            endingLineNumber = "233"
+            startingLineNumber = "243"
+            endingLineNumber = "243"
             landmarkName = "-setWatchStateData:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -63,13 +63,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MultiwatchCell.m"
-            timestampString = "489624514.389307"
+            timestampString = "496169515.1363"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "150"
-            endingLineNumber = "150"
+            startingLineNumber = "159"
+            endingLineNumber = "159"
             landmarkName = "-startStopButtonPressed:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -79,29 +79,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Classes/StopwatchViewController.m"
-            timestampString = "491595808.000905"
+            timestampString = "496172063.693695"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "709"
-            endingLineNumber = "709"
-            landmarkName = "-setSplitData:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Classes/StopwatchViewController.m"
-            timestampString = "490128687.938613"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "467"
-            endingLineNumber = "467"
+            startingLineNumber = "482"
+            endingLineNumber = "482"
             landmarkName = "-startStopButtonPressed"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -111,13 +95,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Classes/StopwatchViewController.m"
-            timestampString = "491595808.000905"
+            timestampString = "496172063.693695"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "502"
-            endingLineNumber = "502"
+            startingLineNumber = "517"
+            endingLineNumber = "517"
             landmarkName = "-lapResetButtonPressed"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -127,13 +111,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Classes/SplitDetailViewController.m"
-            timestampString = "491852459.726236"
+            timestampString = "496172422.430285"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "324"
-            endingLineNumber = "324"
+            startingLineNumber = "328"
+            endingLineNumber = "328"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -149,7 +133,7 @@
             startingLineNumber = "113"
             endingLineNumber = "113"
             landmarkName = "-viewDidLoad"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -159,13 +143,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Classes/SplitDetailViewController.m"
-            timestampString = "491928104.598657"
+            timestampString = "496172422.430285"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "389"
-            endingLineNumber = "389"
+            startingLineNumber = "393"
+            endingLineNumber = "393"
             landmarkName = "-tableView:didSelectRowAtIndexPath:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -175,13 +159,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Classes/SplitDetailViewController.m"
-            timestampString = "491928188.099883"
+            timestampString = "496172063.693695"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "48"
-            endingLineNumber = "48"
+            startingLineNumber = "49"
+            endingLineNumber = "49"
             landmarkName = "-initWithIntervalDistance:Units:KiloSplits:FurlongMode:Finished:EditMode:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -191,13 +175,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Classes/HistoryTableViewController.m"
-            timestampString = "491937211.36156"
+            timestampString = "496172422.430285"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "224"
             endingLineNumber = "224"
             landmarkName = "-tableView:didSelectRowAtIndexPath:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -207,13 +191,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Classes/HistoryTableViewController.m"
-            timestampString = "491937211.36156"
+            timestampString = "496172422.430285"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "207"
             endingLineNumber = "207"
             landmarkName = "-tableView:didSelectRowAtIndexPath:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -223,11 +207,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Classes/StopwatchAppDelegate.m"
-            timestampString = "491934754.204661"
+            timestampString = "496169515.1363"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "616"
-            endingLineNumber = "616"
+            startingLineNumber = "624"
+            endingLineNumber = "624"
             landmarkName = "-getEventInfoArrayBasedOnSelection:withFilter:"
             landmarkType = "7">
          </BreakpointContent>
@@ -239,13 +223,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Classes/HistoryTableViewController.m"
-            timestampString = "491946673.743711"
+            timestampString = "496172422.430285"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "316"
             endingLineNumber = "316"
             landmarkName = "-groupEventsBySelection:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -255,13 +239,77 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Classes/HistoryViewController.m"
-            timestampString = "491937211.36156"
+            timestampString = "496172109.989944"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "116"
-            endingLineNumber = "116"
-            landmarkName = "-sortControlHit:"
-            landmarkType = "5">
+            startingLineNumber = "28"
+            endingLineNumber = "28"
+            landmarkName = "-initWithSettingsViewController:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Classes/HistoryTableViewController.m"
+            timestampString = "496172219.772679"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "74"
+            endingLineNumber = "74"
+            landmarkName = "-viewWillAppear:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Classes/EmailAddressTableViewController.m"
+            timestampString = "496172520.344223"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "34"
+            endingLineNumber = "34"
+            landmarkName = "-dealloc"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Classes/EmailAddressTableViewController.m"
+            timestampString = "496172528.736865"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "86"
+            endingLineNumber = "86"
+            landmarkName = "-viewDidUnload"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Classes/SettingsViewController.m"
+            timestampString = "496172567.629192"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "68"
+            endingLineNumber = "68"
+            landmarkName = "-dealloc"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

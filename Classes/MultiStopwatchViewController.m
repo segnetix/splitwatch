@@ -63,24 +63,24 @@
         // init interface elements
         startStopButton = [[UIButton buttonWithType:UIButtonTypeCustom] retain];
         startStopButton.translatesAutoresizingMaskIntoConstraints = NO;
-        startStopButton.tag = @"startStopButton";
+        //startStopButton.tag = @"startStopButton";
         
         clearResetButton = [[UIButton buttonWithType:UIButtonTypeCustom] retain];
         clearResetButton.translatesAutoresizingMaskIntoConstraints = NO;
-        clearResetButton.tag = @"clearResetButton";
+        //clearResetButton.tag = @"clearResetButton";
         
         runningTimeLabel = [[UILabel alloc] init];
         runningTimeLabel.translatesAutoresizingMaskIntoConstraints = NO;
-        runningTimeLabel.tag = @"runningTimeLabel";
+        //runningTimeLabel.tag = @"runningTimeLabel";
         runningTimeLabel.adjustsFontSizeToFitWidth = YES;
         
         intervalDistanceLabel = [[UILabel alloc] init];
         intervalDistanceLabel.translatesAutoresizingMaskIntoConstraints = NO;
-        intervalDistanceLabel.tag = @"intervalDistanceLabel";
+        //intervalDistanceLabel.tag = @"intervalDistanceLabel";
         
         setupButton = [[UIButton buttonWithType:UIButtonTypeCustom] retain];
         setupButton.translatesAutoresizingMaskIntoConstraints = NO;
-        setupButton.tag = @"setupButton";
+        //setupButton.tag = @"setupButton";
         
         UIImage *separatorImage = [UIImage imageNamed:@"separator_dark_gray.png"];
         topSeparatorImageView = [[UIImageView alloc] initWithImage:separatorImage];
@@ -112,12 +112,26 @@
     [startStopButton release];
     [clearResetButton release];
     [multiStopwatchTableViewController release];
+    [setupButton release];
+    [middleSeparatorImageView release];
+    [topSeparatorImageView release];
+    [timer release];
+    [bottomSeparatorImageView release];
+    [RED_COLOR release];
+    [GREEN_COLOR release];
     
     runningTimeLabel = nil;
     intervalDistanceLabel = nil;
     startStopButton = nil;
     clearResetButton = nil;
     multiStopwatchTableViewController = nil;
+    setupButton = nil;
+    middleSeparatorImageView = nil;
+    topSeparatorImageView = nil;
+    timer = nil;
+    bottomSeparatorImageView = nil;
+    RED_COLOR = nil;
+    GREEN_COLOR = nil;
     
     [super dealloc];
 }
@@ -128,7 +142,7 @@
     
     // AutoLayout setup
     UIView* multiStopwatchView = multiStopwatchTableViewController.view;
-    multiStopwatchView.tag = @"multiStopwatchView";
+    //multiStopwatchView.tag = @"multiStopwatchView";
     
     NSDictionary *views = NSDictionaryOfVariableBindings(topSeparatorImageView, middleSeparatorImageView, bottomSeparatorImageView, startStopButton, clearResetButton, setupButton, runningTimeLabel, intervalDistanceLabel, multiStopwatchView);
 
@@ -184,7 +198,7 @@
     
     // setupButton
     [setupButton addTarget:self action:@selector(setupButtonPressed) forControlEvents:UIControlEventTouchUpInside];
-    [setupButton setTitle:@"Setup" forState:UIControlStateNormal];
+    [setupButton setTitle:NSLocalizedString(@"Setup", nil) forState:UIControlStateNormal];
     [setupButton setTitleColor:self.view.tintColor forState:UIControlStateNormal];
     [setupButton setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
     [setupButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateDisabled];
@@ -208,7 +222,7 @@
     }
     
     // startStopButton
-    [startStopButton setTitle:@"Start" forState:UIControlStateNormal];
+    [startStopButton setTitle:NSLocalizedString(@"Start", nil) forState:UIControlStateNormal];
     [startStopButton setTitleColor:GREEN_COLOR forState:UIControlStateNormal];
     [startStopButton setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
     startStopButton.layer.borderColor = GREEN_COLOR.CGColor;
@@ -453,7 +467,7 @@
     else
     {
         // alert that there are no watches set up
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"No watches!"
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"No watches!", nil)
                                                             message:@"Add watches via the Setup button before starting."
                                                            delegate:nil
                                                   cancelButtonTitle:@"OK"
@@ -478,7 +492,7 @@
         [appDelegate playClickSound];
         
         // prompt for reset
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Reset all watches?"
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Reset all watches?", nil)
                                                             message:@""
                                                            delegate:self
                                                   cancelButtonTitle:@"Cancel"
@@ -562,15 +576,15 @@
     {
         switch (intervalDistance)
         {
-            case 220:	intervalDistanceLabel.text = @"1/8";	break;
-            case 440:	intervalDistanceLabel.text = @"1/4";	break;
+            case 220:	intervalDistanceLabel.text = NSLocalizedString(@"1/8", nil);	break;
+            case 440:	intervalDistanceLabel.text = NSLocalizedString(@"1/4", nil);	break;
             default:	break;
         }
     }
     else if (iUnits == kEnglish)
         intervalDistanceLabel.text = [NSString stringWithFormat:@"%ldy", (long)intervalDistance];
     else if (iUnits == kLap)
-        intervalDistanceLabel.text = @"Lap";
+        intervalDistanceLabel.text = NSLocalizedString(@"Lap", nil);
 }
 
 - (void)resetMainClock

@@ -36,16 +36,16 @@
         
         switch (self.selectorMode) {
             case kAthleteSelectorMode:
-                self.navigationItem.title = @"Athlete";
+                self.navigationItem.title = NSLocalizedString(@"Athlete", nil);
                 break;
             case kEventSelectorMode:
-                self.navigationItem.title = @"Event";
+                self.navigationItem.title = NSLocalizedString(@"Event", nil);
                 break;
             case kDateSelectorMode:
-                self.navigationItem.title = @"Date";
+                self.navigationItem.title = NSLocalizedString(@"Date", nil);
                 break;
             case kDistanceSelectorMode:
-                self.navigationItem.title = @"Distance";
+                self.navigationItem.title = NSLocalizedString(@"Distance", nil);
                 break;
             default:
                 break;
@@ -61,8 +61,8 @@
 
 - (void)dealloc
 {
-    [selections release];
-    selections = nil;
+    //[selections release];
+    //selections = nil;
     
     [super dealloc];
 }

@@ -54,10 +54,10 @@
 - (void)dealloc
 {
 	[tableItems release];
-    [eventInfoArray release];
+    //[eventInfoArray release];
 	
 	tableItems = nil;
-    eventInfoArray = nil;
+    //eventInfoArray = nil;
 	
 	[super dealloc];
 }

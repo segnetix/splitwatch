@@ -164,7 +164,7 @@
     reportSelectorTableViewController.tableView.scrollEnabled = NO;
     reportSelectorTableViewController.tableView.allowsSelection = YES;
     
-    self.navigationItem.title = @"Report";
+    self.navigationItem.title = NSLocalizedString(@"Report", nil);
 }
 
 - (void)dealloc
@@ -172,10 +172,18 @@
     [reportSelectorTableViewController release];
     [emailButton release];
     [printButton release];
+    [date release];
+    [distance release];
+    [eventName release];
+    [runnerName release];
     
     reportSelectorTableViewController = nil;
     emailButton = nil;
     printButton = nil;
+    date = nil;
+    distance = nil;
+    eventName = nil;
+    runnerName = nil;
     
     [super dealloc];
 }
@@ -296,19 +304,19 @@
     switch (indexPath.row)
     {
         case 0:
-            cell.selectorLabel.text = @"Athlete";
+            cell.selectorLabel.text = NSLocalizedString(@"Athlete", nil);
             cell.selectionLabel.text = self.runnerName;
             break;
         case 1:
-            cell.selectorLabel.text = @"Event";
+            cell.selectorLabel.text = NSLocalizedString(@"Event", nil);
             cell.selectionLabel.text = self.eventName;
             break;
         case 2:
-            cell.selectorLabel.text = @"Date";
+            cell.selectorLabel.text = NSLocalizedString(@"Date", nil);
             cell.selectionLabel.text = self.date;
             break;
         case 3:
-            cell.selectorLabel.text = @"Distance";
+            cell.selectorLabel.text = NSLocalizedString(@"Distance", nil);
             cell.selectionLabel.text = self.distance;
             break;
         default:
@@ -505,7 +513,7 @@
         [self presentViewController:mailViewController animated:YES completion:nil];
         
     } else {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Can't Send Email!"
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Can't Send Email!", nil)
                                                             message:@"This device is not configured for sending email."
                                                            delegate:nil
                                                   cancelButtonTitle:@"OK"
@@ -538,7 +546,7 @@
         printController.printFormatter = htmlFormatter;
         UIPrintInfo *printInfo = [UIPrintInfo printInfo];
         printInfo.outputType = UIPrintInfoOutputGeneral;
-        printInfo.jobName    = @"Split Report";
+        printInfo.jobName    = NSLocalizedString(@"Split Report", nil);
         printController.printInfo = printInfo;
         printController.delegate = self;
         
@@ -551,7 +559,7 @@
         
         [printController presentAnimated:YES completionHandler:completionHandler];
     } else {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Can't Print Report!"
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Can't Print Report!", nil)
                                                             message:@"This device is not configured for printing."
                                                            delegate:nil
                                                   cancelButtonTitle:@"OK"
@@ -572,19 +580,19 @@
     switch (result)
     {
         case MFMailComposeResultCancelled:
-            message = @"Email Canceled";
+            message = NSLocalizedString(@"Email Canceled", nil);
             break;
         case MFMailComposeResultSaved:
-            message = @"Email Saved";
+            message = NSLocalizedString(@"Email Saved", nil);
             break;
         case MFMailComposeResultSent:
-            message = @"Email Sent";
+            message = NSLocalizedString(@"Email Sent", nil);
             break;
         case MFMailComposeResultFailed:
-            message = @"Email Failed";
+            message = NSLocalizedString(@"Email Failed", nil);
             break;
         default:
-            message = @"Email Not Sent";
+            message = NSLocalizedString(@"Email Not Sent", nil);
             break;
     }
     

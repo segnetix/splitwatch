@@ -35,7 +35,7 @@
 	helpTableViewController = [[UITableViewController alloc] initWithStyle:UITableViewStyleGrouped];
     UIView* helpTableView = helpTableViewController.view;
     helpTableView.translatesAutoresizingMaskIntoConstraints = NO;
-    helpTableView.tag = @"helpTableView";
+    //helpTableView.tag = @"helpTableView";
     
     UIImage *separatorImage = [UIImage imageNamed:@"separator_dark_gray.png"];
     UIImageView *bottomSeparatorImageView = [[UIImageView alloc] initWithImage:separatorImage];
@@ -59,7 +59,7 @@
 	helpTableViewController.tableView.scrollEnabled = NO;
 	helpTableViewController.tableView.allowsSelection = YES;
 	
-	self.navigationItem.title = @"Help";
+	self.navigationItem.title = NSLocalizedString(@"Help", nil);
 }
 
 - (void)dealloc
@@ -135,22 +135,22 @@
 		case 0:
 			tabBarIconImage = [UIImage imageNamed:@"splitwatch.png"];
 			topicLabel = [[UILabel alloc] init];
-			topicLabel.text = @"Splitwatch";
+			topicLabel.text = NSLocalizedString(@"Splitwatch", nil);
 			break;
 		case 1:
 			tabBarIconImage = [UIImage imageNamed:@"multiwatch.png"];
 			topicLabel = [[UILabel alloc] init];
-			topicLabel.text = @"Multiwatch";
+			topicLabel.text = NSLocalizedString(@"Multiwatch", nil);
 			break;
 		case 2:
 			tabBarIconImage = [UIImage imageNamed:@"history03.png"];
 			topicLabel = [[UILabel alloc] init];
-			topicLabel.text = @"History";
+			topicLabel.text = NSLocalizedString(@"History", nil);
 			break;			
 		case 3:
 			tabBarIconImage = [UIImage imageNamed:@"settings02.png"];
 			topicLabel = [[UILabel alloc] init];
-			topicLabel.text = @"Settings";
+			topicLabel.text = NSLocalizedString(@"Settings", nil);
 			break;			
 		default:
 			break;

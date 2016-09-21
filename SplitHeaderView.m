@@ -122,9 +122,9 @@
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[lapColumn]-2-[timeColumn]-2-[splitColumn1]-2-[splitColumn2]-2-[splitColumn3]-2-[splitColumn4]" options:0 metrics:nil views:views]];
 }
 
-/*
 - (void)dealloc
 {
+    /*
     [lapColumn release];
     [timeColumn release];
     [splitColumn1 release];
@@ -138,10 +138,10 @@
     splitColumn2 = nil;
     splitColumn3 = nil;
     splitColumn4 = nil;
+    */
     
-    //[super dealloc];
+    [super dealloc];
 }
-*/
 
 - (void)setTextWithArray:(NSMutableArray*)textArray;
 {

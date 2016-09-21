@@ -43,13 +43,13 @@
         
         // AutoLayout setup
         UIView* historyView = historyTableViewController.view;
-        historyView.tag = @"historyView";
+        //historyView.tag = @"historyView";
         NSDictionary *views = NSDictionaryOfVariableBindings(historyView, sortSegmentedControl);
         
         //historyTableViewController.view.frame = CGRectMake(0, 65, 320, 300);
         [historyTableViewController groupEventsBySelection:0];
         historyView.translatesAutoresizingMaskIntoConstraints = NO;
-        historyView.tag = @"historyView";
+        //historyView.tag = @"historyView";
         [self.view addSubview:historyView];
         [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[historyView]|" options:0 metrics:nil views:views]];
         
@@ -59,7 +59,7 @@
         sortSegmentedControl.tintColor = [UIColor darkGrayColor];
         sortSegmentedControl.selectedSegmentIndex = 0;
         sortSegmentedControl.translatesAutoresizingMaskIntoConstraints = NO;
-        sortSegmentedControl.tag = @"sortSegmentedControl";
+        //sortSegmentedControl.tag = @"sortSegmentedControl";
         [sortSegmentedControl addTarget:self
                                  action:@selector(sortControlHit:)
                        forControlEvents:UIControlEventValueChanged];
@@ -74,7 +74,7 @@
 
 - (void)dealloc
 {
-	[historyTableViewController release];
+	//[historyTableViewController release];
 	
 	[super dealloc];
 }
@@ -95,9 +95,9 @@
     
 	// v1.2 - for Furlong Mode
 	if ([settingsViewController isSetForFurlongDisplay])
-		[sortSegmentedControl setTitle:@"Horse" forSegmentAtIndex:4];
+		[sortSegmentedControl setTitle:NSLocalizedString(@"Horse", nil) forSegmentAtIndex:4];
 	else
-		[sortSegmentedControl setTitle:@"Athlete" forSegmentAtIndex:4];
+		[sortSegmentedControl setTitle:NSLocalizedString(@"Athlete", nil) forSegmentAtIndex:4];
     
 	[super viewWillAppear:animated];
 }

@@ -56,13 +56,13 @@ static CGFloat kScrollZoneHeight = 40.0;
 		appDelegate = (StopwatchAppDelegate *)[[UIApplication sharedApplication] delegate];
 		database = [appDelegate getEventDatabase];
         
-        self.title = @"Multiwatch Setup";
+        self.title = NSLocalizedString(@"Multiwatch Setup", nil);
         
         // this left button is just to clear the space, so only the right side Done button will appear and function
         UIBarButtonItem *backBarButton = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:NULL];
         self.navigationItem.leftBarButtonItem = backBarButton;
         
-        UIBarButtonItem *doneBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStylePlain target:nil action:NULL];
+        UIBarButtonItem *doneBarButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Done", nil) style:UIBarButtonItemStylePlain target:nil action:NULL];
         self.navigationItem.rightBarButtonItem = doneBarButton;
         
         // separators
@@ -113,6 +113,9 @@ static CGFloat kScrollZoneHeight = 40.0;
     [pickerDataArray release];
     pickerDataArray = nil;
     
+    [displayLink release];
+    displayLink = nil;
+    
     //[pickView release];
     pickView = nil;
     
@@ -140,7 +143,7 @@ static CGFloat kScrollZoneHeight = 40.0;
     pickView.backgroundColor = [UIColor groupTableViewBackgroundColor];
     pickView.translatesAutoresizingMaskIntoConstraints = NO;
     pickView.userInteractionEnabled = YES;
-    pickView.tag = @"pickView";
+    //pickView.tag = @"pickView";
     [self.view addSubview:pickView];
     [pickView release];
     
@@ -148,7 +151,7 @@ static CGFloat kScrollZoneHeight = 40.0;
     pickerToolbar = [[UIToolbar alloc] init];
     pickerToolbar.backgroundColor = [UIColor groupTableViewBackgroundColor];
     pickerToolbar.translatesAutoresizingMaskIntoConstraints = NO;
-    pickerToolbar.tag = @"pickerToolbar";
+    //pickerToolbar.tag = @"pickerToolbar";
     [self.view addSubview:pickerToolbar];
     [pickerToolbar release];
     

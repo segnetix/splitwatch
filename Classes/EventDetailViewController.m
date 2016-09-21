@@ -49,14 +49,13 @@
 		database = [appDelegate getEventDatabase];
         
 		if (theEvent.bFurlongMode)
-			athleteLabel.text = @"Horse:";
+			athleteLabel.text = NSLocalizedString(@"Horse:", nil);
 		else
-			athleteLabel.text = @"Athlete:";
+			athleteLabel.text = NSLocalizedString(@"Athlete:", nil);
 
 		// splitHeader
         splitHeader = [[SplitHeaderView alloc] init];
         splitHeader.translatesAutoresizingMaskIntoConstraints = NO;
-        splitHeader.tag = @"splitHeader";
         
         splitDetailViewController = [[SplitDetailViewController alloc]
          initWithIntervalDistance:event.lapDistance
@@ -65,7 +64,7 @@
          FurlongMode:event.bFurlongMode
          Finished:YES
          EditMode:NO];
-         splitDetailViewController.splits = [event getSplitData];
+        splitDetailViewController.splits = [event getSplitData];
         splitDetailViewController.view.translatesAutoresizingMaskIntoConstraints = NO;
         
         // setup pickView
@@ -74,13 +73,11 @@
         pickView.showsSelectionIndicator = YES;
         pickView.backgroundColor = [UIColor groupTableViewBackgroundColor];
         pickView.translatesAutoresizingMaskIntoConstraints = NO;
-        pickView.tag = @"pickView";
         
         // setup pickerToolbar
         pickerToolbar = [[UIToolbar alloc] init];
         pickerToolbar.backgroundColor = [UIColor groupTableViewBackgroundColor];
         pickerToolbar.translatesAutoresizingMaskIntoConstraints = NO;
-        pickerToolbar.tag = @"pickerToolbar";
         
 		bEditing = NO;
     }
@@ -94,11 +91,10 @@
 
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
 	//self.navigationItem.rightBarButtonItem = self.editButtonItem;
-	self.navigationItem.title = @"Split Detail";
+	self.navigationItem.title = NSLocalizedString(@"Split Detail", nil);
     self.view.backgroundColor = [UIColor whiteColor];
     
     UIView* splitDetailView = splitDetailViewController.view;
-    splitDetailView.tag = @"splitDetailView";
     
     UIImage *separatorImage = [UIImage imageNamed:@"separator_dark_gray.png"];
     UIImageView *topSeparatorImageView = [[UIImageView alloc] initWithImage:separatorImage];
@@ -158,7 +154,7 @@
     pickerDataArray = [[NSMutableArray alloc] init];
     
     pickView.userInteractionEnabled = YES;
-    tapGesture =[[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(pickerDoubleTap)] autorelease];
+    tapGesture = [[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(pickerDoubleTap)] autorelease];
     tapGesture.numberOfTapsRequired = 2;
     tapGesture.delegate = self;
     [pickView addGestureRecognizer:tapGesture];
@@ -167,7 +163,7 @@
                                                                                         target:self
                                                                                         action:@selector(pickerCancel)] autorelease];
     
-    UIBarButtonItem *pickerSetButton = [[[UIBarButtonItem alloc] initWithTitle:@"Set"
+    UIBarButtonItem *pickerSetButton = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Set", nil)
                                                                         style:UIBarButtonItemStylePlain
                                                                        target:self
                                                                        action:@selector(pickerSet)] autorelease];
@@ -200,14 +196,14 @@
 	
 	// v1.2
 	if (event.bFurlongMode)
-		athleteLabel.text = @"Horse:";
+		athleteLabel.text = NSLocalizedString(@"Horse:", nil);
 	else
-		athleteLabel.text = @"Athlete:";
+		athleteLabel.text = NSLocalizedString(@"Athlete:", nil);
 	
 	if (event.iEventType == kLap)
-		distanceLabel.text = @"Splits:";
+		distanceLabel.text = NSLocalizedString(@"Splits:", nil);
 	else
-		distanceLabel.text = @"Distance:";
+		distanceLabel.text = NSLocalizedString(@"Distance:", nil);
 		
 	NSMutableArray *headerArray = [Utilities getSplitViewHeaderArray:event.lapDistance Units:event.iEventType KiloSplits:event.bKiloSplits FurlongDisplayMode:event.bFurlongMode];
     [splitHeader setTextWithArray:headerArray];

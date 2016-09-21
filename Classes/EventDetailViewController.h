@@ -62,7 +62,7 @@
 @property (nonatomic, retain) IBOutlet UIButton *pickEventButton;
 @property (nonatomic, retain) IBOutlet UIButton *editSplitsButton;
 @property (nonatomic, assign) StopwatchAppDelegate *appDelegate;
-@property (retain, nonatomic) UITapGestureRecognizer *tapGesture;
+@property (nonatomic, retain) UITapGestureRecognizer *tapGesture;
 
 - (id)initWithEvent:(Event *)theEvent settingsVC:(SettingsViewController *)theSettingsVC;
 - (IBAction)textFieldDoneEditing:(id)sender;

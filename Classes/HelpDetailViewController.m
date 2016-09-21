@@ -40,7 +40,7 @@
 	NSURL *baseURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]];
     
     webView.translatesAutoresizingMaskIntoConstraints = NO;
-    webView.tag = @"webView";
+    //webView.tag = @"webView";
 
     UIImage *separatorImage = [UIImage imageNamed:@"separator_dark_gray.png"];
     UIImageView *bottomSeparatorImageView = [[UIImageView alloc] initWithImage:separatorImage];
@@ -54,19 +54,19 @@
 	{
 		case kSplitwatchMode:
 			filePath = [[NSBundle mainBundle] pathForResource:@"Help_Splitwatch" ofType:@"html"];
-            self.navigationItem.title = @"Splitwatch";
+            self.navigationItem.title = NSLocalizedString(@"Splitwatch", nil);
 			break;
 		case kMultiwatchMode:
 			filePath = [[NSBundle mainBundle] pathForResource:@"Help_Multiwatch" ofType:@"html"];
-            self.navigationItem.title = @"Multiwatch";
+            self.navigationItem.title = NSLocalizedString(@"Multiwatch", nil);
 			break;
 		case kHistoryMode:
 			filePath = [[NSBundle mainBundle] pathForResource:@"Help_History" ofType:@"html"];
-            self.navigationItem.title = @"History";
+            self.navigationItem.title = NSLocalizedString(@"History", nil);
 			break;
 		case kSettingsMode:
 			filePath = [[NSBundle mainBundle] pathForResource:@"Help_Settings" ofType:@"html"];
-            self.navigationItem.title = @"Settings";
+            self.navigationItem.title = NSLocalizedString(@"Settings", nil);
 			break;
 		default:
 			break;

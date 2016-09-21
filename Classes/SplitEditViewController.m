@@ -53,7 +53,7 @@
 		// splitHeader
 		splitHeader = [[SplitHeaderView alloc] init];
         splitHeader.translatesAutoresizingMaskIntoConstraints = NO;
-        splitHeader.tag = @"splitHeader";
+        //splitHeader.tag = @"splitHeader";
     }
 	
     return self;
@@ -91,8 +91,8 @@
     splitDetailView.translatesAutoresizingMaskIntoConstraints = NO;
     pickerView.translatesAutoresizingMaskIntoConstraints = NO;
     
-    splitDetailView.tag = @"splitDetailView";
-    pickerView.tag      = @"pickerView";
+    //splitDetailView.tag = @"splitDetailView";
+    //pickerView.tag      = @"pickerView";
     
     UIImage *separatorImage = [UIImage imageNamed:@"separator_dark_gray.png"];
     UIImageView *topSeparatorImageView = [[UIImageView alloc] initWithImage:separatorImage];
@@ -129,7 +129,7 @@
     
 	// Uncomment the following line to display an Edit button in the navigation bar for this view controller.
 	//self.navigationItem.rightBarButtonItem = self.editButtonItem;
-	self.navigationItem.title = @"Event Edit";
+	self.navigationItem.title = NSLocalizedString(@"Event Edit", nil);
     self.view.backgroundColor = [UIColor whiteColor];
 	
 	// set the control states based on event
@@ -138,18 +138,18 @@
 	switch (event.iEventType)
 	{
 		case kMetric:
-			[lapIntervalControl setTitle:@"25m" forSegmentAtIndex:k25mLapInterval];
-			[lapIntervalControl setTitle:@"50m" forSegmentAtIndex:k50mLapInterval];
-			[lapIntervalControl setTitle:@"100m" forSegmentAtIndex:k100mLapInterval];
-			[lapIntervalControl setTitle:@"200m" forSegmentAtIndex:k200mLapInterval];
-			[lapIntervalControl setTitle:@"400m" forSegmentAtIndex:k400mLapInterval];
+			[lapIntervalControl setTitle:NSLocalizedString(@"25m",  nil) forSegmentAtIndex:k25mLapInterval];
+			[lapIntervalControl setTitle:NSLocalizedString(@"50m",  nil) forSegmentAtIndex:k50mLapInterval];
+			[lapIntervalControl setTitle:NSLocalizedString(@"100m", nil) forSegmentAtIndex:k100mLapInterval];
+			[lapIntervalControl setTitle:NSLocalizedString(@"200m", nil) forSegmentAtIndex:k200mLapInterval];
+			[lapIntervalControl setTitle:NSLocalizedString(@"400m", nil) forSegmentAtIndex:k400mLapInterval];
 			break;
 		case kEnglish:
-			[lapIntervalControl setTitle:@"25y" forSegmentAtIndex:k25yLapInterval];
-			[lapIntervalControl setTitle:@"50y" forSegmentAtIndex:k50yLapInterval];
-			[lapIntervalControl setTitle:@"110y" forSegmentAtIndex:k110yLapInterval];
-			[lapIntervalControl setTitle:@"220y" forSegmentAtIndex:k220yLapInterval];
-			[lapIntervalControl setTitle:@"440y" forSegmentAtIndex:k440yLapInterval];
+			[lapIntervalControl setTitle:NSLocalizedString(@"25y",  nil) forSegmentAtIndex:k25yLapInterval];
+			[lapIntervalControl setTitle:NSLocalizedString(@"50y",  nil) forSegmentAtIndex:k50yLapInterval];
+			[lapIntervalControl setTitle:NSLocalizedString(@"110y", nil) forSegmentAtIndex:k110yLapInterval];
+			[lapIntervalControl setTitle:NSLocalizedString(@"220y", nil) forSegmentAtIndex:k220yLapInterval];
+			[lapIntervalControl setTitle:NSLocalizedString(@"440y", nil) forSegmentAtIndex:k440yLapInterval];
 			break;
 		case kLap:
 			[lapIntervalControl setTitle:@"" forSegmentAtIndex:0];
@@ -311,11 +311,11 @@
 	
 	if (unitsControl.selectedSegmentIndex == kMetric)
 	{
-		[lapIntervalControl setTitle:@"25m" forSegmentAtIndex:k25mLapInterval];
-		[lapIntervalControl setTitle:@"50m" forSegmentAtIndex:k50mLapInterval];
-		[lapIntervalControl setTitle:@"100m" forSegmentAtIndex:k100mLapInterval];
-		[lapIntervalControl setTitle:@"200m" forSegmentAtIndex:k200mLapInterval];
-		[lapIntervalControl setTitle:@"400m" forSegmentAtIndex:k400mLapInterval];
+		[lapIntervalControl setTitle:NSLocalizedString(@"25m",  nil) forSegmentAtIndex:k25mLapInterval];
+		[lapIntervalControl setTitle:NSLocalizedString(@"50m",  nil) forSegmentAtIndex:k50mLapInterval];
+		[lapIntervalControl setTitle:NSLocalizedString(@"100m", nil) forSegmentAtIndex:k100mLapInterval];
+		[lapIntervalControl setTitle:NSLocalizedString(@"200m", nil) forSegmentAtIndex:k200mLapInterval];
+		[lapIntervalControl setTitle:NSLocalizedString(@"400m", nil) forSegmentAtIndex:k400mLapInterval];
 		
 		lapIntervalControl.enabled = YES;
 		
@@ -336,11 +336,11 @@
 	}
 	else if (unitsControl.selectedSegmentIndex == kEnglish)
 	{
-		[lapIntervalControl setTitle:@"25y" forSegmentAtIndex:k25yLapInterval];
-		[lapIntervalControl setTitle:@"50y" forSegmentAtIndex:k50yLapInterval];
-		[lapIntervalControl setTitle:@"110y" forSegmentAtIndex:k110yLapInterval];
-		[lapIntervalControl setTitle:@"220y" forSegmentAtIndex:k220yLapInterval];
-		[lapIntervalControl setTitle:@"440y" forSegmentAtIndex:k440yLapInterval];
+		[lapIntervalControl setTitle:NSLocalizedString(@"25y",  nil) forSegmentAtIndex:k25yLapInterval];
+		[lapIntervalControl setTitle:NSLocalizedString(@"50y",  nil) forSegmentAtIndex:k50yLapInterval];
+		[lapIntervalControl setTitle:NSLocalizedString(@"110y", nil) forSegmentAtIndex:k110yLapInterval];
+		[lapIntervalControl setTitle:NSLocalizedString(@"220y", nil) forSegmentAtIndex:k220yLapInterval];
+		[lapIntervalControl setTitle:NSLocalizedString(@"440y", nil) forSegmentAtIndex:k440yLapInterval];
 		
 		lapIntervalControl.enabled = YES;
 		if (lapIntervalControl.selectedSegmentIndex < 0)
